@@ -1,4 +1,4 @@
-package com.example.reflecet
+package com.example.reflect
 
 import org.junit.Test
 
