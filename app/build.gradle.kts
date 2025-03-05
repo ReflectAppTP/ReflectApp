@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.services)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp.android)
 }
 
 android {
@@ -42,33 +42,31 @@ android {
 }
 
 dependencies {
-    val room_version = "2.6.1"
-
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
-    testImplementation("androidx.room:room-testing:$room_version")
-
-    
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+    // Room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    testImplementation(libs.room.testing)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
 
     // Hilt
-    implementation ("com.google.dagger:hilt-android:2.51.1")
-    ksp ("com.google.dagger:hilt-compiler:2.51.1")
+    implementation (libs.hilt.android)
+    ksp (libs.hilt.compiler)
 
     // ViewBinding
-    implementation("dev.androidbroadcast.vbpd:vbpd:2.0.4")
+    implementation(libs.vbpd)
 
     // Splash API
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation(libs.androidx.core.splashscreen)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
