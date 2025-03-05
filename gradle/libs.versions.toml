@@ -11,21 +11,36 @@ activity = "1.10.1"
 constraintlayout = "2.2.1"
 google-services="4.4.2"
 firebase-bom="33.10.0"
+hilt="2.51.1"
+ksp="2.1.0-1.0.29"
+roomVersion="2.6.1"
+vbpdVersion="2.0.4"
+coreSplashscreen="1.0.1"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen"}
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom"}
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-bom"}
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion"}
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion"}
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion"}
+room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomVersion"}
+vbpd = { group = "dev.androidbroadcast.vbpd", name = "vbpd", version.ref = "vbpdVersion"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
-
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+ksp-android = { id = "com.google.devtools.ksp", version.ref = "ksp"}
