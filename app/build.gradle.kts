@@ -48,10 +48,6 @@ dependencies {
     implementation(libs.room.ktx)
     testImplementation(libs.room.testing)
 
-    // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-
     // Hilt
     implementation (libs.hilt.android)
     ksp (libs.hilt.compiler)

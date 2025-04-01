@@ -10,7 +10,6 @@ material = "1.12.0"
 activity = "1.10.1"
 constraintlayout = "2.2.1"
 google-services="4.4.2"
-firebase-bom="33.10.0"
 hilt="2.51.1"
 ksp="2.1.0-1.0.29"
 roomVersion="2.6.1"
@@ -27,8 +26,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom"}
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-bom"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion"}
