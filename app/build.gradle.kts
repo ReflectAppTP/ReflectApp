@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp.android)
+
+    kotlin("plugin.serialization").version(libs.versions.kotlin.serialization)
 }
 
 android {
@@ -57,6 +59,13 @@ dependencies {
 
     // Splash API
     implementation(libs.androidx.core.splashscreen)
+
+    // Navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.dynamic)
+    implementation(libs.navigation.testing)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
