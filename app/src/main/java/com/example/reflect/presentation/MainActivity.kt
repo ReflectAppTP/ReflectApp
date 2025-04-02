@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.ActivityMainBinding
 import com.example.reflect.presentation.friends.fragment.FriendsFragment
@@ -21,45 +24,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bnv = binding.bottomNavigationBar
-
-        // TODO: Переделать навигацию 
-        val rf = RecordsFragment()
-        val sf = StatisticsFragment()
-        val ff = FriendsFragment()
-        val pf = ProfileFragment()
-
-        bnv.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.records -> {
-                    setCurrentFragment(rf)
-                    true
-                }
-                R.id.statistic -> {
-                    setCurrentFragment(sf)
-                    true
-                }
-                R.id.friends -> {
-                    setCurrentFragment(ff)
-                    true
-                }
-                R.id.profile -> {
-                    setCurrentFragment(pf)
-                    true
-                }
+        // TODO: обернуть в отдельную функцию
+        val bottomNavBar = binding.bottomNavigationBar
+        val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
+        val navController = navHostFragment.navController
+        bottomNavBar.setupWithNavController(navController)
+        bottomNavBar.setOnItemSelectedListener { item ->
+            when(item.itemId) {
                 R.id.add_record -> {
                     Toast.makeText(this, "Мяу мяу...", Toast.LENGTH_SHORT).show()
                     false
-                    }
-                else -> false
+                }
+                else -> {
+                    navController.navigate(item.itemId)
+                    true
+                }
             }
         }
     }
-
-    private fun setCurrentFragment(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.main_activity_frame_layout, fragment)
-            commit()
-        }
-
 }

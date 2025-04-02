@@ -8,10 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_activity_frame_layout"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_graph" />
+
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_appbar"
@@ -44,5 +48,7 @@
         app:layout_anchor="@id/bottom_appbar"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@drawable/ic_fab_ai" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

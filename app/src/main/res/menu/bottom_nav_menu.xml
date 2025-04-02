@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/records"
+        android:id="@+id/recordsFragment"
         android:title="@string/records"
         android:icon="@drawable/ic_bottom_navbar_records"/>
 
     <item
-        android:id="@+id/statistic"
+        android:id="@+id/statisticsFragment"
         android:title="@string/statistic"
         android:icon="@drawable/ic_bottom_navbar_statistic"
         />
@@ -20,13 +20,13 @@
         />
 
     <item
-        android:id="@+id/friends"
+        android:id="@+id/friendsFragment"
         android:title="@string/friends"
         android:icon="@drawable/ic_bottom_navbar_friends"
         />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:title="@string/profile"
         android:icon="@drawable/ic_bottom_navbar_profile"/>
 </menu>
