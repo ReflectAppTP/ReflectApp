@@ -23,4 +23,5 @@
     <color name="surfaceVariant">#DEE4D9</color>
     <color name="onSurfaceVariant">#424840</color>
     <color name="outline">#737970</color>
+    <color name="surfaceContainer">#EEEEE9</color>
 </resources>

@@ -2,4 +2,8 @@
     <string name="app_name">Reflect</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="records">Записи</string>
+    <string name="statistic">Статистика\n</string>
+    <string name="friends">Друзья</string>
+    <string name="profile">Профиль</string>
 </resources>
