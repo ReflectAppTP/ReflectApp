@@ -12,13 +12,12 @@
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_graph" />
 
-
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_appbar"
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -26,7 +25,7 @@
         app:backgroundTint="@color/surfaceContainer">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_bar"
+            android:id="@+id/bottomNavBar"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginEnd="16dp"
@@ -38,14 +37,14 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_ai"
+        android:id="@+id/fabAI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="91dp"
         app:shapeAppearanceOverlay="@style/CircleFab"
-        app:layout_anchor="@id/bottom_appbar"
+        app:layout_anchor="@id/bottomAppBar"
         app:layout_anchorGravity="top|end"
         app:srcCompat="@drawable/ic_fab_ai" />
 
