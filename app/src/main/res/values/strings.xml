@@ -10,6 +10,8 @@
 
     <string name="toolbarRecordsTitle">Записи</string>
     <string name="toolbarStatisticTitle">Статистика</string>
+    <string name="toolbarFriendsTitle">Друзья</string>
 
-    <string name="contentDescriptionToolbarStreakIcon">Streak icon</string>
+    <string name="contentDescriptionToolbarStreakIcon">Иконка стрика</string>
+    <string name="contentDescriptionToolbarSearchIcon">Иконка поиска</string>
 </resources>
