@@ -3,10 +3,10 @@ package com.example.reflect.presentation
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.ActivityMainBinding
+import com.example.reflect.presentation.adapters.ViewPager2Adapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,18 +16,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // TODO: обернуть в отдельную функцию
+        val viewPager = binding.mainActivityViewPager
+        viewPager.adapter = ViewPager2Adapter(this)
+        viewPager.isUserInputEnabled = false
+
         val bottomNavBar = binding.bottomNavBar
-        val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
-        val navController = navHostFragment.navController
-        bottomNavBar.setupWithNavController(navController)
         bottomNavBar.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.recordsFragment -> {
-                    navController.navigate(it.itemId)
+                    viewPager.currentItem = 0
                     true
                 }
                 R.id.statisticsFragment -> {
-                    navController.navigate(it.itemId)
+                    viewPager.currentItem = 1
                     true
                 }
                 R.id.add_record -> {
@@ -35,15 +36,30 @@ class MainActivity : AppCompatActivity() {
                     false
                 }
                 R.id.friendsFragment -> {
-                    navController.navigate(it.itemId)
+                    viewPager.currentItem = 2
                     true
                 }
                 R.id.profileFragment -> {
-                    navController.navigate(it.itemId)
+                    viewPager.currentItem = 3
                     true
                 }
                 else -> false
             }
         }
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val destinationId = when (position) {
+                    0 -> R.id.recordsFragment
+                    1 -> R.id.statisticsFragment
+                    2 -> R.id.friendsFragment
+                    3 -> R.id.profileFragment
+                    else -> R.id.recordsFragment
+                }
+
+                bottomNavBar.selectedItemId = destinationId
+            }
+        })
     }
 }
