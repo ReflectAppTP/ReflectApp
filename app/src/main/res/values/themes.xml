@@ -28,7 +28,10 @@
         <item name="colorSurfaceContainer">@color/surfaceContainer</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:navigationBarColor">@color/surfaceContainer</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+
         <!-- Customize your theme here. -->
     </style>
 
