@@ -1,21 +1,23 @@
 [versions]
 agp = "8.5.2"
 kotlin = "2.1.0"
-coreKtx = "1.15.0"
+coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.10.1"
+activity = "1.9.3"
 constraintlayout = "2.2.1"
 google-services="4.4.2"
-firebase-bom="33.10.0"
 hilt="2.51.1"
 ksp="2.1.0-1.0.29"
 roomVersion="2.6.1"
 vbpdVersion="2.0.4"
 coreSplashscreen="1.0.1"
+kotlin-serialization="2.0.21"
+kotlinx-serialization-json="1.8.0"
+nav_version="2.8.9"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -27,8 +29,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom"}
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-bom"}
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion"}
@@ -36,6 +36,11 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion"}
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomVersion"}
 vbpd = { group = "dev.androidbroadcast.vbpd", name = "vbpd", version.ref = "vbpdVersion"}
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "nav_version"}
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "nav_version"}
+navigation-dynamic = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "nav_version"}
+navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "nav_version"}
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref="kotlinx-serialization-json"}
 
 
 [plugins]
