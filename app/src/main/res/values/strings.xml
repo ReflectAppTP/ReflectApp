@@ -6,4 +6,6 @@
     <string name="statistic">Статистика\n</string>
     <string name="friends">Друзья</string>
     <string name="profile">Профиль</string>
+    <string name="toolbarRecordsTitle">Записи</string>
+    <string name="contentDescriptionToolbarStreakIcon">Streak icon</string>
 </resources>
