@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.login.fragment.LoginFragment">
+
+
+    <LinearLayout
+        android:id="@+id/loginTopLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/loginBottomLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/loginTitle"
+            style="@style/TextAppearance.Material3.DisplaySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/onSurface"
+            android:text="@string/loginTitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLoginEditText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/loginEmailHint"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLoginEditText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginPasswordHint"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/loginErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/error"
+            android:layout_marginBottom="16dp"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="@string/loginButton"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginOr"
+            android:textColor="@color/onSurface"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            />
+
+        <Button
+            android:id="@+id/loginWithVKButton"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0077FF"
+            android:text="Войти через VK"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:id="@+id/loginLikeGuestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logintLikeGuest"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/onSurfaceVariant"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loginBottomLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="35dp"
+        >
+
+        <Button
+            android:id="@+id/loginRegistrationButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="@string/logintRegistration"
+            android:textColor="@color/onSurface"
+            app:cornerRadius="12dp" />
+
+        <TextView
+            android:id="@+id/loginForgotPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginForgotPassword"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/onSurface"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

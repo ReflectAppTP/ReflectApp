@@ -3,26 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/recordsFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/recordsFragment"
-        android:name="com.example.reflect.presentation.records.fragment.RecordsFragment"
+        android:name="com.example.reflect.presentation.screens.records.fragment.RecordsFragment"
         android:label="fragment_records"
         tools:layout="@layout/fragment_records" />
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.reflect.presentation.statistics.fragment.StatisticsFragment"
+        android:name="com.example.reflect.presentation.screens.statistics.fragment.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.example.reflect.presentation.friends.fragment.FriendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.FriendsFragment"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.reflect.presentation.profile.fragment.ProfileFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.reflect.presentation.screens.login.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.reflect.presentation.screens.main.fragment.MainFragment"
+        android:label="MainFragment" />
 </navigation>

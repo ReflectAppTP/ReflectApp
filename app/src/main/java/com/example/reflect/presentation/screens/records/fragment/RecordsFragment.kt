@@ -1,4 +1,4 @@
-package com.example.reflect.presentation.records.fragment
+package com.example.reflect.presentation.screens.records.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
