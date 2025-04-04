@@ -21,7 +21,11 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(R.id.mainFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+        }
+
+        binding.loginRegistrationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
         }
 
         return binding.root
