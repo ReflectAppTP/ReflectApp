@@ -19,7 +19,7 @@
             android:id="@+id/registrationBackArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Иконка возврата на экран авторизации"
+            android:contentDescription="@string/registrationIconBackContentDescription"
             android:src="@drawable/ic_back_arrow"
             android:background="@color/surface"
             android:layout_gravity="start"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/onSurface"
-            android:text="Регистрация"
+            android:text="@string/registrationIcon"
             />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +52,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Логин"
+            android:hint="@string/registrationLoginHint"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
 
@@ -65,7 +65,7 @@
             android:id="@+id/registrationEmailEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Почта"
+            android:hint="@string/registrationEmailHint"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
 
@@ -79,7 +79,7 @@
             android:id="@+id/registrationPasswordEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Пароль"
+            android:hint="@string/registrationPasswordHint"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
@@ -94,7 +94,7 @@
             android:id="@+id/registrationPasswordConfirmationEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Повторите пароль"
+            android:hint="@string/registrationPasswordConfirmationHint"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
@@ -109,13 +109,13 @@
             android:id="@+id/registrationButton"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="Зарегестрироваться"
+            android:text="@string/registrationButton"
             app:cornerRadius="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="или"
+            android:text="@string/registrationOr"
             android:textColor="@color/onSurface"
             style="@style/TextAppearance.Material3.LabelLarge"
             />

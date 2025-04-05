@@ -22,7 +22,18 @@
     <string name="loginPasswordHint">Пароль</string>
     <string name="loginButton">Войти</string>
     <string name="loginOr">или</string>
-    <string name="logintLikeGuest">Войти как гость</string>
-    <string name="logintRegistration">Регистрация</string>
+    <string name="loginLikeGuest">Войти как гость</string>
+    <string name="loginRegistration">Регистрация</string>
     <string name="loginForgotPassword">Забыли пароль?</string>
+
+
+    <!-- Registration Fragment -->
+    <string name="registrationIconBackContentDescription">Иконка возврата на экран авторизации</string>
+    <string name="registrationIcon">Регистрация</string>
+    <string name="registrationLoginHint">Логин</string>
+    <string name="registrationEmailHint">Почта</string>
+    <string name="registrationPasswordHint">Пароль</string>
+    <string name="registrationPasswordConfirmationHint">Повторите пароль</string>
+    <string name="registrationButton">Зарегестрироваться</string>
+    <string name="registrationOr">или</string>
 </resources>
