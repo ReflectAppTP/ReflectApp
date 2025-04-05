@@ -35,6 +35,7 @@
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
             app:endIconMode="clear_text"
+            android:nextFocusDown="@id/passwordLoginEditText"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -52,8 +53,10 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordLoginEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 

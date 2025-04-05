@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRegistrationBinding
@@ -23,6 +24,13 @@ class RegistrationFragment : Fragment() {
 
         binding.registrationButton.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+        }
+
+        binding.registrationPasswordConfirmationEditTextField.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+            }
+            true
         }
 
         binding.registrationBackArrow.setOnClickListener {

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentLoginBinding
@@ -22,6 +23,13 @@ class LoginFragment : Fragment() {
 
         binding.loginButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+        }
+
+        binding.passwordLoginEditTextField.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+            true
         }
 
         binding.loginRegistrationButton.setOnClickListener {

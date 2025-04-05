@@ -34,6 +34,6 @@
     <string name="registrationEmailHint">Почта</string>
     <string name="registrationPasswordHint">Пароль</string>
     <string name="registrationPasswordConfirmationHint">Повторите пароль</string>
-    <string name="registrationButton">Зарегестрироваться</string>
+    <string name="registrationButton">Зарегистрироваться</string>
     <string name="registrationOr">или</string>
 </resources>
