@@ -34,6 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
             app:endIconMode="clear_text"
             android:nextFocusDown="@id/passwordLoginEditText"
             app:errorEnabled="true">
@@ -49,6 +51,8 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 

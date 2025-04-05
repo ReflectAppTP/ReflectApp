@@ -25,6 +25,8 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
         }
 
+
+
         binding.passwordLoginEditTextField.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
@@ -43,5 +45,7 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
 }
