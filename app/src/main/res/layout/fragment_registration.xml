@@ -130,6 +130,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/registrationErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/error"
+            android:layout_marginBottom="16dp"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            />
+
         <Button
             android:id="@+id/registrationButton"
             android:layout_width="280dp"

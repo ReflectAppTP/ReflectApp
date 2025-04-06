@@ -17,6 +17,19 @@ class ViewModelRegistration : ViewModel() {
     private val _passwordConfirmation = MutableLiveData("")
     val passwordConfirmation: LiveData<String> get() = _passwordConfirmation
 
+    private var _loginErrorState = MutableLiveData(false)
+    val loginErrorState: LiveData<Boolean> get() = _loginErrorState
+
+    private var _emailErrorState = MutableLiveData(false)
+    val emailErrorState: LiveData<Boolean> get() = _emailErrorState
+
+    private var _passwordErrorState = MutableLiveData(false)
+    val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+
+    private var _passwordConfirmationErrorState = MutableLiveData(false)
+    val passwordConfirmationErrorState: LiveData<Boolean> get() = _passwordConfirmationErrorState
+
+
     fun updateLogin(result: String) {
         _login.value = result
     }
@@ -31,5 +44,16 @@ class ViewModelRegistration : ViewModel() {
 
     fun updatePasswordConfirmation(result: String) {
         _passwordConfirmation.value = result
+    }
+
+    fun changeErrorStates(
+        loginError: Boolean = true,
+        emailError: Boolean = true,
+        passwordError: Boolean = true,
+        passwordConfirmationError: Boolean = true) {
+        _loginErrorState.value = loginError
+        _emailErrorState.value = emailError
+        _passwordErrorState.value = passwordError
+        _passwordConfirmationErrorState.value = passwordConfirmationError
     }
 }

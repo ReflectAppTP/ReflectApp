@@ -11,11 +11,22 @@ class ViewModelLogin : ViewModel() {
     private var _password = MutableLiveData("")
     val password: LiveData<String> get() = _password
 
+    private var _emailErrorState = MutableLiveData(false)
+    val emailErrorState: LiveData<Boolean> get() = _emailErrorState
+
+    private var _passwordErrorState = MutableLiveData(false)
+    val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+
     fun updateEmail(result: String) {
         _email.value = result
     }
 
     fun updatePassword(result: String) {
         _password.value = result
+    }
+
+    fun changeErrorStates(emailError: Boolean = true, passwordError: Boolean = true) {
+        _emailErrorState.value = emailError
+        _passwordErrorState.value = passwordError
     }
 }

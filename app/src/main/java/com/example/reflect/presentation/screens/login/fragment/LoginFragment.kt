@@ -10,6 +10,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentLoginBinding
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
 
@@ -42,6 +43,7 @@ class LoginFragment : Fragment() {
             emailLoginEditTextField.setText(vm.email.value)
             emailLoginEditTextField.doAfterTextChanged { value ->
                 vm.updateEmail(value.toString())
+                changeErrorStates(emailError = false, passwordError = false)
                 emailLoginEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterEmailLength) - resources.getInteger(R.integer.characterLimit)
             }
@@ -49,6 +51,7 @@ class LoginFragment : Fragment() {
             passwordLoginEditTextField.setText(vm.password.value)
             passwordLoginEditTextField.doAfterTextChanged { value ->
                 vm.updatePassword(value.toString())
+                changeErrorStates(emailError = false, passwordError = false)
                 passwordLoginEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterPasswordLength) - resources.getInteger(R.integer.characterLimit)
             }
@@ -58,12 +61,16 @@ class LoginFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             loginButton.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                if (areFieldsEmpty()) {
+                    changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
+                } else {
+                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                }
             }
 
             passwordLoginEditTextField.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    loginButton.performClick()
                 }
                 true
             }
@@ -71,6 +78,18 @@ class LoginFragment : Fragment() {
             loginRegistrationButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
+        }
+    }
+
+    private fun areFieldsEmpty() =
+        Utils.isEditTextEmpty(binding.passwordLoginEditTextField) || Utils.isEditTextEmpty(binding.emailLoginEditTextField)
+
+    private fun changeErrorStates(emailError: Boolean = true, passwordError: Boolean = true, errorMessage: String = "") {
+        with(binding) {
+            vm.changeErrorStates(emailError, passwordError)
+            emailLoginEditText.error = if (emailError) " " else ""
+            passwordLoginEditText.error = if (passwordError) " " else ""
+            loginErrorMessage.text = errorMessage
         }
     }
 }

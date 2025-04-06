@@ -10,9 +10,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
-
 
 class RegistrationFragment : Fragment() {
 
@@ -43,6 +43,12 @@ class RegistrationFragment : Fragment() {
             registrationLoginEditTextField.setText(vm.login.value)
             registrationLoginEditTextField.doAfterTextChanged { value ->
                 vm.updateLogin(value.toString())
+                changeErrorStates(
+                    loginError = false,
+                    emailError = false,
+                    passwordError = false,
+                    passwordConfirmationError = false
+                )
                 registrationLoginEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterLoginLength) - resources.getInteger(R.integer.characterLimit)
             }
@@ -50,6 +56,12 @@ class RegistrationFragment : Fragment() {
             registrationEmailEditTextField.setText(vm.email.value)
             registrationEmailEditTextField.doAfterTextChanged { value ->
                 vm.updateEmail(value.toString())
+                changeErrorStates(
+                    loginError = false,
+                    emailError = false,
+                    passwordError = false,
+                    passwordConfirmationError = false
+                )
                 registrationEmailEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterEmailLength) - resources.getInteger(R.integer.characterLimit)
             }
@@ -57,6 +69,12 @@ class RegistrationFragment : Fragment() {
             registrationPasswordEditTextField.setText(vm.password.value)
             registrationPasswordEditTextField.doAfterTextChanged { value ->
                 vm.updatePassword(value.toString())
+                changeErrorStates(
+                    loginError = false,
+                    emailError = false,
+                    passwordError = false,
+                    passwordConfirmationError = false
+                )
                 registrationPasswordEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterPasswordLength) - resources.getInteger(R.integer.characterLimit)
             }
@@ -64,6 +82,12 @@ class RegistrationFragment : Fragment() {
             registrationPasswordConfirmationEditTextField.setText(vm.passwordConfirmation.value)
             registrationPasswordConfirmationEditTextField.doAfterTextChanged { value ->
                 vm.updatePasswordConfirmation(value.toString())
+                changeErrorStates(
+                    loginError = false,
+                    emailError = false,
+                    passwordError = false,
+                    passwordConfirmationError = false
+                )
                 registrationPasswordConfirmationEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterPasswordLength) - resources.getInteger(R.integer.characterLimit)
 
@@ -75,12 +99,16 @@ class RegistrationFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             registrationButton.setOnClickListener {
-                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                if (areFieldsEmpty()) {
+                    changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
+                } else {
+                    findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                }
             }
 
             registrationPasswordConfirmationEditTextField.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    registrationButton.performClick()
                 }
                 true
             }
@@ -90,4 +118,32 @@ class RegistrationFragment : Fragment() {
             }
         }
     }
+
+    private fun areFieldsEmpty() = with(binding) {
+        Utils.isEditTextEmpty(registrationLoginEditTextField) ||
+                Utils.isEditTextEmpty(registrationEmailEditTextField) ||
+                Utils.isEditTextEmpty(registrationPasswordEditTextField) ||
+                Utils.isEditTextEmpty(registrationPasswordConfirmationEditTextField)
+    }
+
+
+    private fun changeErrorStates(
+        loginError: Boolean = true,
+        emailError: Boolean = true,
+        passwordError: Boolean = true,
+        passwordConfirmationError: Boolean = true,
+        errorMessage: String = ""
+    ) {
+        with(binding) {
+            registrationLoginEditText.error = if (loginError) " " else ""
+            registrationEmailEditText.error = if (emailError) " " else ""
+            registrationPasswordEditText.error = if (passwordError) " " else ""
+            registrationPasswordConfirmationEditText.error = if (passwordConfirmationError) " " else ""
+            registrationErrorMessage.text = errorMessage
+        }
+
+    }
 }
+
+
+
