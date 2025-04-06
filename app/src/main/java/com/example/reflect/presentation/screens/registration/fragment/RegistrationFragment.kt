@@ -102,7 +102,15 @@ class RegistrationFragment : Fragment() {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
-                    findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    if (registrationPasswordEditTextField.text.toString() != registrationPasswordConfirmationEditTextField.text.toString()) {
+                        changeErrorStates(
+                            loginError = false,
+                            emailError = false,
+                            errorMessage = getText(R.string.inequalityFieldsErrorMessage).toString()
+                        )
+                    } else {
+                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    }
                 }
             }
 

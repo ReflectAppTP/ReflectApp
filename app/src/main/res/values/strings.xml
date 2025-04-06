@@ -38,4 +38,5 @@
     <string name="registrationOr">или</string>
 
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
+    <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
 </resources>
