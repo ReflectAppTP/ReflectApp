@@ -1,14 +1,7 @@
 name: Reflect CI
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-  pull_request:
-    branches:
-      - main
-      - dev
+  push
 
 jobs:
   build:
