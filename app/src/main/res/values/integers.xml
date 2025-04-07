@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="counterLoginLength">20</integer>
+    <integer name="counterEmailLength">50</integer>
+    <integer name="counterPasswordLength">20</integer>
+    <integer name="characterLimit">3</integer>
+</resources>

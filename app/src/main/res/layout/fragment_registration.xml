@@ -19,7 +19,7 @@
             android:id="@+id/registrationBackArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Иконка возврата на экран авторизации"
+            android:contentDescription="@string/registrationIconBackContentDescription"
             android:src="@drawable/ic_back_arrow"
             android:background="@color/surface"
             android:layout_gravity="start"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/onSurface"
-            android:text="Регистрация"
+            android:text="@string/registrationIcon"
             />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -52,41 +52,60 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:hint="Логин"
+            android:hint="@string/registrationLoginHint"
+            android:nextFocusDown="@id/registrationEmailEditText"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterLoginLength"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registrationLoginEditTextField"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:inputType="textVisiblePassword"
+                android:maxLength="@integer/counterLoginLength"
+                android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationEmailEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Почта"
+            android:hint="@string/registrationEmailHint"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterEmailLength"
+            android:nextFocusDown="@id/registrationPasswordEditText"
             app:endIconMode="clear_text"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registrationEmailEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:maxLength="@integer/counterEmailLength"
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationPasswordEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Пароль"
+            android:hint="@string/registrationPasswordHint"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterPasswordLength"
+            android:nextFocusDown="@id/registrationPasswordConfirmationEditText"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/registrationPasswordEditTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="@integer/counterPasswordLength"
+            android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,28 +113,44 @@
             android:id="@+id/registrationPasswordConfirmationEditText"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Повторите пароль"
+            android:hint="@string/registrationPasswordConfirmationHint"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterPasswordLength"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/registrationPasswordConfirmationEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLength="@integer/counterPasswordLength"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/registrationErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/error"
+            android:layout_marginBottom="16dp"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            />
 
         <Button
             android:id="@+id/registrationButton"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="Зарегестрироваться"
+            android:text="@string/registrationButton"
             app:cornerRadius="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="или"
+            android:text="@string/registrationOr"
             android:textColor="@color/onSurface"
             style="@style/TextAppearance.Material3.LabelLarge"
             />

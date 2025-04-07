@@ -34,13 +34,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterEmailLength"
             app:endIconMode="clear_text"
+            android:nextFocusDown="@id/passwordLoginEditText"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailLoginEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:maxLength="@integer/counterEmailLength"
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,13 +54,19 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
+            app:counterEnabled="false"
+            app:counterMaxLength="@integer/counterPasswordLength"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordLoginEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLength="@integer/counterPasswordLength"
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -94,7 +106,7 @@
             android:id="@+id/loginLikeGuestButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/logintLikeGuest"
+            android:text="@string/loginLikeGuest"
             style="@style/TextAppearance.Material3.LabelLarge"
             android:layout_marginTop="12dp"
             android:textColor="@color/onSurfaceVariant"
@@ -119,7 +131,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:text="@string/logintRegistration"
+            android:text="@string/loginRegistration"
             android:textColor="@color/onSurface"
             app:cornerRadius="12dp" />
 
