@@ -1,4 +1,4 @@
-package com.example.reflect.presentation.statistics.fragment
+package com.example.reflect.presentation.screens.statistics.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
