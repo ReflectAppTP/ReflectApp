@@ -48,4 +48,6 @@
     <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
     <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
+    <string name="newPasswordHint">Новый пароль</string>
+    <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
 </resources>
