@@ -46,6 +46,16 @@
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
+            app:destination="@id/navigation_reset_password_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            />
+
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -64,4 +74,6 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
+    <include app:graph="@navigation/navigation_reset_password_graph"/>
 </navigation>

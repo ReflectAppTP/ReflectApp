@@ -46,6 +46,10 @@ android {
 dependencies {
     // Room
     implementation(libs.room.runtime)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
     testImplementation(libs.room.testing)
