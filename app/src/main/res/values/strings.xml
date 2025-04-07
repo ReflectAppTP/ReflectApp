@@ -39,5 +39,9 @@
 
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+
+
     <string name="resetPasswordTitle">Восстановить пароль</string>
+    <string name="resetPasswordEmailTitle">Введите почту, на которую придёт код для восстановления пароля</string>
+    <string name="sendCodeButtonText">Отправить код</string>
 </resources>

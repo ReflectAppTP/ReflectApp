@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentPasswordResetEmailBinding
 import com.example.reflect.presentation.screens.passwordReset.viewmodel.ViewModelPasswordReset
 
@@ -21,6 +23,10 @@ class PasswordResetEmailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentPasswordResetEmailBinding.inflate(inflater, container, false)
+
+        binding.resetPasswordSendCodeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_passwordResetEmailFragment_to_passwordResetCodeFragment)
+        }
 
         return binding.root
     }
