@@ -71,6 +71,9 @@ dependencies {
     implementation(libs.navigation.testing)
     implementation(libs.kotlinx.serialization.json)
 
+    // PinView
+    implementation(libs.pin.view)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
