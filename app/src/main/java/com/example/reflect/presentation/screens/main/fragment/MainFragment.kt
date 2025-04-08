@@ -10,7 +10,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
@@ -19,7 +21,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
 
         val viewPager = binding.mainActivityViewPager

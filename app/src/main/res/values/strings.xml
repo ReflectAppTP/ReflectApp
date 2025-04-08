@@ -39,4 +39,16 @@
 
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+
+
+    <string name="resetPasswordTitle">Восстановить пароль</string>
+    <string name="resetPasswordEmailTitle">Введите почту, на которую придёт код для восстановления пароля</string>
+    <string name="sendCodeButtonText">Отправить код</string>
+    <string name="resetPasswordCodeTitle">На почту %1$s отправлен код подтверждения</string>
+    <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
+    <string name="resetPasswordSendCodeAgainWithoutTimer">Отправить код повторно</string>
+    <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
+    <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
+    <string name="newPasswordHint">Новый пароль</string>
+    <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
 </resources>

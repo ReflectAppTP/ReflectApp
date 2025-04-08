@@ -3,8 +3,11 @@ package com.example.reflect.presentation.screens.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ViewModelRegistration : ViewModel() {
+@HiltViewModel
+class ViewModelRegistration @Inject constructor() : ViewModel() {
     private val _login = MutableLiveData("")
     val login: LiveData<String> get() = _login
 

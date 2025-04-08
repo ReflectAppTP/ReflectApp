@@ -13,7 +13,9 @@ import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistrationFragment : Fragment() {
 
     private var _binding: FragmentRegistrationBinding? = null
@@ -27,10 +29,15 @@ class RegistrationFragment : Fragment() {
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         bindViewModelAndTextFields()
         setOnClickLogic()
 
-        return binding.root
     }
 
     override fun onDestroyView() {

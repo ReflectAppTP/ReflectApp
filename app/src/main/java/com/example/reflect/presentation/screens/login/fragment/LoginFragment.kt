@@ -13,7 +13,9 @@ import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentLoginBinding
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
@@ -27,10 +29,14 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         bindViewModelAndTextFields()
         setOnClickLogic()
-
-        return binding.root
     }
 
     override fun onDestroyView() {
@@ -75,8 +81,16 @@ class LoginFragment : Fragment() {
                 true
             }
 
+            loginLikeGuestButton.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+
             loginRegistrationButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
+            }
+
+            loginForgotPasswordButton.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
             }
         }
     }

@@ -46,6 +46,15 @@
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
+            app:destination="@id/mainPasswordResetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/loginFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
@@ -63,5 +72,21 @@
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+
+    <include app:graph="@navigation/navigation_reset_password_graph"/>
+    <fragment
+        android:id="@+id/mainPasswordResetFragment"
+        android:name="com.example.reflect.presentation.screens.passwordReset.fragments.MainPasswordResetFragment"
+        android:label="fragment_main_password_reset"
+        tools:layout="@layout/fragment_main_password_reset" >
+        <action
+            android:id="@+id/action_passwordResetNewPasswordFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 </navigation>

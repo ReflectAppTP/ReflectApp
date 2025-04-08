@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.reflect.databinding.FragmentStatisticsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StatisticsFragment : Fragment() {
 
     private var _binding: FragmentStatisticsBinding? = null

@@ -3,8 +3,11 @@ package com.example.reflect.presentation.screens.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ViewModelLogin : ViewModel() {
+@HiltViewModel
+class ViewModelLogin @Inject constructor() : ViewModel() {
     private var _email = MutableLiveData("")
     val email: LiveData<String> get() = _email
 

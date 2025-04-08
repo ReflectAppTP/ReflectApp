@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.reflect.databinding.FragmentRecordsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecordsFragment : Fragment() {
 
     private var _binding: FragmentRecordsBinding? = null
@@ -15,7 +17,7 @@ class RecordsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentRecordsBinding.inflate(inflater, container, false)
 
         return binding.root
