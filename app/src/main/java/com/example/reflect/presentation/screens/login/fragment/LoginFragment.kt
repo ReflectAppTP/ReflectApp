@@ -77,6 +77,10 @@ class LoginFragment : Fragment() {
                 true
             }
 
+            loginForgotPasswordButton.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+
             loginRegistrationButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
