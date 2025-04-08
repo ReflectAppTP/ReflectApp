@@ -29,10 +29,15 @@ class RegistrationFragment : Fragment() {
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         bindViewModelAndTextFields()
         setOnClickLogic()
 
-        return binding.root
     }
 
     override fun onDestroyView() {
