@@ -13,7 +13,9 @@ import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentLoginBinding
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null

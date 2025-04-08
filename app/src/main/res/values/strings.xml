@@ -46,6 +46,7 @@
     <string name="sendCodeButtonText">Отправить код</string>
     <string name="resetPasswordCodeTitle">На почту %1$s отправлен код подтверждения</string>
     <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
+    <string name="resetPasswordSendCodeAgainWithoutTimer">Отправить код повторно</string>
     <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="newPasswordHint">Новый пароль</string>
