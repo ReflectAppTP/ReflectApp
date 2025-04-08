@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelPasswordReset @Inject constructor() : ViewModel() {
+    // TODO: remove unused fields
     private var _email = MutableLiveData("")
     val email: LiveData<String> get() = _email
 

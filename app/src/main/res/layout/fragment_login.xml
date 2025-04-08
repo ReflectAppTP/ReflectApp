@@ -106,10 +106,12 @@
             android:id="@+id/loginLikeGuestButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:padding="16dp"
             android:text="@string/loginLikeGuest"
             style="@style/TextAppearance.Material3.LabelLarge"
-            android:layout_marginTop="12dp"
             android:textColor="@color/onSurfaceVariant"
+            android:clickable="true"
             />
 
     </LinearLayout>
@@ -140,7 +142,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loginForgotPassword"
-            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:textColor="@color/onSurface"
             style="@style/TextAppearance.Material3.LabelLarge"
             />

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -77,7 +78,7 @@ class LoginFragment : Fragment() {
                 true
             }
 
-            loginForgotPasswordButton.setOnClickListener {
+            loginLikeGuestButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }
 
