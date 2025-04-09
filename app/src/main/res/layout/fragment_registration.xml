@@ -54,10 +54,9 @@
             android:layout_marginTop="32dp"
             android:hint="@string/registrationLoginHint"
             android:nextFocusDown="@id/registrationEmailEditText"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterLoginLength"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationLoginEditTextField"
@@ -73,11 +72,10 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationEmailHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterEmailLength"
             android:nextFocusDown="@id/registrationPasswordEditText"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationEmailEditTextField"
@@ -93,11 +91,10 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
             android:nextFocusDown="@id/registrationPasswordConfirmationEditText"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registrationPasswordEditTextField"
@@ -114,10 +111,9 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordConfirmationHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationPasswordConfirmationEditTextField"

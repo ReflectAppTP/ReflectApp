@@ -34,11 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterEmailLength"
             app:endIconMode="clear_text"
-            android:nextFocusDown="@id/passwordLoginEditText"
-            app:errorEnabled="true">
+            android:nextFocusDown="@id/passwordLoginEditText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailLoginEditTextField"
@@ -54,10 +53,9 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordLoginEditTextField"
