@@ -51,5 +51,7 @@
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="newPasswordHint">Новый пароль</string>
     <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
+
     <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
+    <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
 </resources>

@@ -109,14 +109,20 @@ class RegistrationFragment : Fragment() {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
-                    if (registrationPasswordEditTextField.text.toString() != registrationPasswordConfirmationEditTextField.text.toString()) {
+                    val isPasswordMoreThanSixSymbols = vm.isPasswordMoreThanSixSymbols()
+                    if (registrationPasswordEditTextField.text.toString() == registrationPasswordConfirmationEditTextField.text.toString()
+                        && isPasswordMoreThanSixSymbols) {
+                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    } else {
+                        val errorMessage = if (!isPasswordMoreThanSixSymbols) {
+                            getText(R.string.passwordInSixSymbolsErrorMessage).toString()
+                        } else getText(R.string.inequalityFieldsErrorMessage).toString()
+
                         changeErrorStates(
                             loginError = false,
                             emailError = false,
-                            errorMessage = getText(R.string.inequalityFieldsErrorMessage).toString()
+                            errorMessage = errorMessage
                         )
-                    } else {
-                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
                     }
                 }
             }
