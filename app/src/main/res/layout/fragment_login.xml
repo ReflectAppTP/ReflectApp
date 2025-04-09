@@ -82,7 +82,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="@string/loginButton"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Войти через VK"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton"/>
 
         <TextView
             android:id="@+id/loginLikeGuestButton"
@@ -133,6 +133,7 @@
             android:layout_height="wrap_content"
             android:text="@string/loginRegistration"
             android:textColor="@color/onSurface"
+            android:paddingVertical="7dp"
             app:cornerRadius="12dp" />
 
         <TextView

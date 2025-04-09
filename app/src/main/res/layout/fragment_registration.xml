@@ -141,7 +141,8 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="@string/registrationButton"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -157,7 +158,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Зарегистрироваться через VK"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
