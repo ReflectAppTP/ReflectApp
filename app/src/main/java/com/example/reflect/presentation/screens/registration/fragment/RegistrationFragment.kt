@@ -108,24 +108,44 @@ class RegistrationFragment : Fragment() {
             registrationButton.setOnClickListener {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
-                } else {
-                    val isPasswordMoreThanSixSymbols = vm.isPasswordMoreThanSixSymbols()
-                    if (registrationPasswordEditTextField.text.toString() == registrationPasswordConfirmationEditTextField.text.toString()
-                        && isPasswordMoreThanSixSymbols) {
-                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
-                    } else {
-                        val errorMessage = if (!isPasswordMoreThanSixSymbols) {
-                            getText(R.string.passwordInSixSymbolsErrorMessage).toString()
-                        } else getText(R.string.inequalityFieldsErrorMessage).toString()
+                    return@setOnClickListener
+                }
 
+                if (!Utils.isEmailValid(vm.email.value!!)) {
+                    changeErrorStates(
+                        loginError = false,
+                        passwordError = false,
+                        passwordConfirmationError = false,
+                        errorMessage = getText(R.string.incorrectEmailErrorMessage).toString()
+                    )
+                    return@setOnClickListener
+                }
+
+                val password = registrationPasswordEditTextField.text.toString()
+                val passwordConfirmation = registrationPasswordConfirmationEditTextField.text.toString()
+                val isPasswordValid = vm.isPasswordMoreThanSixSymbols()
+
+                when {
+                    password == passwordConfirmation && isPasswordValid -> {
+                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    }
+                    !isPasswordValid -> {
                         changeErrorStates(
                             loginError = false,
                             emailError = false,
-                            errorMessage = errorMessage
+                            errorMessage = getText(R.string.passwordInSixSymbolsErrorMessage).toString()
+                        )
+                    }
+                    else -> {
+                        changeErrorStates(
+                            loginError = false,
+                            emailError = false,
+                            errorMessage = getText(R.string.inequalityFieldsErrorMessage).toString()
                         )
                     }
                 }
             }
+
 
             registrationPasswordConfirmationEditTextField.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {

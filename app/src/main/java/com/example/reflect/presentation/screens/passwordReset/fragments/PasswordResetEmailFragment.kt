@@ -11,6 +11,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentPasswordResetEmailBinding
 import com.example.reflect.presentation.screens.passwordReset.viewmodel.ViewModelPasswordReset
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,9 +61,13 @@ class PasswordResetEmailFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             resetPasswordSendCodeButton.setOnClickListener {
-                vm.generatePinCode()
-                Toast.makeText(context, vm.sendedPinCode.value, Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_passwordResetEmailFragment_to_passwordResetCodeFragment)
+                if (!Utils.isEmailValid(vm.email.value!!)) {
+                    changeErrorState(errorMessage = getText(R.string.incorrectEmailErrorMessage).toString())
+                } else {
+                    vm.generatePinCode()
+                    Toast.makeText(context, vm.sendedPinCode.value, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_passwordResetEmailFragment_to_passwordResetCodeFragment)
+                }
             }
 
             resetPasswordEmailEditTextField.setOnEditorActionListener { _, actionId, _ ->

@@ -54,4 +54,5 @@
 
     <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
     <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
+    <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
 </resources>
