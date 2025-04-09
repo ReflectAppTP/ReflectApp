@@ -30,7 +30,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLoginEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
@@ -50,7 +50,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLoginEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
             style="@style/EditText"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:text="@string/loginButton"
             style="@style/MaterialButton" />
@@ -94,7 +94,7 @@
 
         <Button
             android:id="@+id/loginWithVKButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Войти через VK"
