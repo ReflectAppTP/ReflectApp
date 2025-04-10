@@ -24,4 +24,6 @@
     <color name="onSurfaceVariant">#424840</color>
     <color name="outline">#737970</color>
     <color name="surfaceContainer">#EEEEE9</color>
+
+    <color name="splashScreen">#EBFFE5</color>
 </resources>

@@ -38,23 +38,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="CircleFab" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/splashScreen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Reflect</item>
+        <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
     </style>
 
-    <style name="EditText" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusBottomEnd">12dp</item>
-        <item name="boxCornerRadiusBottomStart">12dp</item>
-        <item name="boxCornerRadiusTopEnd">12dp</item>
-        <item name="boxCornerRadiusTopStart">12dp</item>
-        <item name="errorEnabled">true</item>
-        <item name="counterEnabled">false</item>
-    </style>
-
-    <style name="MaterialButton" parent="Widget.Material3.Button.IconButton.Filled">
-        <item name="android:paddingTop">13dp</item>
-        <item name="android:paddingBottom">13dp</item>
-        <item name="cornerRadius">12dp</item>
-    </style>
 </resources>
