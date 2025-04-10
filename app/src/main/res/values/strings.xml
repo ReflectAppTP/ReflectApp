@@ -26,7 +26,6 @@
     <string name="loginRegistration">Регистрация</string>
     <string name="loginForgotPassword">Забыли пароль?</string>
 
-
     <!-- Registration Fragment -->
     <string name="registrationIconBackContentDescription">Иконка возврата на экран авторизации</string>
     <string name="registrationIcon">Регистрация</string>
@@ -37,10 +36,13 @@
     <string name="registrationButton">Зарегистрироваться</string>
     <string name="registrationOr">или</string>
 
+    <!-- Error messages -->
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+    <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
+    <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
 
-
+    <!-- Сброс пароля -->
     <string name="resetPasswordTitle">Восстановить пароль</string>
     <string name="resetPasswordEmailTitle">Введите почту, на которую придёт код для восстановления пароля</string>
     <string name="sendCodeButtonText">Отправить код</string>
@@ -48,11 +50,15 @@
     <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
     <string name="resetPasswordSendCodeAgainWithoutTimer">Отправить код повторно</string>
     <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
-    <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="newPasswordHint">Новый пароль</string>
     <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
 
     <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
-    <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
     <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
+
+    <!-- Диалоговое окно с подтверждением на обработку персональных данных -->
+    <string name="agreementDialogTitle">Согласие на обработку персональных данных</string>
+    <string name="agreementDialogDescription">Подтверждая, вы даете согласие на обработку персональных данных</string>
+    <string name="agreementButtonText">Согласен/а</string>
+    <string name="disagreementButtonText">Не согласен/а</string>
 </resources>

@@ -89,4 +89,9 @@
             app:popUpToInclusive="true"
             />
     </fragment>
+    <dialog
+        android:id="@+id/consentDialog"
+        android:name="com.example.reflect.presentation.dialog.ConsentDialog"
+        android:label="ConsentDialog" />
+
 </navigation>
