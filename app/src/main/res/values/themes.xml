@@ -36,6 +36,7 @@
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
         <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
@@ -44,6 +45,10 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.Reflect</item>
         <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
+    </style>
+
+    <style name="Theme.App.BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
 
 </resources>

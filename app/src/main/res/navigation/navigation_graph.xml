@@ -93,5 +93,6 @@
         android:id="@+id/consentDialog"
         android:name="com.example.reflect.presentation.dialog.ConsentDialog"
         android:label="ConsentDialog" />
+    <include app:graph="@navigation/navigation_add_emotional_state" />
 
 </navigation>

@@ -27,4 +27,11 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.7</item>
     </style>
+
+    <style name="BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="behavior_skipCollapsed">true</item>
+        <item name="behavior_fitToContents">true</item>
+        <item name="behavior_peekHeight">500dp</item>
+        <item name="behavior_hideable">true</item>
+    </style>
 </resources>

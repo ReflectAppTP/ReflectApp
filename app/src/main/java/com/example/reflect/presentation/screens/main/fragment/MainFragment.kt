@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
+import com.example.reflect.presentation.screens.addState.fragments.AddStateBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +41,8 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.add_record -> {
+                    val bottomSheet = AddStateBottomSheetFragment()
+                    bottomSheet.show(parentFragmentManager, "OLEG")
                     Toast.makeText(context, "Мяу мяу...", Toast.LENGTH_SHORT).show()
                     false
                 }
