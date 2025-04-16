@@ -5,33 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screens.addState.fragments.FirstClarificationAddStateFragment">
+    tools:context=".presentation.screens.addState.fragments.SecondClarificationAddStateFragment">
 
     <TextView
-        android:id="@+id/addStateFirstClarificationTitle"
+        android:id="@+id/addStateSecondClarificationTitle"
         style="@style/TextAppearance.Material3.HeadlineMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Что тебя заставляет так себя чувствовать?"
+        android:text="Как ты себя чувствуешь?"
         android:textColor="@color/onSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addStateFirstClarificationRV"
+        android:id="@+id/addStateSecondClarificationRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/addStateFirstClarificationTitle"
+        app:layout_constraintTop_toBottomOf="@id/addStateSecondClarificationTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/addStateFirstClarificationNextButton"
+        app:layout_constraintBottom_toTopOf="@id/addStateSecondClarificationNextButton"
         />
 
     <Button
-        android:id="@+id/addStateFirstClarificationNextButton"
+        android:id="@+id/addStateSecondClarificationNextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="34dp"
