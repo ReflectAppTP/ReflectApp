@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentFirstClarificationAddStateBinding
 
 class FirstClarificationAddStateFragment : Fragment() {
@@ -23,6 +25,8 @@ class FirstClarificationAddStateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        addButtonOnClickListeners()
+
     }
 
     override fun onDestroyView() {
@@ -30,4 +34,11 @@ class FirstClarificationAddStateFragment : Fragment() {
         _binding = null
     }
 
+    private fun addButtonOnClickListeners() {
+        with (binding) {
+            addStateFirstClarificationNextButton.setOnClickListener {
+                findNavController().navigate(R.id.action_firstClarificationAddStateFragment_to_secondClarificationAddStateFragment)
+            }
+        }
+    }
 }

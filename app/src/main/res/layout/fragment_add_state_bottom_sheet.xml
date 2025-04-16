@@ -8,6 +8,7 @@
     android:background="@drawable/rounded_bottom_sheet"
     android:paddingTop="3dp"
     android:paddingHorizontal="6dp"
+    android:id="@+id/addStateBottomSheetLayout"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:context=".presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment">
 

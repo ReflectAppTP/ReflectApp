@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainAddStateBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MainAddStateFragment : Fragment() {
 
@@ -24,6 +28,17 @@ class MainAddStateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        addSliderOnChangeListener()
+        addButtonOnClickListeners()
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun addSliderOnChangeListener() {
         with (binding) {
             addStateSlider.addOnChangeListener { _, value, _ ->
                 when (value.toInt()) {
@@ -38,9 +53,19 @@ class MainAddStateFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun addButtonOnClickListeners() {
+        with (binding) {
+            addStateSaveButton.setOnClickListener {
+                // TODO: переделать тост и внести строку в ресурсы
+                Toast.makeText(context, "Запись сохранена", Toast.LENGTH_SHORT).show()
+                // TODO: просто bruh
+                (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+            }
+
+            addStateClarifyButton.setOnClickListener {
+                findNavController().navigate(R.id.action_mainAddStateFragment_to_firstClarificationAddStateFragment)
+            }
+        }
     }
 
 }

@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAddStateBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -45,6 +48,16 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with (binding) {
+            addStateBackArrow.setOnClickListener {
+                if (addStateFragmentContainerView.findNavController().currentDestination?.label.toString() == resources.getResourceEntryName(R.layout.fragment_main_add_state)) {
+//                    findNavController().popBackStack()
+                    dismiss()
+                } else {
+                    addStateFragmentContainerView.findNavController().popBackStack()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
