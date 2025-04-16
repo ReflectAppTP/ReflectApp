@@ -35,8 +35,8 @@
         <item name="android:navigationBarColor">@color/surfaceContainer</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
-        <!-- Customize your theme here. -->
-        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
+<!--         Customize your theme here. -->
+<!--        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>-->
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

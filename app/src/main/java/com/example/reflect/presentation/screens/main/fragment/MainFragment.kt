@@ -10,7 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
-import com.example.reflect.presentation.screens.addState.fragments.AddStateBottomSheetFragment
+import com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

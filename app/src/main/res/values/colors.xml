@@ -27,4 +27,7 @@
 
     <color name="splashScreen">#EBFFE5</color>
     <color name="surfaceContainerLow">#EEEEE9</color>
+    <color name="surfaceContainerHigh">#E8E8E3</color>
+
+    <color name="primary80">#ABD0A6</color>
 </resources>

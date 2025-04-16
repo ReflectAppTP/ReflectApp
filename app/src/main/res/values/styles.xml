@@ -29,9 +29,14 @@
     </style>
 
     <style name="BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
-        <item name="behavior_skipCollapsed">true</item>
-        <item name="behavior_fitToContents">true</item>
-        <item name="behavior_peekHeight">500dp</item>
-        <item name="behavior_hideable">true</item>
+<!--        <item name="behavior_skipCollapsed">true</item>-->
+<!--        <item name="behavior_fitToContents">true</item>-->
+<!--        <item name="behavior_peekHeight">1000dp</item>-->
+<!--        <item name="behavior_hideable">true</item>-->
+        <item name="android:background">@drawable/rounded_bottom_sheet</item>
+        <item name="backgroundTint">@color/background</item>
+<!--        <item name="android:layout_marginStart">3dp</item>-->
+<!--        <item name="android:layout_marginEnd">3dp</item>-->
+<!--        <item name="android:layout_marginTop">8dp</item>-->
     </style>
 </resources>

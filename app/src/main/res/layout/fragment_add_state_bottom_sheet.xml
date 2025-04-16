@@ -5,33 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
-    android:paddingHorizontal="18dp"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="16dp"
+    android:background="@drawable/rounded_bottom_sheet"
+    android:paddingTop="3dp"
+    android:paddingHorizontal="6dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".presentation.screens.addState.fragments.AddStateBottomSheetFragment">
+    tools:context=".presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment">
 
     <ImageButton
-        android:id="@+id/resetPasswordBackArrow"
+        android:id="@+id/addStateBackArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_margin="16dp"
         android:background="@color/surface"
         android:contentDescription="Иконка закрытия окна добавления состояния"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        style="@style/TextAppearance.Material3.HeadlineMedium"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/addStateFragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Как ты себя чувствуешь?"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="17dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetPasswordBackArrow" />
+        app:layout_constraintTop_toBottomOf="@+id/addStateBackArrow"
+        app:navGraph="@navigation/navigation_add_emotional_state" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,10 @@
-package com.example.reflect.presentation.screens.addState.fragments
+package com.example.reflect.presentation.screens.addState.bottomSheet
 
-import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.reflect.R
+import android.widget.FrameLayout
 import com.example.reflect.databinding.FragmentAddStateBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,12 +15,30 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentAddStateBottomSheetBinding? = null
     private val binding get() = _binding!!
 
+    override fun onStart() {
+        super.onStart()
+        val dialog = dialog as? BottomSheetDialog ?: return
+
+        val bottomSheet =
+            dialog.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)
+
+        if (bottomSheet != null) {
+            val behavior = BottomSheetBehavior.from(bottomSheet)
+            val layoutParams = bottomSheet.layoutParams
+            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+            bottomSheet.layoutParams = layoutParams
+
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            behavior.skipCollapsed = true
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddStateBottomSheetBinding.inflate(LayoutInflater.from(context))
+        _binding = FragmentAddStateBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,15 +50,5 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
-
-//        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-//        dialog.behavior.peekHeight = 200
-
-        Log.d("MyLog", "expanded")
-        return dialog
     }
 }
