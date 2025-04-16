@@ -19,7 +19,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:background="@color/surface"
-        android:contentDescription="Иконка закрытия окна добавления состояния"
+        android:contentDescription="@string/contentDescriptionAddStateBackArrow"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

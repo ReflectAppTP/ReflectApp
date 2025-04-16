@@ -15,6 +15,8 @@
     <string name="contentDescriptionToolbarStreakIcon">Иконка стрика</string>
     <string name="contentDescriptionToolbarSearchIcon">Иконка поиска</string>
     <string name="contentDescriptionToolbarSettingsIcon">Иконка настроек</string>
+    <string name="contentDescriptionAddStateBackArrow">Иконка закрытия окна добавления состояния</string>
+    <string name="contentDescriptionAddStateImage">Картинка с выбранным состоянием</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -41,6 +43,7 @@
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
+    <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
 
     <!-- Сброс пароля -->
     <string name="resetPasswordTitle">Восстановить пароль</string>
@@ -54,11 +57,22 @@
     <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
 
     <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
-    <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
 
     <!-- Диалоговое окно с подтверждением на обработку персональных данных -->
     <string name="agreementDialogTitle">Согласие на обработку персональных данных</string>
     <string name="agreementDialogDescription">Подтверждая, вы даете согласие на обработку персональных данных</string>
     <string name="agreementButtonText">Согласен/а</string>
     <string name="disagreementButtonText">Не согласен/а</string>
+
+    <string name="addStateHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateBadMood">Ужасно</string>
+    <string name="addStateGoodMood">Замечательно</string>
+    <string name="addStateClarifyButtonText">Уточнить</string>
+    <string name="addStateSaveWithoutClarifyButtonText">Сохранить без подробностей</string>
+    <string name="addStateFirstClarificationHowDoYouFeel">Что тебя заставляет так себя чувствовать?</string>
+    <string name="addStateContinueButtonText">Продолжить</string>
+    <string name="addStateSecondClarificationHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateThirdClarificationHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateThirdClarificationEditTextHint">Добавить заметку…</string>
+    <string name="addStateSaveButtonText">Сохранить</string>
 </resources>

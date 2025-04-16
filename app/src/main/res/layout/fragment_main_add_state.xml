@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Как ты себя чувствуешь?"
+        android:text="@string/addStateHowDoYouFeel"
         android:textColor="@color/onSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:contentDescription="Картинка с выбранным состоянием"
+            android:contentDescription="@string/contentDescriptionAddStateImage"
             android:src="@drawable/ic_add_state_emotion_3" />
 
     </androidx.cardview.widget.CardView>
@@ -62,7 +62,7 @@
         android:id="@+id/addStateBadStateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ужасно"
+        android:text="@string/addStateBadMood"
         android:layout_marginTop="10dp"
         android:layout_marginStart="8dp"
         android:paddingHorizontal="10dp"
@@ -75,7 +75,7 @@
         android:id="@+id/addStateGoodStateTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Замечательно"
+        android:text="@string/addStateGoodMood"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:paddingHorizontal="10dp"
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="34dp"
         android:paddingVertical="20dp"
-        android:text="Уточнить"
+        android:text="@string/addStateClarifyButtonText"
         app:layout_constraintBottom_toTopOf="@+id/addStateSaveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.Button.TextButton"
-        android:text="Сохранить без подробностей"
+        android:text="@string/addStateSaveWithoutClarifyButtonText"
         android:textColor="@color/primaryContainer"
         android:paddingVertical="1dp"
         android:layout_marginBottom="36dp"
