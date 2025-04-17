@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/addStateThirdClarificationLayout"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
     tools:context=".presentation.screens.addState.fragments.ThirdClarificationAddStateFragment">
 
     <TextView
@@ -60,7 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_gravity="top"
                 android:gravity="top|start"
+                android:inputType="textShortMessage"
+                android:imeOptions="actionDone"
                 android:maxLength="@integer/counterDescriptionAddState"
                 android:minLines="10" />
         </com.google.android.material.textfield.TextInputLayout>

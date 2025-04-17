@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.internal.ViewUtils.showKeyboard
+import com.google.android.material.textfield.TextInputEditText
 
 class ThirdClarificationAddStateFragment : Fragment() {
 
@@ -33,6 +35,12 @@ class ThirdClarificationAddStateFragment : Fragment() {
             showKeyboard(binding.addStateThirdClarificationTextInputField)
         }
 
+        binding.addStateThirdClarificationLayout.setOnClickListener { clickedView ->
+            if (clickedView !is TextInputEditText) {
+                hideKeyboard()
+            }
+        }
+
         addButtonOnClickListeners()
     }
 
@@ -46,6 +54,12 @@ class ThirdClarificationAddStateFragment : Fragment() {
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.addStateThirdClarificationTextInputField.clearFocus()
+        imm.hideSoftInputFromWindow(binding.addStateThirdClarificationLayout.windowToken, 0)
+    }
+
     private fun addButtonOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
@@ -53,6 +67,12 @@ class ThirdClarificationAddStateFragment : Fragment() {
                 Toast.makeText(context, "Запись сохранена", Toast.LENGTH_SHORT).show()
                 // TODO Просто bruh!
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+            }
+            addStateThirdClarificationTextInputField.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    addStateThirdClarificationNextButton.performClick()
+                }
+                true
             }
         }
     }
