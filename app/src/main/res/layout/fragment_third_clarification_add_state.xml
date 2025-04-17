@@ -51,10 +51,12 @@
             app:boxStrokeWidth="0dp"
             app:counterEnabled="true"
             app:counterMaxLength="@integer/counterDescriptionAddState"
+            android:focusable="true"
             app:helperTextEnabled="true"
             app:hintTextColor="@color/outline">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addStateThirdClarificationTextInputField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
