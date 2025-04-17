@@ -37,7 +37,7 @@
         android:layout_marginHorizontal="34dp"
         android:paddingVertical="20dp"
         android:text="@string/addStateContinueButtonText"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="@dimen/button_add_state_bottom_margin_50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

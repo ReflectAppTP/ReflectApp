@@ -39,4 +39,9 @@
 <!--        <item name="android:layout_marginEnd">3dp</item>-->
 <!--        <item name="android:layout_marginTop">8dp</item>-->
     </style>
+
+    <style name="EditTextCounterStyle" parent="TextAppearance.Design.Counter">
+        <item name="android:background">@drawable/rounded_bottom_sheet</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
 </resources>

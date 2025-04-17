@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="editTextAndButtonWidth">280dp</dimen>
+
+
+    <dimen name="button_add_state_bottom_margin_50dp">50dp</dimen>
 </resources>
