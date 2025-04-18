@@ -4,4 +4,8 @@
 
 
     <dimen name="button_add_state_bottom_margin_50dp">50dp</dimen>
+    <dimen name="tagCardRadius">12dp</dimen>
+    <dimen name="tagHorizontalMargin8dp">8dp</dimen>
+    <dimen name="tagCardMinWidth100dp">100dp</dimen>
+    <dimen name="tagCardMaxWidth150dp">150dp</dimen>
 </resources>
