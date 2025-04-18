@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainAddStateBinding
+import com.example.reflect.presentation.common.Utils
 import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,8 +71,7 @@ class MainAddStateFragment : Fragment() {
     private fun addButtonOnClickListeners() {
         with (binding) {
             addStateSaveButton.setOnClickListener {
-                // TODO: переделать тост и внести строку в ресурсы
-                Toast.makeText(context, "Запись сохранена", Toast.LENGTH_SHORT).show()
+                Utils.toast(requireContext())
                 // TODO: просто bruh
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
@@ -82,5 +81,4 @@ class MainAddStateFragment : Fragment() {
             }
         }
     }
-
 }

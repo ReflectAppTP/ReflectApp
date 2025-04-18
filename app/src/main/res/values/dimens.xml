@@ -11,4 +11,7 @@
     <dimen name="tagCardMaxWidth150dp">150dp</dimen>
     <dimen name="tagRecyclerViewMarginTop24dp">24dp</dimen>
     <dimen name="tagRecyclerViewMarginBottom12dp">12dp</dimen>
+
+    <dimen name="toastMessageMarginVertical4dp">4dp</dimen>
+    <dimen name="toastMessageMarginHorizontal8dp">8dp</dimen>
 </resources>

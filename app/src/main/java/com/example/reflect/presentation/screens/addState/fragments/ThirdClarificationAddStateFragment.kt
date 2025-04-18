@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
+import com.example.reflect.presentation.common.Utils
 import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -79,8 +80,7 @@ class ThirdClarificationAddStateFragment : Fragment() {
     private fun addButtonOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
-                // TODO: переделать тост и внести строку в ресурсы
-                Toast.makeText(context, "Запись сохранена", Toast.LENGTH_SHORT).show()
+                Utils.toast(requireContext())
                 // TODO Просто bruh!
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
