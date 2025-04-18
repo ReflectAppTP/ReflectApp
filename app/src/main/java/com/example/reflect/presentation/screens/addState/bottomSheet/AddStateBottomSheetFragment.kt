@@ -1,5 +1,6 @@
 package com.example.reflect.presentation.screens.addState.bottomSheet
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +69,11 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        vm.clearData()
     }
 
     override fun onDestroyView() {

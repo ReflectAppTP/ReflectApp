@@ -13,13 +13,13 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
     private var _firstTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
     val firstTags: LiveData<MutableList<TagModel>> get() = _firstTags
 
-    private var _secondTags = MutableLiveData<MutableList<TagModel>>()
+    private var _secondTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
     val secondTags: LiveData<MutableList<TagModel>> get() = _secondTags
 
-    private var _selectedFirstTags = MutableLiveData<MutableList<Int>>()
+    private var _selectedFirstTags = MutableLiveData<MutableList<Int>>(mutableListOf())
     val selectedFirtsTags: LiveData<MutableList<Int>> get() = _selectedFirstTags
 
-    private var _selectedSecondTags = MutableLiveData<MutableList<Int>>()
+    private var _selectedSecondTags = MutableLiveData<MutableList<Int>>(mutableListOf())
     val selectedSecondTags: LiveData<MutableList<Int>> get() = _selectedSecondTags
 
     fun fetchFirstTags() {
@@ -56,5 +56,13 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
 
     fun addTagIdToFirstList(id: Int) {
         _selectedFirstTags.value?.add(id)
+    }
+
+
+    fun clearData() {
+        _firstTags.value = mutableListOf()
+        _secondTags.value = mutableListOf()
+        _selectedFirstTags.value = mutableListOf()
+        _selectedSecondTags.value = mutableListOf()
     }
 }
