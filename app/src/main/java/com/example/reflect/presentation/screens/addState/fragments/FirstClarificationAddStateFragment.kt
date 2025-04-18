@@ -35,7 +35,6 @@ class FirstClarificationAddStateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-//            calculateSpanCount()
             addStateFirstClarificationRV.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             addStateFirstClarificationRV.adapter = AddStateTagListAdapter(
                 vm.firstTags.value!!,

@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainAddStateBinding
+import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class MainAddStateFragment : Fragment() {
+
+    private val vm: AddStateViewModel by activityViewModels()
 
     private var _binding: FragmentMainAddStateBinding? = null
     private val binding get() = _binding!!
@@ -30,6 +34,7 @@ class MainAddStateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        changeSliderState(vm.emotionalState.value!!)
         addSliderOnChangeListener()
         addButtonOnClickListeners()
 
@@ -43,14 +48,22 @@ class MainAddStateFragment : Fragment() {
     private fun addSliderOnChangeListener() {
         with (binding) {
             addStateSlider.addOnChangeListener { _, value, _ ->
-                when (value.toInt()) {
-                    in 0..1 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_1)
-                    in 2..3 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_2)
-                    in 4..6 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_3)
-                    in 7..8 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_4)
-                    in 9..10 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_5)
-                    else -> throw IllegalStateException("Как так вообще получилось, что значение от 0 до 10 больше 10?!")
-                }
+                changeSliderState(value)
+            }
+        }
+    }
+
+    private fun changeSliderState(value: Float) {
+        with (binding) {
+            addStateSlider.value = value
+            vm.updateEmotionalState(value)
+            when (value.toInt()) {
+                in 0..1 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_1)
+                in 2..3 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_2)
+                in 4..6 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_3)
+                in 7..8 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_4)
+                in 9..10 -> addStateImage.setImageResource(R.drawable.ic_add_state_emotion_5)
+                else -> throw IllegalStateException("Как так вообще получилось, что значение от 0 до 10 больше 10?!")
             }
         }
     }

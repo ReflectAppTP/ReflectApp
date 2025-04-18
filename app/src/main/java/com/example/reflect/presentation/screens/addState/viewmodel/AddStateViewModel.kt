@@ -10,11 +10,17 @@ import javax.inject.Inject
 @HiltViewModel
 class AddStateViewModel @Inject constructor() : ViewModel() {
 
+    private var _emotionalState = MutableLiveData(5f)
+    val emotionalState: LiveData<Float> get() = _emotionalState
+
     private var _firstTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
     val firstTags: LiveData<MutableList<TagModel>> get() = _firstTags
 
     private var _secondTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
     val secondTags: LiveData<MutableList<TagModel>> get() = _secondTags
+
+    private var _emotionalDescription = MutableLiveData("")
+    val emotionalDescription: LiveData<String> get() = _emotionalDescription
 
     private var _selectedFirstTags = MutableLiveData<MutableList<Int>>(mutableListOf())
     val selectedFirstTags: LiveData<MutableList<Int>> get() = _selectedFirstTags
@@ -74,6 +80,14 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
         )
     }
 
+    fun updateEmotionalState(state: Float) {
+        _emotionalState.value = state
+    }
+
+    fun updateEmotionalDescription(description: String) {
+        _emotionalDescription.value = description
+    }
+
     fun addTagIdToFirstList(id: Int) {
         _selectedFirstTags.value?.add(id)
     }
@@ -84,8 +98,11 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
 
 
     fun clearData() {
+//        _emotionalState.value = 5
         _firstTags.value = mutableListOf()
         _secondTags.value = mutableListOf()
+        _emotionalDescription.value = ""
+
         _selectedFirstTags.value = mutableListOf()
         _selectedSecondTags.value = mutableListOf()
     }

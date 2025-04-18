@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
 import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
@@ -35,6 +36,9 @@ class ThirdClarificationAddStateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        bindViewModelAndTextField()
+        addButtonOnClickListeners()
+
         view.post {
             binding.addStateThirdClarificationTextInputField.requestFocus()
             showKeyboard(binding.addStateThirdClarificationTextInputField)
@@ -45,8 +49,6 @@ class ThirdClarificationAddStateFragment : Fragment() {
                 hideKeyboard()
             }
         }
-
-        addButtonOnClickListeners()
     }
 
     override fun onDestroyView() {
@@ -63,6 +65,15 @@ class ThirdClarificationAddStateFragment : Fragment() {
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         binding.addStateThirdClarificationTextInputField.clearFocus()
         imm.hideSoftInputFromWindow(binding.addStateThirdClarificationLayout.windowToken, 0)
+    }
+
+    private fun bindViewModelAndTextField() {
+        with (binding) {
+            addStateThirdClarificationTextInputField.setText(vm.emotionalDescription.value)
+            addStateThirdClarificationTextInputField.doAfterTextChanged { value ->
+                vm.updateEmotionalDescription(value.toString())
+            }
+        }
     }
 
     private fun addButtonOnClickListeners() {
