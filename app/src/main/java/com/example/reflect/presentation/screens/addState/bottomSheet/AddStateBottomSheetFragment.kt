@@ -5,18 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAddStateBottomSheetBinding
+import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
 
+    private val vm: AddStateViewModel by activityViewModels()
+
     private var _binding: FragmentAddStateBottomSheetBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        vm.fetchFirstTags()
+        vm.fetchSecondTags()
+    }
 
     override fun onStart() {
         super.onStart()

@@ -9,12 +9,17 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
+import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ThirdClarificationAddStateFragment : Fragment() {
+
+    private val vm: AddStateViewModel by activityViewModels()
 
     private var _binding: FragmentThirdClarificationAddStateBinding? = null
     private val binding get() = _binding!!
