@@ -17,12 +17,13 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
     val secondTags: LiveData<MutableList<TagModel>> get() = _secondTags
 
     private var _selectedFirstTags = MutableLiveData<MutableList<Int>>(mutableListOf())
-    val selectedFirtsTags: LiveData<MutableList<Int>> get() = _selectedFirstTags
+    val selectedFirstTags: LiveData<MutableList<Int>> get() = _selectedFirstTags
 
     private var _selectedSecondTags = MutableLiveData<MutableList<Int>>(mutableListOf())
     val selectedSecondTags: LiveData<MutableList<Int>> get() = _selectedSecondTags
 
     fun fetchFirstTags() {
+        // TODO: Сделать по-человечески
         _firstTags.value = mutableListOf(
             TagModel(1, "Партнер", "\uD83D\uDC6A"),
             TagModel(2, "Спорт", "\uD83C\uDFC3"),
@@ -49,13 +50,36 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-    fun fetchSecondTags(): List<TagModel>? {
+    fun fetchSecondTags() {
         // TODO: impl
-        return null
+        _secondTags.value = mutableListOf(
+            TagModel(1, "Удивленно", "\uD83D\uDE2E"),
+            TagModel(2, "Спокойно", "\uD83D\uDE0C"),
+            TagModel(3, "Удовлетворенно", "\uD83D\uDE0A"),
+            TagModel(4, "Счастливо", "\uD83D\uDE01"),
+            TagModel(5, "Расслабленно", "\uD83D\uDE34"),
+            TagModel(6, "Безмятежно", "\uD83D\uDE07"),
+            TagModel(7, "Окрыленно", "\uD83E\uDD29"),
+            TagModel(8, "Воодушевленно", "\uD83D\uDE0D"),
+            TagModel(9, "Устало", "\uD83D\uDE13"),
+            TagModel(10, "Грустно", "\uD83D\uDE22"),
+            TagModel(11, "Напряженно", "\uD83D\uDE15"),
+            TagModel(12, "Депрессивно", "\uD83D\uDE2D"),
+            TagModel(13, "В стрессе", "\uD83E\uDD2C"),
+            TagModel(14, "Нервно", "\uD83E\uDD75"),
+            TagModel(15, "Расстроенно", "\uD83D\uDE1E"),
+            TagModel(16, "Скучно", "\uD83D\uDE14"),
+            TagModel(17, "Тревожно", "\uD83E\uDD2F"),
+            TagModel(18, "Отвратительно", "\uD83D\uDE21")
+        )
     }
 
     fun addTagIdToFirstList(id: Int) {
         _selectedFirstTags.value?.add(id)
+    }
+
+    fun addTagIdToSecondList(id: Int) {
+        _selectedSecondTags.value?.add(id)
     }
 
 
