@@ -1,7 +1,6 @@
 package com.example.reflect.presentation.adapters
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.reflect.presentation.screens.friends.fragment.FriendsFragment
 import com.example.reflect.presentation.screens.profile.fragment.ProfileFragment

@@ -89,4 +89,15 @@
             app:popUpToInclusive="true"
             />
     </fragment>
+    <dialog
+        android:id="@+id/consentDialog"
+        android:name="com.example.reflect.presentation.dialog.ConsentDialog"
+        android:label="ConsentDialog" />
+    <include app:graph="@navigation/navigation_add_emotional_state" />
+    <dialog
+        android:id="@+id/addStateBottomSheetFragment"
+        android:name="com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment"
+        android:label="fragment_add_state_bottom_sheet"
+        tools:layout="@layout/fragment_add_state_bottom_sheet" />
+
 </navigation>

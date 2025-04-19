@@ -71,10 +71,15 @@ class PasswordResetNewPasswordFragment : Fragment() {
             val navController = Navigation.findNavController(requireActivity(), R.id.mainFragmentContainer)
 
             resetPasswordChangePasswordButton.setOnClickListener {
-                if (vm.newPassword.value == vm.newPasswordConfirmation.value) {
+                val isPasswordMoreThanSixSymbols = vm.isPasswordMoreThanSixSymbols()
+                if (vm.newPassword.value == vm.newPasswordConfirmation.value && isPasswordMoreThanSixSymbols) {
                     navController.navigate(R.id.action_passwordResetNewPasswordFragment_to_mainFragment)
                 } else {
-                    changeErrorState(errorMessage = getString(R.string.inequalityFieldsErrorMessage))
+                    val errorMessage = if (!isPasswordMoreThanSixSymbols) {
+                        getText(R.string.passwordInSixSymbolsErrorMessage).toString()
+                    } else getText(R.string.inequalityFieldsErrorMessage).toString()
+
+                    changeErrorState(errorMessage = errorMessage)
                 }
             }
 

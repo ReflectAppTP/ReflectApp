@@ -23,5 +23,13 @@
     <color name="surfaceVariant">#DEE4D9</color>
     <color name="onSurfaceVariant">#424840</color>
     <color name="outline">#737970</color>
+    <color name="outlineVariant">#C2C8BE</color>
     <color name="surfaceContainer">#EEEEE9</color>
+
+    <color name="splashScreen">#EBFFE5</color>
+    <color name="surfaceContainerLow">#EEEEE9</color>
+    <color name="surfaceContainerHigh">#E8E8E3</color>
+    <color name="inverseOnSurface">#F1F1EC</color>
+
+    <color name="primary80">#ABD0A6</color>
 </resources>

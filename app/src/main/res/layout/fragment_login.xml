@@ -30,15 +30,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLoginEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/loginEmailHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterEmailLength"
             app:endIconMode="clear_text"
-            android:nextFocusDown="@id/passwordLoginEditText"
-            app:errorEnabled="true">
+            android:nextFocusDown="@id/passwordLoginEditText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailLoginEditTextField"
@@ -51,13 +50,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLoginEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordLoginEditTextField"
@@ -81,10 +79,10 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:text="@string/loginButton"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,11 +94,11 @@
 
         <Button
             android:id="@+id/loginWithVKButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Войти через VK"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton"/>
 
         <TextView
             android:id="@+id/loginLikeGuestButton"
@@ -135,6 +133,7 @@
             android:layout_height="wrap_content"
             android:text="@string/loginRegistration"
             android:textColor="@color/onSurface"
+            android:paddingVertical="7dp"
             app:cornerRadius="12dp" />
 
         <TextView

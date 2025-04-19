@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    tools:context=".presentation.screens.addState.fragments.FirstClarificationAddStateFragment">
+
+    <TextView
+        android:id="@+id/addStateFirstClarificationTitle"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/addStateFirstClarificationHowDoYouFeel"
+        android:textColor="@color/onSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addStateFirstClarificationRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/tagRecyclerViewMarginTop24dp"
+        android:layout_marginBottom="@dimen/tagRecyclerViewMarginBottom12dp"
+        tools:listitem="@layout/card_tag"
+        android:foregroundGravity="center"
+        app:layout_constraintTop_toBottomOf="@id/addStateFirstClarificationTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addStateFirstClarificationNextButton"
+        />
+
+    <Button
+        android:id="@+id/addStateFirstClarificationNextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="34dp"
+        android:paddingVertical="20dp"
+        android:text="@string/addStateContinueButtonText"
+        android:layout_marginBottom="@dimen/button_add_state_bottom_margin_50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

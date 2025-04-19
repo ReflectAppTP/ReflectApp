@@ -1,6 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!-- Base application theme. -->
-    <style name="Theme.Reflect" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Reflect" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
@@ -32,11 +35,20 @@
         <item name="android:navigationBarColor">@color/surfaceContainer</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
-        <!-- Customize your theme here. -->
+<!--         Customize your theme here. -->
+<!--        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>-->
     </style>
 
-    <style name="CircleFab" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/splashScreen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.Reflect</item>
+        <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
     </style>
+
+    <style name="Theme.App.BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
 </resources>

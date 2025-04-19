@@ -49,15 +49,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationLoginEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:hint="@string/registrationLoginHint"
             android:nextFocusDown="@id/registrationEmailEditText"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterLoginLength"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationLoginEditTextField"
@@ -70,14 +69,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationEmailEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:hint="@string/registrationEmailHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterEmailLength"
             android:nextFocusDown="@id/registrationPasswordEditText"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true">
+            app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationEmailEditTextField"
@@ -90,14 +88,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationPasswordEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
             android:nextFocusDown="@id/registrationPasswordConfirmationEditText"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/registrationPasswordEditTextField"
@@ -111,13 +108,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationPasswordConfirmationEditText"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordConfirmationHint"
-            app:counterEnabled="false"
+            style="@style/EditText"
             app:counterMaxLength="@integer/counterPasswordLength"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/registrationPasswordConfirmationEditTextField"
@@ -142,10 +138,11 @@
 
         <Button
             android:id="@+id/registrationButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:text="@string/registrationButton"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -157,11 +154,11 @@
 
         <Button
             android:id="@+id/loginWithVKButton"
-            android:layout_width="280dp"
+            android:layout_width="@dimen/editTextAndButtonWidth"
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Зарегистрироваться через VK"
-            app:cornerRadius="12dp" />
+            style="@style/MaterialButton" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

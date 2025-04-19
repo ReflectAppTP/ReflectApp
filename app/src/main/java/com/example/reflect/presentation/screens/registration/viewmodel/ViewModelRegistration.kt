@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelRegistration @Inject constructor() : ViewModel() {
+    // TODO: remove unused values 
     private val _login = MutableLiveData("")
     val login: LiveData<String> get() = _login
 
@@ -59,4 +60,6 @@ class ViewModelRegistration @Inject constructor() : ViewModel() {
         _passwordErrorState.value = passwordError
         _passwordConfirmationErrorState.value = passwordConfirmationError
     }
+
+    fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
 }

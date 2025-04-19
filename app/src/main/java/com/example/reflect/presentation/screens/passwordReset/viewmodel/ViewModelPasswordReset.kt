@@ -104,4 +104,6 @@ class ViewModelPasswordReset @Inject constructor() : ViewModel() {
         _sendedPinCode.value = ""
         if (withEmail) _email.value = ""
     }
+
+    fun isPasswordMoreThanSixSymbols() = _newPassword.value!!.length >= 6 && _newPasswordConfirmation.value!!.length >= 6
 }
