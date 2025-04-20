@@ -1,11 +1,13 @@
 package com.example.reflect.presentation.screens.registration.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,6 +15,8 @@ import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
+import com.google.android.material.internal.ViewUtils.hideKeyboard
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -105,6 +109,11 @@ class RegistrationFragment : Fragment() {
 
     private fun setOnClickLogic() {
         with(binding) {
+            root.setOnClickListener { clickedView ->
+                if (clickedView !is TextInputEditText) {
+                    hideKeyboard()
+                }
+            }
             registrationButton.setOnClickListener {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
@@ -182,7 +191,15 @@ class RegistrationFragment : Fragment() {
             registrationPasswordConfirmationEditText.error = if (passwordConfirmationError) " " else ""
             registrationErrorMessage.text = errorMessage
         }
+    }
 
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.registrationLoginEditTextField.clearFocus()
+        binding.registrationEmailEditTextField.clearFocus()
+        binding.registrationPasswordEditTextField.clearFocus()
+        binding.registrationPasswordConfirmationEditTextField.clearFocus()
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 }
 

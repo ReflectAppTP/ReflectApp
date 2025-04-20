@@ -36,17 +36,11 @@ class ThirdClarificationAddStateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindViewModelAndTextField()
-        addButtonOnClickListeners()
+        addOnClickListeners()
 
         view.post {
             binding.addStateThirdClarificationTextInputField.requestFocus()
             showKeyboard(binding.addStateThirdClarificationTextInputField)
-        }
-
-        binding.addStateThirdClarificationLayout.setOnClickListener { clickedView ->
-            if (clickedView !is TextInputEditText) {
-                hideKeyboard()
-            }
         }
     }
 
@@ -75,12 +69,18 @@ class ThirdClarificationAddStateFragment : Fragment() {
         }
     }
 
-    private fun addButtonOnClickListeners() {
+    private fun addOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
                 Utils.toast(requireContext())
                 // TODO Просто bruh!
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+            }
+
+            addStateThirdClarificationLayout.setOnClickListener { clickedView ->
+                if (clickedView !is TextInputEditText) {
+                    hideKeyboard()
+                }
             }
         }
     }
