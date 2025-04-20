@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:backgroundTint="@color/surfaceContainerLow"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="@dimen/dialogConsentCardCornerRadius_12dp"
     android:background="@color/surfaceContainerLow"
     >
 
@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="8dp"
+        android:paddingVertical="@dimen/dialogConsentLinearLayoutPaddingVertical_12dp"
+        android:paddingHorizontal="@dimen/dialogConsentLinearLayoutPaddingHorizontal_8dp"
         >
 
         <TextView
@@ -23,7 +23,7 @@
             android:text="@string/agreementDialogTitle"
             style="@style/TextAppearance.Material3.TitleSmall"
             android:textColor="@color/onSurfaceVariant"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="@dimen/dialogConsentMarginHorizontal_8dp"
             />
 
         <TextView
@@ -32,8 +32,8 @@
             android:text="@string/agreementDialogDescription"
             style="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/onSurfaceVariant"
-            android:layout_marginVertical="4dp"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="@dimen/dialogConsentMarginVertical_4dp"
+            android:layout_marginHorizontal="@dimen/dialogConsentMarginHorizontal_8dp"
             />
 
         <LinearLayout
@@ -46,14 +46,14 @@
                 android:id="@+id/dialogAgreeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dialogConsentButtonMarginStart_8dp"
+                android:layout_marginEnd="@dimen/dialogConsentButtonMarginEnd_8dp"
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:text="@string/agreementButtonText"
-                app:backgroundTint="#F4F4EF"
-                android:layout_marginStart="8dp"
-                android:elevation="3dp"
+                android:elevation="@dimen/dialogConsentButtonElevation_3dp"
                 android:textColor="@color/tertiary"
-                app:cornerRadius="100dp"
-                android:layout_marginEnd="8dp"
+                app:backgroundTint="#F4F4EF"
+                app:cornerRadius="@dimen/dialogConsentButtonCornerRadius_100dp"
                 />
 
             <Button

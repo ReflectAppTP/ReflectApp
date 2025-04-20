@@ -6,9 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
@@ -38,17 +36,11 @@ class ThirdClarificationAddStateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindViewModelAndTextField()
-        addButtonOnClickListeners()
+        addOnClickListeners()
 
         view.post {
             binding.addStateThirdClarificationTextInputField.requestFocus()
             showKeyboard(binding.addStateThirdClarificationTextInputField)
-        }
-
-        binding.addStateThirdClarificationLayout.setOnClickListener { clickedView ->
-            if (clickedView !is TextInputEditText) {
-                hideKeyboard()
-            }
         }
     }
 
@@ -77,18 +69,18 @@ class ThirdClarificationAddStateFragment : Fragment() {
         }
     }
 
-    private fun addButtonOnClickListeners() {
+    private fun addOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
                 Utils.toast(requireContext())
                 // TODO Просто bruh!
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
-            addStateThirdClarificationTextInputField.setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    addStateThirdClarificationNextButton.performClick()
+
+            addStateThirdClarificationLayout.setOnClickListener { clickedView ->
+                if (clickedView !is TextInputEditText) {
+                    hideKeyboard()
                 }
-                true
             }
         }
     }
