@@ -66,8 +66,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="top"
                 android:gravity="top|start"
-                android:inputType="textShortMessage"
-                android:imeOptions="actionDone"
                 android:maxLength="@integer/counterDescriptionAddState"
                 android:minLines="10" />
         </com.google.android.material.textfield.TextInputLayout>
