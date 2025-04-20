@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="@dimen/registrationFlowToolbarMarginHorizontal_8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,9 +49,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationLoginEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/registrationFragmentTextInputLayoutMarginTop_32dp"
             android:hint="@string/registrationLoginHint"
             android:nextFocusDown="@id/registrationEmailEditText"
             style="@style/EditText"
@@ -69,7 +69,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationEmailEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationEmailHint"
             style="@style/EditText"
@@ -88,7 +88,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationPasswordEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordHint"
             style="@style/EditText"
@@ -108,7 +108,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/registrationPasswordConfirmationEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:hint="@string/registrationPasswordConfirmationHint"
             style="@style/EditText"
@@ -132,13 +132,13 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/error"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/registrationFragmentErrorMessageMarginBottom_16dp"
             style="@style/TextAppearance.Material3.LabelMedium"
             />
 
         <Button
             android:id="@+id/registrationButton"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:text="@string/registrationButton"
             style="@style/MaterialButton"
@@ -154,7 +154,7 @@
 
         <Button
             android:id="@+id/loginWithVKButton"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Зарегистрироваться через VK"

@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:gravity="center"
-
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/loginBottomLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,9 +29,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLoginEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/loginTextInputMarginTop_32dp"
             android:hint="@string/loginEmailHint"
             style="@style/EditText"
             app:counterMaxLength="@integer/counterEmailLength"
@@ -50,7 +49,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordLoginEditText"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:hint="@string/loginPasswordHint"
             style="@style/EditText"
@@ -73,13 +72,13 @@
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/error"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/loginErrorMessageMarginBottom_16dp"
             style="@style/TextAppearance.Material3.LabelMedium"
             />
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:text="@string/loginButton"
             style="@style/MaterialButton" />
@@ -94,7 +93,7 @@
 
         <Button
             android:id="@+id/loginWithVKButton"
-            android:layout_width="@dimen/editTextAndButtonWidth"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Войти через VK"
@@ -105,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="true"
-            android:padding="16dp"
+            android:padding="@dimen/loginButtonLikeGuestPadding_16dp"
             android:text="@string/loginLikeGuest"
             style="@style/Widget.Material3.Button.TextButton"
             android:textColor="@color/onSurfaceVariant"
@@ -123,27 +122,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="@dimen/loginBottomLinearLayoutMarginBottom_35dp"
         >
 
         <Button
             android:id="@+id/loginRegistrationButton"
             style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="220dp"
+            android:layout_width="@dimen/loginRegistrationButtonWidth_220dp"
             android:layout_height="wrap_content"
             android:text="@string/loginRegistration"
             android:textColor="@color/onSurface"
-            android:paddingVertical="7dp"
-            app:cornerRadius="12dp" />
+            android:paddingVertical="@dimen/loginRegistrationButtonPaddingVertical_7dp"
+            app:cornerRadius="@dimen/loginRegistrationButtonCornerRadius_12dp" />
 
         <Button
             android:id="@+id/loginForgotPasswordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loginForgotPassword"
-            android:padding="8dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:padding="@dimen/loginForgotPasswordPadding_8dp"
+            android:paddingHorizontal="@dimen/loginForgotPasswordPaddingHorizontal_20dp"
             android:textColor="@color/onSurface"
             style="@style/Widget.Material3.Button.TextButton"
             />
