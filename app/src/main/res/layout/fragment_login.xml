@@ -100,14 +100,14 @@
             android:text="Войти через VK"
             style="@style/MaterialButton"/>
 
-        <TextView
+        <Button
             android:id="@+id/loginLikeGuestButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="true"
             android:padding="16dp"
             android:text="@string/loginLikeGuest"
-            style="@style/TextAppearance.Material3.LabelLarge"
+            style="@style/Widget.Material3.Button.TextButton"
             android:textColor="@color/onSurfaceVariant"
             android:clickable="true"
             />
@@ -136,7 +136,7 @@
             android:paddingVertical="7dp"
             app:cornerRadius="12dp" />
 
-        <TextView
+        <Button
             android:id="@+id/loginForgotPasswordButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/onSurface"
-            style="@style/TextAppearance.Material3.LabelLarge"
+            style="@style/Widget.Material3.Button.TextButton"
             />
 
     </LinearLayout>
