@@ -24,11 +24,13 @@ object AccountPrefs {
         }
     }
 
-    fun isLoggedIn(context: Context) = getPrefs(context).getBoolean(LOG_STATE, false)
-
-    fun getAuthToken(context: Context) = getPrefs(context).getString(AUTH_TOKEN, null)
+    fun isAuthorized(context: Context) = getPrefs(context).getBoolean(LOG_STATE, false)
 
     fun isGuest(context: Context) = getPrefs(context).getBoolean(GUEST_STATE, false)
+
+    fun isLoggedIn(context: Context) = isAuthorized(context) || isGuest(context)
+
+    fun getAuthToken(context: Context) = getPrefs(context).getString(AUTH_TOKEN, null)
 
     fun clearAuthState(context: Context) {
         getPrefs(context).edit().clear().apply()
