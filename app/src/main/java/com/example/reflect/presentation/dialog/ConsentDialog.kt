@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.reflect.R
-import com.example.reflect.common.Prefs
+import com.example.reflect.common.ConsentPrefs
 import com.example.reflect.databinding.DialogConsentBinding
 
 class ConsentDialog: DialogFragment() {
@@ -20,7 +20,7 @@ class ConsentDialog: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DialogConsentBinding.inflate(inflater, container, false)
         isCancelable = false
         return binding.root
@@ -31,7 +31,7 @@ class ConsentDialog: DialogFragment() {
 
         with(binding) {
             dialogAgreeButton.setOnClickListener {
-                Prefs.setConsent(requireContext(), true)
+                ConsentPrefs.setConsent(requireContext(), true)
                 dismiss()
             }
 

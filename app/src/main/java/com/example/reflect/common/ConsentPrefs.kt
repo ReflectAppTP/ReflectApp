@@ -3,11 +3,9 @@ package com.example.reflect.common
 import android.content.Context
 import android.content.SharedPreferences
 
-object Prefs {
+object ConsentPrefs {
     private const val PREFS_NAME = "app_prefs"
     private const val KEY_CONSENT = "consent_given"
-    private const val CONSENT = "consent"
-    private const val RESULT = "result"
 
     private fun getPrefs(context: Context): SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)

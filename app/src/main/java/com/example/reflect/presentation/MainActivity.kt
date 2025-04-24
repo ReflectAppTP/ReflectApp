@@ -6,7 +6,7 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.reflect.R
-import com.example.reflect.common.Prefs
+import com.example.reflect.common.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(binding.mainFragmentContainer.id) as NavHostFragment
         val navController = navHostFragment.navController
 
-        if (!Prefs.hasConsent(this)) {
+        if (!ConsentPrefs.hasConsent(this)) {
             navController.navigate(R.id.consentDialog)
         }
     }
