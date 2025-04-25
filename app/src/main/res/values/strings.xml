@@ -17,6 +17,8 @@
     <string name="contentDescriptionToolbarSettingsIcon">Иконка настроек</string>
     <string name="contentDescriptionAddStateBackArrow">Иконка закрытия окна добавления состояния</string>
     <string name="contentDescriptionAddStateImage">Картинка с выбранным состоянием</string>
+    <string name="contentDescriptionFragmentProfileIcon">Пустая иконка профиля</string>
+    <string name="contentDescriptionFragmentProfileIconChange">Иконка редактирования иконки профиля</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -64,6 +66,7 @@
     <string name="agreementButtonText">Согласен/а</string>
     <string name="disagreementButtonText">Не согласен/а</string>
 
+    <!-- Добавление состояния -->
     <string name="addStateHowDoYouFeel">Как ты себя чувствуешь?</string>
     <string name="addStateBadMood">Ужасно</string>
     <string name="addStateGoodMood">Замечательно</string>
@@ -76,4 +79,11 @@
     <string name="addStateThirdClarificationEditTextHint">Добавить заметку…</string>
     <string name="addStateSaveButtonText">Сохранить</string>
     <string name="addStateToastMessage">Запись успешно создана</string>
+
+    <!-- Фрагмент профиля -->
+    <string name="fragmentProfilePremiumButton">Премиум</string>
+    <string name="fragmentProfileLoginButton">Войти в аккаунт</string>
+    <string name="fragmentProfileRegistrationButton">Зарегистрироваться</string>
+    <string name="fragmentProfileLogoutButton">Выйти из аккаунта</string>
+    <string name="fragmentProfileWidgetButton">Виджеты</string>
 </resources>

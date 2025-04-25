@@ -117,4 +117,13 @@
     <dimen name="toastMessageMarginVertical_4dp">4dp</dimen>
     <dimen name="toastMessageMarginHorizontal_8dp">8dp</dimen>
 
+    <!-- ProfileFragment -->
+    <dimen name="fragmentProfileButtonWidth_255dp">255dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileButtonPaddingVertical_12dp">12dp</dimen>
+    <dimen name="fragmentProfileButtonIconPadding_8dp">8dp</dimen>
+    <dimen name="fragmentProfileButtonCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentProfileSmallButtonWidth_180dp">180dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_10dp">10dp</dimen>
+
 </resources>
