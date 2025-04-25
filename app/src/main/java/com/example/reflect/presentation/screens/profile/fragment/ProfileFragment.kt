@@ -5,11 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reflect.R
+import com.example.reflect.common.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
+import com.example.reflect.presentation.screens.profile.viewmodel.ViewModelProfile
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
+
+    private val vm: ViewModelProfile by viewModels()
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -19,12 +27,57 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with (binding) {
+            fragmentProfileUserLogin.text = AccountPrefs.getUserLogin(requireContext())
+
+            if (AccountPrefs.isAuthorized(requireContext())) {
+                fragmentProfileLogoutButton.visibility = View.VISIBLE
+                fragmentProfileLoginButton.visibility = View.GONE
+                fragmentProfileRegistrationButton.visibility = View.GONE
+            } else if (AccountPrefs.isGuest(requireContext())) {
+                fragmentProfileLogoutButton.visibility = View.GONE
+                fragmentProfileLoginButton.visibility = View.VISIBLE
+                fragmentProfileRegistrationButton.visibility = View.VISIBLE
+            }
+        }
+
+        setOnClickLogic()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setOnClickLogic() {
+        with(binding) {
+            fragmentProfileWidgetButton.setOnClickListener {
+                Toast.makeText(requireContext(), "Тут должен быть фрагмент виджетов", Toast.LENGTH_SHORT).show()
+            }
+
+            fragmentProfilePremiumButton.setOnClickListener {
+                Toast.makeText(requireContext(), "Тут должен быть фрагмент премиума", Toast.LENGTH_SHORT).show()
+            }
+
+            fragmentProfileLoginButton.setOnClickListener {
+                findNavController().navigate(R.id.loginFragment)
+            }
+
+            fragmentProfileRegistrationButton.setOnClickListener {
+                findNavController().navigate(R.id.registrationFragment)
+            }
+
+            fragmentProfileLogoutButton.setOnClickListener {
+                findNavController().navigate(R.id.loginFragment)
+                AccountPrefs.clearAuthState(requireContext())
+            }
+
+        }
     }
 }
