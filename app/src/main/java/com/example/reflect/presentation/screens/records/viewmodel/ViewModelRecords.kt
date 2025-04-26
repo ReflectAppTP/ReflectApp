@@ -21,7 +21,7 @@ class ViewModelRecords @Inject constructor() : ViewModel() {
     private var _records = MutableLiveData(emptyList<RecordModel>())
     val records: LiveData<List<RecordModel>> get() = _records
 
-    private fun fetchRecords(date: Date){
+    fun fetchRecords(date: Date = calendar.time){
         // TODO: impl
         _records.value = mutableListOf(
             RecordModel(1,1, null, null, null),
