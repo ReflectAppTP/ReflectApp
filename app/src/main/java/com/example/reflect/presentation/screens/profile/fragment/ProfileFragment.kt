@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
-import com.example.reflect.presentation.screens.profile.viewmodel.ViewModelProfile
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
-
-    private val vm: ViewModelProfile by viewModels()
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -77,8 +73,7 @@ class ProfileFragment : Fragment() {
 
             fragmentProfileLogoutButton.setOnClickListener {
                 findNavController().popBackStack()
-                findNavController().navigate(R.id.action_profileFragment_to_loginFragment_with_popUp)
-                AccountPrefs.clearAuthState(requireContext())
+                findNavController().navigate(R.id.logoutDialog)
             }
 
             fragmentProfileImageViewChangeIcon.setOnClickListener {

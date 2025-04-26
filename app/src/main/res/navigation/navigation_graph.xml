@@ -76,15 +76,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_profileFragment_to_loginFragment_with_popUp"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"/>
-
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -125,5 +116,19 @@
         android:name="com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment"
         android:label="fragment_add_state_bottom_sheet"
         tools:layout="@layout/fragment_add_state_bottom_sheet" />
+    <dialog
+        android:id="@+id/logoutDialog"
+        android:name="com.example.reflect.presentation.dialog.LogoutDialog"
+        android:label="LogoutDialog" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment_with_popUp"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+    </dialog>
 
 </navigation>
