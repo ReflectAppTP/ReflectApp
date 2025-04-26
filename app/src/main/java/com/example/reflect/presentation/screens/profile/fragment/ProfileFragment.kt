@@ -58,24 +58,32 @@ class ProfileFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             fragmentProfileWidgetButton.setOnClickListener {
+                // TODO: потом переделать
                 Toast.makeText(requireContext(), "Тут должен быть фрагмент виджетов", Toast.LENGTH_SHORT).show()
             }
 
             fragmentProfilePremiumButton.setOnClickListener {
+                // TODO: потом переделать
                 Toast.makeText(requireContext(), "Тут должен быть фрагмент премиума", Toast.LENGTH_SHORT).show()
             }
 
             fragmentProfileLoginButton.setOnClickListener {
-                findNavController().navigate(R.id.loginFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
             }
 
             fragmentProfileRegistrationButton.setOnClickListener {
-                findNavController().navigate(R.id.registrationFragment)
+                findNavController().navigate(R.id.action_profileFragment_to_registrationFragment)
             }
 
             fragmentProfileLogoutButton.setOnClickListener {
-                findNavController().navigate(R.id.loginFragment)
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_profileFragment_to_loginFragment_with_popUp)
                 AccountPrefs.clearAuthState(requireContext())
+            }
+
+            fragmentProfileImageViewChangeIcon.setOnClickListener {
+                // TODO: потом переделать
+                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
             }
 
         }

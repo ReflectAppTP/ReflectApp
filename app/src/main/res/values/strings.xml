@@ -86,4 +86,8 @@
     <string name="fragmentProfileRegistrationButton">Зарегистрироваться</string>
     <string name="fragmentProfileLogoutButton">Выйти из аккаунта</string>
     <string name="fragmentProfileWidgetButton">Виджеты</string>
+    <string name="dialogLogoutTitle">Подтверждение выхода</string>
+    <string name="dialogLogoutMiddleText">Вы действительно хотите выйти? Все несохраненные данные будут потеряны.</string>
+    <string name="dialogLogoutBackButton">Назад</string>
+    <string name="dialogLogoutLogoutButton">Выйти</string>
 </resources>
