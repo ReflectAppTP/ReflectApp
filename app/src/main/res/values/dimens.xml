@@ -55,16 +55,17 @@
     <dimen name="passwordResetNewPasswordErrorMessageMarginTop_4dp">4dp</dimen>
     <dimen name="passwordResetNewPasswordButtonMarginTop_12dp">12dp</dimen>
 
-    <!-- DialogConsent -->
-    <dimen name="dialogConsentMarginHorizontal_8dp">8dp</dimen>
-    <dimen name="dialogConsentMarginVertical_4dp">4dp</dimen>
-    <dimen name="dialogConsentButtonMarginStart_8dp">8dp</dimen>
-    <dimen name="dialogConsentButtonElevation_3dp">3dp</dimen>
-    <dimen name="dialogConsentButtonCornerRadius_100dp">100dp</dimen>
-    <dimen name="dialogConsentButtonMarginEnd_8dp">8dp</dimen>
-    <dimen name="dialogConsentCardCornerRadius_12dp">12dp</dimen>
-    <dimen name="dialogConsentLinearLayoutPaddingVertical_12dp">12dp</dimen>
-    <dimen name="dialogConsentLinearLayoutPaddingHorizontal_8dp">8dp</dimen>
+    <!-- DialogConsent and DialogLogout -->
+    <dimen name="dialogMarginHorizontal_8dp">8dp</dimen>
+    <dimen name="dialogMarginVertical_4dp">4dp</dimen>
+    <dimen name="dialogMarginVertical_8dp">8dp</dimen>
+    <dimen name="dialogButtonMarginStart_8dp">8dp</dimen>
+    <dimen name="dialogButtonElevation_3dp">3dp</dimen>
+    <dimen name="dialogButtonCornerRadius_100dp">100dp</dimen>
+    <dimen name="dialogButtonMarginEnd_8dp">8dp</dimen>
+    <dimen name="dialogCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="dialogLinearLayoutPaddingVertical_12dp">12dp</dimen>
+    <dimen name="dialogLinearLayoutPaddingHorizontal_8dp">8dp</dimen>
 
     <!-- AddStateMainFragment -->
     <dimen name="addStateRootPaddingTop_3dp">3dp</dimen>
@@ -116,5 +117,20 @@
     <dimen name="toastCardViewCornerRadius_4dp">4dp</dimen>
     <dimen name="toastMessageMarginVertical_4dp">4dp</dimen>
     <dimen name="toastMessageMarginHorizontal_8dp">8dp</dimen>
+
+    <!-- ProfileFragment -->
+    <dimen name="fragmentProfileTitleMarginTop_10dp">10dp</dimen>
+    <dimen name="fragmentProfileTitleMarginHorizontal_20dp">20dp</dimen>
+    <dimen name="fragmentProfileCardMarginTop_15dp">15dp</dimen>
+    <dimen name="fragmentProfileCardElevation_0dp">0dp</dimen>
+    <dimen name="fragmentProfileImageSize_100dp">100dp</dimen>
+    <dimen name="fragmentProfileImageChangeIconMargin_4dp">4dp</dimen>
+    <dimen name="fragmentProfileButtonWidth_255dp">255dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileButtonPaddingVertical_12dp">12dp</dimen>
+    <dimen name="fragmentProfileButtonIconPadding_8dp">8dp</dimen>
+    <dimen name="fragmentProfileButtonCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentProfileSmallButtonWidth_180dp">180dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_10dp">10dp</dimen>
 
 </resources>

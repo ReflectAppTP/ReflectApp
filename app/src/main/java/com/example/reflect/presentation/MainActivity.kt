@@ -6,8 +6,10 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.reflect.R
-import com.example.reflect.common.Prefs
+import com.example.reflect.common.AccountPrefs
+import com.example.reflect.common.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
+import com.example.reflect.presentation.dialog.ConsentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,9 +29,13 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(binding.mainFragmentContainer.id) as NavHostFragment
         val navController = navHostFragment.navController
 
-        if (!Prefs.hasConsent(this)) {
+        if (AccountPrefs.isLoggedIn(this)){
+            navController.navigate(R.id.mainFragment)
+        }
+        if (!ConsentPrefs.hasConsent(this)) {
             navController.navigate(R.id.consentDialog)
         }
+
     }
 
 }

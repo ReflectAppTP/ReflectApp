@@ -24,7 +24,8 @@
         android:id="@+id/profileFragment"
         android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.reflect.presentation.screens.login.fragment.LoginFragment"
@@ -59,7 +60,23 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.reflect.presentation.screens.main.fragment.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.reflect.presentation.screens.registration.fragment.RegistrationFragment"
@@ -99,5 +116,19 @@
         android:name="com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment"
         android:label="fragment_add_state_bottom_sheet"
         tools:layout="@layout/fragment_add_state_bottom_sheet" />
+    <dialog
+        android:id="@+id/logoutDialog"
+        android:name="com.example.reflect.presentation.dialog.LogoutDialog"
+        android:label="LogoutDialog" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment_with_popUp"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"/>
+    </dialog>
 
 </navigation>

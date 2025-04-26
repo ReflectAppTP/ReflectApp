@@ -31,5 +31,7 @@
     <color name="surfaceContainerHigh">#E8E8E3</color>
     <color name="inverseOnSurface">#F1F1EC</color>
 
+    <color name="backgroundColorDialogButton">#F4F4EF</color>
+
     <color name="primary80">#ABD0A6</color>
 </resources>

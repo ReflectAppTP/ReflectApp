@@ -20,8 +20,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/agreementDialogTitle"
-            style="@style/TextAppearance.Material3.TitleSmall"
+            android:text="@string/dialogLogoutTitle"
+            style="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/onSurfaceVariant"
             android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
             />
@@ -29,10 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/agreementDialogDescription"
+            android:text="@string/dialogLogoutMiddleText"
             style="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/onSurfaceVariant"
-            android:layout_marginVertical="@dimen/dialogMarginVertical_4dp"
+            android:layout_marginVertical="@dimen/dialogMarginVertical_8dp"
             android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
             />
 
@@ -43,13 +43,12 @@
             >
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/dialogAgreeButton"
+                android:id="@+id/dialogBackButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dialogButtonMarginStart_8dp"
-                android:layout_marginEnd="@dimen/dialogButtonMarginEnd_8dp"
                 style="@style/Widget.Material3.CardView.Elevated"
-                android:text="@string/agreementButtonText"
+                android:text="@string/dialogLogoutBackButton"
                 android:elevation="@dimen/dialogButtonElevation_3dp"
                 android:textColor="@color/tertiary"
                 app:backgroundTint="@color/backgroundColorDialogButton"
@@ -57,12 +56,12 @@
                 />
 
             <Button
-                android:id="@+id/dialogDeclineButton"
+                android:id="@+id/dialogLogoutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.Material3.Button.TextButton"
-                android:text="@string/disagreementButtonText"
-                android:textColor="@color/primary"
+                android:text="@string/dialogLogoutLogoutButton"
+                android:textColor="@color/error"
                 />
 
         </LinearLayout>
