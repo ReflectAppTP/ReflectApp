@@ -96,7 +96,6 @@ class AddStateViewModel @Inject constructor() : ViewModel() {
         _selectedSecondTags.value?.add(id)
     }
 
-
     fun clearData() {
         _emotionalState.value = 5f
         _firstTags.value = mutableListOf()
