@@ -33,11 +33,11 @@
         android:id="@+id/fragmentProfileImageCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/fragmentProfileCardMarginTop_15dp"
         android:background="@color/background"
         android:backgroundTint="@color/background"
-        android:elevation="0dp"
-        app:cardElevation="0dp"
+        android:elevation="@dimen/fragmentProfileCardElevation_0dp"
+        app:cardElevation="@dimen/fragmentProfileCardElevation_0dp"
         app:layout_constraintTop_toBottomOf="@id/fragmentProfileToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +45,8 @@
 
         <ImageView
             android:id="@+id/fragmentProfileImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/fragmentProfileImageSize_100dp"
+            android:layout_height="@dimen/fragmentProfileImageSize_100dp"
             android:src="@drawable/profile_image"
             android:scaleType="centerCrop"
             android:contentDescription="@string/contentDescriptionFragmentProfileIcon"
@@ -57,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fragmentProfileImageChangeIconMargin_4dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_change_profile_image"
             android:contentDescription="@string/contentDescriptionFragmentProfileIconChange"
-            android:layout_margin="4dp"
             />
 
     </androidx.cardview.widget.CardView>
@@ -69,8 +69,8 @@
         android:id="@+id/fragmentProfileUserLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/fragmentProfileTitleMarginHorizontal_20dp"
+        android:layout_marginTop="@dimen/fragmentProfileTitleMarginTop_10dp"
         android:gravity="center"
         android:textColor="@color/onSurface"
         style="@style/TextAppearance.Material3.TitleLarge"
