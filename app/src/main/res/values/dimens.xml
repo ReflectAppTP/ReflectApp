@@ -81,6 +81,9 @@
     <dimen name="tagHorizontalMargin_8dp">8dp</dimen>
     <dimen name="tagCardMinWidth_100dp">100dp</dimen>
     <dimen name="tagCardMaxWidth_150dp">150dp</dimen>
+    <dimen name="tagStateCardMarginVertical_4dp">4dp</dimen>
+    <dimen name="tagStateCardMarginEnd_9dp">9dp</dimen>
+    <dimen name="tagStateCardElevation_0dp">0dp</dimen>
 
     <!-- MainAddStateFragment -->
     <dimen name="mainFragmentAddStateCardViewMarginTop_26dp">26dp</dimen>
@@ -151,5 +154,4 @@
     <dimen name="cardStateSecondRVMarginTop_6dp">6dp</dimen>
     <dimen name="cardStateDescriptionMarginEnd_16dp">16dp</dimen>
     <dimen name="cardStateDescriptionMarginTop_24dp">24dp</dimen>
-
 </resources>

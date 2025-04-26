@@ -1,6 +1,8 @@
 package com.example.reflect.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +11,52 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.R
 import com.example.reflect.databinding.CardStateBinding
 import com.example.reflect.domain.model.RecordModel
+import java.util.Calendar
+import java.util.Locale
 
 class RecordsListAdapter(
-    private val records: List<RecordModel>
+    private val records: List<RecordModel>,
+    private val calendar: Calendar
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     class RecordViewHolder(
-        private val binding: CardStateBinding,
+        private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: RecordModel, context: Context) {
+        @SuppressLint("SetTextI18n")
+        fun bind(model: RecordModel, calendar: Calendar, context: Context) {
             with (binding) {
+                val today = Calendar.getInstance()
+                calendar.time = model.creationDate
+
+                // TODO: ГОВНОКОД!!! 
+                if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                    calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
+                    calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
+                    cardStateCreationDate.text = "Сегодня в ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
+                } else if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                    calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
+                    calendar.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH) == -1) {
+                    cardStateCreationDate.text = "Вчера в ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
+                } else {
+                    if (today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
+                        cardStateCreationDate.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " +
+                                "${
+                                    calendar.getDisplayName(
+                                        Calendar.MONTH,
+                                        Calendar.LONG_FORMAT,
+                                        Locale("ru")
+                                    )
+                                } в " +
+                                "${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
+                    } else {
+                        cardStateCreationDate.text =
+                            "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH)+1}-${
+                                calendar.get(Calendar.DAY_OF_MONTH)
+                            } в " +
+                                    "${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
+                    }
+                }
+
                 when(model.value) {
                     in 0..1 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_1)
@@ -75,7 +113,7 @@ class RecordsListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RecordViewHolder) {
-            holder.bind(records[position], holder.itemView.context)
+            holder.bind(records[position], calendar, holder.itemView.context)
         }
     }
 
