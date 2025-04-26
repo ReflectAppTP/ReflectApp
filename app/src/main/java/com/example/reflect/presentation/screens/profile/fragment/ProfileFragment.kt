@@ -72,7 +72,6 @@ class ProfileFragment : Fragment() {
             }
 
             fragmentProfileLogoutButton.setOnClickListener {
-                findNavController().popBackStack()
                 findNavController().navigate(R.id.logoutDialog)
             }
 
