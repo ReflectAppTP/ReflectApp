@@ -29,6 +29,7 @@
     <color name="splashScreen">#EBFFE5</color>
     <color name="surfaceContainerLow">#EEEEE9</color>
     <color name="surfaceContainerHigh">#E8E8E3</color>
+    <color name="inverseSurface">#2F312E</color>
     <color name="inverseOnSurface">#F1F1EC</color>
 
     <color name="backgroundColorDialogButton">#F4F4EF</color>

@@ -39,12 +39,13 @@ class RecordsFragment : Fragment() {
                 vm.records.value!!,
                 vm.calendar,
                 {
+                    // TODO: переделать на человеческий 
                     vm::updateRecord
                     Toast.makeText(requireContext(), "Обновить запись", Toast.LENGTH_SHORT).show()
                 },
                 {
                     vm::deleteRecord
-                    Toast.makeText(requireContext(), "Удалить", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Запись удалена", Toast.LENGTH_SHORT).show()
                 }
             )
         }

@@ -35,8 +35,8 @@
 
             <ImageView
                 android:id="@+id/cardStateImageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/cardStateIconSize_45dp"
+                android:layout_height="@dimen/cardStateIconSize_45dp"
                 android:src="@drawable/ic_state_image_1"
                 android:contentDescription="@string/cardStateImageContentDescription" />
 

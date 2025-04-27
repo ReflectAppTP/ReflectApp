@@ -154,4 +154,5 @@
     <dimen name="cardStateSecondRVMarginTop_6dp">6dp</dimen>
     <dimen name="cardStateDescriptionMarginEnd_16dp">16dp</dimen>
     <dimen name="cardStateDescriptionMarginTop_24dp">24dp</dimen>
+    <dimen name="cardStateIconSize_45dp">45dp</dimen>
 </resources>
