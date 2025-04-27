@@ -2,10 +2,11 @@ package com.example.reflect.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.R
@@ -16,14 +17,16 @@ import java.util.Locale
 
 class RecordsListAdapter(
     private val records: List<RecordModel>,
-    private val calendar: Calendar
+    private val calendar: Calendar,
+    private val onEdit: (Int) -> Unit,
+    private val onDelete: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     class RecordViewHolder(
         private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(model: RecordModel, calendar: Calendar, context: Context) {
+        fun bind(model: RecordModel, calendar: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int) -> Unit) {
             with (binding) {
                 val today = Calendar.getInstance()
                 calendar.time = model.creationDate
@@ -100,6 +103,25 @@ class RecordsListAdapter(
                     cardStateSecondRV.layoutManager = GridLayoutManager(context,2)
                     cardStateSecondRV.adapter = RecordsTagListAdapter(model.secondTagList)
                 }
+
+                cardStateChangeDots.setOnClickListener {
+                    val popupMenu = PopupMenu(context, cardStateChangeDots)
+                    popupMenu.inflate(R.menu.card_state_menu)
+                    popupMenu.setOnMenuItemClickListener {
+                        when(it.itemId) {
+                            R.id.menuEdit -> {
+                                onEdit(model.id)
+                                true
+                            }
+                            R.id.menuDelete -> {
+                                onDelete(model.id)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                    popupMenu.show()
+                }
             }
         }
     }
@@ -113,8 +135,7 @@ class RecordsListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RecordViewHolder) {
-            holder.bind(records[position], calendar, holder.itemView.context)
+            holder.bind(records[position], calendar, holder.itemView.context, onDelete, onEdit)
         }
     }
-
 }

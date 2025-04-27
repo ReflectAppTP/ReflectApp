@@ -99,4 +99,6 @@
 
     <!-- StateCard -->
     <string name="cardStateMood">настроение</string>
+    <string name="cardMenuEdit">Редактировать</string>
+    <string name="cardMenuDelete">Удалить</string>
 </resources>

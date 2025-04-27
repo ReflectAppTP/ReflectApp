@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentRecordsBinding
@@ -34,7 +35,18 @@ class RecordsFragment : Fragment() {
 
         with (binding) {
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            fragmentRecordsRV.adapter = RecordsListAdapter(vm.records.value!!, vm.calendar)
+            fragmentRecordsRV.adapter = RecordsListAdapter(
+                vm.records.value!!,
+                vm.calendar,
+                {
+                    vm::updateRecord
+                    Toast.makeText(requireContext(), "Обновить запись", Toast.LENGTH_SHORT).show()
+                },
+                {
+                    vm::deleteRecord
+                    Toast.makeText(requireContext(), "Удалить", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 
