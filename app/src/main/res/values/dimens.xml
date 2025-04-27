@@ -81,6 +81,9 @@
     <dimen name="tagHorizontalMargin_8dp">8dp</dimen>
     <dimen name="tagCardMinWidth_100dp">100dp</dimen>
     <dimen name="tagCardMaxWidth_150dp">150dp</dimen>
+    <dimen name="tagStateCardMarginVertical_4dp">4dp</dimen>
+    <dimen name="tagStateCardMarginEnd_9dp">9dp</dimen>
+    <dimen name="tagStateCardElevation_0dp">0dp</dimen>
 
     <!-- MainAddStateFragment -->
     <dimen name="mainFragmentAddStateCardViewMarginTop_26dp">26dp</dimen>
@@ -133,4 +136,23 @@
     <dimen name="fragmentProfileSmallButtonWidth_180dp">180dp</dimen>
     <dimen name="fragmentProfileButtonMarginTop_10dp">10dp</dimen>
 
+    <!-- StateCard -->
+    <dimen name="cardStateCardViewMarginVertical_8dp">8dp</dimen>
+    <dimen name="cardStateCardViewMarginHorizontal_23dp">23dp</dimen>
+    <dimen name="cardStateCardViewCornerRadius_12dp">12dp</dimen>
+    <dimen name="cardStateCardViewElevation_4dp">4dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginVertical_12dp">12dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginEnd_4dp">4dp</dimen>
+    <dimen name="cardStateImageCardViewCornerRadius_45dp">45dp</dimen>
+    <dimen name="cardStateChangeMoodMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateMoodMarginStart_4dp">4dp</dimen>
+    <dimen name="cardStateCreationDateMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateCreationDateMarginTop_4dp">4dp</dimen>
+    <dimen name="cardStateChangeDotsPadding_0dp">0dp</dimen>
+    <dimen name="cardStateFirstRVMarginTop_13dp">13dp</dimen>
+    <dimen name="cardStateSecondRVMarginTop_6dp">6dp</dimen>
+    <dimen name="cardStateDescriptionMarginEnd_16dp">16dp</dimen>
+    <dimen name="cardStateDescriptionMarginTop_24dp">24dp</dimen>
+    <dimen name="cardStateIconSize_45dp">45dp</dimen>
 </resources>

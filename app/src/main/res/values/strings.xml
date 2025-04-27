@@ -21,6 +21,8 @@
     <string name="contentDescriptionAddStateImage">Картинка с выбранным состоянием</string>
     <string name="contentDescriptionFragmentProfileIcon">Пустая иконка профиля</string>
     <string name="contentDescriptionFragmentProfileIconChange">Иконка редактирования иконки профиля</string>
+    <string name="cardStateImageContentDescription">Иконка, показывающая состояние</string>
+    <string name="cardStateChangeDotsContentDescription">Иконка, при нажатии показывающая выпадающее меню</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -94,4 +96,9 @@
     <string name="dialogLogoutMiddleText">Вы действительно хотите выйти? Все несохраненные данные будут потеряны.</string>
     <string name="dialogLogoutBackButton">Назад</string>
     <string name="dialogLogoutLogoutButton">Выйти</string>
+
+    <!-- StateCard -->
+    <string name="cardStateMood">настроение</string>
+    <string name="cardMenuEdit">Редактировать</string>
+    <string name="cardMenuDelete">Удалить</string>
 </resources>
