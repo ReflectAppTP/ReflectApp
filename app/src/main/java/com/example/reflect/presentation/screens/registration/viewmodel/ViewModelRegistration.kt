@@ -3,11 +3,21 @@ package com.example.reflect.presentation.screens.registration.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.usecase.RegistrationUseCase
+import com.example.reflect.presentation.screens.registration.RegistrationState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelRegistration @Inject constructor() : ViewModel() {
+class ViewModelRegistration @Inject constructor(
+    private val registrationUseCase: RegistrationUseCase
+) : ViewModel() {
     // TODO: remove unused values 
     private val _login = MutableLiveData("")
     val login: LiveData<String> get() = _login
@@ -32,6 +42,9 @@ class ViewModelRegistration @Inject constructor() : ViewModel() {
 
     private var _passwordConfirmationErrorState = MutableLiveData(false)
     val passwordConfirmationErrorState: LiveData<Boolean> get() = _passwordConfirmationErrorState
+
+    private val _state = MutableStateFlow<RegistrationState>(RegistrationState.Idle)
+    val state: StateFlow<RegistrationState> = _state
 
 
     fun updateLogin(result: String) {
@@ -62,4 +75,13 @@ class ViewModelRegistration @Inject constructor() : ViewModel() {
     }
 
     fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
+
+    fun register() {
+        viewModelScope.launch {
+            registrationUseCase(_login.value!!, _email.value!!, password.value!!)
+                .onEach { newState ->
+                    _state.value = newState
+                }
+        }
+    }
 }
