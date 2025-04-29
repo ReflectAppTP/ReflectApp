@@ -19,9 +19,9 @@ import com.example.reflect.R
 import com.example.reflect.common.AccountPrefs
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.registration.RegistrationState
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -218,14 +218,15 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handleRegistrationState(state: RegistrationState) {
+        val context = requireContext()
         when (state) {
             is RegistrationState.Loading -> {
-                Toast.makeText(requireContext(), "Загрузка", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
             }
             is RegistrationState.Success -> {
-                Toast.makeText(requireContext(), "Регистрация успешна", Toast.LENGTH_SHORT).show()
+                ToastUtils.showWelcomeToast(context)
                 AccountPrefs.saveAuthState(
-                    requireContext(),
+                    context,
                     true,
                     "Надо получить токен от Ромы",
                     userLogin = ((vm.state.value) as RegistrationState.Success).user.username
