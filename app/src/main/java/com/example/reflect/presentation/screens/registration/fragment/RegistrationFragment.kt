@@ -20,6 +20,7 @@ import com.example.reflect.common.AccountPrefs
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.registration.RegistrationIntent
 import com.example.reflect.presentation.screens.registration.RegistrationState
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
 import com.google.android.material.textfield.TextInputEditText
@@ -151,7 +152,9 @@ class RegistrationFragment : Fragment() {
 
                 when {
                     password == passwordConfirmation && isPasswordValid -> {
-                        vm.register()
+                        lifecycleScope.launch {
+                            vm.userIntent.send(RegistrationIntent.RegistrateUser)
+                        }
                     }
                     !isPasswordValid -> {
                         changeErrorStates(

@@ -5,10 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.RegistrationUseCase
+import com.example.reflect.presentation.screens.registration.RegistrationIntent
 import com.example.reflect.presentation.screens.registration.RegistrationState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -18,7 +21,12 @@ import javax.inject.Inject
 class ViewModelRegistration @Inject constructor(
     private val registrationUseCase: RegistrationUseCase
 ) : ViewModel() {
-    // TODO: remove unused values 
+
+    val userIntent = Channel<RegistrationIntent>(Channel.UNLIMITED)
+    private val _state = MutableStateFlow<RegistrationState>(RegistrationState.Idle)
+    val state: StateFlow<RegistrationState> = _state
+
+    // TODO: remove unused values
     private val _login = MutableLiveData("")
     val login: LiveData<String> get() = _login
 
@@ -43,9 +51,30 @@ class ViewModelRegistration @Inject constructor(
     private var _passwordConfirmationErrorState = MutableLiveData(false)
     val passwordConfirmationErrorState: LiveData<Boolean> get() = _passwordConfirmationErrorState
 
-    private val _state = MutableStateFlow<RegistrationState>(RegistrationState.Idle)
-    val state: StateFlow<RegistrationState> = _state
+    init {
+        handleIntent()
+    }
 
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect{
+                when (it) {
+                    is RegistrationIntent.RegistrateUser -> register()
+                }
+            }
+        }
+    }
+
+    private fun register() {
+        _state.value = RegistrationState.Idle
+        viewModelScope.launch {
+            registrationUseCase(_login.value!!, _email.value!!, password.value!!)
+                .onEach { newState ->
+                    _state.value = newState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
 
     fun updateLogin(result: String) {
         _login.value = result
@@ -75,15 +104,4 @@ class ViewModelRegistration @Inject constructor(
     }
 
     fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
-
-    fun register() {
-        _state.value = RegistrationState.Idle
-        viewModelScope.launch {
-            registrationUseCase(_login.value!!, _email.value!!, password.value!!)
-                .onEach { newState ->
-                    _state.value = newState
-                }
-                .launchIn(viewModelScope)
-        }
-    }
 }
