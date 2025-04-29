@@ -233,11 +233,9 @@ class RegistrationFragment : Fragment() {
                 findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
             }
             is RegistrationState.Error -> {
-                changeErrorStates(errorMessage = "Ошибка: ${state.message}")
+                changeErrorStates(errorMessage = state.message)
             }
-            RegistrationState.Idle -> {
-                Toast.makeText(requireContext(), "Опять пусто", Toast.LENGTH_SHORT).show()
-            }
+            RegistrationState.Idle -> Unit
         }
     }
 }
