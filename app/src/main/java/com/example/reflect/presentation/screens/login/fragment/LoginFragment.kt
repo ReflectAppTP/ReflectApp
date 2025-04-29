@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
                     // TODO: добавить бизнес логики (когда Ромчик подоит корову)
-                    AccountPrefs.saveAuthState(requireContext(), true, "Надо получить токен от Ромы", userLogin = "Зареганый профиль")
+//                    AccountPrefs.saveAuthState(requireContext(), true, "Надо получить токен от Ромы", user = "Зареганый профиль")
                     findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                 }
             }
@@ -94,7 +94,7 @@ class LoginFragment : Fragment() {
             }
 
             loginLikeGuestButton.setOnClickListener {
-                AccountPrefs.saveAuthState(requireContext(), false, "Наверно ещё один токен от Ромчика", true, "Супер гость")
+//                AccountPrefs.saveAuthState(requireContext(), false, "Наверно ещё один токен от Ромчика", true, "Супер гость")
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }
 

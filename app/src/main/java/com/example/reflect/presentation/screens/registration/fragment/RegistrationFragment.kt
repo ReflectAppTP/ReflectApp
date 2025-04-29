@@ -229,7 +229,7 @@ class RegistrationFragment : Fragment() {
                     context,
                     true,
                     "Надо получить токен от Ромы",
-                    userLogin = ((vm.state.value) as RegistrationState.Success).user.username
+                    user = ((vm.state.value) as RegistrationState.Success).user
                 )
                 findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
             }

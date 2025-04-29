@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            fragmentProfileUserLogin.text = AccountPrefs.getUserLogin(requireContext())
+            fragmentProfileUserLogin.text = AccountPrefs.getUser(requireContext()).username
 
             if (AccountPrefs.isAuthorized(requireContext())) {
                 fragmentProfileLogoutButton.visibility = View.VISIBLE
