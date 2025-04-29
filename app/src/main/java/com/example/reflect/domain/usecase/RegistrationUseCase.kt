@@ -1,5 +1,6 @@
 package com.example.reflect.domain.usecase
 
+import com.example.reflect.common.RetrofitException
 import com.example.reflect.domain.repository.RegistrationRepository
 import com.example.reflect.presentation.screens.registration.RegistrationState
 import kotlinx.coroutines.flow.Flow
@@ -18,8 +19,8 @@ class RegistrationUseCase @Inject constructor(
         try {
             val user = registrationRepository.register(username, email, password)
             emit(RegistrationState.Success(user))
-        } catch (e: Exception) {
-            emit(RegistrationState.Error(e.message.toString()))
+        } catch (e: RetrofitException) {
+            emit(RegistrationState.Error("Code: ${e.code}, Message: ${e.message}"))
         }
     }
 }

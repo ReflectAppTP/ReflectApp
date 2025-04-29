@@ -1,5 +1,6 @@
 package com.example.reflect.data.repository
 
+import com.example.reflect.common.RetrofitException
 import com.example.reflect.data.dto.RegistrationRequestDTO
 import com.example.reflect.data.dto.RegistrationResponseDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
@@ -17,7 +18,7 @@ class RegistrationRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {
-            throw Exception("Code: ${response.code()}, Message: ${response.message()}, Details: ${response.errorBody()}")
+            throw RetrofitException(response.code(), response.message(), response.errorBody())
         }
     }
 

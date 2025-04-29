@@ -68,11 +68,13 @@
 
         <TextView
             android:id="@+id/loginErrorMessage"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:textColor="@color/error"
+            android:gravity="center"
             android:layout_marginBottom="@dimen/loginErrorMessageMarginBottom_16dp"
+            android:layout_marginHorizontal="@dimen/errorMessageMarginHorizontal_58dp"
             style="@style/TextAppearance.Material3.LabelMedium"
             />
 

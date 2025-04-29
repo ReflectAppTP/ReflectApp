@@ -6,6 +6,7 @@
 
     <dimen name="editTextAndButtonWidth_280dp">280dp</dimen>
 
+    <dimen name="errorMessageMarginHorizontal_58dp">58dp</dimen>
     <!-- MainFragment -->
     <dimen name="mainFragmentBottomAppBarPadding_0dp">0dp</dimen>
     <dimen name="mainFragmentBottomNavigationViewHeight_75dp">75dp</dimen>

@@ -40,6 +40,7 @@ class ProfileFragment : Fragment() {
                 fragmentProfileLogoutButton.visibility = View.GONE
                 fragmentProfileLoginButton.visibility = View.VISIBLE
                 fragmentProfileRegistrationButton.visibility = View.VISIBLE
+                fragmentProfileImageViewChangeIcon.visibility = View.GONE
             }
         }
 

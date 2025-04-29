@@ -8,16 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.AccountPrefs
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
+import com.example.reflect.presentation.screens.registration.RegistrationState
 import com.example.reflect.presentation.screens.registration.viewmodel.ViewModelRegistration
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -38,6 +45,14 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.state.collect { state ->
+                    handleRegistrationState(state)
+                }
+            }
+        }
 
         bindViewModelAndTextFields()
         setOnClickLogic()
@@ -136,7 +151,7 @@ class RegistrationFragment : Fragment() {
 
                 when {
                     password == passwordConfirmation && isPasswordValid -> {
-                        findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                        vm.register()
                     }
                     !isPasswordValid -> {
                         changeErrorStates(
@@ -200,6 +215,30 @@ class RegistrationFragment : Fragment() {
         binding.registrationPasswordEditTextField.clearFocus()
         binding.registrationPasswordConfirmationEditTextField.clearFocus()
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun handleRegistrationState(state: RegistrationState) {
+        when (state) {
+            is RegistrationState.Loading -> {
+                Toast.makeText(requireContext(), "Загрузка", Toast.LENGTH_SHORT).show()
+            }
+            is RegistrationState.Success -> {
+                Toast.makeText(requireContext(), "Регистрация успешна", Toast.LENGTH_SHORT).show()
+                AccountPrefs.saveAuthState(
+                    requireContext(),
+                    true,
+                    "Надо получить токен от Ромы",
+                    userLogin = ((vm.state.value) as RegistrationState.Success).user.username
+                )
+                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+            }
+            is RegistrationState.Error -> {
+                changeErrorStates(errorMessage = "Ошибка: ${state.message}")
+            }
+            RegistrationState.Idle -> {
+                Toast.makeText(requireContext(), "Опять пусто", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
 

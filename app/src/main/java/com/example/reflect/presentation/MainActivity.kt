@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         if (AccountPrefs.isLoggedIn(this)){
-            navController.navigate(R.id.mainFragment)
+            navController.navigate(R.id.action_loginFragment_to_mainFragment)
         }
         if (!ConsentPrefs.hasConsent(this)) {
             navController.navigate(R.id.consentDialog)

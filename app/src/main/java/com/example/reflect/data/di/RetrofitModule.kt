@@ -3,6 +3,8 @@ package com.example.reflect.data.di
 import android.util.Log
 import com.example.reflect.data.remote.api.RetrofitService
 import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.data.repository.RegistrationRepositoryImpl
+import com.example.reflect.domain.repository.RegistrationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

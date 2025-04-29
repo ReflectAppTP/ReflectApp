@@ -77,11 +77,13 @@ class ViewModelRegistration @Inject constructor(
     fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
 
     fun register() {
+        _state.value = RegistrationState.Idle
         viewModelScope.launch {
             registrationUseCase(_login.value!!, _email.value!!, password.value!!)
                 .onEach { newState ->
                     _state.value = newState
                 }
+                .launchIn(viewModelScope)
         }
     }
 }
