@@ -9,18 +9,30 @@ object AccountPrefs {
     private const val PREFS_NAME = "auth_prefs"
     private const val LOG_STATE = "is_logged_in"
     private const val GUEST_STATE = "is_guest"
-    private const val AUTH_TOKEN = "auth_token"
+    private const val ACCESS_TOKEN = "access_token"
     private const val USER = "user"
 
     private fun getPrefs(context: Context) : SharedPreferences =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    fun saveAuthState(context: Context, isLoggedIn: Boolean, token: String?, isGuest: Boolean = false, user: UserModel) {
+    fun saveAuthState(context: Context, isLoggedIn: Boolean, isGuest: Boolean = false) {
         getPrefs(context).edit().apply{
             putBoolean(GUEST_STATE, isGuest)
             putBoolean(LOG_STATE, isLoggedIn)
-            putString(AUTH_TOKEN, token)
+            apply()
+        }
+    }
+    
+    fun saveUserModel(context: Context, user: UserModel) {
+        getPrefs(context).edit().apply{
             putString(USER, Gson().toJson(user))
+            apply()
+        }
+    }
+    
+    fun saveUserToken(context: Context, accessToken: String) {
+        getPrefs(context).edit().apply{
+            putString(ACCESS_TOKEN, accessToken)
             apply()
         }
     }
@@ -31,15 +43,19 @@ object AccountPrefs {
 
     fun isLoggedIn(context: Context) = isAuthorized(context) || isGuest(context)
 
-    fun getAuthToken(context: Context) = getPrefs(context).getString(AUTH_TOKEN, null)
+    fun getAuthToken(context: Context) = getPrefs(context).getString(ACCESS_TOKEN, "Empty access token")
 
     // TODO: Возможно, переделать catch блок
-    fun getUser(context: Context) =
+    fun getUser(context: Context): UserModel =
         try {
             Gson().fromJson(getPrefs(context).getString(USER, "Надо было покрыть это тестами"), UserModel::class.java)
         } catch (e: Exception) {
             UserModel(-1,"", "","", isAdmin = false, isPremium = false)
         }
+
+    fun clearToken(context: Context) {
+        getPrefs(context).edit().remove(ACCESS_TOKEN).apply()
+    }
 
     fun clearAuthState(context: Context) {
         getPrefs(context).edit().clear().apply()
