@@ -8,15 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentLoginBinding
+import com.example.reflect.presentation.screens.login.LoginIntent
+import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
+import com.example.reflect.presentation.screens.registration.RegistrationState
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -37,6 +46,14 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.state.collect { state ->
+                    handleLoginState(state)
+                }
+            }
+        }
 
         bindViewModelAndTextFields()
         setOnClickLogic()
@@ -73,9 +90,9 @@ class LoginFragment : Fragment() {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
-                    // TODO: добавить бизнес логики (когда Ромчик подоит корову)
-//                    AccountPrefs.saveAuthState(requireContext(), true, "Надо получить токен от Ромы", user = "Зареганый профиль")
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    lifecycleScope.launch {
+                        vm.userIntent.send(LoginIntent.LoginUser)
+                    }
                 }
             }
 
@@ -124,5 +141,21 @@ class LoginFragment : Fragment() {
         binding.emailLoginEditTextField.clearFocus()
         binding.passwordLoginEditTextField.clearFocus()
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun handleLoginState(state: LoginState) {
+        val context = requireContext()
+        when (state) {
+            is LoginState.Loading -> {
+                Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
+            }
+            is LoginState.Success -> {
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+            is LoginState.Error -> {
+                changeErrorStates(errorMessage = state.message)
+            }
+            is LoginState.Idle -> Unit
+        }
     }
 }

@@ -3,11 +3,30 @@ package com.example.reflect.presentation.screens.login.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.media.session.MediaButtonReceiver.handleIntent
+import com.example.reflect.domain.usecase.LoginUseCase
+import com.example.reflect.presentation.screens.login.LoginIntent
+import com.example.reflect.presentation.screens.login.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelLogin @Inject constructor() : ViewModel() {
+class ViewModelLogin @Inject constructor(
+    private val loginUseCase: LoginUseCase
+) : ViewModel() {
+
+    val userIntent = Channel<LoginIntent>(Channel.UNLIMITED)
+    private val _state = MutableStateFlow<LoginState>(LoginState.Idle)
+    val state: SharedFlow<LoginState> = _state
+
     private var _email = MutableLiveData("")
     val email: LiveData<String> get() = _email
 
@@ -19,6 +38,31 @@ class ViewModelLogin @Inject constructor() : ViewModel() {
 
     private var _passwordErrorState = MutableLiveData(false)
     val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+
+    init {
+        handleIntent()
+    }
+
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect {
+                when (it) {
+                    is LoginIntent.LoginUser -> login()
+                }
+            }
+        }
+    }
+
+    private fun login() {
+        _state.value = LoginState.Idle
+        viewModelScope.launch {
+            loginUseCase(_email.value!!, _password.value!!)
+                .onEach { newState ->
+                    _state.value = newState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
 
     fun updateEmail(result: String) {
         _email.value = result

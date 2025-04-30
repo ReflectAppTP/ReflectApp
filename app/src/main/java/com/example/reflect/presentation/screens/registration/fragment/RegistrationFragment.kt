@@ -228,13 +228,14 @@ class RegistrationFragment : Fragment() {
             }
             is RegistrationState.Success -> {
                 ToastUtils.showWelcomeToast(context)
+                // TODO: Перенести это в логин
                 AccountPrefs.saveAuthState(
                     context,
                     true,
                     "Надо получить токен от Ромы",
                     user = ((vm.state.value) as RegistrationState.Success).user
                 )
-                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                findNavController().popBackStack()
             }
             is RegistrationState.Error -> {
                 changeErrorStates(errorMessage = state.message)
