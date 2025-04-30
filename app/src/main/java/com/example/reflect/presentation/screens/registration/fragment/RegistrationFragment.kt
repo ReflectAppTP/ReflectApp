@@ -224,7 +224,7 @@ class RegistrationFragment : Fragment() {
         val context = requireContext()
         when (state) {
             is RegistrationState.Loading -> {
-                Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
+                ToastUtils.showLoadingToast(context)
             }
             is RegistrationState.Success -> {
                 ToastUtils.showSuccessfulRegistrationToast(context)

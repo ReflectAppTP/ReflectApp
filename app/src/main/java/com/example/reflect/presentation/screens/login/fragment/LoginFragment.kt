@@ -19,6 +19,7 @@ import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentLoginBinding
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
@@ -109,8 +110,10 @@ class LoginFragment : Fragment() {
             }
 
             loginLikeGuestButton.setOnClickListener {
+                // TODO: сделать по человечески
 //                AccountPrefs.saveAuthState(requireContext(), false, "Наверно ещё один токен от Ромчика", true, "Супер гость")
-                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+//                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                Toast.makeText(requireContext(), "Пока не работает", Toast.LENGTH_SHORT).show()
             }
 
             loginRegistrationButton.setOnClickListener {
@@ -146,15 +149,15 @@ class LoginFragment : Fragment() {
         val context = requireContext()
         when (state) {
             is LoginState.Loading -> {
-                Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
+                ToastUtils.showLoadingToast(context)
             }
             is LoginState.SuccessLogin -> {
                 AccountPrefs.saveUserToken(context, state.loginModel.access)
-                Toast.makeText(context, "Получаем профиль", Toast.LENGTH_SHORT).show()
             }
             is LoginState.SuccessGetProfile -> {
                 AccountPrefs.saveAuthState(context, true)
                 AccountPrefs.saveUserModel(context, state.userModel)
+                ToastUtils.showWelcomeToast(context)
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }
             is LoginState.Error -> {
