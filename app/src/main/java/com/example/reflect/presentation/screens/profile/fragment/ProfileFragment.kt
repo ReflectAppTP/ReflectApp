@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 

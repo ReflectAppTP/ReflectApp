@@ -6,10 +6,9 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
-import com.example.reflect.common.ConsentPrefs
+import com.example.reflect.common.prefs.AccountPrefs
+import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
-import com.example.reflect.presentation.dialog.ConsentDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -16,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentRegistrationBinding
 import com.example.reflect.presentation.common.ToastUtils
@@ -153,7 +153,7 @@ class RegistrationFragment : Fragment() {
                 when {
                     password == passwordConfirmation && isPasswordValid -> {
                         lifecycleScope.launch {
-                            vm.userIntent.send(RegistrationIntent.RegistrateUser)
+                            vm.userIntent.send(RegistrationIntent.RegisterUser)
                         }
                     }
                     !isPasswordValid -> {

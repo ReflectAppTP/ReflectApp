@@ -1,4 +1,4 @@
-package com.example.reflect.common
+package com.example.reflect.common.prefs
 
 import android.content.Context
 import android.content.SharedPreferences

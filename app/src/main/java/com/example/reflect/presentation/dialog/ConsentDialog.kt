@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.reflect.R
-import com.example.reflect.common.ConsentPrefs
+import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.DialogConsentBinding
 
 class ConsentDialog: DialogFragment() {

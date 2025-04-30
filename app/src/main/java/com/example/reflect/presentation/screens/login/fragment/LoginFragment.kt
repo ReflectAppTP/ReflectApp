@@ -12,7 +12,6 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
 import com.example.reflect.common.Utils
 import com.example.reflect.databinding.FragmentLoginBinding
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin

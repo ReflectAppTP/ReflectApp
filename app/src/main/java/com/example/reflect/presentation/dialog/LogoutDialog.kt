@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.DialogLogoutBinding
 
 class LogoutDialog : DialogFragment() {

@@ -59,7 +59,7 @@ class ViewModelRegistration @Inject constructor(
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect{
                 when (it) {
-                    is RegistrationIntent.RegistrateUser -> register()
+                    is RegistrationIntent.RegisterUser -> register()
                 }
             }
         }
