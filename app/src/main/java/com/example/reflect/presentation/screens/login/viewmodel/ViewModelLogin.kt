@@ -1,7 +1,5 @@
 package com.example.reflect.presentation.screens.login.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.GetProfileUseCase
@@ -11,7 +9,7 @@ import com.example.reflect.presentation.screens.login.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -26,19 +24,19 @@ class ViewModelLogin @Inject constructor(
 
     val userIntent = Channel<LoginIntent>(Channel.UNLIMITED)
     private val _state = MutableStateFlow<LoginState>(LoginState.Idle)
-    val state: SharedFlow<LoginState> = _state
+    val state: StateFlow<LoginState> = _state
 
-    private var _email = MutableLiveData("")
-    val email: LiveData<String> get() = _email
+    private var _email = MutableStateFlow("")
+    val email: StateFlow<String> get() = _email
 
-    private var _password = MutableLiveData("")
-    val password: LiveData<String> get() = _password
+    private var _password = MutableStateFlow("")
+    val password: StateFlow<String> get() = _password
 
-    private var _emailErrorState = MutableLiveData(false)
-    val emailErrorState: LiveData<Boolean> get() = _emailErrorState
+    private var _emailErrorState = MutableStateFlow(false)
+    val emailErrorState: StateFlow<Boolean> get() = _emailErrorState
 
-    private var _passwordErrorState = MutableLiveData(false)
-    val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+    private var _passwordErrorState = MutableStateFlow(false)
+    val passwordErrorState: StateFlow<Boolean> get() = _passwordErrorState
 
     init {
         handleIntent()

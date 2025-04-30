@@ -1,7 +1,5 @@
 package com.example.reflect.presentation.screens.registration.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.RegistrationUseCase
@@ -27,29 +25,29 @@ class ViewModelRegistration @Inject constructor(
     val state: StateFlow<RegistrationState> = _state
 
     // TODO: remove unused values
-    private val _login = MutableLiveData("")
-    val login: LiveData<String> get() = _login
+    private val _login = MutableStateFlow("")
+    val login: StateFlow<String> get() = _login
 
-    private var _email = MutableLiveData("")
-    val email: LiveData<String> get() = _email
+    private var _email = MutableStateFlow("")
+    val email: StateFlow<String> get() = _email
 
-    private var _password = MutableLiveData("")
-    val password: LiveData<String> get() = _password
+    private var _password = MutableStateFlow("")
+    val password: StateFlow<String> get() = _password
 
-    private val _passwordConfirmation = MutableLiveData("")
-    val passwordConfirmation: LiveData<String> get() = _passwordConfirmation
+    private val _passwordConfirmation = MutableStateFlow("")
+    val passwordConfirmation: StateFlow<String> get() = _passwordConfirmation
 
-    private var _loginErrorState = MutableLiveData(false)
-    val loginErrorState: LiveData<Boolean> get() = _loginErrorState
+    private var _loginErrorState = MutableStateFlow(false)
+    val loginErrorState: StateFlow<Boolean> get() = _loginErrorState
 
-    private var _emailErrorState = MutableLiveData(false)
-    val emailErrorState: LiveData<Boolean> get() = _emailErrorState
+    private var _emailErrorState = MutableStateFlow(false)
+    val emailErrorState: StateFlow<Boolean> get() = _emailErrorState
 
-    private var _passwordErrorState = MutableLiveData(false)
-    val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+    private var _passwordErrorState = MutableStateFlow(false)
+    val passwordErrorState: StateFlow<Boolean> get() = _passwordErrorState
 
-    private var _passwordConfirmationErrorState = MutableLiveData(false)
-    val passwordConfirmationErrorState: LiveData<Boolean> get() = _passwordConfirmationErrorState
+    private var _passwordConfirmationErrorState = MutableStateFlow(false)
+    val passwordConfirmationErrorState: StateFlow<Boolean> get() = _passwordConfirmationErrorState
 
     init {
         handleIntent()

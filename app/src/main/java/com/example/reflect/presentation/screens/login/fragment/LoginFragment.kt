@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             loginButton.setOnClickListener {
+                hideKeyboard()
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {

@@ -131,6 +131,7 @@ class RegistrationFragment : Fragment() {
                 }
             }
             registrationButton.setOnClickListener {
+                hideKeyboard()
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                     return@setOnClickListener
