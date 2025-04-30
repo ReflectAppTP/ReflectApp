@@ -227,7 +227,7 @@ class RegistrationFragment : Fragment() {
                 Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
             }
             is RegistrationState.Success -> {
-                ToastUtils.showWelcomeToast(context)
+                ToastUtils.showSuccessfulRegistrationToast(context)
                 // TODO: Перенести это в логин
                 AccountPrefs.saveAuthState(
                     context,

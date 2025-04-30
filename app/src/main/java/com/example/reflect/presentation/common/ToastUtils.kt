@@ -27,4 +27,14 @@ object ToastUtils {
             show()
         }
     }
+
+    fun showSuccessfulRegistrationToast(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_successful_registration, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,280)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
 }

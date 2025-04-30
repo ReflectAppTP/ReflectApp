@@ -82,7 +82,6 @@
     <string name="addStateThirdClarificationHowDoYouFeel">Как ты себя чувствуешь?</string>
     <string name="addStateThirdClarificationEditTextHint">Добавить заметку…</string>
     <string name="addStateSaveButtonText">Сохранить</string>
-    <string name="addStateToastMessage">Запись успешно создана</string>
 
     <!-- ProfileFragment -->
     <string name="fragmentProfilePremiumButton">Премиум</string>
@@ -101,5 +100,8 @@
     <string name="cardStateMood">настроение</string>
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
+
+    <string name="addStateToastMessage">Запись успешно создана</string>
     <string name="welcomeToastMessage">Добро пожаловать!</string>
+    <string name="successfulRegistrationToastMessage">Регистрация прошла успешно</string>
 </resources>
