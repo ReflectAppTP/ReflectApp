@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.media.session.MediaButtonReceiver.handleIntent
+import com.example.reflect.domain.usecase.GetProfileUseCase
 import com.example.reflect.domain.usecase.LoginUseCase
 import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
@@ -20,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelLogin @Inject constructor(
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val getProfileUseCase: GetProfileUseCase
 ) : ViewModel() {
 
     val userIntent = Channel<LoginIntent>(Channel.UNLIMITED)
@@ -59,6 +60,13 @@ class ViewModelLogin @Inject constructor(
             loginUseCase(_email.value!!, _password.value!!)
                 .onEach { newState ->
                     _state.value = newState
+                    if (newState is LoginState.SuccessLogin) {
+                        getProfileUseCase(newState.loginModel.access)
+                            .onEach { newGetProfileState ->
+                                _state.value = newGetProfileState
+                            }
+                            .launchIn(viewModelScope)
+                    }
                 }
                 .launchIn(viewModelScope)
         }

@@ -21,10 +21,8 @@ import com.example.reflect.databinding.FragmentLoginBinding
 import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
-import com.example.reflect.presentation.screens.registration.RegistrationState
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -149,13 +147,18 @@ class LoginFragment : Fragment() {
             is LoginState.Loading -> {
                 Toast.makeText(context, "Загрузка", Toast.LENGTH_SHORT).show()
             }
-            is LoginState.Success -> {
+            is LoginState.SuccessLogin -> {
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+            is LoginState.SuccessGetProfile -> {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }
             is LoginState.Error -> {
                 changeErrorStates(errorMessage = state.message)
             }
-            is LoginState.Idle -> Unit
+            is LoginState.Idle -> {
+                Unit
+            }
         }
     }
 }
