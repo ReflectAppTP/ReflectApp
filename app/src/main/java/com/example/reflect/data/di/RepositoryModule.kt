@@ -3,9 +3,11 @@ package com.example.reflect.data.di
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.data.repository.GetProfileRepositoryImpl
 import com.example.reflect.data.repository.LoginRepositoryImpl
+import com.example.reflect.data.repository.RefreshRepositoryImpl
 import com.example.reflect.data.repository.RegistrationRepositoryImpl
 import com.example.reflect.domain.repository.GetProfileRepository
 import com.example.reflect.domain.repository.LoginRepository
+import com.example.reflect.domain.repository.RefreshRepository
 import com.example.reflect.domain.repository.RegistrationRepository
 import dagger.Module
 import dagger.Provides
@@ -34,4 +36,10 @@ object RepositoryModule {
     fun provideGetProfileRepository(
         remoteData: RetrofitRemoteData
     ): GetProfileRepository = GetProfileRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideRefreshRepository(
+        remoteData: RetrofitRemoteData
+    ): RefreshRepository = RefreshRepositoryImpl(remoteData)
 }

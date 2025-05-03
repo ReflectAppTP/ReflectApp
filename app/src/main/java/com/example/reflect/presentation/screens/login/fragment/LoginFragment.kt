@@ -153,7 +153,7 @@ class LoginFragment : Fragment() {
                 ToastUtils.showLoadingToast(context)
             }
             is LoginState.SuccessLogin -> {
-                AccountPrefs.saveUserToken(context, state.loginModel.access)
+                AccountPrefs.saveUserToken(context, state.loginModel.access, state.loginModel.refresh)
             }
             is LoginState.SuccessGetProfile -> {
                 AccountPrefs.saveAuthState(context, true)
@@ -163,7 +163,7 @@ class LoginFragment : Fragment() {
             }
             is LoginState.Error -> {
                 changeErrorStates(errorMessage = state.message)
-                AccountPrefs.clearToken(context)
+                AccountPrefs.clearTokens(context)
             }
             is LoginState.Idle -> {
                 Unit

@@ -10,6 +10,7 @@ object AccountPrefs {
     private const val LOG_STATE = "is_logged_in"
     private const val GUEST_STATE = "is_guest"
     private const val ACCESS_TOKEN = "access_token"
+    private const val REFRESH_TOKEN = "refresh_token"
     private const val USER = "user"
 
     private fun getPrefs(context: Context) : SharedPreferences =
@@ -30,9 +31,10 @@ object AccountPrefs {
         }
     }
     
-    fun saveUserToken(context: Context, accessToken: String) {
+    fun saveUserToken(context: Context, accessToken: String, refreshToken: String) {
         getPrefs(context).edit().apply{
             putString(ACCESS_TOKEN, accessToken)
+            putString(REFRESH_TOKEN, refreshToken)
             apply()
         }
     }
@@ -45,6 +47,8 @@ object AccountPrefs {
 
     fun getAuthToken(context: Context) = getPrefs(context).getString(ACCESS_TOKEN, "Empty access token")
 
+    fun getRefreshToken(context: Context) = getPrefs(context).getString(REFRESH_TOKEN, "Empty refresh token")
+
     // TODO: Возможно, переделать catch блок
     fun getUser(context: Context): UserModel =
         try {
@@ -53,8 +57,11 @@ object AccountPrefs {
             UserModel(-1,"", "","", isAdmin = false, isPremium = false)
         }
 
-    fun clearToken(context: Context) {
-        getPrefs(context).edit().remove(ACCESS_TOKEN).apply()
+    fun clearTokens(context: Context) {
+        getPrefs(context).edit()
+            .remove(ACCESS_TOKEN)
+            .remove(REFRESH_TOKEN)
+            .apply()
     }
 
     fun clearAuthState(context: Context) {

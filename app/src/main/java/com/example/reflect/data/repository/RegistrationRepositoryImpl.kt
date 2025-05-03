@@ -1,8 +1,8 @@
 package com.example.reflect.data.repository
 
 import com.example.reflect.common.RetrofitException
-import com.example.reflect.data.dto.RegistrationRequestDTO
-import com.example.reflect.data.dto.RegistrationResponseDTO
+import com.example.reflect.data.dto.registration.RegistrationRequestDTO
+import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.domain.model.UserModel
 import com.example.reflect.domain.repository.RegistrationRepository

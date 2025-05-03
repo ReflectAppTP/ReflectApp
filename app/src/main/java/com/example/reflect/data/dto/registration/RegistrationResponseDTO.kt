@@ -1,5 +1,6 @@
-package com.example.reflect.data.dto
+package com.example.reflect.data.dto.registration
 
+import com.example.reflect.data.dto.UserDTO
 import com.google.gson.annotations.SerializedName
 
 data class RegistrationResponseDTO(

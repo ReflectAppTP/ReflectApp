@@ -1,20 +1,18 @@
 package com.example.reflect.data.repository
 
 import com.example.reflect.common.RetrofitException
-import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.LoginResponseDTO
+import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.domain.model.LoginModel
-import com.example.reflect.domain.repository.LoginRepository
+import com.example.reflect.domain.repository.RefreshRepository
 import javax.inject.Inject
 
-class LoginRepositoryImpl @Inject constructor(
+class RefreshRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
-) : LoginRepository {
-    override suspend fun login(email: String, password: String): LoginModel {
-        val response = remoteData.login(
-            LoginRequestDTO(email, password)
-        )
+): RefreshRepository {
+    override suspend fun getAccessToken(refreshToken: String): LoginModel {
+        val response = remoteData.getAccessToken(RefreshRequestDTO(refreshToken))
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {
