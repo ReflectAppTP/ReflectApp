@@ -1,10 +1,10 @@
 package com.example.reflect.data.di
 
+import android.content.Context
 import android.util.Log
+import com.example.reflect.common.interceptor.AccessTokenInterceptor
 import com.example.reflect.data.remote.api.RetrofitService
 import com.example.reflect.data.remote.data.RetrofitRemoteData
-import com.example.reflect.data.repository.RegistrationRepositoryImpl
-import com.example.reflect.domain.repository.RegistrationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,9 +24,12 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun profideOkHttpClient() : OkHttpClient =
+    fun provideOkHttpClient(
+        authInterceptor: AccessTokenInterceptor
+    ) : OkHttpClient =
         OkHttpClient
             .Builder()
+            .addInterceptor(authInterceptor)
             .addInterceptor(
                 HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {
                     setLevel(HttpLoggingInterceptor.Level.BODY)

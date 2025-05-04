@@ -27,7 +27,7 @@ class ViewModelMainActivity @Inject constructor(
     }
 
     private suspend fun verifyAccessToken(accessToken: String, refreshToken: String) {
-        getProfileUseCase(accessToken).collect {
+        getProfileUseCase().collect {
             when(it) {
                 is LoginState.SuccessGetProfile -> {
                     _state.value = GetProfileState.Success(LoginModel(refreshToken, accessToken))
@@ -36,7 +36,7 @@ class ViewModelMainActivity @Inject constructor(
                     if (it.code == 401) {
                         refreshTokens(refreshToken)
                     } else {
-                        _state.value = GetProfileState.Error(it.message, it.code)
+                        _state.value = GetProfileState.RefreshError(it.message, it.code)
                     }
                 }
                 else -> {}

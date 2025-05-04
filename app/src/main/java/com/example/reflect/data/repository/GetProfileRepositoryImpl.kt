@@ -10,8 +10,8 @@ import javax.inject.Inject
 class GetProfileRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
 ): GetProfileRepository {
-    override suspend fun getUser(accessToken: String): UserModel {
-        val response = remoteData.getUser("Bearer $accessToken")
+    override suspend fun getUser(): UserModel {
+        val response = remoteData.getUser()
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {

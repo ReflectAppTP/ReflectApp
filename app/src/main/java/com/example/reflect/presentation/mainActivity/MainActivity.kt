@@ -73,9 +73,11 @@ class MainActivity : AppCompatActivity() {
 
             }
             is GetProfileState.Error -> {
-                if (state.code != 401) {
-                    AccountPrefs.clearTokens(this)
-                }
+                // TODO: Какой нибудь тост сделать 
+                splashScreen.setKeepOnScreenCondition { false }
+            }
+            is GetProfileState.RefreshError -> {
+                AccountPrefs.clearTokens(this)
                 splashScreen.setKeepOnScreenCondition { false }
             }
             is GetProfileState.Idle -> Unit

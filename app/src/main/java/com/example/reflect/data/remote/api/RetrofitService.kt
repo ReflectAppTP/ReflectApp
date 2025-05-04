@@ -24,8 +24,8 @@ interface RetrofitService {
     suspend fun login(@Body loginRequest: LoginRequestDTO): Response<LoginResponseDTO>
 
     @GET("${authReflect}/profile/")
-    suspend fun getProfile(@Header("Authorization") accessToken: String): Response<UserDTO>
+    suspend fun getProfile(): Response<UserDTO>
 
-    @GET("${token}/refresh")
+    @POST("${token}/refresh")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>
 }

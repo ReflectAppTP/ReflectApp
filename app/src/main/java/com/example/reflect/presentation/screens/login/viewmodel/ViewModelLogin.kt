@@ -55,11 +55,11 @@ class ViewModelLogin @Inject constructor(
     private fun login() {
         _state.value = LoginState.Idle
         viewModelScope.launch {
-            loginUseCase(_email.value!!, _password.value!!)
+            loginUseCase(_email.value, _password.value)
                 .onEach { newState ->
                     _state.value = newState
                     if (newState is LoginState.SuccessLogin) {
-                        getProfileUseCase(newState.loginModel.access)
+                        getProfileUseCase()
                             .onEach { newGetProfileState ->
                                 _state.value = newGetProfileState
                             }

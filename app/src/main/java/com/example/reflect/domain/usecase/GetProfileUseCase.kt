@@ -12,11 +12,9 @@ import javax.inject.Inject
 class GetProfileUseCase @Inject constructor(
     private val getProfileRepository: GetProfileRepository
 ) {
-    suspend operator fun invoke(
-        accessToken: String
-    ): Flow<LoginState> = flow {
+    suspend operator fun invoke(): Flow<LoginState> = flow {
         try {
-            val user = getProfileRepository.getUser(accessToken)
+            val user = getProfileRepository.getUser()
             emit(LoginState.SuccessGetProfile(user))
         } catch (e: RetrofitException) {
             emit(LoginState.Error(RetrofitExceptionHandler.getErrorMessage(e), e.code))
