@@ -11,8 +11,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -52,21 +50,15 @@ class ViewModelLogin @Inject constructor(
         }
     }
 
-    private fun login() {
+    private suspend fun login() {
         _state.value = LoginState.Idle
-        viewModelScope.launch {
-            loginUseCase(_email.value, _password.value)
-                .onEach { newState ->
-                    _state.value = newState
-                    if (newState is LoginState.SuccessLogin) {
-                        getProfileUseCase()
-                            .onEach { newGetProfileState ->
-                                _state.value = newGetProfileState
-                            }
-                            .launchIn(viewModelScope)
-                    }
+        loginUseCase(_email.value, _password.value).collect { newState ->
+            _state.value = newState
+            if (newState is LoginState.SuccessLogin) {
+                getProfileUseCase().collect { newGetProfileState ->
+                    _state.value = newGetProfileState
                 }
-                .launchIn(viewModelScope)
+            }
         }
     }
 

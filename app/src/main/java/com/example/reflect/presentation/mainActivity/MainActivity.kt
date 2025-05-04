@@ -1,8 +1,6 @@
 package com.example.reflect.presentation.mainActivity
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +14,6 @@ import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Timer
 import kotlin.concurrent.schedule
@@ -73,7 +70,8 @@ class MainActivity : AppCompatActivity() {
 
             }
             is GetProfileState.Error -> {
-                // TODO: Какой нибудь тост сделать 
+                // TODO: Какой нибудь тост сделать
+                Toast.makeText(this, "Какая то ошибка на тосте", Toast.LENGTH_SHORT).show()
                 splashScreen.setKeepOnScreenCondition { false }
             }
             is GetProfileState.RefreshError -> {
