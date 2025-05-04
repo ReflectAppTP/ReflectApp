@@ -3,16 +3,21 @@ package com.example.reflect.data.di
 import android.content.Context
 import android.util.Log
 import com.example.reflect.common.interceptor.AccessTokenInterceptor
+import com.example.reflect.common.interceptor.CacheInterceptor
+import com.example.reflect.common.interceptor.ForceCacheInterceptor
 import com.example.reflect.data.remote.api.RetrofitService
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import javax.inject.Singleton
 
 @Module
@@ -25,10 +30,16 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        authInterceptor: AccessTokenInterceptor
+        authInterceptor: AccessTokenInterceptor,
+        cacheInterceptor: CacheInterceptor,
+        forceCacheInterceptor: ForceCacheInterceptor,
+        @ApplicationContext context: Context
     ) : OkHttpClient =
         OkHttpClient
             .Builder()
+            .cache(Cache(File(context.cacheDir, "http-cache"), 2L * 1024L * 1024L)) // 2 MB
+            .addNetworkInterceptor(cacheInterceptor)
+            .addInterceptor(forceCacheInterceptor)
             .addInterceptor(authInterceptor)
             .addInterceptor(
                 HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {

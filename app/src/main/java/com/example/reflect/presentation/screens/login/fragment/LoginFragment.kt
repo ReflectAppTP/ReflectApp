@@ -91,6 +91,7 @@ class LoginFragment : Fragment() {
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
+                    changeErrorStates(emailError = false, passwordError = false)
                     lifecycleScope.launch {
                         vm.userIntent.send(LoginIntent.LoginUser)
                     }
@@ -111,9 +112,6 @@ class LoginFragment : Fragment() {
             }
 
             loginLikeGuestButton.setOnClickListener {
-                // TODO: сделать по человечески
-//                AccountPrefs.saveAuthState(requireContext(), false, "Наверно ещё один токен от Ромчика", true, "Супер гость")
-//                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                 Toast.makeText(requireContext(), "Пока не работает", Toast.LENGTH_SHORT).show()
             }
 
