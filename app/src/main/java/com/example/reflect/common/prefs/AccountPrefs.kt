@@ -45,9 +45,9 @@ object AccountPrefs {
 
     fun isLoggedIn(context: Context) = isAuthorized(context) || isGuest(context)
 
-    fun getAuthToken(context: Context) = getPrefs(context).getString(ACCESS_TOKEN, "Empty access token")
+    fun getAuthToken(context: Context) = getPrefs(context).getString(ACCESS_TOKEN, null)
 
-    fun getRefreshToken(context: Context) = getPrefs(context).getString(REFRESH_TOKEN, "Empty refresh token")
+    fun getRefreshToken(context: Context) = getPrefs(context).getString(REFRESH_TOKEN, null)
 
     // TODO: Возможно, переделать catch блок
     fun getUser(context: Context): UserModel =

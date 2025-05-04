@@ -19,9 +19,11 @@ class GetProfileUseCase @Inject constructor(
             val user = getProfileRepository.getUser(accessToken)
             emit(LoginState.SuccessGetProfile(user))
         } catch (e: RetrofitException) {
-            emit(LoginState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
+            emit(LoginState.Error(RetrofitExceptionHandler.getErrorMessage(e), e.code))
         } catch (e: ConnectException) {
-            emit(LoginState.Error("Ошибка подключения к интернету"))
+            emit(LoginState.Error("Ошибка подключения к интернету", 0))
+        } catch (e: Exception) {
+            emit(LoginState.Error("Какая то ошибка", -1))
         }
     }
 }

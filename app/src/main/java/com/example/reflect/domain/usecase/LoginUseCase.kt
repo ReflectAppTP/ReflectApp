@@ -21,9 +21,11 @@ class LoginUseCase @Inject constructor(
           val loginModel = loginRepository.login(email, password)
           emit(LoginState.SuccessLogin(loginModel))
         } catch (e: RetrofitException) {
-            emit(LoginState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
+            emit(LoginState.Error(RetrofitExceptionHandler.getErrorMessage(e), e.code))
         } catch (e: ConnectException) {
-            emit(LoginState.Error("Ошибка подлючения к интернету"))
+            emit(LoginState.Error("Ошибка подключения к интернету", 0))
+        } catch (e: Exception) {
+            emit(LoginState.Error("Какая то ошибка", -1))
         }
     }
 }
