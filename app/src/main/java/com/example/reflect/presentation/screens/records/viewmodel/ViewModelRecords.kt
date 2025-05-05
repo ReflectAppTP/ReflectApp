@@ -10,8 +10,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,16 +33,15 @@ class ViewModelRecords @Inject constructor(
     val records: StateFlow<List<RecordModel>> get() = _records
 
     init {
-        fetchRecords(calendar.time)
+        fetchRecords()
     }
 
-    fun fetchRecords(date: Date = calendar.time){
+    fun fetchRecords(){
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         viewModelScope.launch {
-            getStatesUseCase().collect { newState ->
+            getStatesUseCase(dateFormat.format(_selectedDate.value)).collect { newState ->
                 if (newState is GetRecordsState.Success) {
                     _records.value = newState.records
-                    Log.d("OkHttp get", _records.value.toString())
-                    Log.d("OkHttp get", records.value.toString())
                 }
                 _recordsState.value = newState
             }
@@ -49,7 +50,7 @@ class ViewModelRecords @Inject constructor(
 
     fun updateSelectedDate(date: Date) {
         _selectedDate.value = date
-        fetchRecords(date)
+        fetchRecords()
     }
     
     fun updateRecord(id: Int) {

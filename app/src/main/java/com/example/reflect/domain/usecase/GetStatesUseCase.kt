@@ -13,9 +13,9 @@ import javax.inject.Inject
 class GetStatesUseCase @Inject constructor(
     private val getStatesRepository: GetStatesRepository
 ) {
-    suspend operator fun invoke(): Flow<GetRecordsState> = flow {
+    suspend operator fun invoke(date: String): Flow<GetRecordsState> = flow {
         try {
-            val records = getStatesRepository.getStates()
+            val records = getStatesRepository.getStates(date)
             emit(GetRecordsState.Success(records))
         } catch (e: RetrofitException) {
             emit(GetRecordsState.Error(RetrofitExceptionHandler.getErrorMessage(e)))

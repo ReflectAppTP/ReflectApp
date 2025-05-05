@@ -15,5 +15,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun getFirstTags() = retrofitService.getFirstTags()
     suspend fun getSecondTags() = retrofitService.getSecondTags()
     suspend fun addState(addStateRequestDTO: AddStateRequestDTO) = retrofitService.addState(addStateRequestDTO)
-    suspend fun getStates() = retrofitService.getStates()
+    suspend fun getStates(date: String) = retrofitService.getStates(date)
 }

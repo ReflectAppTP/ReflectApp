@@ -13,6 +13,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 private const val authReflect = "api/authReflect"
 private const val token = "api/token"
@@ -42,5 +43,5 @@ interface RetrofitService {
     suspend fun addState(@Body addStateRequestDTO: AddStateRequestDTO): Response<AddStateResponseDTO>
 
     @GET("${emotions}/states/")
-    suspend fun getStates(): Response<List<AddStateResponseDTO>>
+    suspend fun getStates(@Query("date") date: String): Response<List<AddStateResponseDTO>>
 }

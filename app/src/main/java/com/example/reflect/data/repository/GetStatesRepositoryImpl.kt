@@ -13,8 +13,8 @@ import javax.inject.Inject
 class GetStatesRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
 ) : GetStatesRepository {
-    override suspend fun getStates(): List<RecordModel> {
-        val response = remoteData.getStates()
+    override suspend fun getStates(date: String): List<RecordModel> {
+        val response = remoteData.getStates(date)
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {
