@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.R
 import com.example.reflect.databinding.CardStateBinding
@@ -16,11 +17,10 @@ import java.util.Calendar
 import java.util.Locale
 
 class RecordsListAdapter(
-    private val records: List<RecordModel>,
     private val calendar: Calendar,
     private val onEdit: (Int) -> Unit,
     private val onDelete: (Int) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+) : ListAdapter<RecordModel, RecordsListAdapter.RecordViewHolder>(DIFF_CALLBACK){
 
     class RecordViewHolder(
         private val binding: CardStateBinding
@@ -126,16 +126,26 @@ class RecordsListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         val cardStateBinding = CardStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecordViewHolder(cardStateBinding)
     }
 
-    override fun getItemCount(): Int = records.size
+    override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
+        holder.bind(currentList[position], calendar, holder.itemView.context, onDelete, onEdit)
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is RecordViewHolder) {
-            holder.bind(records[position], calendar, holder.itemView.context, onDelete, onEdit)
+    override fun getItemCount(): Int = currentList.size
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecordModel>() {
+            override fun areItemsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import com.example.reflect.data.repository.AddStateRepositoryImpl
 import com.example.reflect.data.repository.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.GetProfileRepositoryImpl
 import com.example.reflect.data.repository.GetSecondTagsRepositoryImpl
+import com.example.reflect.data.repository.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.LoginRepositoryImpl
 import com.example.reflect.data.repository.RefreshRepositoryImpl
 import com.example.reflect.data.repository.RegistrationRepositoryImpl
@@ -12,6 +13,7 @@ import com.example.reflect.domain.repository.AddStateRepository
 import com.example.reflect.domain.repository.GetFirstTagsRepository
 import com.example.reflect.domain.repository.GetProfileRepository
 import com.example.reflect.domain.repository.GetSecondTagsRepository
+import com.example.reflect.domain.repository.GetStatesRepository
 import com.example.reflect.domain.repository.LoginRepository
 import com.example.reflect.domain.repository.RefreshRepository
 import com.example.reflect.domain.repository.RegistrationRepository
@@ -66,4 +68,10 @@ object RepositoryModule {
     fun provideAddStateRepository(
         remoteData: RetrofitRemoteData
     ): AddStateRepository = AddStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStatesRepository(
+        remoteData: RetrofitRemoteData
+    ): GetStatesRepository = GetStatesRepositoryImpl(remoteData)
 }

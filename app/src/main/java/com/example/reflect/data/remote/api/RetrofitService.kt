@@ -40,4 +40,7 @@ interface RetrofitService {
 
     @POST("${emotions}/states/")
     suspend fun addState(@Body addStateRequestDTO: AddStateRequestDTO): Response<AddStateResponseDTO>
+
+    @GET("${emotions}/states/")
+    suspend fun getStates(): Response<List<AddStateResponseDTO>>
 }

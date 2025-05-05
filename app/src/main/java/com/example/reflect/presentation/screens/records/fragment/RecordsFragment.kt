@@ -6,40 +6,55 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentRecordsBinding
 import com.example.reflect.presentation.adapters.RecordsListAdapter
+import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecordsFragment : Fragment() {
 
-    private val vm: ViewModelRecords by viewModels()
+    private val vm: ViewModelRecords by activityViewModels()
 
     private var _binding: FragmentRecordsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var recordsAdapter: RecordsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRecordsBinding.inflate(inflater, container, false)
-        vm.fetchRecords()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.recordsState.collect { state ->
+                    handleRecordsState(state)
+                }
+            }
+        }
+
         with (binding) {
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            fragmentRecordsRV.adapter = RecordsListAdapter(
-                vm.records.value!!,
+            recordsAdapter = RecordsListAdapter(
                 vm.calendar,
                 {
-                    // TODO: переделать на человеческий 
+                    // TODO: переделать на человеческий
                     vm::updateRecord
                     Toast.makeText(requireContext(), "Обновить запись", Toast.LENGTH_SHORT).show()
                 },
@@ -48,11 +63,30 @@ class RecordsFragment : Fragment() {
                     Toast.makeText(requireContext(), "Запись удалена", Toast.LENGTH_SHORT).show()
                 }
             )
+            fragmentRecordsRV.adapter = recordsAdapter
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleRecordsState(state: GetRecordsState) {
+        val context = requireContext()
+        when (state) {
+            is GetRecordsState.Loading -> {
+                ToastUtils.showLoadingToast(context)
+            }
+            is GetRecordsState.Success -> {
+                recordsAdapter.submitList(vm.records.value)
+            }
+            is GetRecordsState.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
+            is GetRecordsState.Idle -> {
+                Unit
+            }
+        }
     }
 }

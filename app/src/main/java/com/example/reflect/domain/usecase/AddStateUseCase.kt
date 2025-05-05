@@ -1,9 +1,7 @@
 package com.example.reflect.domain.usecase
 
-import android.util.Log
 import com.example.reflect.common.RetrofitException
 import com.example.reflect.common.RetrofitExceptionHandler
-import com.example.reflect.domain.model.TagModel
 import com.example.reflect.domain.repository.AddStateRepository
 import com.example.reflect.presentation.screens.addState.RecordState
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +20,6 @@ class AddStateUseCase @Inject constructor(
     ): Flow<RecordState> = flow {
         try {
             val recordModel = addStateRepository.addState(value, description, firstTagsIndices, secondTagsIndices)
-            Log.d("OkHttp adds", recordModel.toString())
             emit(RecordState.Success(recordModel))
         } catch (e: RetrofitException) {
             emit(RecordState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
