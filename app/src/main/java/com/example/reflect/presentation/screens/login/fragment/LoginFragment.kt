@@ -8,16 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
 import com.example.reflect.common.Utils
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentLoginBinding
+import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.login.LoginIntent
+import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -38,6 +46,14 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.state.collect { state ->
+                    handleLoginState(state)
+                }
+            }
+        }
 
         bindViewModelAndTextFields()
         setOnClickLogic()
@@ -71,12 +87,14 @@ class LoginFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             loginButton.setOnClickListener {
+                hideKeyboard()
                 if (areFieldsEmpty()) {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
-                    // TODO: добавить бизнес логики (когда Ромчик подоит корову)
-                    AccountPrefs.saveAuthState(requireContext(), true, "Надо получить токен от Ромы", userLogin = "Зареганый профиль")
-                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                    changeErrorStates(emailError = false, passwordError = false)
+                    lifecycleScope.launch {
+                        vm.userIntent.send(LoginIntent.LoginUser)
+                    }
                 }
             }
 
@@ -94,8 +112,7 @@ class LoginFragment : Fragment() {
             }
 
             loginLikeGuestButton.setOnClickListener {
-                AccountPrefs.saveAuthState(requireContext(), false, "Наверно ещё один токен от Ромчика", true, "Супер гость")
-                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                Toast.makeText(requireContext(), "Пока не работает", Toast.LENGTH_SHORT).show()
             }
 
             loginRegistrationButton.setOnClickListener {
@@ -125,5 +142,30 @@ class LoginFragment : Fragment() {
         binding.emailLoginEditTextField.clearFocus()
         binding.passwordLoginEditTextField.clearFocus()
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun handleLoginState(state: LoginState) {
+        val context = requireContext()
+        when (state) {
+            is LoginState.Loading -> {
+                ToastUtils.showLoadingToast(context)
+            }
+            is LoginState.SuccessLogin -> {
+                AccountPrefs.saveUserToken(context, state.loginModel.access, state.loginModel.refresh)
+            }
+            is LoginState.SuccessGetProfile -> {
+                AccountPrefs.saveAuthState(context, true)
+                AccountPrefs.saveUserModel(context, state.userModel)
+                ToastUtils.showWelcomeToast(context)
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+            is LoginState.Error -> {
+                changeErrorStates(errorMessage = state.message)
+                AccountPrefs.clearTokens(context)
+            }
+            is LoginState.Idle -> {
+                Unit
+            }
+        }
     }
 }

@@ -1,32 +1,32 @@
 package com.example.reflect.presentation.screens.addState.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.reflect.domain.model.TagModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class AddStateViewModel @Inject constructor() : ViewModel() {
+class ViewModelAddState @Inject constructor() : ViewModel() {
 
-    private var _emotionalState = MutableLiveData(5f)
-    val emotionalState: LiveData<Float> get() = _emotionalState
+    private var _emotionalState = MutableStateFlow(5f)
+    val emotionalState: StateFlow<Float> get() = _emotionalState
 
-    private var _firstTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
-    val firstTags: LiveData<MutableList<TagModel>> get() = _firstTags
+    private var _firstTags = MutableStateFlow<MutableList<TagModel>>(mutableListOf())
+    val firstTags: StateFlow<MutableList<TagModel>> get() = _firstTags
 
-    private var _secondTags = MutableLiveData<MutableList<TagModel>>(mutableListOf())
-    val secondTags: LiveData<MutableList<TagModel>> get() = _secondTags
+    private var _secondTags = MutableStateFlow<MutableList<TagModel>>(mutableListOf())
+    val secondTags: StateFlow<MutableList<TagModel>> get() = _secondTags
 
-    private var _emotionalDescription = MutableLiveData("")
-    val emotionalDescription: LiveData<String> get() = _emotionalDescription
+    private var _emotionalDescription = MutableStateFlow("")
+    val emotionalDescription: StateFlow<String> get() = _emotionalDescription
 
-    private var _selectedFirstTags = MutableLiveData<MutableList<Int>>(mutableListOf())
-    val selectedFirstTags: LiveData<MutableList<Int>> get() = _selectedFirstTags
+    private var _selectedFirstTags = MutableStateFlow<MutableList<Int>>(mutableListOf())
+    val selectedFirstTags: StateFlow<MutableList<Int>> get() = _selectedFirstTags
 
-    private var _selectedSecondTags = MutableLiveData<MutableList<Int>>(mutableListOf())
-    val selectedSecondTags: LiveData<MutableList<Int>> get() = _selectedSecondTags
+    private var _selectedSecondTags = MutableStateFlow<MutableList<Int>>(mutableListOf())
+    val selectedSecondTags: StateFlow<MutableList<Int>> get() = _selectedSecondTags
 
     fun fetchFirstTags() {
         // TODO: Сделать по-человечески

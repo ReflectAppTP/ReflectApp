@@ -1,38 +1,78 @@
 package com.example.reflect.presentation.screens.registration.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.usecase.RegistrationUseCase
+import com.example.reflect.presentation.screens.registration.RegistrationIntent
+import com.example.reflect.presentation.screens.registration.RegistrationState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelRegistration @Inject constructor() : ViewModel() {
-    // TODO: remove unused values 
-    private val _login = MutableLiveData("")
-    val login: LiveData<String> get() = _login
+class ViewModelRegistration @Inject constructor(
+    private val registrationUseCase: RegistrationUseCase
+) : ViewModel() {
 
-    private var _email = MutableLiveData("")
-    val email: LiveData<String> get() = _email
+    val userIntent = Channel<RegistrationIntent>(Channel.UNLIMITED)
+    private val _state = MutableStateFlow<RegistrationState>(RegistrationState.Idle)
+    val state: StateFlow<RegistrationState> = _state
 
-    private var _password = MutableLiveData("")
-    val password: LiveData<String> get() = _password
+    // TODO: remove unused values
+    private val _login = MutableStateFlow("")
+    val login: StateFlow<String> get() = _login
 
-    private val _passwordConfirmation = MutableLiveData("")
-    val passwordConfirmation: LiveData<String> get() = _passwordConfirmation
+    private var _email = MutableStateFlow("")
+    val email: StateFlow<String> get() = _email
 
-    private var _loginErrorState = MutableLiveData(false)
-    val loginErrorState: LiveData<Boolean> get() = _loginErrorState
+    private var _password = MutableStateFlow("")
+    val password: StateFlow<String> get() = _password
 
-    private var _emailErrorState = MutableLiveData(false)
-    val emailErrorState: LiveData<Boolean> get() = _emailErrorState
+    private val _passwordConfirmation = MutableStateFlow("")
+    val passwordConfirmation: StateFlow<String> get() = _passwordConfirmation
 
-    private var _passwordErrorState = MutableLiveData(false)
-    val passwordErrorState: LiveData<Boolean> get() = _passwordErrorState
+    private var _loginErrorState = MutableStateFlow(false)
+    val loginErrorState: StateFlow<Boolean> get() = _loginErrorState
 
-    private var _passwordConfirmationErrorState = MutableLiveData(false)
-    val passwordConfirmationErrorState: LiveData<Boolean> get() = _passwordConfirmationErrorState
+    private var _emailErrorState = MutableStateFlow(false)
+    val emailErrorState: StateFlow<Boolean> get() = _emailErrorState
 
+    private var _passwordErrorState = MutableStateFlow(false)
+    val passwordErrorState: StateFlow<Boolean> get() = _passwordErrorState
+
+    private var _passwordConfirmationErrorState = MutableStateFlow(false)
+    val passwordConfirmationErrorState: StateFlow<Boolean> get() = _passwordConfirmationErrorState
+
+    init {
+        handleIntent()
+    }
+
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect{
+                when (it) {
+                    is RegistrationIntent.RegisterUser -> register()
+                }
+            }
+        }
+    }
+
+    private fun register() {
+        _state.value = RegistrationState.Idle
+        viewModelScope.launch {
+            registrationUseCase(_login.value!!, _email.value!!, password.value!!)
+                .onEach { newState ->
+                    _state.value = newState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
 
     fun updateLogin(result: String) {
         _login.value = result

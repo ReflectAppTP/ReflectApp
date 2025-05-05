@@ -10,14 +10,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAddStateBottomSheetBinding
-import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
+import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
 
-    private val vm: AddStateViewModel by activityViewModels()
+    private val vm: ViewModelAddState by activityViewModels()
 
     private var _binding: FragmentAddStateBottomSheetBinding? = null
     private val binding get() = _binding!!

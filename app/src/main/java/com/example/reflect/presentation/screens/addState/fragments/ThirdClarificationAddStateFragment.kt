@@ -10,8 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
-import com.example.reflect.presentation.common.Utils
-import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
+import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ThirdClarificationAddStateFragment : Fragment() {
 
-    private val vm: AddStateViewModel by activityViewModels()
+    private val vm: ViewModelAddState by activityViewModels()
 
     private var _binding: FragmentThirdClarificationAddStateBinding? = null
     private val binding get() = _binding!!
@@ -72,7 +72,7 @@ class ThirdClarificationAddStateFragment : Fragment() {
     private fun addOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
-                Utils.toast(requireContext())
+                ToastUtils.showAddStateToast(requireContext())
                 // TODO Просто bruh!
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }

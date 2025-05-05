@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentSecondClarificationAddStateBinding
 import com.example.reflect.presentation.adapters.AddStateTagListAdapter
-import com.example.reflect.presentation.screens.addState.viewmodel.AddStateViewModel
+import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SecondClarificationAddStateFragment : Fragment() {
 
-    private val vm: AddStateViewModel by activityViewModels()
+    private val vm: ViewModelAddState by activityViewModels()
 
     private var _binding: FragmentSecondClarificationAddStateBinding? = null
     private val binding get() = _binding!!

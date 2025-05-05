@@ -5,14 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
-import com.example.reflect.common.ConsentPrefs
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
-import com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

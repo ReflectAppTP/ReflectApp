@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
-import com.example.reflect.common.AccountPrefs
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            fragmentProfileUserLogin.text = AccountPrefs.getUserLogin(requireContext())
+            fragmentProfileUserLogin.text = AccountPrefs.getUser(requireContext()).username
 
             if (AccountPrefs.isAuthorized(requireContext())) {
                 fragmentProfileLogoutButton.visibility = View.VISIBLE
@@ -40,6 +40,7 @@ class ProfileFragment : Fragment() {
                 fragmentProfileLogoutButton.visibility = View.GONE
                 fragmentProfileLoginButton.visibility = View.VISIBLE
                 fragmentProfileRegistrationButton.visibility = View.VISIBLE
+                fragmentProfileImageViewChangeIcon.visibility = View.GONE
             }
         }
 
