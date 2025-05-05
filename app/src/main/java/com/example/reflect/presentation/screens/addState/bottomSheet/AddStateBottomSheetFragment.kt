@@ -22,13 +22,6 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentAddStateBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.fetchFirstTags()
-        vm.fetchSecondTags()
-    }
-
     override fun onStart() {
         super.onStart()
         val dialog = dialog as? BottomSheetDialog ?: return

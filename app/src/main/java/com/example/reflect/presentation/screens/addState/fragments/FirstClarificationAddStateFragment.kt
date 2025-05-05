@@ -37,8 +37,8 @@ class FirstClarificationAddStateFragment : Fragment() {
         with (binding) {
             addStateFirstClarificationRV.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             addStateFirstClarificationRV.adapter = AddStateTagListAdapter(
-                vm.firstTags.value!!,
-                vm.selectedFirstTags.value!!,
+                vm.firstTags.value,
+                vm.selectedFirstTags.value,
                 vm::addTagIdToFirstList )
         }
 

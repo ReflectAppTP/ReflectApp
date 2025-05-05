@@ -11,4 +11,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun login(loginRequest: LoginRequestDTO) = retrofitService.login(loginRequest)
     suspend fun getUser() = retrofitService.getProfile()
     suspend fun getAccessToken(refreshToken: RefreshRequestDTO) = retrofitService.getAccessToken(refreshToken)
+    suspend fun getFirstTags() = retrofitService.getFirstTags()
 }
