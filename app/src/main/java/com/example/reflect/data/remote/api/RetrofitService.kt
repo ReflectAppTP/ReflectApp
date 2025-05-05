@@ -32,4 +32,7 @@ interface RetrofitService {
 
     @GET("${emotions}/tags")
     suspend fun getFirstTags(): Response<List<TagDTO>>
+
+    @GET("${emotions}/emotional-tags")
+    suspend fun getSecondTags(): Response<List<TagDTO>>
 }

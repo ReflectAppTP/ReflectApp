@@ -3,11 +3,13 @@ package com.example.reflect.data.di
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.data.repository.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.GetProfileRepositoryImpl
+import com.example.reflect.data.repository.GetSecondTagsRepositoryImpl
 import com.example.reflect.data.repository.LoginRepositoryImpl
 import com.example.reflect.data.repository.RefreshRepositoryImpl
 import com.example.reflect.data.repository.RegistrationRepositoryImpl
 import com.example.reflect.domain.repository.GetFirstTagsRepository
 import com.example.reflect.domain.repository.GetProfileRepository
+import com.example.reflect.domain.repository.GetSecondTagsRepository
 import com.example.reflect.domain.repository.LoginRepository
 import com.example.reflect.domain.repository.RefreshRepository
 import com.example.reflect.domain.repository.RegistrationRepository
@@ -50,4 +52,10 @@ object RepositoryModule {
     fun provideGetFirstTagsRepository(
         remoteData: RetrofitRemoteData
     ): GetFirstTagsRepository = GetFirstTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetSecondTagsRepository(
+        remoteData: RetrofitRemoteData
+    ): GetSecondTagsRepository = GetSecondTagsRepositoryImpl(remoteData)
 }

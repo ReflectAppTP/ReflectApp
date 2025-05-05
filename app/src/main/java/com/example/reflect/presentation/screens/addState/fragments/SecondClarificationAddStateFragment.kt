@@ -36,8 +36,8 @@ class SecondClarificationAddStateFragment : Fragment() {
         with (binding) {
             addStateSecondClarificationRV.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             addStateSecondClarificationRV.adapter = AddStateTagListAdapter(
-                vm.secondTags.value!!,
-                vm.selectedSecondTags.value!!,
+                vm.secondTags.value,
+                vm.selectedSecondTags.value,
                 vm::addTagIdToSecondList
             )
         }

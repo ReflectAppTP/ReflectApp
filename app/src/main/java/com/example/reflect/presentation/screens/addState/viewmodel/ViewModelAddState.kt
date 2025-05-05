@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.TagModel
 import com.example.reflect.domain.usecase.GetFirstTagsUseCase
+import com.example.reflect.domain.usecase.GetSecondTagsUseCase
 import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.TagsState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelAddState @Inject constructor(
-    private val getFirstTagsUseCase: GetFirstTagsUseCase
+    private val getFirstTagsUseCase: GetFirstTagsUseCase,
+    private val getSecondTagsUseCase: GetSecondTagsUseCase
 ) : ViewModel() {
 
     val userIntent = Channel<AddStateIntent>(Channel.UNLIMITED)
@@ -32,8 +34,8 @@ class ViewModelAddState @Inject constructor(
     private var _firstTags = MutableStateFlow<List<TagModel>>(mutableListOf())
     val firstTags: StateFlow<List<TagModel>> get() = _firstTags
 
-    private var _secondTags = MutableStateFlow<MutableList<TagModel>>(mutableListOf())
-    val secondTags: StateFlow<MutableList<TagModel>> get() = _secondTags
+    private var _secondTags = MutableStateFlow<List<TagModel>>(mutableListOf())
+    val secondTags: StateFlow<List<TagModel>> get() = _secondTags
 
     private var _emotionalDescription = MutableStateFlow("")
     val emotionalDescription: StateFlow<String> get() = _emotionalDescription
@@ -46,6 +48,7 @@ class ViewModelAddState @Inject constructor(
 
     init {
         fetchFirstTags()
+        fetchSecondTags()
 
         handleIntent()
     }
@@ -76,28 +79,16 @@ class ViewModelAddState @Inject constructor(
         }
     }
 
-    fun fetchSecondTags() {
-        // TODO: impl
-        _secondTags.value = mutableListOf(
-            TagModel(1, "Удивленно", "\uD83D\uDE2E"),
-            TagModel(2, "Спокойно", "\uD83D\uDE0C"),
-            TagModel(3, "Удовлетворенно", "\uD83D\uDE0A"),
-            TagModel(4, "Счастливо", "\uD83D\uDE01"),
-            TagModel(5, "Расслабленно", "\uD83D\uDE34"),
-            TagModel(6, "Безмятежно", "\uD83D\uDE07"),
-            TagModel(7, "Окрыленно", "\uD83E\uDD29"),
-            TagModel(8, "Воодушевленно", "\uD83D\uDE0D"),
-            TagModel(9, "Устало", "\uD83D\uDE13"),
-            TagModel(10, "Грустно", "\uD83D\uDE22"),
-            TagModel(11, "Напряженно", "\uD83D\uDE15"),
-            TagModel(12, "Депрессивно", "\uD83D\uDE2D"),
-            TagModel(13, "В стрессе", "\uD83E\uDD2C"),
-            TagModel(14, "Нервно", "\uD83E\uDD75"),
-            TagModel(15, "Расстроенно", "\uD83D\uDE1E"),
-            TagModel(16, "Скучно", "\uD83D\uDE14"),
-            TagModel(17, "Тревожно", "\uD83E\uDD2F"),
-            TagModel(18, "Отвратительно", "\uD83D\uDE21")
-        )
+    private fun fetchSecondTags() {
+        _secondTagsState.value = TagsState.Idle
+        viewModelScope.launch {
+            getSecondTagsUseCase().collect {
+                _secondTagsState.value = it
+                if (it is TagsState.Success) {
+                    _secondTags.value = it.tags
+                }
+            }
+        }
     }
 
     fun updateEmotionalState(state: Float) {

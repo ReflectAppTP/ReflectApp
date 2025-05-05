@@ -1,0 +1,29 @@
+package com.example.reflect.data.repository
+
+import com.example.reflect.common.RetrofitException
+import com.example.reflect.data.dto.TagDTO
+import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.domain.model.TagModel
+import com.example.reflect.domain.repository.GetSecondTagsRepository
+import javax.inject.Inject
+
+class GetSecondTagsRepositoryImpl @Inject constructor(
+    private val remoteData: RetrofitRemoteData
+) : GetSecondTagsRepository {
+    override suspend fun getSecondTags(): List<TagModel> {
+        val response = remoteData.getSecondTags()
+        if (response.isSuccessful) {
+            return response.body()!!.toDomain()
+        } else {
+            throw RetrofitException(response.code(), response.message(), response.errorBody())
+        }
+    }
+
+    private fun TagDTO.toDomain() = TagModel(
+        id = this.id,
+        name = this.name,
+        emoji = this.emoji
+    )
+
+    private fun List<TagDTO>.toDomain() = this.map { it.toDomain() }
+}
