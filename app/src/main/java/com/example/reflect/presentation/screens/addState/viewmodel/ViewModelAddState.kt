@@ -3,9 +3,11 @@ package com.example.reflect.presentation.screens.addState.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.TagModel
+import com.example.reflect.domain.usecase.AddStateUseCase
 import com.example.reflect.domain.usecase.GetFirstTagsUseCase
 import com.example.reflect.domain.usecase.GetSecondTagsUseCase
 import com.example.reflect.presentation.screens.addState.AddStateIntent
+import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.TagsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -18,10 +20,14 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelAddState @Inject constructor(
     private val getFirstTagsUseCase: GetFirstTagsUseCase,
-    private val getSecondTagsUseCase: GetSecondTagsUseCase
+    private val getSecondTagsUseCase: GetSecondTagsUseCase,
+    private val addStateUseCase: AddStateUseCase
 ) : ViewModel() {
 
     val userIntent = Channel<AddStateIntent>(Channel.UNLIMITED)
+    private val _recordState = MutableStateFlow<RecordState>(RecordState.Idle)
+    val recordState: StateFlow<RecordState> = _recordState
+
     private val _firstTagsState = MutableStateFlow<TagsState>(TagsState.Idle)
     val firstTagsState: StateFlow<TagsState> = _firstTagsState
 
@@ -64,7 +70,15 @@ class ViewModelAddState @Inject constructor(
     }
 
     private suspend fun addState() {
-        // TODO:
+        _recordState.value = RecordState.Idle
+        addStateUseCase(
+            _emotionalState.value.toInt(),
+            _emotionalDescription.value,
+            _selectedFirstTags.value,
+            _selectedSecondTags.value
+        ).collect { newState ->
+            _recordState.value = newState
+        }
     }
 
     private fun fetchFirstTags() {
@@ -108,9 +122,13 @@ class ViewModelAddState @Inject constructor(
     }
 
     fun clearData() {
+        _recordState.value = RecordState.Idle
+        _firstTagsState.value = TagsState.Idle
+        _secondTagsState.value = TagsState.Idle
+
         _emotionalState.value = 5f
-        _firstTags.value = mutableListOf()
-        _secondTags.value = mutableListOf()
+//        _firstTags.value = mutableListOf()
+//        _secondTags.value = mutableListOf()
         _emotionalDescription.value = ""
 
         _selectedFirstTags.value = mutableListOf()

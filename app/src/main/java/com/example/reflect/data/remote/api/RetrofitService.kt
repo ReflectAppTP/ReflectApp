@@ -1,5 +1,7 @@
 package com.example.reflect.data.remote.api
 
+import com.example.reflect.data.dto.AddStateRequestDTO
+import com.example.reflect.data.dto.AddStateResponseDTO
 import com.example.reflect.data.dto.TagDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.LoginResponseDTO
@@ -35,4 +37,7 @@ interface RetrofitService {
 
     @GET("${emotions}/emotional-tags")
     suspend fun getSecondTags(): Response<List<TagDTO>>
+
+    @POST("${emotions}/states/")
+    suspend fun addState(@Body addStateRequestDTO: AddStateRequestDTO): Response<AddStateResponseDTO>
 }

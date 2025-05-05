@@ -8,5 +8,5 @@ data class RecordModel(
     val firstTagList: List<TagModel>?,
     val secondTagList: List<TagModel>?,
     val description: String?,
-    val creationDate: Date
+    val creationDate: Date?
     )

@@ -7,14 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.reflect.databinding.FragmentThirdClarificationAddStateBinding
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.addState.AddStateIntent
+import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ThirdClarificationAddStateFragment : Fragment() {
@@ -34,6 +41,14 @@ class ThirdClarificationAddStateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.recordState.collect { state ->
+                    handleRecordState(state)
+                }
+            }
+        }
 
         bindViewModelAndTextField()
         addOnClickListeners()
@@ -72,15 +87,35 @@ class ThirdClarificationAddStateFragment : Fragment() {
     private fun addOnClickListeners() {
         with (binding) {
             addStateThirdClarificationNextButton.setOnClickListener {
-                ToastUtils.showAddStateToast(requireContext())
-                // TODO Просто bruh!
-                (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+                lifecycleScope.launch {
+                    vm.userIntent.send(AddStateIntent.AddState)
+                }
             }
 
             addStateThirdClarificationLayout.setOnClickListener { clickedView ->
                 if (clickedView !is TextInputEditText) {
                     hideKeyboard()
                 }
+            }
+        }
+    }
+
+    private fun handleRecordState(state: RecordState) {
+        val context = requireContext()
+        when (state) {
+            is RecordState.Loading -> {
+                ToastUtils.showLoadingToast(context)
+            }
+            is RecordState.Success -> {
+                ToastUtils.showAddStateToast(context)
+                (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+            }
+            is RecordState.Error -> {
+                // TODO: Обработать ошибку, возможно тостом
+                Toast.makeText(context, "Произошла ошибка", Toast.LENGTH_SHORT).show()
+            }
+            is RecordState.Idle -> {
+                Unit
             }
         }
     }
