@@ -11,6 +11,7 @@ import com.example.reflect.data.dto.UserDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -49,4 +50,7 @@ interface RetrofitService {
 
     @PATCH("${emotions}/states/{id}/")
     suspend fun editState(@Path("id") id: Int, @Body stateRequestDTO: StateRequestDTO): Response<StateResponseDTO>
+
+    @DELETE("${emotions}/states/{id}")
+    suspend fun deleteState(@Path("id") id: Int): Response<Unit>
 }

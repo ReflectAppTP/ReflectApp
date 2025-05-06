@@ -2,6 +2,7 @@ package com.example.reflect.data.di
 
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.data.repository.AddStateRepositoryImpl
+import com.example.reflect.data.repository.DeleteStateRepositoryImpl
 import com.example.reflect.data.repository.EditStateRepositoryImpl
 import com.example.reflect.data.repository.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.GetProfileRepositoryImpl
@@ -11,6 +12,7 @@ import com.example.reflect.data.repository.LoginRepositoryImpl
 import com.example.reflect.data.repository.RefreshRepositoryImpl
 import com.example.reflect.data.repository.RegistrationRepositoryImpl
 import com.example.reflect.domain.repository.AddStateRepository
+import com.example.reflect.domain.repository.DeleteStateRepository
 import com.example.reflect.domain.repository.EditStateRepository
 import com.example.reflect.domain.repository.GetFirstTagsRepository
 import com.example.reflect.domain.repository.GetProfileRepository
@@ -82,4 +84,10 @@ object RepositoryModule {
     fun provideEditStateRepository(
         remoteData: RetrofitRemoteData
     ): EditStateRepository = EditStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideDeleteStateRepository(
+        remoteData: RetrofitRemoteData
+    ): DeleteStateRepository = DeleteStateRepositoryImpl(remoteData)
 }

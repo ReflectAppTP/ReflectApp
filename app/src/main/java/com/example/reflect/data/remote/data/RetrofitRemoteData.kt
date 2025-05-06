@@ -17,4 +17,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun addState(stateRequestDTO: StateRequestDTO) = retrofitService.addState(stateRequestDTO)
     suspend fun getStates(date: String) = retrofitService.getStates(date)
     suspend fun editState(id: Int, stateRequestDTO: StateRequestDTO) = retrofitService.editState(id, stateRequestDTO)
+    suspend fun deleteState(id: Int) = retrofitService.deleteState(id)
 }

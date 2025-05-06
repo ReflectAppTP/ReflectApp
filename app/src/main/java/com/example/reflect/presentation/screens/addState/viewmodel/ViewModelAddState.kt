@@ -104,10 +104,10 @@ class ViewModelAddState @Inject constructor(
         _firstTagsState.value = TagsState.Idle
         viewModelScope.launch {
             getFirstTagsUseCase().collect {
-                _firstTagsState.value = it
                 if (it is TagsState.Success) {
                     _firstTags.value = it.tags
                 }
+                _firstTagsState.value = it
             }
         }
     }

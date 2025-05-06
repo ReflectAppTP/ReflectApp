@@ -16,6 +16,8 @@ import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
 import com.example.reflect.presentation.adapters.RecordsListAdapter
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.screens.addState.RecordState
+import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +50,10 @@ class RecordsFragment : Fragment() {
                 vm.recordsState.collect { state ->
                     handleRecordsState(state)
                 }
+
+                vm.deleteState.collect { state ->
+                    handleDeleteState(state)
+                }
             }
         }
 
@@ -63,8 +69,9 @@ class RecordsFragment : Fragment() {
                     findNavController().navigate(R.id.addStateBottomSheetFragment, args)
                 },
                 onDelete = {
-                    vm.deleteRecord(id)
-                    Toast.makeText(requireContext(), "Запись удалена", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        vm.userIntent.send(DeleteStateIntent.DeleteRecord(id))
+                    }
                 }
             )
             fragmentRecordsRV.adapter = recordsAdapter
@@ -89,6 +96,24 @@ class RecordsFragment : Fragment() {
                 Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
             }
             is GetRecordsState.Idle -> {
+                Unit
+            }
+        }
+    }
+
+    private fun handleDeleteState(state: RecordState) {
+        val context = requireContext()
+        when (state) {
+            is RecordState.Loading -> {
+                ToastUtils.showLoadingToast(context)
+            }
+            is RecordState.Success -> {
+                Toast.makeText(context, "Запись успешно удалена", Toast.LENGTH_SHORT).show()
+            }
+            is RecordState.Error -> {
+                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+            }
+            is RecordState.Idle -> {
                 Unit
             }
         }
