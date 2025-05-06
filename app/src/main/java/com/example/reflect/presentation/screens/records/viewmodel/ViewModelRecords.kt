@@ -63,7 +63,7 @@ class ViewModelRecords @Inject constructor(
         viewModelScope.launch {
             getStatesUseCase(dateFormat.format(_selectedDate.value)).collect { newState ->
                 if (newState is GetRecordsState.Success) {
-                    _records.value = newState.records
+                    _records.value = newState.records.sortedBy { it.id }
                 }
                 _recordsState.value = newState
             }
