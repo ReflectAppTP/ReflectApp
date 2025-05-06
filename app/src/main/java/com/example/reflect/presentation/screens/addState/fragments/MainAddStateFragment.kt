@@ -111,7 +111,7 @@ class MainAddStateFragment : Fragment() {
             }
             is RecordState.Success -> {
                 if (vm.id.value != null) {
-                    Toast.makeText(context, "Запись успешно изменена", Toast.LENGTH_SHORT).show()
+                    ToastUtils.showEditStateToast(context)
                 } else {
                     ToastUtils.showAddStateToast(context)
                 }
@@ -119,8 +119,7 @@ class MainAddStateFragment : Fragment() {
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
             is RecordState.Error -> {
-                // TODO: Обработать ошибку, возможно тостом
-                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                ToastUtils.showErrorToast(context)
             }
             is RecordState.Idle -> {
                 Unit

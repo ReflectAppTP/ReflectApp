@@ -105,4 +105,7 @@
     <string name="welcomeToastMessage">Добро пожаловать!</string>
     <string name="successfulRegistrationToastMessage">Регистрация прошла успешно</string>
     <string name="loadingToastMessage">Пожалуйста, подождите</string>
+    <string name="editStateToastMessage">Запись успешно обновлена</string>
+    <string name="deleteStateToastMessage">Запись успешно удалена</string>
+    <string name="errorToastMessage">Произошла ошибка</string>
 </resources>

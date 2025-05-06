@@ -108,10 +108,10 @@ class RecordsFragment : Fragment() {
                 ToastUtils.showLoadingToast(context)
             }
             is RecordState.Success -> {
-                Toast.makeText(context, "Запись успешно удалена", Toast.LENGTH_SHORT).show()
+                ToastUtils.showDeleteStateToast(context)
             }
             is RecordState.Error -> {
-                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                ToastUtils.showErrorToast(context)
             }
             is RecordState.Idle -> {
                 Unit

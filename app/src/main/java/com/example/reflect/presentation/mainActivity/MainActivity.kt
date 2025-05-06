@@ -13,6 +13,7 @@ import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
+import com.example.reflect.presentation.common.ToastUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Timer
@@ -70,8 +71,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             is GetProfileState.Error -> {
-                // TODO: Какой нибудь тост сделать
-                Toast.makeText(this, "Какая то ошибка на тосте", Toast.LENGTH_SHORT).show()
+                ToastUtils.showErrorToast(this)
                 splashScreen.setKeepOnScreenCondition { false }
             }
             is GetProfileState.RefreshError -> {

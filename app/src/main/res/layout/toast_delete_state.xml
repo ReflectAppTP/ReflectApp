@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toastContainer"
+    app:cardCornerRadius="@dimen/toastCardViewCornerRadius_4dp"
+    android:background="@color/primary"
+    app:cardBackgroundColor="@color/primary"
+    app:strokeColor="@color/primary"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/toastMessage"
+        style="@style/TextAppearance.Material3.BodyMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteStateToastMessage"
+        android:textColor="@color/inverseOnSurface"
+        android:layout_marginVertical="@dimen/toastMessageMarginVertical_4dp"
+        android:layout_marginHorizontal="@dimen/toastMessageMarginHorizontal_8dp" />
+
+</com.google.android.material.card.MaterialCardView>
