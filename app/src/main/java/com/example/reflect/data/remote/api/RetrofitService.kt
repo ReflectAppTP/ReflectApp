@@ -51,6 +51,6 @@ interface RetrofitService {
     @PATCH("${emotions}/states/{id}/")
     suspend fun editState(@Path("id") id: Int, @Body stateRequestDTO: StateRequestDTO): Response<StateResponseDTO>
 
-    @DELETE("${emotions}/states/{id}")
+    @DELETE("${emotions}/states/{id}/")
     suspend fun deleteState(@Path("id") id: Int): Response<Unit>
 }

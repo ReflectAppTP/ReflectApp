@@ -1,6 +1,7 @@
 package com.example.reflect.presentation.screens.records.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,12 +46,17 @@ class RecordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO: почему тут надо в разных scope 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.recordsState.collect { state ->
                     handleRecordsState(state)
                 }
+            }
+        }
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.deleteState.collect { state ->
                     handleDeleteState(state)
                 }
@@ -68,7 +74,7 @@ class RecordsFragment : Fragment() {
                     }
                     findNavController().navigate(R.id.addStateBottomSheetFragment, args)
                 },
-                onDelete = {
+                onDelete = { id ->
                     lifecycleScope.launch {
                         vm.userIntent.send(DeleteStateIntent.DeleteRecord(id))
                     }
@@ -108,6 +114,7 @@ class RecordsFragment : Fragment() {
                 ToastUtils.showLoadingToast(context)
             }
             is RecordState.Success -> {
+                vm.fetchRecords()
                 ToastUtils.showDeleteStateToast(context)
             }
             is RecordState.Error -> {
