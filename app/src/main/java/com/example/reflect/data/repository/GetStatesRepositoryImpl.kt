@@ -1,7 +1,7 @@
 package com.example.reflect.data.repository
 
 import com.example.reflect.common.RetrofitException
-import com.example.reflect.data.dto.AddStateResponseDTO
+import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.domain.repository.GetStatesRepository
@@ -22,7 +22,7 @@ class GetStatesRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun AddStateResponseDTO.toDomain() = RecordModel(
+    private fun StateResponseDTO.toDomain() = RecordModel(
         id = this.id,
         value = this.value,
         firstTagList = this.firstTags,
@@ -32,5 +32,5 @@ class GetStatesRepositoryImpl @Inject constructor(
             it.timeZone = TimeZone.getTimeZone("UTC")
         }.parse(this.createdAt)
     )
-    private fun List<AddStateResponseDTO>.toDomain() = this.map { it.toDomain() }
+    private fun List<StateResponseDTO>.toDomain() = this.map { it.toDomain() }
 }

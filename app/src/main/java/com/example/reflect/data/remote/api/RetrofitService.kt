@@ -1,7 +1,7 @@
 package com.example.reflect.data.remote.api
 
-import com.example.reflect.data.dto.AddStateRequestDTO
-import com.example.reflect.data.dto.AddStateResponseDTO
+import com.example.reflect.data.dto.StateRequestDTO
+import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.dto.TagDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.LoginResponseDTO
@@ -12,7 +12,9 @@ import com.example.reflect.data.dto.login.RefreshRequestDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val authReflect = "api/authReflect"
@@ -40,8 +42,11 @@ interface RetrofitService {
     suspend fun getSecondTags(): Response<List<TagDTO>>
 
     @POST("${emotions}/states/")
-    suspend fun addState(@Body addStateRequestDTO: AddStateRequestDTO): Response<AddStateResponseDTO>
+    suspend fun addState(@Body stateRequestDTO: StateRequestDTO): Response<StateResponseDTO>
 
     @GET("${emotions}/states/")
-    suspend fun getStates(@Query("date") date: String): Response<List<AddStateResponseDTO>>
+    suspend fun getStates(@Query("date") date: String): Response<List<StateResponseDTO>>
+
+    @PATCH("${emotions}/states/{id}/")
+    suspend fun editState(@Path("id") id: Int, @Body stateRequestDTO: StateRequestDTO): Response<StateResponseDTO>
 }

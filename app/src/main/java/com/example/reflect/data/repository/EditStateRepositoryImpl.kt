@@ -5,24 +5,17 @@ import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.domain.model.RecordModel
-import com.example.reflect.domain.repository.AddStateRepository
+import com.example.reflect.domain.repository.EditStateRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 import javax.inject.Inject
 
-class AddStateRepositoryImpl @Inject constructor(
+class EditStateRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
-): AddStateRepository {
-    override suspend fun addState(
-        value: Int,
-        description: String,
-        firstTagsIndices: List<Int>,
-        secondTagsIndices: List<Int>
-    ): RecordModel {
-        val response = remoteData.addState(
-            StateRequestDTO(value, description, firstTagsIndices, secondTagsIndices)
-        )
+): EditStateRepository {
+    override suspend fun editState(id: Int, value: Int, description: String, firstTagsIndices: List<Int>, secondTagsIndices: List<Int>): RecordModel {
+        val response = remoteData.editState(id, StateRequestDTO(value, description, firstTagsIndices, secondTagsIndices))
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {

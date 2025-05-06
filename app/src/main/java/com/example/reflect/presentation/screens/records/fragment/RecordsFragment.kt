@@ -10,7 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
 import com.example.reflect.presentation.adapters.RecordsListAdapter
 import com.example.reflect.presentation.common.ToastUtils
@@ -53,13 +55,15 @@ class RecordsFragment : Fragment() {
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recordsAdapter = RecordsListAdapter(
                 vm.calendar,
-                {
-                    // TODO: переделать на человеческий
-                    vm::updateRecord
-                    Toast.makeText(requireContext(), "Обновить запись", Toast.LENGTH_SHORT).show()
+                onEdit = { id, model ->
+                    val args = Bundle().apply {
+                        putInt("id", id)
+                        putParcelable("recordModel", model)
+                    }
+                    findNavController().navigate(R.id.addStateBottomSheetFragment, args)
                 },
-                {
-                    vm::deleteRecord
+                onDelete = {
+                    vm.deleteRecord(id)
                     Toast.makeText(requireContext(), "Запись удалена", Toast.LENGTH_SHORT).show()
                 }
             )

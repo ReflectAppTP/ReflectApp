@@ -18,7 +18,7 @@ import java.util.Locale
 
 class RecordsListAdapter(
     private val calendar: Calendar,
-    private val onEdit: (Int) -> Unit,
+    private val onEdit: (Int, RecordModel) -> Unit,
     private val onDelete: (Int) -> Unit
 ) : ListAdapter<RecordModel, RecordsListAdapter.RecordViewHolder>(DIFF_CALLBACK){
 
@@ -26,7 +26,7 @@ class RecordsListAdapter(
         private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(model: RecordModel, calendar: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int) -> Unit) {
+        fun bind(model: RecordModel, calendar: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int, RecordModel) -> Unit) {
             with (binding) {
                 val today = Calendar.getInstance()
                 calendar.time = model.creationDate
@@ -110,7 +110,7 @@ class RecordsListAdapter(
                     popupMenu.setOnMenuItemClickListener {
                         when(it.itemId) {
                             R.id.menuEdit -> {
-                                onEdit(model.id)
+                                onEdit(model.id, model)
                                 true
                             }
                             R.id.menuDelete -> {

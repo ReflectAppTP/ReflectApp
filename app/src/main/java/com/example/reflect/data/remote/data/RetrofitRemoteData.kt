@@ -1,6 +1,6 @@
 package com.example.reflect.data.remote.data
 
-import com.example.reflect.data.dto.AddStateRequestDTO
+import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
@@ -14,6 +14,7 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun getAccessToken(refreshToken: RefreshRequestDTO) = retrofitService.getAccessToken(refreshToken)
     suspend fun getFirstTags() = retrofitService.getFirstTags()
     suspend fun getSecondTags() = retrofitService.getSecondTags()
-    suspend fun addState(addStateRequestDTO: AddStateRequestDTO) = retrofitService.addState(addStateRequestDTO)
+    suspend fun addState(stateRequestDTO: StateRequestDTO) = retrofitService.addState(stateRequestDTO)
     suspend fun getStates(date: String) = retrofitService.getStates(date)
+    suspend fun editState(id: Int, stateRequestDTO: StateRequestDTO) = retrofitService.editState(id, stateRequestDTO)
 }

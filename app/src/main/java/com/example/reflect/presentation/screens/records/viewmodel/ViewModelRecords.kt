@@ -52,10 +52,6 @@ class ViewModelRecords @Inject constructor(
         _selectedDate.value = date
         fetchRecords()
     }
-    
-    fun updateRecord(id: Int) {
-        // TODO: impl 
-    }
 
     fun deleteRecord(id: Int) {
         // TODO: impl

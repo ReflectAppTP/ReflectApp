@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.TagModel
 import com.example.reflect.domain.usecase.AddStateUseCase
+import com.example.reflect.domain.usecase.EditStateUseCase
 import com.example.reflect.domain.usecase.GetFirstTagsUseCase
 import com.example.reflect.domain.usecase.GetSecondTagsUseCase
 import com.example.reflect.presentation.screens.addState.AddStateIntent
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class ViewModelAddState @Inject constructor(
     private val getFirstTagsUseCase: GetFirstTagsUseCase,
     private val getSecondTagsUseCase: GetSecondTagsUseCase,
-    private val addStateUseCase: AddStateUseCase
+    private val addStateUseCase: AddStateUseCase,
+    private val editStateUseCase: EditStateUseCase
 ) : ViewModel() {
 
     val userIntent = Channel<AddStateIntent>(Channel.UNLIMITED)
@@ -52,6 +54,9 @@ class ViewModelAddState @Inject constructor(
     private var _selectedSecondTags = MutableStateFlow<MutableList<Int>>(mutableListOf())
     val selectedSecondTags: StateFlow<MutableList<Int>> get() = _selectedSecondTags
 
+    private var _id = MutableStateFlow<Int?>(null)
+    val id: StateFlow<Int?> get() = _id
+
     init {
         fetchFirstTags()
         fetchSecondTags()
@@ -64,6 +69,7 @@ class ViewModelAddState @Inject constructor(
             userIntent.consumeAsFlow().collect {
                 when (it) {
                     is AddStateIntent.AddState -> addState()
+                    is AddStateIntent.EditState -> editState()
                 }
             }
         }
@@ -72,6 +78,19 @@ class ViewModelAddState @Inject constructor(
     private suspend fun addState() {
         _recordState.value = RecordState.Idle
         addStateUseCase(
+            _emotionalState.value.toInt(),
+            _emotionalDescription.value,
+            _selectedFirstTags.value,
+            _selectedSecondTags.value
+        ).collect { newState ->
+            _recordState.value = newState
+        }
+    }
+
+    private suspend fun editState() {
+        _recordState.value = RecordState.Idle
+        editStateUseCase(
+            _id.value!!,
             _emotionalState.value.toInt(),
             _emotionalDescription.value,
             _selectedFirstTags.value,
@@ -113,6 +132,18 @@ class ViewModelAddState @Inject constructor(
         _emotionalDescription.value = description
     }
 
+    fun updateFirstTagIdsList(ids: MutableList<Int>) {
+        _selectedFirstTags.value = ids
+    }
+
+    fun updateSecondTagIdsList(ids: MutableList<Int>) {
+        _selectedSecondTags.value = ids
+    }
+
+    fun updateId(id: Int?) {
+        _id.value = id
+    }
+
     fun addTagIdToFirstList(id: Int) {
         _selectedFirstTags.value.add(id)
     }
@@ -130,6 +161,7 @@ class ViewModelAddState @Inject constructor(
 //        _firstTags.value = mutableListOf()
 //        _secondTags.value = mutableListOf()
         _emotionalDescription.value = ""
+        _id.value = null
 
         _selectedFirstTags.value = mutableListOf()
         _selectedSecondTags.value = mutableListOf()

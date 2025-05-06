@@ -17,6 +17,7 @@ import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
+import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ import kotlinx.coroutines.launch
 class MainAddStateFragment : Fragment() {
 
     private val vm: ViewModelAddState by activityViewModels()
+    private val recordsvm: ViewModelRecords by activityViewModels()
 
     private var _binding: FragmentMainAddStateBinding? = null
     private val binding get() = _binding!!
@@ -87,7 +89,11 @@ class MainAddStateFragment : Fragment() {
         with (binding) {
             addStateSaveButton.setOnClickListener {
                 lifecycleScope.launch {
-                    vm.userIntent.send(AddStateIntent.AddState)
+                    if (vm.id.value != null) {
+                        vm.userIntent.send(AddStateIntent.EditState)
+                    } else {
+                        vm.userIntent.send(AddStateIntent.AddState)
+                    }
                 }
             }
 
@@ -104,7 +110,12 @@ class MainAddStateFragment : Fragment() {
                 ToastUtils.showLoadingToast(context)
             }
             is RecordState.Success -> {
-                ToastUtils.showAddStateToast(context)
+                if (vm.id.value != null) {
+                    Toast.makeText(context, "Запись успешно изменена", Toast.LENGTH_SHORT).show()
+                } else {
+                    ToastUtils.showAddStateToast(context)
+                }
+                recordsvm.fetchRecords()
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
             is RecordState.Error -> {
