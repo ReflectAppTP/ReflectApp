@@ -103,6 +103,7 @@
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
 
+    <!-- ToastMessages -->
     <string name="addStateToastMessage">Запись успешно создана</string>
     <string name="welcomeToastMessage">Добро пожаловать!</string>
     <string name="successfulRegistrationToastMessage">Регистрация прошла успешно</string>
@@ -110,4 +111,11 @@
     <string name="editStateToastMessage">Запись успешно обновлена</string>
     <string name="deleteStateToastMessage">Запись успешно удалена</string>
     <string name="errorToastMessage">Произошла ошибка</string>
+
+    <!-- DateUtils -->
+    <string name="creationDate">%1$s %2$s %3$s</string>
+    <string name="creationDateIn">в</string>
+    <string name="creationDateToday">Сегодня</string>
+    <string name="creationDateYesterday">Вчера</string>
+    <string name="creationDateTomorrow">Завтра</string>
 </resources>

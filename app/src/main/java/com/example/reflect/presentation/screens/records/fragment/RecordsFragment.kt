@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
 import com.example.reflect.presentation.adapters.RecordsListAdapter
+import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
@@ -23,6 +24,8 @@ import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Calendar
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecordsFragment : Fragment() {
@@ -64,7 +67,7 @@ class RecordsFragment : Fragment() {
         }
 
         with (binding) {
-            fragmentRecordsDateTV.text = vm.calendar.time.toString()
+            fragmentRecordsDateTV.text = DateUtils.dateToString(today = Calendar.getInstance(), currentDate = vm.calendar)
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recordsAdapter = RecordsListAdapter(
                 vm.calendar,
