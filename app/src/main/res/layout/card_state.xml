@@ -61,10 +61,8 @@
             android:layout_marginStart="@dimen/cardStateMoodMarginStart_4dp"
             android:layout_marginTop="4dp"
             android:text="@string/cardStateMood"
-            tools:text="sdfgsgsdfgsdfgssdfsdfdfgdfgsdfsg"
             android:textColor="@color/onSurface"
             app:layout_constraintEnd_toStartOf="@+id/cardStateChangeDots"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/cardStateChangeMoodTV"
             app:layout_constraintTop_toTopOf="parent" />
 

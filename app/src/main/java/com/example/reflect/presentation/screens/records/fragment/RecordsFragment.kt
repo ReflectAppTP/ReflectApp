@@ -64,6 +64,7 @@ class RecordsFragment : Fragment() {
         }
 
         with (binding) {
+            fragmentRecordsDateTV.text = vm.calendar.time.toString()
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recordsAdapter = RecordsListAdapter(
                 vm.calendar,
