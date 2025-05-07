@@ -1,5 +1,6 @@
 package com.example.reflect.presentation.screens.records.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
@@ -38,7 +39,7 @@ class ViewModelRecords @Inject constructor(
     private var _deleteState = MutableStateFlow<RecordState>(RecordState.Idle)
     val deleteState: StateFlow<RecordState> = _deleteState
 
-    private var _selectedDate = MutableStateFlow(currentCalendar.time)
+    private var _selectedDate = MutableStateFlow(mutableCalendar.time)
     val selectedDate: StateFlow<Date> get() = _selectedDate
 
     private var _records = MutableStateFlow(emptyList<RecordModel>())
@@ -82,6 +83,13 @@ class ViewModelRecords @Inject constructor(
             set(Calendar.DAY_OF_MONTH, day)
         }
         _selectedDate.value = mutableCalendar.time
+        _selectedDateText.value = DateUtils.dateToString(today = currentCalendar, currentDate = mutableCalendar)
+        fetchRecords()
+    }
+
+    fun updateSelectedDate() {
+        _selectedDate.value = mutableCalendar.time
+        Log.d("Ok", "Сейча ${currentCalendar.get(Calendar.DAY_OF_MONTH)}, а выбранно ${mutableCalendar.get(Calendar.DAY_OF_MONTH)}")
         _selectedDateText.value = DateUtils.dateToString(today = currentCalendar, currentDate = mutableCalendar)
         fetchRecords()
     }

@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
+import android.view.animation.AnimationUtils
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -47,6 +52,24 @@ class RecordsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val context = requireContext()
+
+        // TODO: почему тут надо в разных scope
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.recordsState.collect { state ->
+                    handleRecordsState(state)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.deleteState.collect { state ->
+                    handleDeleteState(state)
+                }
+            }
+        }
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setSelection(vm.mutableCalendar.timeInMillis)
@@ -65,32 +88,62 @@ class RecordsFragment : Fragment() {
             )
         }
 
-        // TODO: почему тут надо в разных scope 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.recordsState.collect { state ->
-                    handleRecordsState(state)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.deleteState.collect { state ->
-                    handleDeleteState(state)
-                }
-            }
-        }
-
         with (binding) {
             lifecycleScope.launch {
                 vm.selectedDateText.collect { date ->
                     fragmentRecordsDateTV.text = date
                 }
             }
+
             fragmentRecordsDateTV.setOnClickListener {
                 datePicker.show(parentFragmentManager, "datePicker")
             }
+
+            // Анимация для переключения даты по нажатию стрелочек
+            val animationDuration = 131L
+            val sir = AnimationUtils.loadAnimation(context, R.anim.slide_in_right)
+            sir.duration = animationDuration
+            val sor = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right)
+            sor.duration = animationDuration
+            val sol = AnimationUtils.loadAnimation(context, R.anim.slide_out_left)
+            sol.duration = animationDuration
+            val sil = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
+            sil.duration = animationDuration
+
+            sol.setAnimationListener(object: AnimationListener {
+                override fun onAnimationStart(p0: Animation?) {
+
+                }
+                override fun onAnimationEnd(p0: Animation?) {
+                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, -1)
+                    vm.updateSelectedDate()
+                    fragmentRecordsDateTV.startAnimation(sir)
+                }
+                override fun onAnimationRepeat(p0: Animation?) {
+                }
+            })
+
+            sor.setAnimationListener(object: AnimationListener {
+                override fun onAnimationStart(p0: Animation?) {
+
+                }
+                override fun onAnimationEnd(p0: Animation?) {
+                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                    vm.updateSelectedDate()
+                    fragmentRecordsDateTV.startAnimation(sil)
+                }
+                override fun onAnimationRepeat(p0: Animation?) {
+
+                }
+            })
+            fragmentRecordsICChevronLeft.setOnClickListener {
+                fragmentRecordsDateTV.startAnimation(sol)
+            }
+
+            fragmentRecordsICChevronRight.setOnClickListener {
+                fragmentRecordsDateTV.startAnimation(sor)
+            }
+
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recordsAdapter = RecordsListAdapter(
                 vm.currentCalendar,

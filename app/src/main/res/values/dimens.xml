@@ -123,9 +123,10 @@
     <dimen name="toastMessageMarginVertical_4dp">4dp</dimen>
     <dimen name="toastMessageMarginHorizontal_8dp">8dp</dimen>
 
+    <!-- RecordsFragment -->
     <dimen name="fragmentRecordsDateTVMarginTop_7dp">7dp</dimen>
     <dimen name="fragmentRecordsRVMarginBottom_80dp">80dp</dimen>
-    <dimen name="fragmentRecordsRVMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentRecordsRVMarginTop_12dp">12dp</dimen>
 
     <!-- ProfileFragment -->
     <dimen name="fragmentProfileTitleMarginTop_10dp">10dp</dimen>

@@ -26,12 +26,12 @@ class RecordsListAdapter(
         private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(model: RecordModel, calendar: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int, RecordModel) -> Unit) {
+        fun bind(model: RecordModel, today: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int, RecordModel) -> Unit) {
             with (binding) {
-                val today = Calendar.getInstance()
-                calendar.time = model.creationDate!!
+                val currentDate = Calendar.getInstance()
+                currentDate.time = model.creationDate!!
 
-                cardStateCreationDate.text = DateUtils.creationDateToString(today = today, currentDate = calendar)
+                cardStateCreationDate.text = DateUtils.creationDateToString(today = today, currentDate = currentDate)
 
                 when(model.value) {
                     in 0..1 -> {
