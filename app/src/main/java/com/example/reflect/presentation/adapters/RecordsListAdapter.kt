@@ -36,23 +36,23 @@ class RecordsListAdapter(
                 when(model.value) {
                     in 0..1 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_1)
-                        cardStateChangeMoodTV.text = "Ужасное"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Ужасное")
                     }
                     in 2..3 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_2)
-                        cardStateChangeMoodTV.text = "Плохое"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Плохое")
                     }
                     in 4..6 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_3)
-                        cardStateChangeMoodTV.text = "Нормальное"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Нормально")
                     }
                     in 7..8 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_4)
-                        cardStateChangeMoodTV.text = "Хорошее"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Хорошее")
                     }
                     in 9..10 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_5)
-                        cardStateChangeMoodTV.text = "Потрясающее"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Отличное")
                     }
                     else -> throw IllegalStateException("Как так вообще получилось, что значение от 0 до 10 больше 10?!")
                 }

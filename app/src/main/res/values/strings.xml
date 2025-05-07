@@ -99,7 +99,7 @@
     <string name="dialogLogoutLogoutButton">Выйти</string>
 
     <!-- StateCard -->
-    <string name="cardStateMood">настроение</string>
+    <string name="cardStateMood">%1$s настроение</string>
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
 
