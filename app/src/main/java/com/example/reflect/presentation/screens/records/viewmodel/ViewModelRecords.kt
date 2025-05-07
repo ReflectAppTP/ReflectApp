@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.domain.usecase.DeleteStateUseCase
 import com.example.reflect.domain.usecase.GetStatesUseCase
+import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
@@ -26,7 +27,8 @@ class ViewModelRecords @Inject constructor(
     private val deleteStateUseCase: DeleteStateUseCase
 ) : ViewModel() {
     // Надо это поле делать private или нет?
-    val calendar = Calendar.getInstance()
+    val currentCalendar = Calendar.getInstance()
+    val mutableCalendar = Calendar.getInstance()
 
     val userIntent = Channel<DeleteStateIntent>(Channel.UNLIMITED)
 
@@ -36,11 +38,14 @@ class ViewModelRecords @Inject constructor(
     private var _deleteState = MutableStateFlow<RecordState>(RecordState.Idle)
     val deleteState: StateFlow<RecordState> = _deleteState
 
-    private var _selectedDate = MutableStateFlow(calendar.time)
+    private var _selectedDate = MutableStateFlow(currentCalendar.time)
     val selectedDate: StateFlow<Date> get() = _selectedDate
 
     private var _records = MutableStateFlow(emptyList<RecordModel>())
     val records: StateFlow<List<RecordModel>> get() = _records
+
+    private var _selectedDateText = MutableStateFlow(DateUtils.dateToString(today = currentCalendar, currentDate = currentCalendar))
+    val selectedDateText: StateFlow<String> get() = _selectedDateText
 
     init {
         fetchRecords()
@@ -70,8 +75,14 @@ class ViewModelRecords @Inject constructor(
         }
     }
 
-    fun updateSelectedDate(date: Date) {
-        _selectedDate.value = date
+    fun updateSelectedDate(year: Int, month: Int, day: Int) {
+        mutableCalendar.apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month)
+            set(Calendar.DAY_OF_MONTH, day)
+        }
+        _selectedDate.value = mutableCalendar.time
+        _selectedDateText.value = DateUtils.dateToString(today = currentCalendar, currentDate = mutableCalendar)
         fetchRecords()
     }
 

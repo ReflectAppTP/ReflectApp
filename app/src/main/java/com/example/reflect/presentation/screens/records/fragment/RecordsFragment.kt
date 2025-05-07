@@ -1,7 +1,6 @@
 package com.example.reflect.presentation.screens.records.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,10 +21,11 @@ import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecordsFragment : Fragment() {
@@ -42,12 +42,28 @@ class RecordsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRecordsBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setSelection(vm.mutableCalendar.timeInMillis)
+            .setTitleText(R.string.selectDate)
+            .setTheme(R.style.ThemeOverlay_App_DatePicker)
+            .build()
+
+        datePicker.addOnPositiveButtonClickListener {
+            val selectedDate = vm.mutableCalendar.apply {
+                timeInMillis = it
+            }
+            vm.updateSelectedDate(
+                selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH)
+            )
+        }
 
         // TODO: почему тут надо в разных scope 
         lifecycleScope.launch {
@@ -67,10 +83,17 @@ class RecordsFragment : Fragment() {
         }
 
         with (binding) {
-            fragmentRecordsDateTV.text = DateUtils.dateToString(today = Calendar.getInstance(), currentDate = vm.calendar)
+            lifecycleScope.launch {
+                vm.selectedDateText.collect { date ->
+                    fragmentRecordsDateTV.text = date
+                }
+            }
+            fragmentRecordsDateTV.setOnClickListener {
+                datePicker.show(parentFragmentManager, "datePicker")
+            }
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             recordsAdapter = RecordsListAdapter(
-                vm.calendar,
+                vm.currentCalendar,
                 onEdit = { id, model ->
                     val args = Bundle().apply {
                         putInt("id", id)

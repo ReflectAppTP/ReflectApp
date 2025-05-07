@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 AccountPrefs.saveUserToken(this, state.loginModel.access, state.loginModel.refresh)
                 navController.navigate(R.id.action_loginFragment_to_mainFragment)
                 // TODO: ГОВНОКОД!
-                Timer("SettingUp", false).schedule(1000) {
+                Timer("SettingUp", false).schedule(1500) {
                     splashScreen.setKeepOnScreenCondition { false }
                 }
 
