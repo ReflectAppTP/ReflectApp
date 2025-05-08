@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,17 @@ class StatisticsFragment : Fragment() {
         _binding = FragmentStatisticsBinding.inflate(inflater, container,false)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            fragmentStatisticToggleGroup.check(R.id.fragmentStatisticWeekButton)
+            fragmentStatisticToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+
+            }
+        }
     }
 
     override fun onDestroyView() {

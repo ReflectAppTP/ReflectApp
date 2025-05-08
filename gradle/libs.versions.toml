@@ -25,6 +25,7 @@ fragmentKtx = "1.8.6"
 pinView = "1.4.4"
 retrofitVersion="2.11.0"
 loggingInterceptor = "3.8.0"
+chartVersion="v3.1.0"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -56,7 +57,7 @@ pin-view = { group = "io.github.chaosleung", name = "pinview", version.ref = "pi
 retrofit= { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion"}
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor"}
-
+android-chart = { group = "com.github.PhilJay", name = "MPAndriodChart", version.ref = "chartVersion"}
 
 
 [plugins]

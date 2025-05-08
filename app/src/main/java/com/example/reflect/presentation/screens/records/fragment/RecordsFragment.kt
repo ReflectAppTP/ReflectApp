@@ -115,7 +115,7 @@ class RecordsFragment : Fragment() {
 
                 }
                 override fun onAnimationEnd(p0: Animation?) {
-                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, -1)
+                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, 1)
                     vm.updateSelectedDate()
                     fragmentRecordsDateTV.startAnimation(sir)
                 }
@@ -128,7 +128,7 @@ class RecordsFragment : Fragment() {
 
                 }
                 override fun onAnimationEnd(p0: Animation?) {
-                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, -1)
                     vm.updateSelectedDate()
                     fragmentRecordsDateTV.startAnimation(sil)
                 }
@@ -137,11 +137,11 @@ class RecordsFragment : Fragment() {
                 }
             })
             fragmentRecordsICChevronLeft.setOnClickListener {
-                fragmentRecordsDateTV.startAnimation(sol)
+                fragmentRecordsDateTV.startAnimation(sor)
             }
 
             fragmentRecordsICChevronRight.setOnClickListener {
-                fragmentRecordsDateTV.startAnimation(sor)
+                fragmentRecordsDateTV.startAnimation(sol)
             }
 
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

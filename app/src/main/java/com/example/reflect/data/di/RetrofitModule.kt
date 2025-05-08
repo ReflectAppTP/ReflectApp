@@ -37,9 +37,9 @@ object RetrofitModule {
     ) : OkHttpClient =
         OkHttpClient
             .Builder()
-//            .cache(Cache(File(context.cacheDir, "http-cache"), 2L * 1024L * 1024L)) // 2 MB
-//            .addNetworkInterceptor(cacheInterceptor)
-//            .addInterceptor(forceCacheInterceptor)
+            .cache(Cache(File(context.cacheDir, "http-cache"), 2L * 1024L * 1024L)) // 2 MB
+            .addNetworkInterceptor(cacheInterceptor)
+            .addInterceptor(forceCacheInterceptor)
             .addInterceptor(authInterceptor)
             .addInterceptor(
                 HttpLoggingInterceptor { message -> Log.d("OkHttp", message) }.apply {

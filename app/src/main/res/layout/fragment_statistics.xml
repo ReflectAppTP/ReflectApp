@@ -28,13 +28,54 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentStatisticRV"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/fragmentStatisticToggleGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="11dp"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentStatisticToolbar"
-        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <Button
+            android:id="@+id/fragmentStatisticWeekButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="Неделя"
+            />
+
+        <Button
+            android:id="@+id/fragmentStatisticMonthButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="Месяц"
+            />
+
+        <Button
+            android:id="@+id/fragmentStatisticYearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="Год"
+            />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/fragmentStatisticRV"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/fragmentStatisticToolbar"-->
+<!--        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

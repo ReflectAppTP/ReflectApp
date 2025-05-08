@@ -46,14 +46,14 @@ android {
 
 dependencies {
     // Room
-    implementation(libs.room.runtime)
-    implementation(libs.androidx.legacy.support.v4)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.fragment.ktx)
-    ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
-    testImplementation(libs.room.testing)
+//    implementation(libs.room.runtime)
+//    implementation(libs.androidx.legacy.support.v4)
+//    implementation(libs.androidx.lifecycle.livedata.ktx)
+//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.fragment.ktx)
+//    ksp(libs.room.compiler)
+//    implementation(libs.room.ktx)
+//    testImplementation(libs.room.testing)
 
     // Hilt
     implementation (libs.hilt.android)
@@ -79,6 +79,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.logging.interceptor)
+
+    // Charts
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
