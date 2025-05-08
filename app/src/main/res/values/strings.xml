@@ -21,6 +21,8 @@
     <string name="contentDescriptionAddStateImage">Картинка с выбранным состоянием</string>
     <string name="contentDescriptionFragmentProfileIcon">Пустая иконка профиля</string>
     <string name="contentDescriptionFragmentProfileIconChange">Иконка редактирования иконки профиля</string>
+    <string name="contentDescriptionRecordsFragmentChevronLeft">Кнопка выбора даты на день назад</string>
+    <string name="contentDescriptionRecordsFragmentChevronRight">Кнопка выбора даты на день вперёд</string>
     <string name="cardStateImageContentDescription">Иконка, показывающая состояние</string>
     <string name="cardStateChangeDotsContentDescription">Иконка, при нажатии показывающая выпадающее меню</string>
 
@@ -59,8 +61,8 @@
     <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
     <string name="resetPasswordSendCodeAgainWithoutTimer">Отправить код повторно</string>
     <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
-    <string name="newPasswordHint">Новый пароль</string>
     <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
+    <string name="newPasswordHint">Новый пароль</string>
 
     <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
 
@@ -97,12 +99,19 @@
     <string name="dialogLogoutLogoutButton">Выйти</string>
 
     <!-- StateCard -->
-    <string name="cardStateMood">настроение</string>
+    <string name="cardStateMood">%1$s настроение</string>
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
 
+    <!-- ToastMessages -->
     <string name="addStateToastMessage">Запись успешно создана</string>
     <string name="welcomeToastMessage">Добро пожаловать!</string>
     <string name="successfulRegistrationToastMessage">Регистрация прошла успешно</string>
     <string name="loadingToastMessage">Пожалуйста, подождите</string>
+    <string name="editStateToastMessage">Запись успешно обновлена</string>
+    <string name="deleteStateToastMessage">Запись успешно удалена</string>
+    <string name="errorToastMessage">Произошла ошибка</string>
+
+    <!-- DateUtils -->
+    <string name="selectDate">Выберите дату</string>
 </resources>

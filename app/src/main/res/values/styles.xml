@@ -44,4 +44,12 @@
         <item name="android:background">@drawable/rounded_bottom_sheet</item>
         <item name="android:textColor">@color/primary</item>
     </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">@color/tertiary</item>
+        <item name="colorSurfaceContainerHigh">@color/surface</item>
+        <item name="android:textColor">@color/onSurfaceVariant</item>
+        <item name="itemFillColor">@color/tertiary</item>
+        <item name="iconTint">@color/tertiary</item>
+    </style>
 </resources>

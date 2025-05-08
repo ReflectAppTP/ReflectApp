@@ -7,12 +7,43 @@ import android.widget.Toast
 import com.example.reflect.R
 
 object ToastUtils {
+    private const val YOFFSET = 280
     // TODO: Переделать, потому что deprecated (христа ради, почему?)
     fun showAddStateToast(context: Context) {
         val view = LayoutInflater.from(context).inflate(R.layout.toast_add_state, null)
         val toast = Toast(context).apply {
             setView(view)
-            setGravity(Gravity.BOTTOM, 0,280)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
+
+    fun showEditStateToast(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_edit_state, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
+
+    fun showDeleteStateToast(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_delete_state, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
+
+    fun showErrorToast(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_error, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
             duration = Toast.LENGTH_SHORT
             show()
         }
@@ -22,7 +53,7 @@ object ToastUtils {
         val view = LayoutInflater.from(context).inflate(R.layout.toast_welcome, null)
         val toast = Toast(context).apply {
             setView(view)
-            setGravity(Gravity.BOTTOM, 0,280)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
             duration = Toast.LENGTH_SHORT
             show()
         }
@@ -32,7 +63,7 @@ object ToastUtils {
         val view = LayoutInflater.from(context).inflate(R.layout.toast_successful_registration, null)
         val toast = Toast(context).apply {
             setView(view)
-            setGravity(Gravity.BOTTOM, 0,280)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
             duration = Toast.LENGTH_SHORT
             show()
         }
@@ -42,7 +73,7 @@ object ToastUtils {
         val view = LayoutInflater.from(context).inflate(R.layout.toast_loading, null)
         val toast = Toast(context).apply {
             setView(view)
-            setGravity(Gravity.BOTTOM, 0,280)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
             duration = Toast.LENGTH_SHORT
             show()
         }

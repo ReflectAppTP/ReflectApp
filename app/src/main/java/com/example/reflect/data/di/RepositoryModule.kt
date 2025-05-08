@@ -1,11 +1,23 @@
 package com.example.reflect.data.di
 
 import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.data.repository.AddStateRepositoryImpl
+import com.example.reflect.data.repository.DeleteStateRepositoryImpl
+import com.example.reflect.data.repository.EditStateRepositoryImpl
+import com.example.reflect.data.repository.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.GetProfileRepositoryImpl
+import com.example.reflect.data.repository.GetSecondTagsRepositoryImpl
+import com.example.reflect.data.repository.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.LoginRepositoryImpl
 import com.example.reflect.data.repository.RefreshRepositoryImpl
 import com.example.reflect.data.repository.RegistrationRepositoryImpl
+import com.example.reflect.domain.repository.AddStateRepository
+import com.example.reflect.domain.repository.DeleteStateRepository
+import com.example.reflect.domain.repository.EditStateRepository
+import com.example.reflect.domain.repository.GetFirstTagsRepository
 import com.example.reflect.domain.repository.GetProfileRepository
+import com.example.reflect.domain.repository.GetSecondTagsRepository
+import com.example.reflect.domain.repository.GetStatesRepository
 import com.example.reflect.domain.repository.LoginRepository
 import com.example.reflect.domain.repository.RefreshRepository
 import com.example.reflect.domain.repository.RegistrationRepository
@@ -42,4 +54,40 @@ object RepositoryModule {
     fun provideRefreshRepository(
         remoteData: RetrofitRemoteData
     ): RefreshRepository = RefreshRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetFirstTagsRepository(
+        remoteData: RetrofitRemoteData
+    ): GetFirstTagsRepository = GetFirstTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetSecondTagsRepository(
+        remoteData: RetrofitRemoteData
+    ): GetSecondTagsRepository = GetSecondTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideAddStateRepository(
+        remoteData: RetrofitRemoteData
+    ): AddStateRepository = AddStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStatesRepository(
+        remoteData: RetrofitRemoteData
+    ): GetStatesRepository = GetStatesRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideEditStateRepository(
+        remoteData: RetrofitRemoteData
+    ): EditStateRepository = EditStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideDeleteStateRepository(
+        remoteData: RetrofitRemoteData
+    ): DeleteStateRepository = DeleteStateRepositoryImpl(remoteData)
 }

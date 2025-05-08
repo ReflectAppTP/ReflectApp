@@ -13,6 +13,7 @@ import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
+import com.example.reflect.presentation.common.ToastUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Timer
@@ -64,14 +65,13 @@ class MainActivity : AppCompatActivity() {
                 AccountPrefs.saveUserToken(this, state.loginModel.access, state.loginModel.refresh)
                 navController.navigate(R.id.action_loginFragment_to_mainFragment)
                 // TODO: ГОВНОКОД!
-                Timer("SettingUp", false).schedule(1000) {
+                Timer("SettingUp", false).schedule(1500) {
                     splashScreen.setKeepOnScreenCondition { false }
                 }
 
             }
             is GetProfileState.Error -> {
-                // TODO: Какой нибудь тост сделать
-                Toast.makeText(this, "Какая то ошибка на тосте", Toast.LENGTH_SHORT).show()
+                ToastUtils.showErrorToast(this)
                 splashScreen.setKeepOnScreenCondition { false }
             }
             is GetProfileState.RefreshError -> {

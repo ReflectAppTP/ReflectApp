@@ -66,11 +66,9 @@ class ViewModelRegistration @Inject constructor(
     private fun register() {
         _state.value = RegistrationState.Idle
         viewModelScope.launch {
-            registrationUseCase(_login.value!!, _email.value!!, password.value!!)
-                .onEach { newState ->
-                    _state.value = newState
-                }
-                .launchIn(viewModelScope)
+            registrationUseCase(_login.value, _email.value, password.value).collect { newState ->
+                _state.value = newState
+            }
         }
     }
 

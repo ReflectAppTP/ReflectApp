@@ -6,80 +6,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.R
 import com.example.reflect.databinding.CardStateBinding
 import com.example.reflect.domain.model.RecordModel
+import com.example.reflect.presentation.common.DateUtils
 import java.util.Calendar
-import java.util.Locale
 
 class RecordsListAdapter(
-    private val records: List<RecordModel>,
     private val calendar: Calendar,
-    private val onEdit: (Int) -> Unit,
+    private val onEdit: (Int, RecordModel) -> Unit,
     private val onDelete: (Int) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+) : ListAdapter<RecordModel, RecordsListAdapter.RecordViewHolder>(DIFF_CALLBACK){
 
     class RecordViewHolder(
         private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(model: RecordModel, calendar: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int) -> Unit) {
+        fun bind(model: RecordModel, today: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int, RecordModel) -> Unit) {
             with (binding) {
-                val today = Calendar.getInstance()
-                calendar.time = model.creationDate
+                val currentDate = Calendar.getInstance()
+                currentDate.time = model.creationDate!!
 
-                // TODO: ГОВНОКОД!!! 
-                if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                    calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-                    calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
-                    cardStateCreationDate.text = "Сегодня в ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
-                } else if (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                    calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH) &&
-                    calendar.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH) == -1) {
-                    cardStateCreationDate.text = "Вчера в ${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
-                } else {
-                    if (today.get(Calendar.YEAR) == calendar.get(Calendar.YEAR)) {
-                        cardStateCreationDate.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " +
-                                "${
-                                    calendar.getDisplayName(
-                                        Calendar.MONTH,
-                                        Calendar.LONG_FORMAT,
-                                        Locale("ru")
-                                    )
-                                } в " +
-                                "${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
-                    } else {
-                        cardStateCreationDate.text =
-                            "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH)+1}-${
-                                calendar.get(Calendar.DAY_OF_MONTH)
-                            } в " +
-                                    "${String.format("%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${String.format("%02d", calendar.get(Calendar.MINUTE))}"
-                    }
-                }
+                cardStateCreationDate.text = DateUtils.creationDateToString(today = today, currentDate = currentDate)
 
                 when(model.value) {
                     in 0..1 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_1)
-                        cardStateChangeMoodTV.text = "Ужасное"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Ужасное")
                     }
                     in 2..3 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_2)
-                        cardStateChangeMoodTV.text = "Плохое"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Плохое")
                     }
                     in 4..6 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_3)
-                        cardStateChangeMoodTV.text = "Нормальное"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Нормально")
                     }
                     in 7..8 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_4)
-                        cardStateChangeMoodTV.text = "Хорошее"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Хорошее")
                     }
                     in 9..10 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_5)
-                        cardStateChangeMoodTV.text = "Потрясающее"
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Отличное")
                     }
                     else -> throw IllegalStateException("Как так вообще получилось, что значение от 0 до 10 больше 10?!")
                 }
@@ -110,7 +83,7 @@ class RecordsListAdapter(
                     popupMenu.setOnMenuItemClickListener {
                         when(it.itemId) {
                             R.id.menuEdit -> {
-                                onEdit(model.id)
+                                onEdit(model.id, model)
                                 true
                             }
                             R.id.menuDelete -> {
@@ -126,16 +99,26 @@ class RecordsListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         val cardStateBinding = CardStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecordViewHolder(cardStateBinding)
     }
 
-    override fun getItemCount(): Int = records.size
+    override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
+        holder.bind(currentList[position], calendar, holder.itemView.context, onDelete, onEdit)
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is RecordViewHolder) {
-            holder.bind(records[position], calendar, holder.itemView.context, onDelete, onEdit)
+    override fun getItemCount(): Int = currentList.size
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecordModel>() {
+            override fun areItemsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

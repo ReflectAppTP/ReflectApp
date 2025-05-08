@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAddStateBottomSheetBinding
+import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -21,13 +22,6 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentAddStateBottomSheetBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        vm.fetchFirstTags()
-        vm.fetchSecondTags()
-    }
 
     override fun onStart() {
         super.onStart()
@@ -53,6 +47,19 @@ class AddStateBottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddStateBottomSheetBinding.inflate(inflater, container, false)
+        val id = arguments?.getInt("id")
+        vm.updateId(id)
+        if (id != null) {
+            val recordModel: RecordModel = arguments?.getParcelable("recordModel") ?: run {
+                throw IllegalArgumentException("RecordModel is null")
+            }
+            vm.updateEmotionalState(recordModel.value.toFloat())
+            recordModel.description?.let { vm.updateEmotionalDescription(it) }
+            recordModel.firstTagList?.map { it.id }?.toMutableList()
+                ?.let { vm.updateFirstTagIdsList(it) }
+            recordModel.secondTagList?.map { it.id }?.toMutableList()
+                ?.let { vm.updateSecondTagIdsList(it) }
+        }
         return binding.root
     }
 

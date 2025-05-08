@@ -11,42 +11,76 @@
         android:id="@+id/fragmentRecordsToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
         android:layout_marginHorizontal="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/fragmentRecordsToolbarTitle"
+            style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toolbarRecordsTitle"
             android:layout_gravity="center"
-            android:textColor="@color/onSurface"
-            style="@style/TextAppearance.Material3.TitleLarge"
-            />
+            android:text="@string/toolbarRecordsTitle"
+            android:textColor="@color/onSurface" />
 
         <ImageButton
             android:id="@+id/fragmentRecordsToolbarStreakIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:contentDescription="@string/contentDescriptionToolbarStreakIcon"
             android:background="@color/surface"
-            android:src="@drawable/ic_streak_toolbar"
-            />
+            android:contentDescription="@string/contentDescriptionToolbarStreakIcon"
+            android:src="@drawable/ic_streak_toolbar" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <ImageButton
+        android:id="@+id/fragmentRecordsICChevronLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/surface"
+        android:contentDescription="@string/contentDescriptionRecordsFragmentChevronLeft"
+        android:src="@drawable/ic_chevron_left"
+        android:layout_marginStart="@dimen/cardStateCardViewMarginHorizontal_23dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRecordsToolbar" />
+
+    <TextView
+        android:id="@+id/fragmentRecordsDateTV"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="@dimen/fragmentRecordsDateTVMarginTop_7dp"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentRecordsICChevronRight"
+        app:layout_constraintStart_toEndOf="@+id/fragmentRecordsICChevronLeft"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRecordsToolbar"
+        tools:text="Сегодня" />
+
+    <ImageButton
+        android:id="@+id/fragmentRecordsICChevronRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_chevron_right"
+        android:backgroundTint="@color/surface"
+        android:layout_marginEnd="@dimen/cardStateCardViewMarginHorizontal_23dp"
+        android:contentDescription="@string/contentDescriptionRecordsFragmentChevronRight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRecordsToolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentRecordsRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="@dimen/fragmentRecordsRVMarginBottom_80dp"
+        android:layout_marginTop="@dimen/fragmentRecordsRVMarginTop_12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentRecordsToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentRecordsICChevronLeft" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
