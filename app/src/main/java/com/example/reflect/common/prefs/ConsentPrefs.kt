@@ -16,4 +16,8 @@ object ConsentPrefs {
     fun setConsent(context: Context, consent: Boolean) {
         getPrefs(context).edit().putBoolean(KEY_CONSENT, consent).apply()
     }
+
+    fun clearPrefs(context: Context) {
+        getPrefs(context).edit().clear().apply()
+    }
 }

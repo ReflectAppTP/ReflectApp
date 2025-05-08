@@ -33,7 +33,7 @@ interface RetrofitService {
     @GET("${authReflect}/profile/")
     suspend fun getProfile(): Response<UserDTO>
 
-    @POST("${token}/refresh")
+    @POST("${token}/refresh/")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>
 
     @GET("${emotions}/tags")
