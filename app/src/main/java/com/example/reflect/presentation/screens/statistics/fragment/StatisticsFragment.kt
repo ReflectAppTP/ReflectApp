@@ -1,6 +1,5 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +19,7 @@ import com.example.reflect.presentation.common.WeekXAxisFormatter
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.LineChartState
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -40,12 +40,12 @@ class StatisticsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentStatisticsBinding.inflate(inflater, container,false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val context = requireContext()
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -59,50 +59,64 @@ class StatisticsFragment : Fragment() {
             with (fragmentStatisticBarChart) {
                 val testSize = 16f
                 xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.textColor = Color.BLACK
+                xAxis.textColor = ContextCompat.getColor(context, R.color.onSurface)
                 xAxis.textSize = testSize
-                xAxis.setAvoidFirstLastClipping(true)
 
 
                 axisRight.isEnabled = false
-                axisRight.setDrawZeroLine(false)
+                axisRight.setDrawZeroLine(true)
 
                 axisLeft.setDrawTopYLabelEntry(false)
                 axisLeft.setDrawGridLines(false)
                 axisLeft.setDrawZeroLine(true)
+                axisLeft.setDrawLabels(false)
                 axisLeft.axisMinimum = 0f
                 axisLeft.axisMaximum = 10f
-                axisLeft.textColor = Color.BLACK
+                axisLeft.textColor = ContextCompat.getColor(context, R.color.onSurface)
                 axisLeft.textSize = testSize
 
-                legend.textSize = testSize + 4f
-                legend.textColor = ContextCompat.getColor(requireContext(), R.color.onSurface)
+                legend.textSize = testSize + 6f
+                legend.textColor = ContextCompat.getColor(context, R.color.onSurface)
                 legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
                 legend.yEntrySpace = 100f
-                legend.formToTextSpace = 14f
+                legend.formToTextSpace = 12f
 
                 description.isEnabled = false
+
+                setNoDataText("Пока что здесь пусто")
+                getPaint(Chart.PAINT_INFO).apply {
+                    textSize = 56f
+                    color = ContextCompat.getColor(context, R.color.primary)
+                }
+                invalidate()
             }
 
 
             fragmentStatisticToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-                lifecycleScope.launch {
-                    when (checkedId) {
-                        R.id.fragmentStatisticWeekButton -> {
-                            vm.userIntent.send(StatisticIntent.WeekStatistic)
-                            fragmentStatisticBarChart.xAxis.valueFormatter = WeekXAxisFormatter()
-                        }
-                        R.id.fragmentStatisticMonthButton -> {
-                            vm.userIntent.send(StatisticIntent.MonthStatistic)
-                            fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
-                        }
-                        R.id.fragmentStatisticYearButton -> {
-                            vm.userIntent.send(StatisticIntent.YearStatistic)
-                            fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
-                        }
+                if (isChecked) {
+                    lifecycleScope.launch {
+                        when (checkedId) {
+                            R.id.fragmentStatisticWeekButton -> {
+                                vm.userIntent.send(StatisticIntent.WeekStatistic)
+                                fragmentStatisticBarChart.xAxis.valueFormatter = WeekXAxisFormatter()
+                            }
+                            R.id.fragmentStatisticMonthButton -> {
+                                vm.userIntent.send(StatisticIntent.MonthStatistic)
+                                fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
+                            }
+                            R.id.fragmentStatisticYearButton -> {
+                                vm.userIntent.send(StatisticIntent.YearStatistic)
+                                fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
+                            }
 
+                        }
+                    }
+                } else {
+                    if (-1 == group.checkedButtonId) {
+                        group.check(checkedId)
                     }
                 }
+
             }
             fragmentStatisticWeekButton.performClick()
         }
@@ -120,19 +134,20 @@ class StatisticsFragment : Fragment() {
                 Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
             }
             is LineChartState.Success -> {
-                val dataSet = BarDataSet(state.data, "Среднее значение за период").apply {
+//                val dataSet = BarDataSet(state.data, "Среднее значение за период").apply {
+//                    color = ContextCompat.getColor(context, R.color.primary)
+//                    setValueTextColors(mutableListOf(ContextCompat.getColor(context, R.color.primary)))
+//                    valueTextSize = 9f
+//                    highLightColor = ContextCompat.getColor(context, R.color.secondary)
+//                }
+
+                binding.fragmentStatisticBarChart.data = if (state.data.isEmpty()) null else BarData(
+                    BarDataSet(state.data, "Среднее значение за период").apply {
                     color = ContextCompat.getColor(context, R.color.primary)
-//                    setCircleColors(ContextCompat.getColor(context, R.color.primary))
                     setValueTextColors(mutableListOf(ContextCompat.getColor(context, R.color.primary)))
                     valueTextSize = 9f
-//                    highlightLineWidth = 1f
                     highLightColor = ContextCompat.getColor(context, R.color.secondary)
-//                    circleRadius = 5f
-//                    lineWidth = 3f
-                }
-
-                binding.fragmentStatisticBarChart.data = BarData(dataSet)
-                binding.fragmentStatisticBarChart.setNoDataText("Добавьте эмоциональное состояние")
+                })
                 binding.fragmentStatisticBarChart.animateXY(state.data.size * 80, 300)
             }
             is LineChartState.Error -> {

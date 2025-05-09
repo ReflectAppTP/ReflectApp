@@ -59,7 +59,7 @@ class VIewModelStatistic @Inject constructor(
     private fun getMonthStatistic() {
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
-        _lineChartState.value = LineChartState.Success(listOf(BarEntry(0f, 1f), BarEntry(2f, 10f)))
+        _lineChartState.value = LineChartState.Success(listOf(BarEntry(0f, 1f), BarEntry(2f, 10f),BarEntry(5f, 4f)))
     }
 
     private fun getYearStatistic() {

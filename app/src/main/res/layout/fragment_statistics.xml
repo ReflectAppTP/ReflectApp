@@ -34,13 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="11dp"
         app:singleSelection="true"
-        app:selectionRequired="true"
         app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fragmentStatisticWeekButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +48,7 @@
             android:text="Неделя"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fragmentStatisticMonthButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
             android:text="Месяц"
             />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fragmentStatisticYearButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
