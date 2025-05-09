@@ -1,6 +1,7 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -137,11 +138,11 @@ class StatisticsFragment : Fragment() {
         val context = requireContext()
         // TODO: ГОВНОКОД! Лучше куда то вынести
         val pieColors = listOf(
-            ContextCompat.getColor(context, R.color.error),
-            ContextCompat.getColor(context, R.color.onErrorContainer),
-            ContextCompat.getColor(context, R.color.secondary),
-            ContextCompat.getColor(context, R.color.primary),
-            ContextCompat.getColor(context, R.color.tertiary),
+            ContextCompat.getColor(context, R.color.pieChartStateAwful),
+            ContextCompat.getColor(context, R.color.pieChartStateBad),
+            ContextCompat.getColor(context, R.color.pieChartStateNormal),
+            ContextCompat.getColor(context, R.color.pieChartStateNice),
+            ContextCompat.getColor(context, R.color.pieChartStateMagnifique),
         )
         when (state) {
             is PieChartState.Loading -> {
@@ -157,11 +158,14 @@ class StatisticsFragment : Fragment() {
                     }
                     binding.fragmentStatisticPieChart.data = PieData(PieDataSet(state.data, "").apply {
                         colors = dataSetColors
-                        valueTextSize = 14f
-                        valueTextColor = ContextCompat.getColor(context, R.color.surfaceContainerLow)
-                        sliceSpace = 3f
+//                        valueTextSize = 0f
+//                        valueTextColor = ContextCompat.getColor(context, R.color.onSurface)
+                        sliceSpace = 5f
                         selectionShift = 5f
-                    }).apply { setValueFormatter(PercentFormatter(binding.fragmentStatisticPieChart))  }
+                    }).apply {
+//                        setValueFormatter(PercentFormatter(binding.fragmentStatisticPieChart))
+                        setDrawValues(false)
+                    }
                 }
 //                binding.fragmentStatisticPieChart.data = if (state.data.isEmpty()) null else PieData(
 //                    PieDataSet(state.data, "").apply {
@@ -191,33 +195,47 @@ class StatisticsFragment : Fragment() {
 
     private fun setBarChartProperties(context: Context) {
         with (binding) {
-            fragmentStatisticBarChart.setExtraOffsets(4f,20f,4f,10f)
             with (fragmentStatisticBarChart) {
+                setExtraOffsets(4f,20f,4f,10f)
                 isDoubleTapToZoomEnabled = false
 
                 val testSize = 16f
-                xAxis.position = XAxis.XAxisPosition.BOTTOM
-                xAxis.textColor = ContextCompat.getColor(context, R.color.onSurface)
-                xAxis.textSize = testSize
+                xAxis.apply {
+                    position = XAxis.XAxisPosition.BOTTOM
+                    textColor = ContextCompat.getColor(context, R.color.onSurface)
+                    textSize = testSize
+                    setDrawGridLines(true)
+                    gridColor = ContextCompat.getColor(context, R.color.onSurface)
+                }
 
+                axisRight.apply {
+//                    isEnabled = false
+                    setDrawTopYLabelEntry(false)
+                    setDrawZeroLine(true)
+                    setDrawGridLines(false)
+                    setDrawLabels(false)
+                    gridColor = ContextCompat.getColor(context, R.color.onSurface)
+                }
 
-                axisRight.isEnabled = false
-                axisRight.setDrawZeroLine(true)
+                axisLeft.apply {
+                    setDrawTopYLabelEntry(false)
+                    setDrawGridLines(true)
+                    gridColor = ContextCompat.getColor(context, R.color.onSurface)
+                    setDrawZeroLine(false)
+                    setDrawLabels(false)
+                    axisMinimum = 0f
+                    axisMaximum = 10f
+                    textColor = ContextCompat.getColor(context, R.color.onSurface)
+                    textSize = testSize
+                }
 
-                axisLeft.setDrawTopYLabelEntry(false)
-                axisLeft.setDrawGridLines(false)
-                axisLeft.setDrawZeroLine(false)
-                axisLeft.setDrawLabels(false)
-                axisLeft.axisMinimum = 0f
-                axisLeft.axisMaximum = 10f
-                axisLeft.textColor = ContextCompat.getColor(context, R.color.onSurface)
-                axisLeft.textSize = testSize
-
-                legend.textSize = testSize + 6f
-                legend.textColor = ContextCompat.getColor(context, R.color.onSurface)
-                legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-                legend.yEntrySpace = 100f
-                legend.formToTextSpace = 12f
+                legend.apply {
+                    textSize = testSize + 6f
+                    textColor = ContextCompat.getColor(context, R.color.onSurface)
+                    verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                    yEntrySpace = 100f
+                    formToTextSpace = 12f
+                }
 
                 description.isEnabled = false
 
@@ -233,21 +251,31 @@ class StatisticsFragment : Fragment() {
 
     private fun setPieChartProperties(context: Context) {
         with (binding) {
-            fragmentStatisticPieChart.setExtraOffsets(4f,10f,4f,70f)
             with (fragmentStatisticPieChart) {
+                setExtraOffsets(8f,0f,4f,0f)
+
                 centerText = "Частота настроения"
-                setCenterTextSize(16f)
+                setCenterTextTypeface(Typeface.createFromAsset(context.assets, "fonts/InterSemiBold.ttf"))
+                setCenterTextSize(14f)
+
                 description.isEnabled = false
 
                 setUsePercentValues(true)
+                
                 setDrawEntryLabels(false)
                 legend.apply {
-                    verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-                    horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+                    verticalAlignment = Legend.LegendVerticalAlignment.CENTER
+                    horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
                     orientation = Legend.LegendOrientation.VERTICAL
                     isEnabled = true
-                    textSize = 20f
+                    form = Legend.LegendForm.CIRCLE
+                    textSize = 14f
+                    yOffset = -35f
+                    typeface = Typeface.createFromAsset(context.assets, "fonts/InterRegular.ttf")
+                    textColor = ContextCompat.getColor(context, R.color.onSurfaceVariant)
                 }
+
+                transparentCircleRadius = 50f
 
                 setNoDataText("Пока что здесь пусто")
                 getPaint(Chart.PAINT_INFO).apply {

@@ -10,7 +10,7 @@
     style="@style/Widget.Material3.CardView.Outlined"
     app:strokeColor="@color/outlineVariant"
     app:cardCornerRadius="@dimen/cardStateCardViewCornerRadius_12dp"
-    app:cardBackgroundColor="@color/surface"
+    app:cardBackgroundColor="@color/surfaceVariant"
     app:cardElevation="@dimen/cardStateCardViewElevation_4dp"
     >
 
@@ -63,7 +63,8 @@
             android:textColor="@color/onSurface"
             app:layout_constraintEnd_toStartOf="@+id/cardStateChangeDots"
             app:layout_constraintStart_toEndOf="@+id/cardStateChangeMoodTV"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Хорошее настроение"/>
 
         <TextView
             android:id="@+id/cardStateCreationDate"

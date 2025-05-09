@@ -84,24 +84,50 @@
             android:layout_marginBottom="100dp"
             >
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/fragmentStatisticBarChart"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardBarChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="300dp"
+                app:cardElevation="4dp"
+                android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/fragmentStatisticPieChart"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/fragmentStatisticBarChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="300dp"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardPieChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="400dp"
-                android:layout_marginTop="12dp"
+                app:cardElevation="4dp"
+                android:layout_marginVertical="12dp"
+                android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticBarChart"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardBarChart"
+                >
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/fragmentStatisticPieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="300dp"
+                    />
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardPieChart"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

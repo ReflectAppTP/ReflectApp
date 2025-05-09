@@ -36,6 +36,7 @@
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
         <item name="materialCalendarTheme">@style/ThemeOverlay.App.DatePicker</item>
+        <item name="elevationOverlayEnabled">false</item>
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">

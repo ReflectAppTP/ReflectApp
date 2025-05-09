@@ -65,7 +65,7 @@ class VIewModelStatistic @Inject constructor(
             PieEntry(20f, "Плохое", 2),
             PieEntry(25f, "Нормальное", 3),
             PieEntry(35f, "Хорошее", 4),
-            PieEntry(10f, "Отличное", 5)
+            PieEntry(10f, "Замечательное", 5)
         ))
     }
 
@@ -77,10 +77,10 @@ class VIewModelStatistic @Inject constructor(
         _pieChartState.value = PieChartState.Loading
         _pieChartState.value = PieChartState.Success(listOf(
 //            PieEntry(0f, "Ужасное"),
-            PieEntry(25f, "Плохое", 2),
+            PieEntry(2f, "Плохое", 2),
             PieEntry(35f, "Нормальное", 3),
-//            PieEntry(40f, "Хорошее",4),
-            PieEntry(40f, "Отличное", 5)
+            PieEntry(18f, "Хорошее",4),
+            PieEntry(45f, "Замечательное", 5)
         ))
     }
 
