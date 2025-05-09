@@ -1,4 +1,4 @@
-package com.example.reflect.presentation.screens.statistics
+package com.example.reflect.presentation.screens.statistics.states
 
 import com.github.mikephil.charting.data.BarEntry
 

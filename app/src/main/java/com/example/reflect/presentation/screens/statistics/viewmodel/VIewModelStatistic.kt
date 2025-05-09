@@ -3,9 +3,10 @@ package com.example.reflect.presentation.screens.statistics.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
-import com.example.reflect.presentation.screens.statistics.LineChartState
+import com.example.reflect.presentation.screens.statistics.states.LineChartState
+import com.example.reflect.presentation.screens.statistics.states.PieChartState
 import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +24,9 @@ class VIewModelStatistic @Inject constructor(
 
     private var _lineChartState = MutableStateFlow<LineChartState>(LineChartState.Idle)
     val lineChartState: StateFlow<LineChartState> = _lineChartState
+
+    private var _pieChartState = MutableStateFlow<PieChartState>(PieChartState.Idle)
+    val pieChartState: StateFlow<PieChartState> = _pieChartState
 
     init {
         getWeekStatistic()
@@ -54,17 +58,40 @@ class VIewModelStatistic @Inject constructor(
             BarEntry(5f, 4f),
             BarEntry(6f, 2f)
         ))
+
+        _pieChartState.value = PieChartState.Loading
+        _pieChartState.value = PieChartState.Success(listOf(
+            PieEntry(10f, "Ужасное", 1),
+            PieEntry(20f, "Плохое", 2),
+            PieEntry(25f, "Нормальное", 3),
+            PieEntry(35f, "Хорошее", 4),
+            PieEntry(10f, "Отличное", 5)
+        ))
     }
 
     private fun getMonthStatistic() {
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
         _lineChartState.value = LineChartState.Success(listOf(BarEntry(0f, 1f), BarEntry(2f, 10f),BarEntry(5f, 4f)))
+
+        _pieChartState.value = PieChartState.Loading
+        _pieChartState.value = PieChartState.Success(listOf(
+//            PieEntry(0f, "Ужасное"),
+            PieEntry(25f, "Плохое", 2),
+            PieEntry(35f, "Нормальное", 3),
+//            PieEntry(40f, "Хорошее",4),
+            PieEntry(40f, "Отличное", 5)
+        ))
     }
 
     private fun getYearStatistic() {
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
         _lineChartState.value = LineChartState.Success(mutableListOf())
+
+        _pieChartState.value = PieChartState.Loading
+        _pieChartState.value = PieChartState.Success(mutableListOf())
     }
+
+
 }
