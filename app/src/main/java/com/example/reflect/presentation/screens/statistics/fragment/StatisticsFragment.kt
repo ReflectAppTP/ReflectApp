@@ -228,14 +228,14 @@ class StatisticsFragment : Fragment() {
                     textColor = ContextCompat.getColor(context, R.color.onSurface)
                     textSize = testSize
                 }
-
-                legend.apply {
-                    textSize = testSize + 6f
-                    textColor = ContextCompat.getColor(context, R.color.onSurface)
-                    verticalAlignment = Legend.LegendVerticalAlignment.TOP
-                    yEntrySpace = 100f
-                    formToTextSpace = 12f
-                }
+                legend.isEnabled = false
+//                legend.apply {
+//                    textSize = testSize + 6f
+//                    textColor = ContextCompat.getColor(context, R.color.onSurface)
+//                    verticalAlignment = Legend.LegendVerticalAlignment.TOP
+//                    yEntrySpace = 100f
+//                    formToTextSpace = 12f
+//                }
 
                 description.isEnabled = false
 
