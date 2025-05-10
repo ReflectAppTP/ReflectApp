@@ -141,7 +141,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/fragmentStatisticCardTitleTV"
+                        android:id="@+id/fragmentStatisticCardFirstTagsTitleTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Чаще всего вы испытывали эмоции:"
@@ -151,13 +151,22 @@
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/fragmentStatisticCardRV"
+                        android:id="@+id/fragmentStatisticCardFirstTagsRV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardTitleTV"
+                        tools:listitem="@layout/card_statistic_tag"
+                        tools:itemCount="5"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstTagsTitleTV"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="fragmentStatisticCardFirstTagsTitleTV, fragmentStatisticCardFirstTagsRV"
+                        android:id="@+id/fragmentStatisticRVGroup"
                         />
 
                     <com.github.mikephil.charting.charts.BarChart

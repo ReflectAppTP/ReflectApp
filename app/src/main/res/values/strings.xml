@@ -114,4 +114,8 @@
 
     <!-- DateUtils -->
     <string name="selectDate">Выберите дату</string>
+
+
+    <!-- StatisticFragment -->
+    <string name="cardStatisticTagTV">%1$d раз(а)</string>
 </resources>

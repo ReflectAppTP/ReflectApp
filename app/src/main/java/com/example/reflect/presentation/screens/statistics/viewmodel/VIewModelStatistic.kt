@@ -2,8 +2,9 @@ package com.example.reflect.presentation.screens.statistics.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
-import com.example.reflect.presentation.screens.statistics.states.BarChartState
+import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
 import com.github.mikephil.charting.data.BarEntry
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
-import java.lang.Thread.State
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,11 +31,8 @@ class VIewModelStatistic @Inject constructor(
     private var _pieChartState = MutableStateFlow<PieChartState>(PieChartState.Idle)
     val pieChartState: StateFlow<PieChartState> = _pieChartState
 
-    private var _firstBarChartState = MutableStateFlow<BarChartState>(BarChartState.Idle)
-    val firstBarChartState: StateFlow<BarChartState> = _firstBarChartState
-
-    private var _firstBarChartLabels = MutableStateFlow<List<String>>(mutableListOf())
-    val firstBarChartLabels: StateFlow<List<String>> = _firstBarChartLabels
+    private var _firstStatisticTagState = MutableStateFlow<StatisticTagState>(StatisticTagState.Idle)
+    val firstStatisticTagState: StateFlow<StatisticTagState> = _firstStatisticTagState
 
     init {
         getWeekStatistic()
@@ -77,21 +74,14 @@ class VIewModelStatistic @Inject constructor(
             PieEntry(10f, "Замечательное", 5)
         ))
 
-        _firstBarChartState.value = BarChartState.Loading
-        _firstBarChartState.value = BarChartState.Success(listOf(
-            BarEntry(1f, 7f), // 😁 Счастливо
-            BarEntry(2f, 5f), // 😴 Расслабленно
-            BarEntry(3f, 4f), // 😊 Удовлетворенно
-            BarEntry(4f, 2f), // 😕 Напряженно
-            BarEntry(5f, 2f), // 🥵 Нервно
+        _firstStatisticTagState.value = StatisticTagState.Loading
+        _firstStatisticTagState.value = StatisticTagState.Success(listOf(
+            StatisticTagModel(1, "Счастливо", "\uD83D\uDE01", 20),
+            StatisticTagModel(2, "Расслабленно", "\uD83D\uDE34", 14),
+            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 7),
+            StatisticTagModel(4, "Напряженно", "\uD83D\uDE15", 6),
+            StatisticTagModel(5, "Нервно", "\uD83D\uDE15", 1),
         ))
-        _firstBarChartLabels.value = listOf(
-            "\uD83D\uDE01 Счастливо",
-            "\uD83D\uDE34 Расслабленно",
-            "\uD83D\uDE0A Удовлетворенно",
-            "\uD83D\uDE15 Напряженно",
-            "\uD83E\uDD75 Нервно"
-            )
     }
 
     private fun getMonthStatistic() {
@@ -124,21 +114,14 @@ class VIewModelStatistic @Inject constructor(
             PieEntry(45f, "Замечательное", 5)
         ))
 
-        _firstBarChartState.value = BarChartState.Loading
-        _firstBarChartState.value = BarChartState.Success(listOf(
-            BarEntry(1f, 15f), // 😁 Счастливо
-            BarEntry(2f, 20f), // 😴 Расслабленно
-            BarEntry(3f, 5f), // 😊 Удовлетворенно
-            BarEntry(4f, 2f), // 😕 Напряженно
-            BarEntry(5f, 9f), // 🥵 Нервно
+        _firstStatisticTagState.value = StatisticTagState.Loading
+        _firstStatisticTagState.value = StatisticTagState.Success(listOf(
+            StatisticTagModel(1, "Сосливо", "\uD83D\uDE01", 15),
+            StatisticTagModel(2, "Дрочливо", "\uD83D\uDE34", 15),
+            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 15),
+            StatisticTagModel(4, "ЙОУЛИВО", "\uD83D\uDE15", 15),
+            StatisticTagModel(5, "Гойдливо", "\uD83D\uDE15", 15),
         ))
-        _firstBarChartLabels.value = mutableListOf(
-            "\uD83D\uDE01 \r Счастливо",
-            "\uD83D\uDE34 Расслабленно",
-            "\uD83D\uDE0A Удовлетворенно",
-            "\uD83D\uDE15 Напряженно",
-            "\uD83E\uDD75 Нервно"
-        )
     }
 
     private fun getYearStatistic() {
@@ -149,8 +132,8 @@ class VIewModelStatistic @Inject constructor(
         _pieChartState.value = PieChartState.Loading
         _pieChartState.value = PieChartState.Success(mutableListOf())
 
-        _firstBarChartState.value = BarChartState.Loading
-        _firstBarChartState.value = BarChartState.Success(mutableListOf())
+        _firstStatisticTagState.value = StatisticTagState.Loading
+        _firstStatisticTagState.value = StatisticTagState.Success(mutableListOf())
     }
 
 
