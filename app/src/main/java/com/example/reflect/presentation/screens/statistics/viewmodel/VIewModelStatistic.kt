@@ -6,6 +6,7 @@ import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -50,13 +51,13 @@ class VIewModelStatistic @Inject constructor(
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
         _lineChartState.value = LineChartState.Success(listOf(
-            BarEntry(0f, 9f),
-            BarEntry(1f, 7f),
-            BarEntry(2f, 10f),
-            BarEntry(3f, 6f),
-            BarEntry(4f, 8f),
-            BarEntry(5f, 4f),
-            BarEntry(6f, 2f)
+            Entry(0f, 9f),
+            Entry(1f, 7f),
+            Entry(2f, 10f),
+            Entry(3f, 6f),
+            Entry(4f, 8f),
+            Entry(5f, 4f),
+            Entry(6f, 2f)
         ))
 
         _pieChartState.value = PieChartState.Loading
@@ -72,7 +73,23 @@ class VIewModelStatistic @Inject constructor(
     private fun getMonthStatistic() {
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
-        _lineChartState.value = LineChartState.Success(listOf(BarEntry(0f, 1f), BarEntry(2f, 10f),BarEntry(5f, 4f)))
+        _lineChartState.value = LineChartState.Success(listOf(
+            Entry(0f, 1f),
+            Entry(2f, 10f),
+            Entry(5f, 4f),
+            Entry(6f, 2f),
+            Entry(7f, 1f),
+            Entry(8f, 7f),
+            Entry(9f, 8f),
+            Entry(12f, 10f),
+            Entry(15f, 3f),
+            Entry(16f, 10f),
+            Entry(17f, 10f),
+            Entry(18f, 7f),
+            Entry(20f, 1f),
+            Entry(21f, 10f),
+            Entry(24f, 6f),
+        ))
 
         _pieChartState.value = PieChartState.Loading
         _pieChartState.value = PieChartState.Success(listOf(

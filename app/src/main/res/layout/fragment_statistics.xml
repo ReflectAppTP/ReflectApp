@@ -88,14 +88,14 @@
                 android:id="@+id/fragmentStatisticCardBarChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 >
 
-                <com.github.mikephil.charting.charts.BarChart
+                <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/fragmentStatisticBarChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                 android:id="@+id/fragmentStatisticCardPieChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="4dp"
+                app:cardElevation="2dp"
                 android:layout_marginVertical="12dp"
                 android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"

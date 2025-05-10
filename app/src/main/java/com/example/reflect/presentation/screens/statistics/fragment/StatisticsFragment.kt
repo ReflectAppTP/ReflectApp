@@ -25,11 +25,10 @@ import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelSt
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.formatter.PercentFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -56,7 +55,7 @@ class StatisticsFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.lineChartState.collect { state ->
-                    handleLineChartState(state)
+                    handleLineChartState(state, context)
                 }
             }
         }
@@ -65,12 +64,12 @@ class StatisticsFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.pieChartState.collect { state ->
-                    handlePieChartState(state)
+                    handlePieChartState(state, context)
                 }
             }
         }
 
-        setBarChartProperties(context)
+        setLineChartProperties(context)
         setPieChartProperties(context)
 
         with(binding) {
@@ -109,21 +108,23 @@ class StatisticsFragment : Fragment() {
         _binding = null
     }
 
-    private fun handleLineChartState(state: LineChartState) {
-        val context = requireContext()
+    private fun handleLineChartState(state: LineChartState, context: Context) {
         when (state) {
             is LineChartState.Loading -> {
                 Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
             }
             is LineChartState.Success -> {
-                binding.fragmentStatisticBarChart.data = if (state.data.isEmpty()) null else BarData(
-                    BarDataSet(state.data, "Среднее значение за период").apply {
-                    color = ContextCompat.getColor(context, R.color.primary)
-                    setValueTextColors(mutableListOf(ContextCompat.getColor(context, R.color.primary)))
-                    valueTextSize = 9f
-                    highLightColor = ContextCompat.getColor(context, R.color.tertiary)
-                })
-                binding.fragmentStatisticBarChart.animateXY(state.data.size * 80, 300)
+                binding.fragmentStatisticBarChart.data = if (state.data.isEmpty()) null else LineData(
+                    LineDataSet(state.data, "Среднее значение за период").apply {
+                        lineWidth = 5f
+                        color = ContextCompat.getColor(context, R.color.tertiary)
+                        circleColors = mutableListOf(ContextCompat.getColor(context, R.color.tertiary))
+                        circleRadius = 5f
+                        circleHoleRadius = 2f
+//                        valueTextSize = 9f
+//                        highLightColor = ContextCompat.getColor(context, R.color.tertiary)
+                }).apply { setDrawValues(false) }
+                binding.fragmentStatisticBarChart.animateX(state.data.size * 80)
             }
             is LineChartState.Error -> {
                 ToastUtils.showErrorToast(context)
@@ -134,8 +135,7 @@ class StatisticsFragment : Fragment() {
         }
     }
 
-    private fun handlePieChartState(state: PieChartState) {
-        val context = requireContext()
+    private fun handlePieChartState(state: PieChartState, context: Context) {
         // TODO: ГОВНОКОД! Лучше куда то вынести
         val pieColors = listOf(
             ContextCompat.getColor(context, R.color.pieChartStateAwful),
@@ -193,11 +193,12 @@ class StatisticsFragment : Fragment() {
         }
     }
 
-    private fun setBarChartProperties(context: Context) {
+    private fun setLineChartProperties(context: Context) {
         with (binding) {
             with (fragmentStatisticBarChart) {
-                setExtraOffsets(4f,20f,4f,10f)
+                setExtraOffsets(20f,20f,20f,20f)
                 isDoubleTapToZoomEnabled = false
+                setTouchEnabled(false)
 
                 val testSize = 16f
                 xAxis.apply {
