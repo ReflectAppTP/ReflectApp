@@ -78,7 +78,7 @@
     <!-- Tag -->
     <dimen name="tagMarginVertical_6dp">6dp</dimen>
     <dimen name="tagMarginHorizontal_12dp">12dp</dimen>
-    <dimen name="tagCardElevation_6dp">6dp</dimen>
+    <dimen name="tagCardElevation_4dp">4dp</dimen>
     <dimen name="tagCardRadius_12dp">12dp</dimen>
     <dimen name="tagHorizontalMargin_8dp">8dp</dimen>
     <dimen name="tagCardMinWidth_100dp">100dp</dimen>

@@ -85,7 +85,7 @@
             >
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragmentStatisticCardBarChart"
+                android:id="@+id/fragmentStatisticCardLineChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="2dp"
@@ -96,7 +96,7 @@
                 >
 
                 <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/fragmentStatisticBarChart"
+                    android:id="@+id/fragmentStatisticLineChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="300dp"/>
@@ -111,7 +111,7 @@
                 android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardBarChart"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardLineChart"
                 >
 
                 <com.github.mikephil.charting.charts.PieChart
@@ -122,12 +122,59 @@
                     />
             </com.google.android.material.card.MaterialCardView>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardFirstBarChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:cardElevation="2dp"
+                android:layout_marginVertical="12dp"
+                android:layout_marginHorizontal="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardPieChart"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="14dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/fragmentStatisticCardTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Чаще всего вы испытывали эмоции:"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fragmentStatisticCardRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardTitleTV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/fragmentStatisticFirstBarChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstBarChart"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

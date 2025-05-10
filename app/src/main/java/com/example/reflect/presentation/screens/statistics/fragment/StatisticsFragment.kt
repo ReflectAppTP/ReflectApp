@@ -1,6 +1,7 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,16 +16,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
-import com.example.reflect.presentation.common.DayXAxisFormatter
+import com.example.reflect.presentation.common.formatter.DayXAxisFormatter
 import com.example.reflect.presentation.common.ToastUtils
-import com.example.reflect.presentation.common.WeekXAxisFormatter
+import com.example.reflect.presentation.common.formatter.TagXAxisFormatter
+import com.example.reflect.presentation.common.formatter.WeekXAxisFormatter
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
+import com.example.reflect.presentation.screens.statistics.states.BarChartState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
@@ -69,26 +74,34 @@ class StatisticsFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.firstBarChartState.collect { state ->
+                    handleFirstBarChartState(state, context)
+                }
+            }
+        }
+
         setLineChartProperties(context)
         setPieChartProperties(context)
+        setFirstBarChartProperties(context)
 
         with(binding) {
-
             fragmentStatisticToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
                 if (isChecked) {
                     lifecycleScope.launch {
                         when (checkedId) {
                             R.id.fragmentStatisticWeekButton -> {
                                 vm.userIntent.send(StatisticIntent.WeekStatistic)
-                                fragmentStatisticBarChart.xAxis.valueFormatter = WeekXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = WeekXAxisFormatter()
                             }
                             R.id.fragmentStatisticMonthButton -> {
                                 vm.userIntent.send(StatisticIntent.MonthStatistic)
-                                fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter()
                             }
                             R.id.fragmentStatisticYearButton -> {
                                 vm.userIntent.send(StatisticIntent.YearStatistic)
-                                fragmentStatisticBarChart.xAxis.valueFormatter = DayXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter()
                             }
                         }
                     }
@@ -114,7 +127,7 @@ class StatisticsFragment : Fragment() {
                 Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
             }
             is LineChartState.Success -> {
-                binding.fragmentStatisticBarChart.data = if (state.data.isEmpty()) null else LineData(
+                binding.fragmentStatisticLineChart.data = if (state.data.isEmpty()) null else LineData(
                     LineDataSet(state.data, "Среднее значение за период").apply {
                         lineWidth = 5f
                         color = ContextCompat.getColor(context, R.color.tertiary)
@@ -124,7 +137,7 @@ class StatisticsFragment : Fragment() {
 //                        valueTextSize = 9f
 //                        highLightColor = ContextCompat.getColor(context, R.color.tertiary)
                 }).apply { setDrawValues(false) }
-                binding.fragmentStatisticBarChart.animateX(state.data.size * 80)
+                binding.fragmentStatisticLineChart.animateX(state.data.size * 80)
             }
             is LineChartState.Error -> {
                 ToastUtils.showErrorToast(context)
@@ -193,9 +206,59 @@ class StatisticsFragment : Fragment() {
         }
     }
 
+    private fun handleFirstBarChartState(state: BarChartState, context: Context) {
+        when (state) {
+            is BarChartState.Loading -> {
+                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
+            }
+            is BarChartState.Success -> {
+                val colors = listOf(
+                    Color.RED,
+                    Color.rgb(255, 165, 0),
+                    Color.YELLOW,
+                    Color.GREEN,
+                    Color.CYAN
+                )
+                with (binding ){
+                    if (state.data.isEmpty()) {
+                        fragmentStatisticFirstBarChart.data = null
+                    } else {
+                        fragmentStatisticFirstBarChart.data = BarData(BarDataSet(state.data, "").apply {
+                            valueTextSize = 6f
+                        })
+                    }
+                    fragmentStatisticFirstBarChart.animateX(state.data.size * 100)
+                }
+            }
+            is BarChartState.Error -> {
+                ToastUtils.showErrorToast(context)
+            }
+            is BarChartState.Idle -> {
+                Unit
+            }
+        }
+    }
+
+    private fun handleSecondBarChartState(state: BarChartState, context: Context) {
+        when (state) {
+            is BarChartState.Loading -> {
+                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
+            }
+            is BarChartState.Success -> {
+
+            }
+            is BarChartState.Error -> {
+                ToastUtils.showErrorToast(context)
+            }
+            is BarChartState.Idle -> {
+                Unit
+            }
+        }
+    }
+
     private fun setLineChartProperties(context: Context) {
         with (binding) {
-            with (fragmentStatisticBarChart) {
+            with (fragmentStatisticLineChart) {
                 setExtraOffsets(20f,20f,20f,20f)
                 isDoubleTapToZoomEnabled = false
                 setTouchEnabled(false)
@@ -285,8 +348,36 @@ class StatisticsFragment : Fragment() {
                 }
                 invalidate()
             }
+        }
+    }
 
+    private fun setFirstBarChartProperties(context: Context) {
+        with (binding) {
+            with (fragmentStatisticFirstBarChart) {
+                fitScreen()
+                setExtraOffsets(-10f,6f,-10f,20f)
+//                setFitBars(true)
 
+                xAxis.apply {
+                    position = XAxis.XAxisPosition.BOTTOM
+                    granularity = 1f
+                    setDrawGridLines(false)
+                    valueFormatter = TagXAxisFormatter(vm.firstBarChartLabels.value)
+                }
+
+                axisLeft.isEnabled = false
+                axisRight.isEnabled = false
+
+                legend.isEnabled = false
+                description.isEnabled = false
+
+                setNoDataText("Пока что здесь пусто")
+                getPaint(Chart.PAINT_INFO).apply {
+                    textSize = 56f
+                    color = ContextCompat.getColor(context, R.color.primary)
+                }
+                invalidate()
+            }
         }
     }
 }

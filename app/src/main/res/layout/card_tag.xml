@@ -13,7 +13,7 @@
     style="@style/Widget.Material3.CardView.Outlined"
     app:cardBackgroundColor="@color/surfaceContainerLow"
     app:strokeColor="@color/surfaceContainerLow"
-    app:cardElevation="@dimen/tagCardElevation_6dp"
+    app:cardElevation="@dimen/tagCardElevation_4dp"
     app:cardCornerRadius="@dimen/tagCardRadius_12dp"
     >
 
