@@ -1,8 +1,11 @@
 package com.example.reflect.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -30,8 +33,29 @@ class StatisticTagListAdapter:
         return StatisticViewHolder(cardStatisticTagBinding)
     }
 
-    override fun onBindViewHolder(holder: StatisticViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StatisticViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.bind(currentList[position], holder.itemView.context)
+
+        holder.itemView.apply {
+            translationX = -context.resources.displayMetrics.widthPixels.toFloat()
+            alpha = 0f
+
+            viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    viewTreeObserver.removeOnPreDrawListener(this)
+
+                    animate()
+                        .translationX(0f)
+                        .alpha(1f)
+                        .setStartDelay(position * 100L)
+                        .setDuration(300L)
+                        .setInterpolator(DecelerateInterpolator())
+                        .start()
+
+                    return true
+                }
+            })
+        }
     }
 
     override fun getItemCount(): Int = currentList.size

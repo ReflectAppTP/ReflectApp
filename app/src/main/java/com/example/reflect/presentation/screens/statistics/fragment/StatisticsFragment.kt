@@ -213,6 +213,7 @@ class StatisticsFragment : Fragment() {
     private fun handleFirstBarChartState(state: StatisticTagState, context: Context) {
         when (state) {
             is StatisticTagState.Loading -> {
+                statisticFirstTagsAdapter.submitList(null)
                 Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
             }
             is StatisticTagState.Success -> {
@@ -224,7 +225,8 @@ class StatisticsFragment : Fragment() {
                         fragmentStatisticRVGroup.visibility = View.VISIBLE
                         fragmentStatisticFirstBarChart.visibility = View.GONE
 
-                        statisticFirstTagsAdapter.submitList(state.data)
+                        statisticFirstTagsAdapter.submitList(null)
+                        statisticFirstTagsAdapter.submitList(state.data.toMutableList())
                     }
                     fragmentStatisticFirstBarChart.animateX(state.data.size * 100)
                 }
