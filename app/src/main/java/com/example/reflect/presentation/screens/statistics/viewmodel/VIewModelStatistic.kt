@@ -7,13 +7,13 @@ import com.example.reflect.domain.usecase.statistic.GetMonthlyAverageUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticEmotionalTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
+import com.example.reflect.domain.usecase.statistic.GetYearlyAverageUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.DateUtils.getStringFromDate
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
-import com.github.mikephil.charting.data.Entry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +27,7 @@ import javax.inject.Inject
 class VIewModelStatistic @Inject constructor(
     private val getWeeklyAverageUseCase: GetWeeklyAverageUseCase,
     private val getMonthlyAverageUseCase: GetMonthlyAverageUseCase,
+    private val getYealyAverageUseCase: GetYearlyAverageUseCase,
     private val getFrequencyUseCase: GetFrequencyUseCase,
     private val getStatisticTagsUseCase: GetStatisticTagsUseCase,
     private val getStatisticEmotionalTagsUseCase: GetStatisticEmotionalTagsUseCase,
@@ -168,15 +169,21 @@ class VIewModelStatistic @Inject constructor(
         todayCalendar.time = currentCalendar.time
         todayCalendar.add(Calendar.DAY_OF_MONTH, 1)
         val currentDate = todayCalendar.time
-        selectedCalendar.add(Calendar.YEAR, -1)
+        selectedCalendar.roll(Calendar.YEAR, -1)
+//        selectedCalendar.add(Calendar.YEAR, -1)
         val selectedDate = selectedCalendar.time
 
         val startDate = getStringFromDate(selectedDate)
         val endDate = getStringFromDate(currentDate)
 
         _timeRangeTitle.value = DateUtils.getYearRange(currentCalendar, selectedCalendar)
-        // TODO: Запрос
-        _lineChartState.value = LineChartState.Loading
+
+        _lineChartState.value = LineChartState.Idle
+        viewModelScope.launch {
+            getYealyAverageUseCase().collect { newState ->
+                _lineChartState.value = newState
+            }
+        }
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {

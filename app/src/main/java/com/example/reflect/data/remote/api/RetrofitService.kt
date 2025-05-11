@@ -72,4 +72,7 @@ interface RetrofitService {
 
     @GET("${statistic}/mood/monthly/")
     suspend fun getMonthlyAverage(): Response<List<StatisticAverageResponseDTO>>
+
+    @GET("${statistic}/mood/yearly/")
+    suspend fun getYearlyAverage(): Response<List<StatisticAverageResponseDTO>>
 }

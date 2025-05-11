@@ -16,6 +16,7 @@ import com.example.reflect.data.repository.statistic.GetStateFrequencyRepository
 import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetWeeklyAverageRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetYearlyAverageRepositoryImpl
 import com.example.reflect.domain.repository.state.AddStateRepository
 import com.example.reflect.domain.repository.state.DeleteStateRepository
 import com.example.reflect.domain.repository.state.EditStateRepository
@@ -31,6 +32,7 @@ import com.example.reflect.domain.repository.statistic.GetStateFrequencyReposito
 import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticTagsRepository
 import com.example.reflect.domain.repository.statistic.GetWeeklyAverageRepository
+import com.example.reflect.domain.repository.statistic.GetYearlyAverageRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -130,4 +132,10 @@ object RepositoryModule {
     fun provideGetMonthlyAverage(
         remoteData: RetrofitRemoteData
     ): GetMonthlyAverageRepository = GetMonthlyAverageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetYearlyAverage(
+        remoteData: RetrofitRemoteData
+    ): GetYearlyAverageRepository = GetYearlyAverageRepositoryImpl(remoteData)
 }

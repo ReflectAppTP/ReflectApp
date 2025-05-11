@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -35,6 +34,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.math.floor
 
 @AndroidEntryPoint
 class StatisticsFragment : Fragment() {
@@ -152,7 +152,6 @@ class StatisticsFragment : Fragment() {
                 is LineChartState.Loading -> {
                     fragmentStatisticLottieLineChart.visibility = View.VISIBLE
                     fragmentStatisticLineChart.visibility = View.GONE
-
                 }
                 is LineChartState.Success -> {
                     fragmentStatisticLottieLineChart.visibility = View.GONE
@@ -171,13 +170,13 @@ class StatisticsFragment : Fragment() {
                                 axisMaximum = xMax
                                 granularity = when(state.timeRange) {
                                     TimeRange.WEEK -> 1f
-                                    TimeRange.MONTH -> (state.data.size % 5f).coerceAtLeast(1f)
-                                    TimeRange.YEAR -> (state.data.size % 10f).coerceAtLeast(1f)
+                                    TimeRange.MONTH -> floor(state.data.size / 5f).coerceAtLeast(1f)
+                                    TimeRange.YEAR -> floor(state.data.size / 10f).coerceAtLeast(1f)
                                 }
+                                labelCount = state.data.size
                             }
-                            setDrawValues(true)
+                            setDrawValues(false)
                         }
-                    fragmentStatisticLineChart.xAxis.labelCount = state.data.size
                     fragmentStatisticLineChart.animateX(state.data.size * 80)
                 }
                 is LineChartState.Error -> {

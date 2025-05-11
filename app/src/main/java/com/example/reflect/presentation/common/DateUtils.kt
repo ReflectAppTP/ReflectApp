@@ -99,8 +99,8 @@ object DateUtils {
 
     fun getYearRange(today: Calendar, selectedDate: Calendar) : String {
         // апрель 2024 - апрель 2025
-        return selectedDate.getDisplayName(Calendar.MONTH, Calendar.SHORT_STANDALONE, Locale(Locale.getDefault().language)) +
-                " ${today.get(Calendar.YEAR)}" +
+        return selectedDate.getDisplayName(Calendar.MONTH, Calendar.SHORT_STANDALONE, Locale(Locale.getDefault().language))!! +
+                " ${selectedDate.get(Calendar.YEAR)}" +
                 " - " +
                 today.getDisplayName(Calendar.MONTH, Calendar.SHORT_STANDALONE, Locale(Locale.getDefault().language)) +
                 " ${today.get(Calendar.YEAR)}"

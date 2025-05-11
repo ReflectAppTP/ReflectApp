@@ -26,5 +26,6 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun getStatisticEmotionalTags(startDate: String, endDate: String) = retrofitService.getStatisticEmotionalTags(startDate, endDate)
     suspend fun getWeeklyAverage() = retrofitService.getWeeklyAverage()
     suspend fun getMonthlyAverage() = retrofitService.getMonthlyAverage()
+    suspend fun getYearlyAverage() = retrofitService.getYearlyAverage()
 
 }
