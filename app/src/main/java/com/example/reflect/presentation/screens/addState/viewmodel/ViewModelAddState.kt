@@ -3,10 +3,10 @@ package com.example.reflect.presentation.screens.addState.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.TagModel
-import com.example.reflect.domain.usecase.AddStateUseCase
-import com.example.reflect.domain.usecase.EditStateUseCase
-import com.example.reflect.domain.usecase.GetFirstTagsUseCase
-import com.example.reflect.domain.usecase.GetSecondTagsUseCase
+import com.example.reflect.domain.usecase.state.AddStateUseCase
+import com.example.reflect.domain.usecase.state.EditStateUseCase
+import com.example.reflect.domain.usecase.state.GetFirstTagsUseCase
+import com.example.reflect.domain.usecase.state.GetSecondTagsUseCase
 import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.TagsState

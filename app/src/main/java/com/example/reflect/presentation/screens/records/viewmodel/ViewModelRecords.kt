@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
-import com.example.reflect.domain.usecase.DeleteStateUseCase
-import com.example.reflect.domain.usecase.GetStatesUseCase
+import com.example.reflect.domain.usecase.state.DeleteStateUseCase
+import com.example.reflect.domain.usecase.state.GetStatesUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
