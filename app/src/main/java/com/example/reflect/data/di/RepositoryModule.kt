@@ -11,6 +11,7 @@ import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
 import com.example.reflect.domain.repository.state.AddStateRepository
 import com.example.reflect.domain.repository.state.DeleteStateRepository
 import com.example.reflect.domain.repository.state.EditStateRepository
@@ -21,6 +22,7 @@ import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
+import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -90,4 +92,10 @@ object RepositoryModule {
     fun provideDeleteStateRepository(
         remoteData: RetrofitRemoteData
     ): DeleteStateRepository = DeleteStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStateFrequency(
+        remoteData: RetrofitRemoteData
+    ): GetStateFrequencyRepository = GetStateFrequencyRepositoryImpl(remoteData)
 }

@@ -3,24 +3,31 @@ package com.example.reflect.presentation.screens.statistics.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.StatisticTagModel
+import com.example.reflect.domain.usecase.statistic.GetFrequencyUseCase
+import com.example.reflect.presentation.common.DateUtils
+import com.example.reflect.presentation.common.DateUtils.getStringFromDate
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 @HiltViewModel
 class VIewModelStatistic @Inject constructor(
-
+    private val getFrequencyUseCase: GetFrequencyUseCase
 ): ViewModel() {
+
+    private val currentCalendar = Calendar.getInstance()
+    private val todayCalendar = Calendar.getInstance()
+    private val selectedCalendar = Calendar.getInstance()
 
     val userIntent = Channel<StatisticIntent>(Channel.UNLIMITED)
 
@@ -60,46 +67,40 @@ class VIewModelStatistic @Inject constructor(
 
     private fun getWeekStatistic() {
         // TODO: Запрос
-        _lineChartState.value = LineChartState.Loading
-//        _lineChartState.value = LineChartState.Success(listOf(
-//            Entry(0f, 9f),
-//            Entry(1f, 7f),
-//            Entry(2f, 10f),
-//            Entry(3f, 6f),
-//            Entry(4f, 8f),
-//            Entry(5f, 4f),
-//            Entry(6f, 2f)
-//        ))
+        selectedCalendar.time = currentCalendar.time
+        todayCalendar.time = currentCalendar.time
+        todayCalendar.add(Calendar.DAY_OF_MONTH, 1)
+        val currentDate = todayCalendar.time
+        selectedCalendar.add(Calendar.DAY_OF_MONTH, -7)
+        val selectedDate = selectedCalendar.time
 
-        _pieChartState.value = PieChartState.Loading
-//        _pieChartState.value = PieChartState.Success(listOf(
-//            PieEntry(10f, "Ужасное", 1),
-//            PieEntry(20f, "Плохое", 2),
-//            PieEntry(25f, "Нормальное", 3),
-//            PieEntry(35f, "Хорошее", 4),
-//            PieEntry(10f, "Замечательное", 5)
-//        ))
+        _timeRangeTitle.value = DateUtils.getWeekRange(currentCalendar, selectedCalendar)
+
+        _lineChartState.value = LineChartState.Loading
+
+        _pieChartState.value = PieChartState.Idle
+        viewModelScope.launch {
+            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _pieChartState.value = newState
+            }
+        }
+
 
         _firstStatisticTagState.value = StatisticTagState.Loading
-//        _firstStatisticTagState.value = StatisticTagState.Success(listOf(
-//            StatisticTagModel(1, "Счастливо", "\uD83D\uDE01", 20),
-//            StatisticTagModel(2, "Расслабленно", "\uD83D\uDE34", 14),
-//            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 7),
-//            StatisticTagModel(4, "Напряженно", "\uD83D\uDE15", 6),
-//            StatisticTagModel(5, "Нервно", "\uD83D\uDE15", 1),
-//        ))
 
         _secondStatisticTagState.value = StatisticTagState.Loading
-//        _secondStatisticTagState.value = StatisticTagState.Success(listOf(
-//            StatisticTagModel(1, "Учеба", "\uD83D\uDE01", 52),
-//            StatisticTagModel(2, "Питомец", "\uD83D\uDE34", 22),
-//            StatisticTagModel(3, "Финансы", "\uD83D\uDE0A", 16),
-//            StatisticTagModel(4, "Друзья", "\uD83D\uDE15", 8),
-//            StatisticTagModel(5, "Партнер", "\uD83D\uDE15", 1),
-//        ))
     }
 
     private fun getMonthStatistic() {
+        selectedCalendar.time = currentCalendar.time
+        todayCalendar.time = currentCalendar.time
+        todayCalendar.add(Calendar.DAY_OF_MONTH, 1)
+        val currentDate = todayCalendar.time
+        selectedCalendar.add(Calendar.MONTH, -1)
+        val selectedDate = selectedCalendar.time
+
+        _timeRangeTitle.value = DateUtils.getMonthRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
         _lineChartState.value = LineChartState.Success(listOf(
@@ -120,14 +121,13 @@ class VIewModelStatistic @Inject constructor(
             Entry(24f, 6f),
         ))
 
-        _pieChartState.value = PieChartState.Loading
-        _pieChartState.value = PieChartState.Success(listOf(
-//            PieEntry(0f, "Ужасное"),
-            PieEntry(2f, "Плохое", 2),
-            PieEntry(35f, "Нормальное", 3),
-            PieEntry(18f, "Хорошее",4),
-            PieEntry(45f, "Замечательное", 5)
-        ))
+        _pieChartState.value = PieChartState.Idle
+        viewModelScope.launch {
+            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _pieChartState.value = newState
+                }
+        }
 
         _firstStatisticTagState.value = StatisticTagState.Loading
         _firstStatisticTagState.value = StatisticTagState.Success(listOf(
@@ -149,12 +149,25 @@ class VIewModelStatistic @Inject constructor(
     }
 
     private fun getYearStatistic() {
+        selectedCalendar.time = currentCalendar.time
+        todayCalendar.time = currentCalendar.time
+        todayCalendar.add(Calendar.DAY_OF_MONTH, 1)
+        val currentDate = todayCalendar.time
+        selectedCalendar.add(Calendar.YEAR, -1)
+        val selectedDate = selectedCalendar.time
+
+        _timeRangeTitle.value = DateUtils.getYearRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
         _lineChartState.value = LineChartState.Success(mutableListOf())
 
-        _pieChartState.value = PieChartState.Loading
-        _pieChartState.value = PieChartState.Success(mutableListOf())
+        _pieChartState.value = PieChartState.Idle
+        viewModelScope.launch {
+            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _pieChartState.value = newState
+                }
+        }
 
         _firstStatisticTagState.value = StatisticTagState.Loading
         _firstStatisticTagState.value = StatisticTagState.Success(mutableListOf())
@@ -162,6 +175,5 @@ class VIewModelStatistic @Inject constructor(
         _secondStatisticTagState.value = StatisticTagState.Loading
         _secondStatisticTagState.value = StatisticTagState.Success(mutableListOf())
     }
-
 
 }

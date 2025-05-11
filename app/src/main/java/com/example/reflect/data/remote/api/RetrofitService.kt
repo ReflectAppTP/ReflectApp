@@ -22,7 +22,7 @@ import retrofit2.http.Query
 private const val authReflect = "api/authReflect"
 private const val token = "api/token"
 private const val emotions = "api/emotions"
-private const val statistic = "api/emotions/statistics/"
+private const val statistic = "api/emotions/statistics"
 
 interface RetrofitService {
 
@@ -56,6 +56,6 @@ interface RetrofitService {
     @DELETE("${emotions}/states/{id}/")
     suspend fun deleteState(@Path("id") id: Int): Response<Unit>
 
-    @GET("${statistic}/mood")
-    suspend fun getStateFrequency(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<StatisticMoodResponseDTO>
+    @GET("${statistic}/mood/")
+    suspend fun getStateFrequency(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticMoodResponseDTO>>
 }

@@ -219,7 +219,7 @@ class StatisticsFragment : Fragment() {
                 }
                 is PieChartState.Error -> {
                     fragmentStatisticLottiePieChart.visibility = View.GONE
-                    fragmentStatisticPieChart.visibility = View.VISIBLE
+                    fragmentStatisticPieChart.visibility = View.GONE
                     fragmentStatisticPieChart.data = null
 
                     ToastUtils.showErrorToast(context)
