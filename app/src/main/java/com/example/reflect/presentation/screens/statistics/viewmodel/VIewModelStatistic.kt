@@ -33,6 +33,9 @@ class VIewModelStatistic @Inject constructor(
     private var _firstStatisticTagState = MutableStateFlow<StatisticTagState>(StatisticTagState.Idle)
     val firstStatisticTagState: StateFlow<StatisticTagState> = _firstStatisticTagState
 
+    private var _secondStatisticTagState = MutableStateFlow<StatisticTagState>(StatisticTagState.Idle)
+    val secondStatisticTagState: StateFlow<StatisticTagState> = _secondStatisticTagState
+
 
     private var _timeRangeTitle = MutableStateFlow("")
     val timeRangeTitle: StateFlow<String> = _timeRangeTitle
@@ -85,6 +88,15 @@ class VIewModelStatistic @Inject constructor(
             StatisticTagModel(4, "Напряженно", "\uD83D\uDE15", 6),
             StatisticTagModel(5, "Нервно", "\uD83D\uDE15", 1),
         ))
+
+        _secondStatisticTagState.value = StatisticTagState.Loading
+        _secondStatisticTagState.value = StatisticTagState.Success(listOf(
+            StatisticTagModel(1, "Учеба", "\uD83D\uDE01", 52),
+            StatisticTagModel(2, "Питомец", "\uD83D\uDE34", 22),
+            StatisticTagModel(3, "Финансы", "\uD83D\uDE0A", 16),
+            StatisticTagModel(4, "Друзья", "\uD83D\uDE15", 8),
+            StatisticTagModel(5, "Партнер", "\uD83D\uDE15", 1),
+        ))
     }
 
     private fun getMonthStatistic() {
@@ -125,6 +137,15 @@ class VIewModelStatistic @Inject constructor(
             StatisticTagModel(4, "ЙОУЛИВО", "\uD83D\uDE15", 15),
             StatisticTagModel(5, "Гойдливо", "\uD83D\uDE15", 15),
         ))
+
+        _secondStatisticTagState.value = StatisticTagState.Loading
+        _secondStatisticTagState.value = StatisticTagState.Success(listOf(
+            StatisticTagModel(1, "Сосливо", "\uD83D\uDE01", 15),
+            StatisticTagModel(2, "Дрочливо", "\uD83D\uDE34", 15),
+            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 15),
+            StatisticTagModel(4, "ЙОУЛИВО", "\uD83D\uDE15", 15),
+            StatisticTagModel(5, "Гойдливо", "\uD83D\uDE15", 15),
+        ))
     }
 
     private fun getYearStatistic() {
@@ -137,6 +158,9 @@ class VIewModelStatistic @Inject constructor(
 
         _firstStatisticTagState.value = StatisticTagState.Loading
         _firstStatisticTagState.value = StatisticTagState.Success(mutableListOf())
+
+        _secondStatisticTagState.value = StatisticTagState.Loading
+        _secondStatisticTagState.value = StatisticTagState.Success(mutableListOf())
     }
 
 

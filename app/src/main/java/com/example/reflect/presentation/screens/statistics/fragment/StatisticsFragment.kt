@@ -44,6 +44,7 @@ class StatisticsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var statisticFirstTagsAdapter: StatisticTagListAdapter
+    private lateinit var statisticSecondTagsAdapter: StatisticTagListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,11 +83,21 @@ class StatisticsFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                vm.secondStatisticTagState.collect { state ->
+                    handleSecondBarChartState(state, context)
+                }
+            }
+        }
+
         setLineChartProperties(context)
         setPieChartProperties(context)
         setFirstBarChartProperties(context)
+        setSecondBarChartProperties(context)
 
         statisticFirstTagsAdapter = StatisticTagListAdapter()
+        statisticSecondTagsAdapter = StatisticTagListAdapter()
 
         with(binding) {
             lifecycleScope.launch {
@@ -97,6 +108,9 @@ class StatisticsFragment : Fragment() {
 
             fragmentStatisticCardFirstTagsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             fragmentStatisticCardFirstTagsRV.adapter = statisticFirstTagsAdapter
+            fragmentStatisticCardSecondTagsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            fragmentStatisticCardSecondTagsRV.adapter = statisticSecondTagsAdapter
+
             fragmentStatisticToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
                 if (isChecked) {
                     lifecycleScope.launch {
@@ -205,10 +219,10 @@ class StatisticsFragment : Fragment() {
             is StatisticTagState.Success -> {
                 with (binding){
                     if (state.data.isEmpty()) {
-                        fragmentStatisticRVGroup.visibility = View.GONE
+                        fragmentStatisticFirstRVGroup.visibility = View.GONE
                         fragmentStatisticFirstBarChart.visibility = View.VISIBLE
                     } else {
-                        fragmentStatisticRVGroup.visibility = View.VISIBLE
+                        fragmentStatisticFirstRVGroup.visibility = View.VISIBLE
                         fragmentStatisticFirstBarChart.visibility = View.GONE
 
                         statisticFirstTagsAdapter.submitList(null)
@@ -218,7 +232,7 @@ class StatisticsFragment : Fragment() {
                 }
             }
             is StatisticTagState.Error -> {
-                binding.fragmentStatisticRVGroup.visibility = View.GONE
+                binding.fragmentStatisticFirstRVGroup.visibility = View.GONE
                 binding.fragmentStatisticFirstBarChart.visibility = View.VISIBLE
                 ToastUtils.showErrorToast(context)
             }
@@ -231,12 +245,27 @@ class StatisticsFragment : Fragment() {
     private fun handleSecondBarChartState(state: StatisticTagState, context: Context) {
         when (state) {
             is StatisticTagState.Loading -> {
+                statisticSecondTagsAdapter.submitList(null)
                 Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
             }
             is StatisticTagState.Success -> {
+                with (binding){
+                    if (state.data.isEmpty()) {
+                        fragmentStatisticSecondRVGroup.visibility = View.GONE
+                        fragmentStatisticSecondBarChart.visibility = View.VISIBLE
+                    } else {
+                        fragmentStatisticSecondRVGroup.visibility = View.VISIBLE
+                        fragmentStatisticSecondBarChart.visibility = View.GONE
 
+                        statisticSecondTagsAdapter.submitList(null)
+                        statisticSecondTagsAdapter.submitList(state.data.toMutableList())
+                    }
+                    fragmentStatisticSecondBarChart.animateX(state.data.size * 100)
+                }
             }
             is StatisticTagState.Error -> {
+                binding.fragmentStatisticSecondRVGroup.visibility = View.GONE
+                binding.fragmentStatisticSecondBarChart.visibility = View.VISIBLE
                 ToastUtils.showErrorToast(context)
             }
             is StatisticTagState.Idle -> {
@@ -335,6 +364,20 @@ class StatisticsFragment : Fragment() {
     private fun setFirstBarChartProperties(context: Context) {
         with (binding) {
             with (fragmentStatisticFirstBarChart) {
+                data = null
+                setNoDataText(context.resources.getString(R.string.fragmentStatisticEmptyChartData))
+                getPaint(Chart.PAINT_INFO).apply {
+                    textSize = 60f
+                    color = ContextCompat.getColor(context, R.color.onSurface)
+                }
+                invalidate()
+            }
+        }
+    }
+
+    private fun setSecondBarChartProperties(context: Context) {
+        with (binding) {
+            with (fragmentStatisticSecondBarChart) {
                 data = null
                 setNoDataText(context.resources.getString(R.string.fragmentStatisticEmptyChartData))
                 getPaint(Chart.PAINT_INFO).apply {

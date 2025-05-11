@@ -133,4 +133,5 @@
     <string name="fragmentStatisticFirstTagsTitle">Чаще всего вы испытывали эмоции:</string>
     <string name="fragmentStatisticStateFrequency">Частота настроения</string>
     <string name="fragmentStatisticEmptyChartData">Пока что данных недостаточно</string>
+    <string name="fragmentStatisticSecondTagsTitle">Преимущественно, причинами ваших эмоций были:</string>
 </resources>
