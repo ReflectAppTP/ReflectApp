@@ -122,11 +122,11 @@ class StatisticsFragment : Fragment() {
                             }
                             R.id.fragmentStatisticMonthButton -> {
                                 vm.userIntent.send(StatisticIntent.MonthStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter(context.resources.getStringArray(R.array.days))
                             }
                             R.id.fragmentStatisticYearButton -> {
                                 vm.userIntent.send(StatisticIntent.YearStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter(context.resources.getStringArray(R.array.days))
                             }
                         }
                     }

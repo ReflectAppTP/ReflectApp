@@ -11,6 +11,7 @@ import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetMonthlyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
@@ -25,6 +26,7 @@ import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
+import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
 import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticTagsRepository
@@ -122,4 +124,10 @@ object RepositoryModule {
     fun provideGetWeeklyAverage(
         remoteData: RetrofitRemoteData
     ): GetWeeklyAverageRepository = GetWeeklyAverageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetMonthlyAverage(
+        remoteData: RetrofitRemoteData
+    ): GetMonthlyAverageRepository = GetMonthlyAverageRepositoryImpl(remoteData)
 }

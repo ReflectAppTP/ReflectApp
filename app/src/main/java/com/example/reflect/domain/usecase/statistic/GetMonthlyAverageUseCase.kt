@@ -4,25 +4,26 @@ import android.util.Log
 import com.example.reflect.common.RetrofitException
 import com.example.reflect.common.RetrofitExceptionHandler
 import com.example.reflect.domain.model.StatisticAverageModel
+import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
 import com.example.reflect.domain.repository.statistic.GetWeeklyAverageRepository
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
+import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.ConnectException
-import com.github.mikephil.charting.data.Entry
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
 
-class GetWeeklyAverageUseCase @Inject constructor(
-    private val getWeeklyAverageRepository: GetWeeklyAverageRepository
+class GetMonthlyAverageUseCase @Inject constructor(
+    private val getMonthlyAverageRepository: GetMonthlyAverageRepository
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
-            val records = getWeeklyAverageRepository.getWeeklyAverage()
-            emit(LineChartState.Success(records.map { it.toEntry() }, TimeRange.WEEK))
+            val records = getMonthlyAverageRepository.getMonthlyAverage()
+            emit(LineChartState.Success(records.map { it.toEntry() }, TimeRange.MONTH))
         } catch (e: RetrofitException) {
             emit(LineChartState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
         } catch (e: ConnectException) {
@@ -37,7 +38,6 @@ class GetWeeklyAverageUseCase @Inject constructor(
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.date)
         val calendar = Calendar.getInstance()
         calendar.time = date!!
-        // TODO: костыль с датой
-        return Entry((calendar.get(Calendar.DAY_OF_WEEK) - 2).toFloat(),this.averageMood)
+        return Entry((calendar.get(Calendar.DAY_OF_MONTH) - 1).toFloat(),this.averageMood)
     }
 }

@@ -3,6 +3,7 @@ package com.example.reflect.presentation.screens.statistics.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.statistic.GetFrequencyUseCase
+import com.example.reflect.domain.usecase.statistic.GetMonthlyAverageUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticEmotionalTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
@@ -25,6 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class VIewModelStatistic @Inject constructor(
     private val getWeeklyAverageUseCase: GetWeeklyAverageUseCase,
+    private val getMonthlyAverageUseCase: GetMonthlyAverageUseCase,
     private val getFrequencyUseCase: GetFrequencyUseCase,
     private val getStatisticTagsUseCase: GetStatisticTagsUseCase,
     private val getStatisticEmotionalTagsUseCase: GetStatisticEmotionalTagsUseCase,
@@ -128,8 +130,13 @@ class VIewModelStatistic @Inject constructor(
         val endDate = getStringFromDate(currentDate)
 
         _timeRangeTitle.value = DateUtils.getMonthRange(currentCalendar, selectedCalendar)
-        // TODO: Запрос
-        _lineChartState.value = LineChartState.Loading
+
+        _lineChartState.value = LineChartState.Idle
+        viewModelScope.launch {
+            getMonthlyAverageUseCase().collect { newState ->
+                _lineChartState.value = newState
+            }
+        }
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
