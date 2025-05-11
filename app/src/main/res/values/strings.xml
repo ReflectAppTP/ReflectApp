@@ -118,4 +118,19 @@
 
     <!-- StatisticFragment -->
     <string name="cardStatisticTagTV">%1$d раз(а)</string>
+    <string-array name="fragmentStatisticWeekArray">
+        <item>пн</item>
+        <item>вт</item>
+        <item>ср</item>
+        <item>чт</item>
+        <item>пт</item>
+        <item>сб</item>
+        <item>вс</item>
+    </string-array>
+    <string name="fragmentStatisticToggleGroupWeek">Неделя</string>
+    <string name="fragmentStatisticToggleGroupMonth">Месяц</string>
+    <string name="fragmentStatisticToggleGroupYear">Год</string>
+    <string name="fragmentStatisticFirstTagsTitle">Чаще всего вы испытывали эмоции:</string>
+    <string name="fragmentStatisticStateFrequency">Частота настроения</string>
+    <string name="fragmentStatisticEmptyChartData">Пока что данных недостаточно</string>
 </resources>

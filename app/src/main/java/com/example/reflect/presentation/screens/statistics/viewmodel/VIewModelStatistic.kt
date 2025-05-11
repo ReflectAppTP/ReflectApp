@@ -7,7 +7,6 @@ import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.example.reflect.presentation.screens.statistics.states.PieChartState
-import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +32,10 @@ class VIewModelStatistic @Inject constructor(
 
     private var _firstStatisticTagState = MutableStateFlow<StatisticTagState>(StatisticTagState.Idle)
     val firstStatisticTagState: StateFlow<StatisticTagState> = _firstStatisticTagState
+
+
+    private var _timeRangeTitle = MutableStateFlow("")
+    val timeRangeTitle: StateFlow<String> = _timeRangeTitle
 
     init {
         getWeekStatistic()

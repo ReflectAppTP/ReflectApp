@@ -89,6 +89,12 @@ class StatisticsFragment : Fragment() {
         statisticFirstTagsAdapter = StatisticTagListAdapter()
 
         with(binding) {
+            lifecycleScope.launch {
+                vm.timeRangeTitle.collect { data ->
+                    fragmentStatisticTimeRangeTitle.text = data
+                }
+            }
+
             fragmentStatisticCardFirstTagsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             fragmentStatisticCardFirstTagsRV.adapter = statisticFirstTagsAdapter
             fragmentStatisticToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
@@ -97,7 +103,7 @@ class StatisticsFragment : Fragment() {
                         when (checkedId) {
                             R.id.fragmentStatisticWeekButton -> {
                                 vm.userIntent.send(StatisticIntent.WeekStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = WeekXAxisFormatter()
+                                fragmentStatisticLineChart.xAxis.valueFormatter = WeekXAxisFormatter(context.resources.getStringArray(R.array.fragmentStatisticWeekArray))
                             }
                             R.id.fragmentStatisticMonthButton -> {
                                 vm.userIntent.send(StatisticIntent.MonthStatistic)
@@ -132,14 +138,12 @@ class StatisticsFragment : Fragment() {
             }
             is LineChartState.Success -> {
                 binding.fragmentStatisticLineChart.data = if (state.data.isEmpty()) null else LineData(
-                    LineDataSet(state.data, "Среднее значение за период").apply {
+                    LineDataSet(state.data, " ").apply {
                         lineWidth = 5f
                         color = ContextCompat.getColor(context, R.color.tertiary)
                         circleColors = mutableListOf(ContextCompat.getColor(context, R.color.tertiary))
                         circleRadius = 5f
                         circleHoleRadius = 2f
-//                        valueTextSize = 9f
-//                        highLightColor = ContextCompat.getColor(context, R.color.tertiary)
                 }).apply { setDrawValues(false) }
                 binding.fragmentStatisticLineChart.animateX(state.data.size * 80)
             }
@@ -175,30 +179,12 @@ class StatisticsFragment : Fragment() {
                     }
                     binding.fragmentStatisticPieChart.data = PieData(PieDataSet(state.data, "").apply {
                         colors = dataSetColors
-//                        valueTextSize = 0f
-//                        valueTextColor = ContextCompat.getColor(context, R.color.onSurface)
                         sliceSpace = 5f
                         selectionShift = 5f
                     }).apply {
-//                        setValueFormatter(PercentFormatter(binding.fragmentStatisticPieChart))
                         setDrawValues(false)
                     }
                 }
-//                binding.fragmentStatisticPieChart.data = if (state.data.isEmpty()) null else PieData(
-//                    PieDataSet(state.data, "").apply {
-//                        colors = mutableListOf(
-//                            ContextCompat.getColor(context, R.color.tertiary),
-//                            ContextCompat.getColor(context, R.color.primary),
-//                            ContextCompat.getColor(context, R.color.secondary),
-//                            ContextCompat.getColor(context, R.color.error),
-//                            ContextCompat.getColor(context, R.color.onErrorContainer),
-//                        )
-//                        valueTextSize = 14f
-//                        valueTextColor = ContextCompat.getColor(context, R.color.surfaceContainerLow)
-//                        sliceSpace = 3f
-//                        selectionShift = 5f
-//                    }
-//                ).apply { }
                 binding.fragmentStatisticPieChart.animateX(state.data.size * 100)
             }
             is PieChartState.Error -> {
@@ -276,7 +262,6 @@ class StatisticsFragment : Fragment() {
                 }
 
                 axisRight.apply {
-//                    isEnabled = false
                     setDrawTopYLabelEntry(false)
                     setDrawZeroLine(true)
                     setDrawGridLines(false)
@@ -295,21 +280,14 @@ class StatisticsFragment : Fragment() {
                     textColor = ContextCompat.getColor(context, R.color.onSurface)
                     textSize = testSize
                 }
-                legend.isEnabled = false
-//                legend.apply {
-//                    textSize = testSize + 6f
-//                    textColor = ContextCompat.getColor(context, R.color.onSurface)
-//                    verticalAlignment = Legend.LegendVerticalAlignment.TOP
-//                    yEntrySpace = 100f
-//                    formToTextSpace = 12f
-//                }
 
+                legend.isEnabled = false
                 description.isEnabled = false
 
-                setNoDataText("Пока что здесь пусто")
+                setNoDataText(context.resources.getString(R.string.fragmentStatisticEmptyChartData))
                 getPaint(Chart.PAINT_INFO).apply {
-                    textSize = 56f
-                    color = ContextCompat.getColor(context, R.color.primary)
+                    textSize = 60f
+                    color = ContextCompat.getColor(context, R.color.onSurface)
                 }
                 invalidate()
             }
@@ -321,7 +299,7 @@ class StatisticsFragment : Fragment() {
             with (fragmentStatisticPieChart) {
                 setExtraOffsets(8f,0f,4f,0f)
 
-                centerText = "Частота настроения"
+                centerText = context.resources.getString(R.string.fragmentStatisticStateFrequency)
                 setCenterTextTypeface(Typeface.createFromAsset(context.assets, "fonts/InterSemiBold.ttf"))
                 setCenterTextSize(14f)
 
@@ -344,10 +322,10 @@ class StatisticsFragment : Fragment() {
 
                 transparentCircleRadius = 50f
 
-                setNoDataText("Пока что здесь пусто")
+                setNoDataText(context.resources.getString(R.string.fragmentStatisticEmptyChartData))
                 getPaint(Chart.PAINT_INFO).apply {
-                    textSize = 56f
-                    color = ContextCompat.getColor(context, R.color.primary)
+                    textSize = 60f
+                    color = ContextCompat.getColor(context, R.color.onSurface)
                 }
                 invalidate()
             }
@@ -357,28 +335,11 @@ class StatisticsFragment : Fragment() {
     private fun setFirstBarChartProperties(context: Context) {
         with (binding) {
             with (fragmentStatisticFirstBarChart) {
-//                fitScreen()
-//                setExtraOffsets(-10f,6f,-10f,20f)
-////                setFitBars(true)
-//
-//                xAxis.apply {
-//                    position = XAxis.XAxisPosition.BOTTOM
-//                    granularity = 1f
-//                    setDrawGridLines(false)
-//                    valueFormatter = TagXAxisFormatter(vm.firstBarChartLabels.value)
-//                }
-//
-//                axisLeft.isEnabled = false
-//                axisRight.isEnabled = false
-//
-//                legend.isEnabled = false
-//                description.isEnabled = false
-
                 data = null
-                setNoDataText("Пока что здесь пусто")
+                setNoDataText(context.resources.getString(R.string.fragmentStatisticEmptyChartData))
                 getPaint(Chart.PAINT_INFO).apply {
-                    textSize = 56f
-                    color = ContextCompat.getColor(context, R.color.primary)
+                    textSize = 60f
+                    color = ContextCompat.getColor(context, R.color.onSurface)
                 }
                 invalidate()
             }

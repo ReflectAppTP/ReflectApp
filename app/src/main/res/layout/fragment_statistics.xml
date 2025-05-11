@@ -32,7 +32,7 @@
         android:id="@+id/fragmentStatisticToggleGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="11dp"
+        android:layout_marginHorizontal="@dimen/fragmentStatisticToggleGroupMarginHorizontal_11dp"
         app:singleSelection="true"
         app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToolbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_weight="1"
-            android:text="Неделя"
+            android:text="@string/fragmentStatisticToggleGroupWeek"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_weight="1"
-            android:text="Месяц"
+            android:text="@string/fragmentStatisticToggleGroupMonth"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -63,17 +63,29 @@
             android:layout_height="wrap_content"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_weight="1"
-            android:text="Год"
+            android:text="@string/fragmentStatisticToggleGroupYear"
             />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
+    <TextView
+        android:id="@+id/fragmentStatisticTimeRangeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/onSurface"
+        android:gravity="center"
+        tools:text="июнь 2024-июнь 2025г."
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToggleGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToggleGroup"
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticTimeRangeTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
@@ -81,15 +93,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="@dimen/fragmentStatisticTimeRangeMarginBottom_5dp"
             >
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragmentStatisticCardLineChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="2dp"
-                android:layout_marginHorizontal="4dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -99,16 +111,16 @@
                     android:id="@+id/fragmentStatisticLineChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="300dp"/>
+                    android:minHeight="@dimen/fragmentStatisticCardHeight_300dp"/>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragmentStatisticCardPieChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="2dp"
-                android:layout_marginVertical="12dp"
-                android:layout_marginHorizontal="4dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginVertical="@dimen/fragmentStatisticCardMarginVertical_12dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardLineChart"
@@ -118,17 +130,17 @@
                     android:id="@+id/fragmentStatisticPieChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="300dp"
+                    android:minHeight="@dimen/fragmentStatisticCardHeight_300dp"
                     />
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/fragmentStatisticCardFirstBarChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:cardElevation="2dp"
-                android:layout_marginVertical="12dp"
-                android:layout_marginHorizontal="4dp"
+                android:layout_height="@dimen/fragmentStatisticCardHeight_300dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginVertical="@dimen/fragmentStatisticCardMarginVertical_12dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardPieChart"
@@ -137,14 +149,15 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="14dp"
+                    android:layout_margin="@dimen/fragmentStatisticCardConstraintLayoutMargin_14dp"
                     >
 
                     <TextView
                         android:id="@+id/fragmentStatisticCardFirstTagsTitleTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Чаще всего вы испытывали эмоции:"
+                        android:text="@string/fragmentStatisticFirstTagsTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +167,7 @@
                         android:id="@+id/fragmentStatisticCardFirstTagsRV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="@dimen/fragmentStatisticCardRVMarginTop_6dp"
                         tools:listitem="@layout/card_statistic_tag"
                         tools:itemCount="5"
                         app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstTagsTitleTV"
@@ -180,7 +193,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="240dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstBarChart"
@@ -188,14 +201,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--    <androidx.recyclerview.widget.RecyclerView-->
-        <!--        android:id="@+id/fragmentStatisticRV"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/fragmentStatisticToolbar"-->
-        <!--        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"/>-->
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
