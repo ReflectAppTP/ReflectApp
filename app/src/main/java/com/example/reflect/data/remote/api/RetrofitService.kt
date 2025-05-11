@@ -10,6 +10,7 @@ import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
+import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -58,4 +59,7 @@ interface RetrofitService {
 
     @GET("${statistic}/mood/")
     suspend fun getStateFrequency(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticMoodResponseDTO>>
+
+    @GET("${statistic}/tags/")
+    suspend fun getStatisticTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
 }

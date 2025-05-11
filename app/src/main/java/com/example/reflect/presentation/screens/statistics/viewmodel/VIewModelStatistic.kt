@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.domain.usecase.statistic.GetFrequencyUseCase
+import com.example.reflect.domain.usecase.statistic.GetStatisticTagsUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.DateUtils.getStringFromDate
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VIewModelStatistic @Inject constructor(
-    private val getFrequencyUseCase: GetFrequencyUseCase
+    private val getFrequencyUseCase: GetFrequencyUseCase,
+    private val getStatisticTagsUseCase: GetStatisticTagsUseCase
 ): ViewModel() {
 
     private val currentCalendar = Calendar.getInstance()
@@ -87,9 +89,15 @@ class VIewModelStatistic @Inject constructor(
         }
 
 
-        _firstStatisticTagState.value = StatisticTagState.Loading
+        _firstStatisticTagState.value = StatisticTagState.Idle
 
-        _secondStatisticTagState.value = StatisticTagState.Loading
+        _secondStatisticTagState.value = StatisticTagState.Idle
+        viewModelScope.launch {
+            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _secondStatisticTagState.value = newState
+                }
+        }
     }
 
     private fun getMonthStatistic() {
@@ -129,23 +137,16 @@ class VIewModelStatistic @Inject constructor(
                 }
         }
 
-        _firstStatisticTagState.value = StatisticTagState.Loading
-        _firstStatisticTagState.value = StatisticTagState.Success(listOf(
-            StatisticTagModel(1, "Сосливо", "\uD83D\uDE01", 15),
-            StatisticTagModel(2, "Дрочливо", "\uD83D\uDE34", 15),
-            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 15),
-            StatisticTagModel(4, "ЙОУЛИВО", "\uD83D\uDE15", 15),
-            StatisticTagModel(5, "Гойдливо", "\uD83D\uDE15", 15),
-        ))
+        _firstStatisticTagState.value = StatisticTagState.Idle
 
-        _secondStatisticTagState.value = StatisticTagState.Loading
-        _secondStatisticTagState.value = StatisticTagState.Success(listOf(
-            StatisticTagModel(1, "Сосливо", "\uD83D\uDE01", 15),
-            StatisticTagModel(2, "Дрочливо", "\uD83D\uDE34", 15),
-            StatisticTagModel(3, "Удовлетворенно", "\uD83D\uDE0A", 15),
-            StatisticTagModel(4, "ЙОУЛИВО", "\uD83D\uDE15", 15),
-            StatisticTagModel(5, "Гойдливо", "\uD83D\uDE15", 15),
-        ))
+
+        _secondStatisticTagState.value = StatisticTagState.Idle
+        viewModelScope.launch {
+            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _secondStatisticTagState.value = newState
+                }
+        }
     }
 
     private fun getYearStatistic() {
@@ -169,11 +170,15 @@ class VIewModelStatistic @Inject constructor(
                 }
         }
 
-        _firstStatisticTagState.value = StatisticTagState.Loading
-        _firstStatisticTagState.value = StatisticTagState.Success(mutableListOf())
+        _firstStatisticTagState.value = StatisticTagState.Idle
 
-        _secondStatisticTagState.value = StatisticTagState.Loading
-        _secondStatisticTagState.value = StatisticTagState.Success(mutableListOf())
+        _secondStatisticTagState.value = StatisticTagState.Idle
+        viewModelScope.launch {
+            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+                .collect { newState ->
+                    _secondStatisticTagState.value = newState
+                }
+        }
     }
 
 }

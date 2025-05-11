@@ -22,4 +22,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun deleteState(id: Int) = retrofitService.deleteState(id)
 
     suspend fun getStateFrequency(startDate: String, endDate: String) = retrofitService.getStateFrequency(startDate, endDate)
+    suspend fun getStatisticTags(startDate: String, endDate: String) = retrofitService.getStatisticTags(startDate, endDate)
 }
