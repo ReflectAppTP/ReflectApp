@@ -90,7 +90,6 @@ class ViewModelRecords @Inject constructor(
 
     fun updateSelectedDate() {
         _selectedDate.value = mutableCalendar.time
-        Log.d("Ok", "Сейча ${currentCalendar.get(Calendar.DAY_OF_MONTH)}, а выбранно ${mutableCalendar.get(Calendar.DAY_OF_MONTH)}")
         _selectedDateText.value = DateUtils.dateToString(today = currentCalendar, currentDate = mutableCalendar)
         fetchRecords()
     }
