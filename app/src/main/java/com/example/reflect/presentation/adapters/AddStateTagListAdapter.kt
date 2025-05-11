@@ -27,6 +27,7 @@ class AddStateTagListAdapter(
                 root.checkedIcon = null
                 if (selectedTags.contains(model.id)) {
                     changeCardState(context, true)
+                    root.isChecked = !root.isChecked
                 }
                 root.setOnClickListener {
                     root.isChecked = !root.isChecked
