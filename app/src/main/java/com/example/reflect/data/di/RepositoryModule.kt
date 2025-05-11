@@ -1,26 +1,38 @@
 package com.example.reflect.data.di
 
 import com.example.reflect.data.remote.data.RetrofitRemoteData
-import com.example.reflect.data.repository.AddStateRepositoryImpl
-import com.example.reflect.data.repository.DeleteStateRepositoryImpl
-import com.example.reflect.data.repository.EditStateRepositoryImpl
-import com.example.reflect.data.repository.GetFirstTagsRepositoryImpl
-import com.example.reflect.data.repository.GetProfileRepositoryImpl
-import com.example.reflect.data.repository.GetSecondTagsRepositoryImpl
-import com.example.reflect.data.repository.GetStatesRepositoryImpl
-import com.example.reflect.data.repository.LoginRepositoryImpl
-import com.example.reflect.data.repository.RefreshRepositoryImpl
-import com.example.reflect.data.repository.RegistrationRepositoryImpl
-import com.example.reflect.domain.repository.AddStateRepository
-import com.example.reflect.domain.repository.DeleteStateRepository
-import com.example.reflect.domain.repository.EditStateRepository
-import com.example.reflect.domain.repository.GetFirstTagsRepository
-import com.example.reflect.domain.repository.GetProfileRepository
-import com.example.reflect.domain.repository.GetSecondTagsRepository
-import com.example.reflect.domain.repository.GetStatesRepository
-import com.example.reflect.domain.repository.LoginRepository
-import com.example.reflect.domain.repository.RefreshRepository
-import com.example.reflect.domain.repository.RegistrationRepository
+import com.example.reflect.data.repository.state.AddStateRepositoryImpl
+import com.example.reflect.data.repository.state.DeleteStateRepositoryImpl
+import com.example.reflect.data.repository.state.EditStateRepositoryImpl
+import com.example.reflect.data.repository.state.GetFirstTagsRepositoryImpl
+import com.example.reflect.data.repository.auth.GetProfileRepositoryImpl
+import com.example.reflect.data.repository.state.GetSecondTagsRepositoryImpl
+import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
+import com.example.reflect.data.repository.auth.LoginRepositoryImpl
+import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
+import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetMonthlyAverageRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetWeeklyAverageRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetYearlyAverageRepositoryImpl
+import com.example.reflect.domain.repository.state.AddStateRepository
+import com.example.reflect.domain.repository.state.DeleteStateRepository
+import com.example.reflect.domain.repository.state.EditStateRepository
+import com.example.reflect.domain.repository.state.GetFirstTagsRepository
+import com.example.reflect.domain.repository.auth.GetProfileRepository
+import com.example.reflect.domain.repository.state.GetSecondTagsRepository
+import com.example.reflect.domain.repository.state.GetStatesRepository
+import com.example.reflect.domain.repository.auth.LoginRepository
+import com.example.reflect.domain.repository.auth.RefreshRepository
+import com.example.reflect.domain.repository.auth.RegistrationRepository
+import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
+import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
+import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
+import com.example.reflect.domain.repository.statistic.GetStatisticTagsRepository
+import com.example.reflect.domain.repository.statistic.GetWeeklyAverageRepository
+import com.example.reflect.domain.repository.statistic.GetYearlyAverageRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -90,4 +102,40 @@ object RepositoryModule {
     fun provideDeleteStateRepository(
         remoteData: RetrofitRemoteData
     ): DeleteStateRepository = DeleteStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStateFrequency(
+        remoteData: RetrofitRemoteData
+    ): GetStateFrequencyRepository = GetStateFrequencyRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStatisticTags(
+        remoteData: RetrofitRemoteData
+    ): GetStatisticTagsRepository = GetStatisticTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStatisticEmotionalTags(
+        remoteData: RetrofitRemoteData
+    ): GetStatisticEmotionalTagsRepository = GetStatisticEmotionalTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetWeeklyAverage(
+        remoteData: RetrofitRemoteData
+    ): GetWeeklyAverageRepository = GetWeeklyAverageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetMonthlyAverage(
+        remoteData: RetrofitRemoteData
+    ): GetMonthlyAverageRepository = GetMonthlyAverageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetYearlyAverage(
+        remoteData: RetrofitRemoteData
+    ): GetYearlyAverageRepository = GetYearlyAverageRepositoryImpl(remoteData)
 }

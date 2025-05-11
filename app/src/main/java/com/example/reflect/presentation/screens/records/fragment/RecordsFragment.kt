@@ -41,6 +41,7 @@ class RecordsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var recordsAdapter: RecordsListAdapter
+    private lateinit var datePicker: MaterialDatePicker<Long>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,22 +72,8 @@ class RecordsFragment : Fragment() {
             }
         }
 
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setSelection(vm.mutableCalendar.timeInMillis)
-            .setTitleText(R.string.selectDate)
-            .setTheme(R.style.ThemeOverlay_App_DatePicker)
-            .build()
-
-        datePicker.addOnPositiveButtonClickListener {
-            val selectedDate = vm.mutableCalendar.apply {
-                timeInMillis = it
-            }
-            vm.updateSelectedDate(
-                selectedDate.get(Calendar.YEAR),
-                selectedDate.get(Calendar.MONTH),
-                selectedDate.get(Calendar.DAY_OF_MONTH)
-            )
-        }
+        datePicker = createDatePicker()
+        setupDatePickerListeners(datePicker)
 
         with (binding) {
             lifecycleScope.launch {
@@ -115,8 +102,12 @@ class RecordsFragment : Fragment() {
 
                 }
                 override fun onAnimationEnd(p0: Animation?) {
-                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, -1)
+                    vm.mutableCalendar.roll(Calendar.DAY_OF_MONTH, 1)
                     vm.updateSelectedDate()
+
+                    datePicker = createDatePicker()
+                    setupDatePickerListeners(datePicker)
+
                     fragmentRecordsDateTV.startAnimation(sir)
                 }
                 override fun onAnimationRepeat(p0: Animation?) {
@@ -128,8 +119,12 @@ class RecordsFragment : Fragment() {
 
                 }
                 override fun onAnimationEnd(p0: Animation?) {
-                    vm.mutableCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                    vm.mutableCalendar.roll(Calendar.DAY_OF_MONTH, -1)
                     vm.updateSelectedDate()
+
+                    datePicker = createDatePicker()
+                    setupDatePickerListeners(datePicker)
+
                     fragmentRecordsDateTV.startAnimation(sil)
                 }
                 override fun onAnimationRepeat(p0: Animation?) {
@@ -137,11 +132,11 @@ class RecordsFragment : Fragment() {
                 }
             })
             fragmentRecordsICChevronLeft.setOnClickListener {
-                fragmentRecordsDateTV.startAnimation(sol)
+                fragmentRecordsDateTV.startAnimation(sor)
             }
 
             fragmentRecordsICChevronRight.setOnClickListener {
-                fragmentRecordsDateTV.startAnimation(sor)
+                fragmentRecordsDateTV.startAnimation(sol)
             }
 
             fragmentRecordsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -203,6 +198,27 @@ class RecordsFragment : Fragment() {
             is RecordState.Idle -> {
                 Unit
             }
+        }
+    }
+
+    private fun createDatePicker(): MaterialDatePicker<Long> {
+        return MaterialDatePicker.Builder.datePicker()
+            .setSelection(vm.mutableCalendar.timeInMillis)
+            .setTitleText(R.string.selectDate)
+            .setTheme(R.style.ThemeOverlay_App_DatePicker)
+            .build()
+    }
+
+    private fun setupDatePickerListeners(datePicker: MaterialDatePicker<Long>) {
+        datePicker.addOnPositiveButtonClickListener {
+            val selectedDate = vm.mutableCalendar.apply {
+                timeInMillis = it
+            }
+            vm.updateSelectedDate(
+                selectedDate.get(Calendar.YEAR),
+                selectedDate.get(Calendar.MONTH),
+                selectedDate.get(Calendar.DAY_OF_MONTH)
+            )
         }
     }
 }

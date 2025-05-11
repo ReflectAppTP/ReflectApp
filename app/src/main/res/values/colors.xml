@@ -35,4 +35,11 @@
     <color name="backgroundColorDialogButton">#F4F4EF</color>
 
     <color name="primary80">#ABD0A6</color>
+
+    <color name="pieChartStateAwful">#FF5151</color>
+    <color name="pieChartStateBad">#FF8B49</color>
+    <color name="pieChartStateNormal">#FFEF42</color>
+    <color name="pieChartStateNice">#ABFF4C</color>
+    <color name="pieChartStateMagnifique">#53F175</color>
+
 </resources>

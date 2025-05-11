@@ -28,13 +28,280 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentStatisticRV"
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/fragmentStatisticToggleGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fragmentStatisticToggleGroupMarginHorizontal_11dp"
+        app:singleSelection="true"
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragmentStatisticWeekButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="@string/fragmentStatisticToggleGroupWeek"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragmentStatisticMonthButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="@string/fragmentStatisticToggleGroupMonth"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragmentStatisticYearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_weight="1"
+            android:text="@string/fragmentStatisticToggleGroupYear"
+            />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:id="@+id/fragmentStatisticTimeRangeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/onSurface"
+        android:gravity="center"
+        tools:text="июнь 2024-июнь 2025г."
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticToggleGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticTimeRangeTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentStatisticToolbar"
-        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"/>
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragmentStatisticTimeRangeMarginBottom_5dp"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragmentStatisticCardHeight_300dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/fragmentStatisticLottieLineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_rawRes="@raw/loading_animation"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/fragmentStatisticLineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardPieChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragmentStatisticCardHeight_300dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginVertical="@dimen/fragmentStatisticCardMarginVertical_12dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardLineChart"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/fragmentStatisticLottiePieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_rawRes="@raw/loading_animation"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/fragmentStatisticPieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardFirstBarChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragmentStatisticCardHeight_300dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginVertical="@dimen/fragmentStatisticCardMarginVertical_12dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardPieChart"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/fragmentStatisticCardConstraintLayoutMargin_14dp"
+                    >
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/fragmentStatisticLottieFirstTagsChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_rawRes="@raw/loading_animation"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true" />
+
+                    <TextView
+                        android:id="@+id/fragmentStatisticCardFirstTagsTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragmentStatisticFirstTagsTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fragmentStatisticCardFirstTagsRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragmentStatisticCardRVMarginTop_6dp"
+                        tools:listitem="@layout/card_statistic_tag"
+                        tools:itemCount="5"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstTagsTitleTV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="fragmentStatisticCardFirstTagsTitleTV, fragmentStatisticCardFirstTagsRV"
+                        android:id="@+id/fragmentStatisticFirstRVGroup"
+                        />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/fragmentStatisticFirstBarChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentStatisticCardSecondBarChart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/fragmentStatisticCardHeight_300dp"
+                app:cardElevation="@dimen/fragmentStatisticCardElevation_2dp"
+                android:layout_marginVertical="@dimen/fragmentStatisticCardMarginVertical_12dp"
+                android:layout_marginHorizontal="@dimen/fragmentStatisticCardMarginHorizontal_4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardFirstBarChart"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/fragmentStatisticCardConstraintLayoutMargin_14dp"
+                    >
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/fragmentStatisticLottieSecondTagsChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_rawRes="@raw/loading_animation"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true" />
+
+                    <TextView
+                        android:id="@+id/fragmentStatisticCardSecondTagsTitleTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragmentStatisticSecondTagsTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fragmentStatisticCardSecondTagsRV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragmentStatisticCardRVMarginTop_6dp"
+                        tools:listitem="@layout/card_statistic_tag"
+                        tools:itemCount="5"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardSecondTagsTitleTV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="fragmentStatisticCardSecondTagsTitleTV, fragmentStatisticCardSecondTagsRV"
+                        android:id="@+id/fragmentStatisticSecondRVGroup"
+                        />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/fragmentStatisticSecondBarChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentStatisticCardSecondBarChart"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

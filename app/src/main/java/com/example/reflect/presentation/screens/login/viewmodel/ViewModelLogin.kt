@@ -2,8 +2,8 @@ package com.example.reflect.presentation.screens.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.reflect.domain.usecase.GetProfileUseCase
-import com.example.reflect.domain.usecase.LoginUseCase
+import com.example.reflect.domain.usecase.auth.GetProfileUseCase
+import com.example.reflect.domain.usecase.auth.LoginUseCase
 import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel

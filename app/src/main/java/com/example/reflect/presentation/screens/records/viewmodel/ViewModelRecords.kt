@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
-import com.example.reflect.domain.usecase.DeleteStateUseCase
-import com.example.reflect.domain.usecase.GetStatesUseCase
+import com.example.reflect.domain.usecase.state.DeleteStateUseCase
+import com.example.reflect.domain.usecase.state.GetStatesUseCase
+import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
@@ -89,7 +90,6 @@ class ViewModelRecords @Inject constructor(
 
     fun updateSelectedDate() {
         _selectedDate.value = mutableCalendar.time
-        Log.d("Ok", "Сейча ${currentCalendar.get(Calendar.DAY_OF_MONTH)}, а выбранно ${mutableCalendar.get(Calendar.DAY_OF_MONTH)}")
         _selectedDateText.value = DateUtils.dateToString(today = currentCalendar, currentDate = mutableCalendar)
         fetchRecords()
     }

@@ -9,6 +9,9 @@ import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
+import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
+import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
+import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -21,6 +24,7 @@ import retrofit2.http.Query
 private const val authReflect = "api/authReflect"
 private const val token = "api/token"
 private const val emotions = "api/emotions"
+private const val statistic = "api/emotions/statistics"
 
 interface RetrofitService {
 
@@ -33,7 +37,7 @@ interface RetrofitService {
     @GET("${authReflect}/profile/")
     suspend fun getProfile(): Response<UserDTO>
 
-    @POST("${token}/refresh")
+    @POST("${token}/refresh/")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>
 
     @GET("${emotions}/tags")
@@ -53,4 +57,22 @@ interface RetrofitService {
 
     @DELETE("${emotions}/states/{id}/")
     suspend fun deleteState(@Path("id") id: Int): Response<Unit>
+
+    @GET("${statistic}/mood/")
+    suspend fun getStateFrequency(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticMoodResponseDTO>>
+
+    @GET("${statistic}/tags/")
+    suspend fun getStatisticTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
+
+    @GET("${statistic}/emotional-tags/")
+    suspend fun getStatisticEmotionalTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
+
+    @GET("${statistic}/mood/weekly/")
+    suspend fun getWeeklyAverage(): Response<List<StatisticAverageResponseDTO>>
+
+    @GET("${statistic}/mood/monthly/")
+    suspend fun getMonthlyAverage(): Response<List<StatisticAverageResponseDTO>>
+
+    @GET("${statistic}/mood/yearly/")
+    suspend fun getYearlyAverage(): Response<List<StatisticAverageResponseDTO>>
 }

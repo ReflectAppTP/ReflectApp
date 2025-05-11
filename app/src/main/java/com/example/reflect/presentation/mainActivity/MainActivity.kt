@@ -1,7 +1,7 @@
 package com.example.reflect.presentation.mainActivity
 
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen
@@ -71,12 +71,13 @@ class MainActivity : AppCompatActivity() {
 
             }
             is GetProfileState.Error -> {
-                ToastUtils.showErrorToast(this)
-                splashScreen.setKeepOnScreenCondition { false }
-            }
-            is GetProfileState.RefreshError -> {
-                AccountPrefs.clearTokens(this)
-                splashScreen.setKeepOnScreenCondition { false }
+                if (state.code == 401) {
+                    AccountPrefs.clearAuthState(this)
+                    splashScreen.setKeepOnScreenCondition { false }
+                } else {
+                    ToastUtils.showErrorToast(this)
+                    splashScreen.setKeepOnScreenCondition { false }
+                }
             }
             is GetProfileState.Idle -> Unit
         }
