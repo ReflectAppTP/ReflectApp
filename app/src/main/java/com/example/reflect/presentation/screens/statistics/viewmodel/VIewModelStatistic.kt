@@ -27,7 +27,7 @@ import javax.inject.Inject
 class VIewModelStatistic @Inject constructor(
     private val getWeeklyAverageUseCase: GetWeeklyAverageUseCase,
     private val getMonthlyAverageUseCase: GetMonthlyAverageUseCase,
-    private val getYealyAverageUseCase: GetYearlyAverageUseCase,
+    private val getYearlyAverageUseCase: GetYearlyAverageUseCase,
     private val getFrequencyUseCase: GetFrequencyUseCase,
     private val getStatisticTagsUseCase: GetStatisticTagsUseCase,
     private val getStatisticEmotionalTagsUseCase: GetStatisticEmotionalTagsUseCase,
@@ -180,7 +180,7 @@ class VIewModelStatistic @Inject constructor(
 
         _lineChartState.value = LineChartState.Idle
         viewModelScope.launch {
-            getYealyAverageUseCase().collect { newState ->
+            getYearlyAverageUseCase().collect { newState ->
                 _lineChartState.value = newState
             }
         }

@@ -7,17 +7,17 @@ import com.example.reflect.domain.model.StatisticAverageModel
 import com.example.reflect.domain.repository.statistic.GetWeeklyAverageRepository
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
+import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.ConnectException
-import com.github.mikephil.charting.data.Entry
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
 
 class GetWeeklyAverageUseCase @Inject constructor(
-    private val getWeeklyAverageRepository: GetWeeklyAverageRepository
+    private val getWeeklyAverageRepository: GetWeeklyAverageRepository,
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
@@ -37,7 +37,20 @@ class GetWeeklyAverageUseCase @Inject constructor(
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.date)
         val calendar = Calendar.getInstance()
         calendar.time = date!!
-        // TODO: костыль с датой
-        return Entry((calendar.get(Calendar.DAY_OF_WEEK) - 2).toFloat(),this.averageMood)
+//        Log.d("OK use", getRussianDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK)).toString() + " день недели")
+        return Entry((getRussianDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK)) - 1).toFloat(),this.averageMood)
+    }
+
+    private fun getRussianDayOfWeek(calendarDay: Int): Int {
+        return when (calendarDay) {
+            Calendar.SUNDAY -> 7
+            Calendar.MONDAY -> 1
+            Calendar.TUESDAY -> 2
+            Calendar.WEDNESDAY -> 3
+            Calendar.THURSDAY -> 4
+            Calendar.FRIDAY -> 5
+            Calendar.SATURDAY -> 6
+            else -> -1
+        }
     }
 }
