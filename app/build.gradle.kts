@@ -83,6 +83,9 @@ dependencies {
     // Charts
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    // Lottie
+    implementation(libs.lottie)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

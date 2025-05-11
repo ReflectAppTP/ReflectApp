@@ -146,26 +146,37 @@ class StatisticsFragment : Fragment() {
     }
 
     private fun handleLineChartState(state: LineChartState, context: Context) {
-        when (state) {
-            is LineChartState.Loading -> {
-                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
-            }
-            is LineChartState.Success -> {
-                binding.fragmentStatisticLineChart.data = if (state.data.isEmpty()) null else LineData(
-                    LineDataSet(state.data, " ").apply {
-                        lineWidth = 5f
-                        color = ContextCompat.getColor(context, R.color.tertiary)
-                        circleColors = mutableListOf(ContextCompat.getColor(context, R.color.tertiary))
-                        circleRadius = 5f
-                        circleHoleRadius = 2f
-                }).apply { setDrawValues(false) }
-                binding.fragmentStatisticLineChart.animateX(state.data.size * 80)
-            }
-            is LineChartState.Error -> {
-                ToastUtils.showErrorToast(context)
-            }
-            is LineChartState.Idle -> {
-                Unit
+        with (binding) {
+            when (state) {
+                is LineChartState.Loading -> {
+                    fragmentStatisticLottieLineChart.visibility = View.VISIBLE
+                    fragmentStatisticLineChart.visibility = View.GONE
+
+                }
+                is LineChartState.Success -> {
+                    fragmentStatisticLottieLineChart.visibility = View.GONE
+                    fragmentStatisticLineChart.visibility = View.VISIBLE
+
+                    fragmentStatisticLineChart.data = if (state.data.isEmpty()) null else LineData(
+                        LineDataSet(state.data, " ").apply {
+                            lineWidth = 5f
+                            color = ContextCompat.getColor(context, R.color.tertiary)
+                            circleColors = mutableListOf(ContextCompat.getColor(context, R.color.tertiary))
+                            circleRadius = 5f
+                            circleHoleRadius = 2f
+                        }).apply { setDrawValues(false) }
+                    fragmentStatisticLineChart.animateX(state.data.size * 80)
+                }
+                is LineChartState.Error -> {
+                    fragmentStatisticLottieLineChart.visibility = View.GONE
+                    fragmentStatisticLineChart.visibility = View.VISIBLE
+                    fragmentStatisticLineChart.data = null
+
+                    ToastUtils.showErrorToast(context)
+                }
+                is LineChartState.Idle -> {
+                    Unit
+                }
             }
         }
     }
@@ -179,45 +190,60 @@ class StatisticsFragment : Fragment() {
             ContextCompat.getColor(context, R.color.pieChartStateNice),
             ContextCompat.getColor(context, R.color.pieChartStateMagnifique),
         )
-        when (state) {
-            is PieChartState.Loading -> {
-                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
-            }
-            is PieChartState.Success -> {
-                if (state.data.isEmpty()) {
-                    binding.fragmentStatisticPieChart.data = null
-                } else {
-                    val dataSetColors = mutableListOf<Int>()
-                    for (data in state.data) {
-                        dataSetColors.add(pieColors[(data.data as Int) - 1])
-                    }
-                    binding.fragmentStatisticPieChart.data = PieData(PieDataSet(state.data, "").apply {
-                        colors = dataSetColors
-                        sliceSpace = 5f
-                        selectionShift = 5f
-                    }).apply {
-                        setDrawValues(false)
-                    }
+        with (binding) {
+            when (state) {
+                is PieChartState.Loading -> {
+                    fragmentStatisticLottiePieChart.visibility = View.VISIBLE
+                    fragmentStatisticPieChart.visibility = View.GONE
                 }
-                binding.fragmentStatisticPieChart.animateX(state.data.size * 100)
-            }
-            is PieChartState.Error -> {
-                ToastUtils.showErrorToast(context)
-            }
-            is PieChartState.Idle -> {
-                Unit
+                is PieChartState.Success -> {
+                    fragmentStatisticLottiePieChart.visibility = View.GONE
+                    fragmentStatisticPieChart.visibility = View.VISIBLE
+
+                    if (state.data.isEmpty()) {
+                        fragmentStatisticPieChart.data = null
+                    } else {
+                        val dataSetColors = mutableListOf<Int>()
+                        for (data in state.data) {
+                            dataSetColors.add(pieColors[(data.data as Int) - 1])
+                        }
+                        fragmentStatisticPieChart.data = PieData(PieDataSet(state.data, "").apply {
+                            colors = dataSetColors
+                            sliceSpace = 5f
+                            selectionShift = 5f
+                        }).apply {
+                            setDrawValues(false)
+                        }
+                    }
+                    fragmentStatisticPieChart.animateX(state.data.size * 100)
+                }
+                is PieChartState.Error -> {
+                    fragmentStatisticLottiePieChart.visibility = View.GONE
+                    fragmentStatisticPieChart.visibility = View.VISIBLE
+                    fragmentStatisticPieChart.data = null
+
+                    ToastUtils.showErrorToast(context)
+                }
+                is PieChartState.Idle -> {
+                    Unit
+                }
             }
         }
     }
 
     private fun handleFirstBarChartState(state: StatisticTagState, context: Context) {
-        when (state) {
-            is StatisticTagState.Loading -> {
-                statisticFirstTagsAdapter.submitList(null)
-                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
-            }
-            is StatisticTagState.Success -> {
-                with (binding){
+        with (binding) {
+            when (state) {
+                is StatisticTagState.Loading -> {
+                    statisticFirstTagsAdapter.submitList(null)
+
+                    fragmentStatisticLottieFirstTagsChart.visibility = View.VISIBLE
+                    fragmentStatisticFirstRVGroup.visibility = View.GONE
+                    fragmentStatisticFirstBarChart.visibility = View.GONE
+                }
+                is StatisticTagState.Success -> {
+                    fragmentStatisticLottieFirstTagsChart.visibility = View.GONE
+
                     if (state.data.isEmpty()) {
                         fragmentStatisticFirstRVGroup.visibility = View.GONE
                         fragmentStatisticFirstBarChart.visibility = View.VISIBLE
@@ -230,26 +256,31 @@ class StatisticsFragment : Fragment() {
                     }
                     fragmentStatisticFirstBarChart.animateX(state.data.size * 100)
                 }
-            }
-            is StatisticTagState.Error -> {
-                binding.fragmentStatisticFirstRVGroup.visibility = View.GONE
-                binding.fragmentStatisticFirstBarChart.visibility = View.VISIBLE
-                ToastUtils.showErrorToast(context)
-            }
-            is StatisticTagState.Idle -> {
-                Unit
+                is StatisticTagState.Error -> {
+                    fragmentStatisticLottieFirstTagsChart.visibility = View.GONE
+                    fragmentStatisticFirstRVGroup.visibility = View.GONE
+                    fragmentStatisticFirstBarChart.visibility = View.VISIBLE
+
+                    ToastUtils.showErrorToast(context)
+                }
+                is StatisticTagState.Idle -> {
+                    Unit
+                }
             }
         }
     }
 
     private fun handleSecondBarChartState(state: StatisticTagState, context: Context) {
-        when (state) {
-            is StatisticTagState.Loading -> {
-                statisticSecondTagsAdapter.submitList(null)
-                Toast.makeText(context, "симуляция загрузки ёу", Toast.LENGTH_SHORT).show()
-            }
-            is StatisticTagState.Success -> {
-                with (binding){
+        with (binding) {
+            when (state) {
+                is StatisticTagState.Loading -> {
+                    statisticSecondTagsAdapter.submitList(null)
+                    fragmentStatisticLottieSecondTagsChart.visibility = View.VISIBLE
+                    fragmentStatisticSecondRVGroup.visibility = View.GONE
+                    fragmentStatisticSecondBarChart.visibility = View.GONE
+                }
+                is StatisticTagState.Success -> {
+                    fragmentStatisticLottieSecondTagsChart.visibility = View.GONE
                     if (state.data.isEmpty()) {
                         fragmentStatisticSecondRVGroup.visibility = View.GONE
                         fragmentStatisticSecondBarChart.visibility = View.VISIBLE
@@ -262,14 +293,16 @@ class StatisticsFragment : Fragment() {
                     }
                     fragmentStatisticSecondBarChart.animateX(state.data.size * 100)
                 }
-            }
-            is StatisticTagState.Error -> {
-                binding.fragmentStatisticSecondRVGroup.visibility = View.GONE
-                binding.fragmentStatisticSecondBarChart.visibility = View.VISIBLE
-                ToastUtils.showErrorToast(context)
-            }
-            is StatisticTagState.Idle -> {
-                Unit
+                is StatisticTagState.Error -> {
+                    fragmentStatisticLottieSecondTagsChart.visibility = View.GONE
+                    fragmentStatisticSecondRVGroup.visibility = View.GONE
+                    fragmentStatisticSecondBarChart.visibility = View.VISIBLE
+
+                    ToastUtils.showErrorToast(context)
+                }
+                is StatisticTagState.Idle -> {
+                    Unit
+                }
             }
         }
     }

@@ -12,7 +12,6 @@ constraintlayout = "2.2.1"
 google-services="4.4.2"
 hilt="2.51.1"
 ksp="2.1.0-1.0.29"
-roomVersion="2.6.1"
 vbpdVersion="2.0.4"
 coreSplashscreen="1.0.1"
 kotlin-serialization="2.0.21"
@@ -25,7 +24,7 @@ fragmentKtx = "1.8.6"
 pinView = "1.4.4"
 retrofitVersion="2.11.0"
 loggingInterceptor = "3.8.0"
-chartVersion="v3.1.0"
+lottieVersion="3.4.0"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -39,10 +38,6 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion"}
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion"}
-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion"}
-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "roomVersion"}
 vbpd = { group = "dev.androidbroadcast.vbpd", name = "vbpd", version.ref = "vbpdVersion"}
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "nav_version"}
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "nav_version"}
@@ -57,7 +52,7 @@ pin-view = { group = "io.github.chaosleung", name = "pinview", version.ref = "pi
 retrofit= { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion"}
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor"}
-android-chart = { group = "com.github.PhilJay", name = "MPAndriodChart", version.ref = "chartVersion"}
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion"}
 
 
 [plugins]
