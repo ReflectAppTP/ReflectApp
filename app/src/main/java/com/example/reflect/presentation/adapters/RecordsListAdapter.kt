@@ -60,12 +60,14 @@ class RecordsListAdapter(
                 if (model.description.isNullOrEmpty()) {
                     cardStateDescriptionTV.visibility = View.GONE
                 } else {
+                    cardStateDescriptionTV.visibility = View.VISIBLE
                     cardStateDescriptionTV.text = model.description
                 }
 
                 if (model.firstTagList.isNullOrEmpty()) {
                     cardStateFirstRV.visibility = View.GONE
                 } else {
+                    cardStateFirstRV.visibility = View.VISIBLE
                     cardStateFirstRV.layoutManager = GridLayoutManager(context,2)
                     cardStateFirstRV.adapter = RecordsTagListAdapter(model.firstTagList)
                 }
@@ -73,6 +75,7 @@ class RecordsListAdapter(
                 if (model.secondTagList.isNullOrEmpty()) {
                     cardStateSecondRV.visibility = View.GONE
                 } else {
+                    cardStateSecondRV.visibility = View.VISIBLE
                     cardStateSecondRV.layoutManager = GridLayoutManager(context,2)
                     cardStateSecondRV.adapter = RecordsTagListAdapter(model.secondTagList)
                 }
