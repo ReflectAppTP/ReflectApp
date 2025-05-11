@@ -4,24 +4,23 @@ import com.example.reflect.common.RetrofitException
 import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
 import com.example.reflect.data.remote.data.RetrofitRemoteData
 import com.example.reflect.domain.model.StatisticTagModel
-import com.example.reflect.domain.repository.statistic.GetStatisticTagsRepository
+import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
 import javax.inject.Inject
 
-class GetStatisticTagsRepositoryImpl @Inject constructor(
+class GetStatisticEmotionalTagsRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
-): GetStatisticTagsRepository {
-    override suspend fun getStatisticTags(
+): GetStatisticEmotionalTagsRepository {
+    override suspend fun getStatisticEmotionalTags(
         startDate: String,
         endDate: String
     ): List<StatisticTagModel> {
-        val response = remoteData.getStatisticTags(startDate, endDate)
+        val response = remoteData.getStatisticEmotionalTags(startDate, endDate)
         if (response.isSuccessful) {
             return response.body()!!.toDomain()
         } else {
             throw RetrofitException(response.code(), response.message(), response.errorBody())
         }
     }
-
     private fun StatisticTagResponseDTO.toDomain() = StatisticTagModel(
         id = this.id,
         name = this.name,

@@ -12,6 +12,7 @@ import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
+import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
 import com.example.reflect.domain.repository.state.AddStateRepository
 import com.example.reflect.domain.repository.state.DeleteStateRepository
@@ -24,6 +25,7 @@ import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
 import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
+import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticTagsRepository
 import dagger.Module
 import dagger.Provides
@@ -106,4 +108,10 @@ object RepositoryModule {
     fun provideGetStatisticTags(
         remoteData: RetrofitRemoteData
     ): GetStatisticTagsRepository = GetStatisticTagsRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStatisticEmotionalTags(
+        remoteData: RetrofitRemoteData
+    ): GetStatisticEmotionalTagsRepository = GetStatisticEmotionalTagsRepositoryImpl(remoteData)
 }

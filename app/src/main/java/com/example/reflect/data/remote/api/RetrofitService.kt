@@ -62,4 +62,7 @@ interface RetrofitService {
 
     @GET("${statistic}/tags/")
     suspend fun getStatisticTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
+
+    @GET("${statistic}/emotional-tags/")
+    suspend fun getStatisticEmotionalTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
 }

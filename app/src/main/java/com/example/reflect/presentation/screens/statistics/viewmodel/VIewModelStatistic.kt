@@ -2,8 +2,8 @@ package com.example.reflect.presentation.screens.statistics.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.domain.usecase.statistic.GetFrequencyUseCase
+import com.example.reflect.domain.usecase.statistic.GetStatisticEmotionalTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticTagsUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.DateUtils.getStringFromDate
@@ -24,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VIewModelStatistic @Inject constructor(
     private val getFrequencyUseCase: GetFrequencyUseCase,
-    private val getStatisticTagsUseCase: GetStatisticTagsUseCase
+    private val getStatisticTagsUseCase: GetStatisticTagsUseCase,
+    private val getStatisticEmotionalTagsUseCase: GetStatisticEmotionalTagsUseCase,
 ): ViewModel() {
 
     private val currentCalendar = Calendar.getInstance()
@@ -68,7 +69,6 @@ class VIewModelStatistic @Inject constructor(
     }
 
     private fun getWeekStatistic() {
-        // TODO: Запрос
         selectedCalendar.time = currentCalendar.time
         todayCalendar.time = currentCalendar.time
         todayCalendar.add(Calendar.DAY_OF_MONTH, 1)
@@ -76,13 +76,16 @@ class VIewModelStatistic @Inject constructor(
         selectedCalendar.add(Calendar.DAY_OF_MONTH, -7)
         val selectedDate = selectedCalendar.time
 
+        val startDate = getStringFromDate(selectedDate)
+        val endDate = getStringFromDate(currentDate)
+
         _timeRangeTitle.value = DateUtils.getWeekRange(currentCalendar, selectedCalendar)
 
         _lineChartState.value = LineChartState.Loading
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
-            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getFrequencyUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _pieChartState.value = newState
             }
@@ -90,10 +93,16 @@ class VIewModelStatistic @Inject constructor(
 
 
         _firstStatisticTagState.value = StatisticTagState.Idle
+        viewModelScope.launch {
+            getStatisticEmotionalTagsUseCase(startDate = startDate, endDate = endDate)
+                .collect{ newState ->
+                    _firstStatisticTagState.value = newState
+                }
+        }
 
         _secondStatisticTagState.value = StatisticTagState.Idle
         viewModelScope.launch {
-            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getStatisticTagsUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _secondStatisticTagState.value = newState
                 }
@@ -107,6 +116,9 @@ class VIewModelStatistic @Inject constructor(
         val currentDate = todayCalendar.time
         selectedCalendar.add(Calendar.MONTH, -1)
         val selectedDate = selectedCalendar.time
+
+        val startDate = getStringFromDate(selectedDate)
+        val endDate = getStringFromDate(currentDate)
 
         _timeRangeTitle.value = DateUtils.getMonthRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
@@ -131,18 +143,23 @@ class VIewModelStatistic @Inject constructor(
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
-            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getFrequencyUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _pieChartState.value = newState
                 }
         }
 
         _firstStatisticTagState.value = StatisticTagState.Idle
-
+        viewModelScope.launch {
+            getStatisticEmotionalTagsUseCase(startDate = startDate, endDate = endDate)
+                .collect{ newState ->
+                    _firstStatisticTagState.value = newState
+                }
+        }
 
         _secondStatisticTagState.value = StatisticTagState.Idle
         viewModelScope.launch {
-            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getStatisticTagsUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _secondStatisticTagState.value = newState
                 }
@@ -157,6 +174,9 @@ class VIewModelStatistic @Inject constructor(
         selectedCalendar.add(Calendar.YEAR, -1)
         val selectedDate = selectedCalendar.time
 
+        val startDate = getStringFromDate(selectedDate)
+        val endDate = getStringFromDate(currentDate)
+
         _timeRangeTitle.value = DateUtils.getYearRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
@@ -164,17 +184,23 @@ class VIewModelStatistic @Inject constructor(
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
-            getFrequencyUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getFrequencyUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _pieChartState.value = newState
                 }
         }
 
         _firstStatisticTagState.value = StatisticTagState.Idle
+        viewModelScope.launch {
+            getStatisticEmotionalTagsUseCase(startDate = startDate, endDate = endDate)
+                .collect{ newState ->
+                    _firstStatisticTagState.value = newState
+                }
+        }
 
         _secondStatisticTagState.value = StatisticTagState.Idle
         viewModelScope.launch {
-            getStatisticTagsUseCase(startDate = getStringFromDate(selectedDate), endDate = getStringFromDate(currentDate))
+            getStatisticTagsUseCase(startDate = startDate, endDate = endDate)
                 .collect { newState ->
                     _secondStatisticTagState.value = newState
                 }
