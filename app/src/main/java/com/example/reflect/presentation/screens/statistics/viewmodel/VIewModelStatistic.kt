@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.statistic.GetFrequencyUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticEmotionalTagsUseCase
 import com.example.reflect.domain.usecase.statistic.GetStatisticTagsUseCase
+import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.DateUtils.getStringFromDate
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
@@ -23,6 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VIewModelStatistic @Inject constructor(
+    private val getWeeklyAverageUseCase: GetWeeklyAverageUseCase,
     private val getFrequencyUseCase: GetFrequencyUseCase,
     private val getStatisticTagsUseCase: GetStatisticTagsUseCase,
     private val getStatisticEmotionalTagsUseCase: GetStatisticEmotionalTagsUseCase,
@@ -81,7 +83,12 @@ class VIewModelStatistic @Inject constructor(
 
         _timeRangeTitle.value = DateUtils.getWeekRange(currentCalendar, selectedCalendar)
 
-        _lineChartState.value = LineChartState.Loading
+        _lineChartState.value = LineChartState.Idle
+        viewModelScope.launch {
+            getWeeklyAverageUseCase().collect { newState ->
+                _lineChartState.value = newState
+            }
+        }
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
@@ -123,23 +130,6 @@ class VIewModelStatistic @Inject constructor(
         _timeRangeTitle.value = DateUtils.getMonthRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
-        _lineChartState.value = LineChartState.Success(listOf(
-            Entry(0f, 1f),
-            Entry(2f, 10f),
-            Entry(5f, 4f),
-            Entry(6f, 2f),
-            Entry(7f, 1f),
-            Entry(8f, 7f),
-            Entry(9f, 8f),
-            Entry(12f, 10f),
-            Entry(15f, 3f),
-            Entry(16f, 10f),
-            Entry(17f, 10f),
-            Entry(18f, 7f),
-            Entry(20f, 1f),
-            Entry(21f, 10f),
-            Entry(24f, 6f),
-        ))
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {
@@ -180,7 +170,6 @@ class VIewModelStatistic @Inject constructor(
         _timeRangeTitle.value = DateUtils.getYearRange(currentCalendar, selectedCalendar)
         // TODO: Запрос
         _lineChartState.value = LineChartState.Loading
-        _lineChartState.value = LineChartState.Success(mutableListOf())
 
         _pieChartState.value = PieChartState.Idle
         viewModelScope.launch {

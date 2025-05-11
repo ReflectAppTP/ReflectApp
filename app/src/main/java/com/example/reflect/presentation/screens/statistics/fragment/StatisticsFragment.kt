@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
 import com.example.reflect.presentation.adapters.StatisticTagListAdapter
+import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.formatter.DayXAxisFormatter
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.common.formatter.WeekXAxisFormatter
@@ -164,7 +165,19 @@ class StatisticsFragment : Fragment() {
                             circleColors = mutableListOf(ContextCompat.getColor(context, R.color.tertiary))
                             circleRadius = 5f
                             circleHoleRadius = 2f
-                        }).apply { setDrawValues(false) }
+                        }).apply {
+                            fragmentStatisticLineChart.xAxis.apply {
+                                axisMinimum = xMin
+                                axisMaximum = xMax
+                                granularity = when(state.timeRange) {
+                                    TimeRange.WEEK -> 1f
+                                    TimeRange.MONTH -> (state.data.size % 5f).coerceAtLeast(1f)
+                                    TimeRange.YEAR -> (state.data.size % 10f).coerceAtLeast(1f)
+                                }
+                            }
+                            setDrawValues(true)
+                        }
+                    fragmentStatisticLineChart.xAxis.labelCount = state.data.size
                     fragmentStatisticLineChart.animateX(state.data.size * 80)
                 }
                 is LineChartState.Error -> {
@@ -329,6 +342,8 @@ class StatisticsFragment : Fragment() {
                     setDrawGridLines(false)
                     setDrawLabels(false)
                     gridColor = ContextCompat.getColor(context, R.color.onSurface)
+                    axisMinimum = 0f
+                    axisMaximum = 10f
                 }
 
                 axisLeft.apply {

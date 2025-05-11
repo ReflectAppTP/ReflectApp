@@ -9,6 +9,7 @@ import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
+import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
 import retrofit2.Response
@@ -65,4 +66,7 @@ interface RetrofitService {
 
     @GET("${statistic}/emotional-tags/")
     suspend fun getStatisticEmotionalTags(@Query("start_date") startDate: String, @Query("end_date") endDate: String): Response<List<StatisticTagResponseDTO>>
+
+    @GET("${statistic}/mood/weekly/")
+    suspend fun getWeeklyAverage(): Response<List<StatisticAverageResponseDTO>>
 }
