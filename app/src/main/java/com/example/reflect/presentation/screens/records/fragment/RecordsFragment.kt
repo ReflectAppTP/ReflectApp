@@ -65,10 +65,8 @@ class RecordsFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.deleteState.collect { state ->
-                    handleDeleteState(state)
-                }
+            vm.deleteState.collect { state ->
+                handleDeleteState(state)
             }
         }
 
