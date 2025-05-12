@@ -10,6 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:layout_marginEnd="@dimen/mainFragmentFABMarginEnd_16dp"
+        android:layout_marginBottom="@dimen/mainFragmentFABMarginBottom_91dp"
+        android:scaleType="center"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:shapeAppearanceOverlay="@style/CircleFab"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="top|end"
+        app:fabCustomSize="@dimen/mainFragmentFABSize_80dp"
+        app:srcCompat="@drawable/ic_fab_ai" />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -30,16 +46,5 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:layout_marginEnd="@dimen/mainFragmentFABMarginEnd_16dp"
-        android:layout_marginBottom="@dimen/mainFragmentFABMarginBottom_91dp"
-        app:shapeAppearanceOverlay="@style/CircleFab"
-        app:layout_anchor="@id/bottomAppBar"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@drawable/ic_fab_ai" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
