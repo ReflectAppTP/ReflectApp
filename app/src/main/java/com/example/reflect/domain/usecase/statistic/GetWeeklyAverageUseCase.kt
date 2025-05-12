@@ -18,6 +18,7 @@ class GetWeeklyAverageUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
+            emit(LineChartState.Loading)
             val records = getWeeklyAverageRepository.getWeeklyAverage()
             emit(LineChartState.Success(records.toEntries(), TimeRange.WEEK))
         } catch (e: RetrofitException) {

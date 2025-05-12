@@ -18,6 +18,7 @@ class GetMonthlyAverageUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
+            emit(LineChartState.Loading)
             val records = getMonthlyAverageRepository.getMonthlyAverage()
             emit(LineChartState.Success(records.toEntries(), TimeRange.MONTH))
         } catch (e: RetrofitException) {

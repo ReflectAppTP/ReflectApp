@@ -21,6 +21,7 @@ class GetYearlyAverageUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
+            emit(LineChartState.Loading)
             val records = getYearlyAverageRepository.getYearlyAverage()
             emit(LineChartState.Success(records.toEntries(), TimeRange.YEAR))
         } catch (e: RetrofitException) {

@@ -17,6 +17,7 @@ class GetFrequencyUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(startDate: String, endDate: String): Flow<PieChartState> = flow {
         try {
+            emit(PieChartState.Loading)
             val records = getStateFrequencyRepository.getStateFrequency(startDate, endDate)
             emit(PieChartState.Success(records.map { it.toPieEntry() }))
         } catch (e: RetrofitException) {

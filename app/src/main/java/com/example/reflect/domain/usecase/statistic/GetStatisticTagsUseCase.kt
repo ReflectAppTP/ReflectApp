@@ -15,6 +15,7 @@ class GetStatisticTagsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(startDate: String, endDate: String): Flow<StatisticTagState> = flow {
         try {
+            emit(StatisticTagState.Loading)
             val records = getStatisticTagsRepository.getStatisticTags(startDate, endDate)
             emit(StatisticTagState.Success(records))
         }catch (e: RetrofitException) {
