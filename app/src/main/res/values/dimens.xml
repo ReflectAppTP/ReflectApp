@@ -15,6 +15,7 @@
     <dimen name="mainFragmentBottomNavigationViewElevation_0dp">0dp</dimen>
     <dimen name="mainFragmentFABMarginEnd_16dp">16dp</dimen>
     <dimen name="mainFragmentFABMarginBottom_91dp">91dp</dimen>
+    <dimen name="mainFragmentFABSize_80dp">80dp</dimen>
 
     <!-- Login -->
     <dimen name="loginTextInputMarginTop_32dp">32dp</dimen>
@@ -162,6 +163,8 @@
     <dimen name="cardStateDescriptionMarginEnd_16dp">16dp</dimen>
     <dimen name="cardStateDescriptionMarginTop_24dp">24dp</dimen>
     <dimen name="cardStateIconSize_45dp">45dp</dimen>
+
+    <!-- Statistic Fragment -->
     <dimen name="fragmentStatisticToggleGroupMarginHorizontal_11dp">11dp</dimen>
     <dimen name="fragmentStatisticCardElevation_2dp">2dp</dimen>
     <dimen name="fragmentStatisticCardMarginHorizontal_4dp">4dp</dimen>
@@ -170,4 +173,6 @@
     <dimen name="fragmentStatisticCardConstraintLayoutMargin_14dp">14dp</dimen>
     <dimen name="fragmentStatisticCardRVMarginTop_6dp">6dp</dimen>
     <dimen name="fragmentStatisticTimeRangeMarginBottom_5dp">5dp</dimen>
+    <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
+
 </resources>

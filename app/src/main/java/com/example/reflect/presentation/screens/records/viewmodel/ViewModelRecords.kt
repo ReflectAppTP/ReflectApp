@@ -1,12 +1,10 @@
 package com.example.reflect.presentation.screens.records.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.domain.usecase.state.DeleteStateUseCase
 import com.example.reflect.domain.usecase.state.GetStatesUseCase
-import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
@@ -34,7 +32,7 @@ class ViewModelRecords @Inject constructor(
 
     val userIntent = Channel<DeleteStateIntent>(Channel.UNLIMITED)
 
-    private var _recordsState = MutableStateFlow<GetRecordsState>(GetRecordsState.Idle)
+    private var _recordsState = MutableStateFlow<GetRecordsState>(GetRecordsState.EmptyContent)
     val recordsState: StateFlow<GetRecordsState> = _recordsState
 
     private var _deleteState = MutableStateFlow<RecordState>(RecordState.Idle)

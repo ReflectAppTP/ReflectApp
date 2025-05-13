@@ -154,7 +154,7 @@ class ViewModelAddState @Inject constructor(
 
     fun addTagIdToSecondList(id: Int) {
         if (_selectedSecondTags.value.contains(id)) {
-            _selectedFirstTags.value.remove(id)
+            _selectedSecondTags.value.remove(id)
         } else {
             _selectedSecondTags.value.add(id)
         }

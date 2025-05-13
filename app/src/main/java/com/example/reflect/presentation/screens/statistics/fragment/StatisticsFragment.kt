@@ -17,9 +17,8 @@ import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
 import com.example.reflect.presentation.adapters.StatisticTagListAdapter
 import com.example.reflect.presentation.common.TimeRange
-import com.example.reflect.presentation.common.formatter.DayXAxisFormatter
 import com.example.reflect.presentation.common.ToastUtils
-import com.example.reflect.presentation.common.formatter.WeekXAxisFormatter
+import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
@@ -118,15 +117,12 @@ class StatisticsFragment : Fragment() {
                         when (checkedId) {
                             R.id.fragmentStatisticWeekButton -> {
                                 vm.userIntent.send(StatisticIntent.WeekStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = WeekXAxisFormatter(context.resources.getStringArray(R.array.fragmentStatisticWeekArray))
                             }
                             R.id.fragmentStatisticMonthButton -> {
                                 vm.userIntent.send(StatisticIntent.MonthStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter(context.resources.getStringArray(R.array.days))
                             }
                             R.id.fragmentStatisticYearButton -> {
                                 vm.userIntent.send(StatisticIntent.YearStatistic)
-                                fragmentStatisticLineChart.xAxis.valueFormatter = DayXAxisFormatter(context.resources.getStringArray(R.array.days))
                             }
                         }
                     }
@@ -174,6 +170,7 @@ class StatisticsFragment : Fragment() {
                                     TimeRange.YEAR -> floor(state.data.size / 10f).coerceAtLeast(1f)
                                 }
                                 labelCount = state.data.size
+                                valueFormatter = LineChartXAxisFormatter(state.data.map { it.data.toString() }, state.timeRange)
                             }
                             setDrawValues(false)
                         }

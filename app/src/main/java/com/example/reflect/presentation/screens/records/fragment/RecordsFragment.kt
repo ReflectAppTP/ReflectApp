@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -20,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
 import com.example.reflect.presentation.adapters.RecordsListAdapter
-import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
@@ -28,7 +25,6 @@ import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -65,10 +61,8 @@ class RecordsFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.deleteState.collect { state ->
-                    handleDeleteState(state)
-                }
+            vm.deleteState.collect { state ->
+                handleDeleteState(state)
             }
         }
 
@@ -166,17 +160,13 @@ class RecordsFragment : Fragment() {
 
     private fun handleRecordsState(state: GetRecordsState) {
         val context = requireContext()
+        recordsAdapter.updateState(state)
+
         when (state) {
-            is GetRecordsState.Loading -> {
-                ToastUtils.showLoadingToast(context)
-            }
-            is GetRecordsState.Success -> {
-                recordsAdapter.submitList(vm.records.value)
-            }
             is GetRecordsState.Error -> {
-                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
+                ToastUtils.showErrorConnectionToast(context)
             }
-            is GetRecordsState.Idle -> {
+            else -> {
                 Unit
             }
         }

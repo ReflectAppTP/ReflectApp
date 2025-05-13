@@ -33,6 +33,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/surfaceContainer</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
 
         <item name="materialCalendarTheme">@style/ThemeOverlay.App.DatePicker</item>
@@ -42,7 +43,7 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/primary</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/splashScreen</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen</item>
         <item name="postSplashScreenTheme">@style/Theme.Reflect</item>
         <item name="android:forceDarkAllowed" tools:ignore="NewApi">false</item>
     </style>

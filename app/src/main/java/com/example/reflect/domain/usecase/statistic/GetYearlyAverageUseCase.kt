@@ -21,8 +21,9 @@ class GetYearlyAverageUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
+            emit(LineChartState.Loading)
             val records = getYearlyAverageRepository.getYearlyAverage()
-            emit(LineChartState.Success(records.map { it.toEntry() }, TimeRange.YEAR))
+            emit(LineChartState.Success(records.toEntries(), TimeRange.YEAR))
         } catch (e: RetrofitException) {
             emit(LineChartState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
         } catch (e: ConnectException) {
@@ -33,10 +34,11 @@ class GetYearlyAverageUseCase @Inject constructor(
         }
     }
 
-    private fun StatisticAverageModel.toEntry(): Entry {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.date)
-        val calendar = Calendar.getInstance()
-        calendar.time = date!!
-        return Entry((calendar.get(Calendar.DAY_OF_MONTH) - 1).toFloat(),this.averageMood)
+    private fun List<StatisticAverageModel>.toEntries(): List<Entry> {
+        val sortedList = this.sortedBy { it.date }
+
+        return sortedList.mapIndexed { index, model ->
+            Entry(index.toFloat(), model.averageMood, model.date)
+        }
     }
 }

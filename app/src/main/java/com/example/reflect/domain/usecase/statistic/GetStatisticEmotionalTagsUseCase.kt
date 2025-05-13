@@ -15,6 +15,7 @@ class GetStatisticEmotionalTagsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(startDate: String, endDate: String): Flow<StatisticTagState> = flow {
         try {
+            emit(StatisticTagState.Loading)
             val records = getStatisticEmotionalTagsRepository.getStatisticEmotionalTags(startDate, endDate)
             emit(StatisticTagState.Success(records))
         }catch (e: RetrofitException) {

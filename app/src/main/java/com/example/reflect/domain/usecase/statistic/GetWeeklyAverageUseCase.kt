@@ -11,9 +11,6 @@ import com.github.mikephil.charting.data.Entry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.ConnectException
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 import javax.inject.Inject
 
 class GetWeeklyAverageUseCase @Inject constructor(
@@ -21,8 +18,9 @@ class GetWeeklyAverageUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<LineChartState> = flow {
         try {
+            emit(LineChartState.Loading)
             val records = getWeeklyAverageRepository.getWeeklyAverage()
-            emit(LineChartState.Success(records.map { it.toEntry() }, TimeRange.WEEK))
+            emit(LineChartState.Success(records.toEntries(), TimeRange.WEEK))
         } catch (e: RetrofitException) {
             emit(LineChartState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
         } catch (e: ConnectException) {
@@ -33,24 +31,10 @@ class GetWeeklyAverageUseCase @Inject constructor(
         }
     }
 
-    private fun StatisticAverageModel.toEntry(): Entry {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(this.date)
-        val calendar = Calendar.getInstance()
-        calendar.time = date!!
-//        Log.d("OK use", getRussianDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK)).toString() + " день недели")
-        return Entry((getRussianDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK)) - 1).toFloat(),this.averageMood)
-    }
-
-    private fun getRussianDayOfWeek(calendarDay: Int): Int {
-        return when (calendarDay) {
-            Calendar.SUNDAY -> 7
-            Calendar.MONDAY -> 1
-            Calendar.TUESDAY -> 2
-            Calendar.WEDNESDAY -> 3
-            Calendar.THURSDAY -> 4
-            Calendar.FRIDAY -> 5
-            Calendar.SATURDAY -> 6
-            else -> -1
+    private fun List<StatisticAverageModel>.toEntries(): List<Entry> {
+        val sortedList = this.sortedBy { it.date }
+        return sortedList.mapIndexed { index, model ->
+            Entry(index.toFloat(), model.averageMood, model.date)
         }
     }
 }
