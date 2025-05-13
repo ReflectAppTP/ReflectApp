@@ -12,15 +12,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.R
 import com.example.reflect.databinding.CardStateBinding
+import com.example.reflect.databinding.EmptyRecordsBinding
+import com.example.reflect.databinding.LoadingLottieBinding
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.presentation.common.DateUtils
+import com.example.reflect.presentation.screens.records.GetRecordsState
 import java.util.Calendar
 
 class RecordsListAdapter(
     private val calendar: Calendar,
     private val onEdit: (Int, RecordModel) -> Unit,
     private val onDelete: (Int) -> Unit
-) : ListAdapter<RecordModel, RecordsListAdapter.RecordViewHolder>(DIFF_CALLBACK){
+) : ListAdapter<GetRecordsState, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+
+    class EmptyRecordsViewHolder(
+        val binding: EmptyRecordsBinding
+    ): RecyclerView.ViewHolder(binding.root)
+
+    class LoadingViewHolder(
+        val binding: LoadingLottieBinding
+    ): RecyclerView.ViewHolder(binding.root)
 
     class RecordViewHolder(
         private val binding: CardStateBinding
@@ -102,24 +113,70 @@ class RecordsListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
-        val cardStateBinding = CardStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RecordViewHolder(cardStateBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            GetRecordsState.EmptyContent.viewType -> {
+                val binding = EmptyRecordsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                EmptyRecordsViewHolder(binding)
+            }
+            GetRecordsState.Loading.viewType -> {
+                val binding = LoadingLottieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                LoadingViewHolder(binding)
+            }
+            GetRecordsState.Error("").viewType -> {
+                val binding = LoadingLottieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                LoadingViewHolder(binding)
+            }
+            else -> {
+                val binding = CardStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                RecordViewHolder(binding)
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
-        holder.bind(currentList[position], calendar, holder.itemView.context, onDelete, onEdit)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = getItem(position)) {
+            is GetRecordsState.Success -> {
+                val record = item.records.first()
+                (holder as RecordViewHolder).bind(
+                    record,
+                    calendar,
+                    holder.itemView.context,
+                    onDelete,
+                    onEdit
+                )
+            }
+            else -> {
+                Unit
+            }
+        }
     }
 
-    override fun getItemCount(): Int = currentList.size
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).viewType
+    }
+
+    // TODO: Ужасный и противный говнокод 
+    fun updateState(state: GetRecordsState) {
+        val states = when (state) {
+            is GetRecordsState.Success -> state.records.map { record ->
+                GetRecordsState.Success(listOf(record))
+            }
+            else -> listOf(state)
+        }
+        submitList(states)
+    }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecordModel>() {
-            override fun areItemsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
-                return oldItem.id == newItem.id
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<GetRecordsState>() {
+            override fun areItemsTheSame(oldItem: GetRecordsState, newItem: GetRecordsState): Boolean {
+                return (oldItem is GetRecordsState.Success && newItem is GetRecordsState.Success &&
+                        oldItem.records == newItem.records) ||
+                        (oldItem is GetRecordsState.Error && newItem is GetRecordsState.Error &&
+                                oldItem.message == newItem.message)
             }
 
-            override fun areContentsTheSame(oldItem: RecordModel, newItem: RecordModel): Boolean {
+            override fun areContentsTheSame(oldItem: GetRecordsState, newItem: GetRecordsState): Boolean {
                 return oldItem == newItem
             }
         }

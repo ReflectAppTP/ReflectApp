@@ -173,5 +173,6 @@
     <dimen name="fragmentStatisticCardConstraintLayoutMargin_14dp">14dp</dimen>
     <dimen name="fragmentStatisticCardRVMarginTop_6dp">6dp</dimen>
     <dimen name="fragmentStatisticTimeRangeMarginBottom_5dp">5dp</dimen>
+    <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
 
 </resources>

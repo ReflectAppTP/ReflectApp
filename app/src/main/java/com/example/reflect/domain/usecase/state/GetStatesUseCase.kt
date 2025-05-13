@@ -14,9 +14,13 @@ class GetStatesUseCase @Inject constructor(
     private val getStatesRepository: GetStatesRepository
 ) {
     suspend operator fun invoke(date: String): Flow<GetRecordsState> = flow {
+        emit(GetRecordsState.Loading)
         try {
             val records = getStatesRepository.getStates(date)
-            emit(GetRecordsState.Success(records))
+            if (records.isEmpty())
+                emit(GetRecordsState.EmptyContent)
+            else
+                emit(GetRecordsState.Success(records))
         } catch (e: RetrofitException) {
             emit(GetRecordsState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
         } catch (e: ConnectException) {
