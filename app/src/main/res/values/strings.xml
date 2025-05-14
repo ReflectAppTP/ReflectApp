@@ -169,4 +169,5 @@
     <string name="fragmentStatisticSecondTagsTitle">Преимущественно, причинами ваших эмоций были:</string>
 
     <string name="emptyRecordsText">Записей нет</string>
+    <string name="contentDescriptionFragmentStatisitcExportDataIcon">Иконка для экспорта статистики в excel</string>
 </resources>

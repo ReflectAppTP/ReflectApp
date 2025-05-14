@@ -1,12 +1,18 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +21,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
+import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.presentation.adapters.StatisticTagListAdapter
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.ToastUtils
@@ -27,12 +34,22 @@ import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelSt
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import org.apache.poi.ss.usermodel.HorizontalAlignment
+import org.apache.poi.ss.usermodel.IndexedColors
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.math.floor
 
 @AndroidEntryPoint
@@ -134,6 +151,17 @@ class StatisticsFragment : Fragment() {
 
             }
             fragmentStatisticWeekButton.performClick()
+
+            fragmentStatisticToolbarExportDataIcon.setOnClickListener {
+                if (isDataExportable()) {
+                    exportToExcel(context,
+                        (vm.lineChartState.value as LineChartState.Success).data,
+                        (vm.pieChartState.value as PieChartState.Success).data,
+                        (vm.firstStatisticTagState.value as StatisticTagState.Success).data,
+                        (vm.secondStatisticTagState.value as StatisticTagState.Success).data,
+                    )
+                } else Toast.makeText(context, "Невозможно экспортировать статистику", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -181,7 +209,7 @@ class StatisticsFragment : Fragment() {
                     fragmentStatisticLineChart.visibility = View.VISIBLE
                     fragmentStatisticLineChart.data = null
 
-                    ToastUtils.showErrorToast(context)
+//                    ToastUtils.showErrorToast(context)
                 }
                 is LineChartState.Idle -> {
                     Unit
@@ -228,10 +256,10 @@ class StatisticsFragment : Fragment() {
                 }
                 is PieChartState.Error -> {
                     fragmentStatisticLottiePieChart.visibility = View.GONE
-                    fragmentStatisticPieChart.visibility = View.GONE
+                    fragmentStatisticPieChart.visibility = View.VISIBLE
                     fragmentStatisticPieChart.data = null
 
-                    ToastUtils.showErrorToast(context)
+//                    ToastUtils.showErrorToast(context)
                 }
                 is PieChartState.Idle -> {
                     Unit
@@ -270,7 +298,7 @@ class StatisticsFragment : Fragment() {
                     fragmentStatisticFirstRVGroup.visibility = View.GONE
                     fragmentStatisticFirstBarChart.visibility = View.VISIBLE
 
-                    ToastUtils.showErrorToast(context)
+//                    ToastUtils.showErrorToast(context)
                 }
                 is StatisticTagState.Idle -> {
                     Unit
@@ -431,5 +459,133 @@ class StatisticsFragment : Fragment() {
                 invalidate()
             }
         }
+    }
+
+    private fun exportToExcel(
+        context: Context,
+        lineChartData: List<Entry>,
+        pieChartData: List<PieEntry>,
+        emotionalTagData: List<StatisticTagModel>,
+        tagData: List<StatisticTagModel>,
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                var i = 0
+                val workbook = HSSFWorkbook()
+                val sheet = when (vm.time.value) {
+                    TimeRange.WEEK -> workbook.createSheet("Статистика за неделю")
+                    TimeRange.MONTH -> workbook.createSheet("Статистика за месяц")
+                    TimeRange.YEAR -> workbook.createSheet("Статистика за год")
+                }
+                sheet.defaultColumnWidth = 15
+
+                val lineChartTitle = sheet.createRow(i++).apply {
+                    createCell(0).apply {
+                        setCellValue("Статистика")
+                    }
+                }
+                val lineChartHeader = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Дата")
+                    createCell(1).setCellValue("Среднее значение")
+                }
+                lineChartData.forEachIndexed { index, entry ->
+                    val row = sheet.createRow(index +  i)
+                    row.createCell(0).setCellValue(entry.data.toString())
+                    row.createCell(1).setCellValue(entry.y.toDouble())
+                }
+                i += lineChartData.size + 1
+
+                val pieChartTitle = sheet.createRow(i++).apply {
+                    createCell(0).apply {
+                        setCellValue("Частота настроения")
+                    }
+                }
+                val pieChartHeader = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Частота")
+                    createCell(1).setCellValue("Настроение")
+                }
+                val sum = pieChartData.map { it.value }.sum()
+                pieChartData.forEachIndexed { index, pieEntry ->
+                    val row = sheet.createRow(index + i)
+                    row.createCell(0).setCellValue((pieEntry.value / sum * 100).toInt().toString() + " %")
+                    row.createCell(1).setCellValue(pieEntry.label)
+                }
+                i += pieChartData.size + 1
+
+                val emotionalTagTitle = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Статистика по эмоциональным тэгам")
+                }
+                val emotionalTagHeader = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Название тэга")
+                    createCell(1).setCellValue("Эмодзи")
+                    createCell(2).setCellValue("Частота")
+                }
+
+                emotionalTagData.forEachIndexed { index, model ->
+                    val row = sheet.createRow(index + i)
+                    row.createCell(0).setCellValue(model.name)
+                    row.createCell(1).setCellValue(model.emoji)
+                    row.createCell(2).setCellValue(model.freq.toDouble())
+                }
+                i += emotionalTagData.size + 1
+
+                val tagTitle = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Статистика по тэгам")
+                }
+                val tagHeader = sheet.createRow(i++).apply {
+                    createCell(0).setCellValue("Название тэга")
+                    createCell(1).setCellValue("Эмодзи")
+                    createCell(2).setCellValue("Частота")
+                }
+                tagData.forEachIndexed { index, model ->
+                    val row = sheet.createRow(index + i)
+                    row.createCell(0).setCellValue(model.name)
+                    row.createCell(1).setCellValue(model.emoji)
+                    row.createCell(2).setCellValue(model.freq.toDouble())
+                }
+                i += tagData.size + 1
+
+                withContext(Dispatchers.Main) {
+                    saveExcelFile(context, workbook)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun saveExcelFile(context: Context, workbook: HSSFWorkbook) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val filename = when (vm.time.value) {
+                    TimeRange.WEEK -> "week_statistics.xlsx"
+                    TimeRange.MONTH -> "month_statistics.xlsx"
+                    TimeRange.YEAR -> "year_statistics.xlsx"
+                }
+                val filePath = File(context.getExternalFilesDir(null), filename)
+                val fileOutputStream = FileOutputStream(filePath)
+                workbook.write(fileOutputStream)
+                fileOutputStream.close()
+                workbook.close()
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Excel файл сохранен: ${filePath.absolutePath}", Toast.LENGTH_SHORT).show()
+                    Log.d("Ok excel", "Excel файл сохранен: ${filePath.absolutePath}")
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Ошибка при сохранении файла: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+    
+    private fun isDataExportable(): Boolean {
+        return vm.lineChartState.value is LineChartState.Success 
+                && vm.pieChartState.value is PieChartState.Success
+                && vm.firstStatisticTagState.value is StatisticTagState.Success
+                && vm.secondStatisticTagState.value is StatisticTagState.Success
     }
 }
