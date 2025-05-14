@@ -23,6 +23,8 @@ import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
+import com.example.reflect.presentation.screens.statistics.StatisticIntent
+import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,6 +34,7 @@ import java.util.Calendar
 class RecordsFragment : Fragment() {
 
     private val vm: ViewModelRecords by activityViewModels()
+    private val statisticvm: VIewModelStatistic by activityViewModels()
 
     private var _binding: FragmentRecordsBinding? = null
     private val binding get() = _binding!!
@@ -181,6 +184,9 @@ class RecordsFragment : Fragment() {
             is RecordState.Success -> {
                 vm.fetchRecords()
                 ToastUtils.showDeleteStateToast(context)
+                lifecycleScope.launch {
+                    statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
+                }
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)

@@ -19,6 +19,8 @@ import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
+import com.example.reflect.presentation.screens.statistics.StatisticIntent
+import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +30,9 @@ import kotlinx.coroutines.launch
 class ThirdClarificationAddStateFragment : Fragment() {
 
     private val vm: ViewModelAddState by activityViewModels()
+    // Говнокод
     private val recordsvm: ViewModelRecords by activityViewModels()
+    private val statisticvm: VIewModelStatistic by activityViewModels()
 
     private var _binding: FragmentThirdClarificationAddStateBinding? = null
     private val binding get() = _binding!!
@@ -119,6 +123,9 @@ class ThirdClarificationAddStateFragment : Fragment() {
                     ToastUtils.showAddStateToast(context)
                 }
                 recordsvm.fetchRecords()
+                lifecycleScope.launch {
+                    statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
+                }
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
             is RecordState.Error -> {
