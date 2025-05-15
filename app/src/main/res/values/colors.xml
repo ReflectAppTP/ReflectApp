@@ -42,4 +42,5 @@
     <color name="pieChartStateNice">#ABFF4C</color>
     <color name="pieChartStateMagnifique">#53F175</color>
 
+    <color name="aiBackground">#D4FBCE</color>
 </resources>

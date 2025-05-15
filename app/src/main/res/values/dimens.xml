@@ -2,7 +2,7 @@
 <resources>
     <dimen name="mainFragmentViewPagerToolbarMarginHorizontal_16dp">16dp</dimen>
     <dimen name="mainFragmentViewPagerRecyclerViewMarginBottom_80dp">80dp</dimen>
-    <dimen name="registrationFlowToolbarMarginHorizontal_8dp">8dp</dimen>
+    <dimen name="toolbarMarginHorizontal_8dp">8dp</dimen>
 
     <dimen name="editTextAndButtonWidth_280dp">280dp</dimen>
 
