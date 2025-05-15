@@ -88,6 +88,9 @@ dependencies {
 
     // Export to Excel
     implementation("org.apache.poi:poi:3.17")
+    
+    // Yandex metrica
+    implementation(libs.yandex.analytics)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
