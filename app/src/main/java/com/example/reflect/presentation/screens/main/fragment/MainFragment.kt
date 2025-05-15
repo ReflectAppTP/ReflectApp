@@ -11,6 +11,7 @@ import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -40,6 +41,7 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.add_record -> {
+                    AppMetrica.reportEvent("Добавление состояния")
                     findNavController().navigate(R.id.addStateBottomSheetFragment)
                     false
                 }

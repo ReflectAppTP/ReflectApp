@@ -39,7 +39,7 @@
                 android:layout_width="@dimen/cardStateIconSize_45dp"
                 android:layout_height="@dimen/cardStateIconSize_45dp"
                 android:src="@drawable/ic_state_image_1"
-                android:contentDescription="@string/cardStateImageContentDescription" />
+                android:contentDescription="@string/contentDescriptionCardStateImage" />
 
         </androidx.cardview.widget.CardView>
 
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:contentDescription="@string/cardStateChangeDotsContentDescription"
+            android:contentDescription="@string/contentDescriptionCardStateChangeDots"
             android:padding="@dimen/cardStateChangeDotsPadding_0dp"
             android:src="@drawable/ic_card_state_dots"
             app:layout_constraintEnd_toEndOf="parent"

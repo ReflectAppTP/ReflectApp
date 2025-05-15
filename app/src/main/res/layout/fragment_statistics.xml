@@ -26,6 +26,15 @@
             style="@style/TextAppearance.Material3.TitleLarge"
             />
 
+        <ImageButton
+            android:id="@+id/fragmentStatisticToolbarExportDataIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@color/surface"
+            android:contentDescription="@string/contentDescriptionFragmentStatisticExportDataIcon"
+            android:src="@drawable/ic_file_down" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.button.MaterialButtonToggleGroup

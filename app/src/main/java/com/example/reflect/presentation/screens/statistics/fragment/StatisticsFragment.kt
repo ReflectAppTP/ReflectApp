@@ -1,13 +1,17 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +19,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
+import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.presentation.adapters.StatisticTagListAdapter
+import com.example.reflect.presentation.common.ExportStatisticUtils
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
@@ -27,12 +33,20 @@ import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelSt
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.apache.poi.hssf.usermodel.HSSFWorkbook
+import java.io.File
+import java.io.FileOutputStream
 import kotlin.math.floor
 
 @AndroidEntryPoint
@@ -134,6 +148,19 @@ class StatisticsFragment : Fragment() {
 
             }
             fragmentStatisticWeekButton.performClick()
+
+            fragmentStatisticToolbarExportDataIcon.setOnClickListener {
+                if (isDataExportable()) {
+                    ExportStatisticUtils.exportToExcel(
+                        context = context,
+                        time = vm.time.value,
+                        lineChartData = (vm.lineChartState.value as LineChartState.Success).data,
+                        pieChartData = (vm.pieChartState.value as PieChartState.Success).data,
+                        emotionalTagData = (vm.firstStatisticTagState.value as StatisticTagState.Success).data,
+                        tagData = (vm.secondStatisticTagState.value as StatisticTagState.Success).data
+                    )
+                } else ToastUtils.showErrorExportStatisticToast(context)
+            }
         }
     }
 
@@ -181,7 +208,7 @@ class StatisticsFragment : Fragment() {
                     fragmentStatisticLineChart.visibility = View.VISIBLE
                     fragmentStatisticLineChart.data = null
 
-                    ToastUtils.showErrorToast(context)
+//                    ToastUtils.showErrorToast(context)
                 }
                 is LineChartState.Idle -> {
                     Unit
@@ -228,10 +255,8 @@ class StatisticsFragment : Fragment() {
                 }
                 is PieChartState.Error -> {
                     fragmentStatisticLottiePieChart.visibility = View.GONE
-                    fragmentStatisticPieChart.visibility = View.GONE
+                    fragmentStatisticPieChart.visibility = View.VISIBLE
                     fragmentStatisticPieChart.data = null
-
-                    ToastUtils.showErrorToast(context)
                 }
                 is PieChartState.Idle -> {
                     Unit
@@ -270,7 +295,7 @@ class StatisticsFragment : Fragment() {
                     fragmentStatisticFirstRVGroup.visibility = View.GONE
                     fragmentStatisticFirstBarChart.visibility = View.VISIBLE
 
-                    ToastUtils.showErrorToast(context)
+//                    ToastUtils.showErrorToast(context)
                 }
                 is StatisticTagState.Idle -> {
                     Unit
@@ -431,5 +456,12 @@ class StatisticsFragment : Fragment() {
                 invalidate()
             }
         }
+    }
+
+    private fun isDataExportable(): Boolean {
+        return vm.lineChartState.value is LineChartState.Success 
+                && vm.pieChartState.value is PieChartState.Success
+                && vm.firstStatisticTagState.value is StatisticTagState.Success
+                && vm.secondStatisticTagState.value is StatisticTagState.Success
     }
 }

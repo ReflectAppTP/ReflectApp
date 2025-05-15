@@ -10,6 +10,7 @@ import com.example.reflect.domain.usecase.statistic.GetWeeklyAverageUseCase
 import com.example.reflect.domain.usecase.statistic.GetYearlyAverageUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.common.DateUtils.getStringFromDate
+import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.states.StatisticTagState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
@@ -51,9 +52,11 @@ class VIewModelStatistic @Inject constructor(
     private var _secondStatisticTagState = MutableStateFlow<StatisticTagState>(StatisticTagState.Idle)
     val secondStatisticTagState: StateFlow<StatisticTagState> = _secondStatisticTagState
 
-
     private var _timeRangeTitle = MutableStateFlow("")
     val timeRangeTitle: StateFlow<String> = _timeRangeTitle
+
+    private var _time = MutableStateFlow(TimeRange.WEEK)
+    val time: StateFlow<TimeRange> = _time
 
     init {
         getWeekStatistic()
@@ -65,9 +68,25 @@ class VIewModelStatistic @Inject constructor(
         viewModelScope.launch {
             userIntent.consumeAsFlow().collect {
                 when (it) {
-                    is StatisticIntent.WeekStatistic -> getWeekStatistic()
-                    is StatisticIntent.MonthStatistic -> getMonthStatistic()
-                    is StatisticIntent.YearStatistic -> getYearStatistic()
+                    is StatisticIntent.WeekStatistic -> {
+                        getWeekStatistic()
+                        _time.value = TimeRange.WEEK
+                    }
+                    is StatisticIntent.MonthStatistic -> {
+                        getMonthStatistic()
+                        _time.value = TimeRange.MONTH
+                    }
+                    is StatisticIntent.YearStatistic -> {
+                        getYearStatistic()
+                        _time.value = TimeRange.YEAR
+                    }
+                    is StatisticIntent.UpdateStatistic -> {
+                        when (_time.value) {
+                            TimeRange.WEEK -> getWeekStatistic()
+                            TimeRange.MONTH -> getMonthStatistic()
+                            TimeRange.YEAR -> getYearStatistic()
+                        }
+                    }
                 }
             }
         }
@@ -209,5 +228,4 @@ class VIewModelStatistic @Inject constructor(
                 }
         }
     }
-
 }

@@ -23,8 +23,9 @@
     <string name="contentDescriptionFragmentProfileIconChange">Иконка редактирования иконки профиля</string>
     <string name="contentDescriptionRecordsFragmentChevronLeft">Кнопка выбора даты на день назад</string>
     <string name="contentDescriptionRecordsFragmentChevronRight">Кнопка выбора даты на день вперёд</string>
-    <string name="cardStateImageContentDescription">Иконка, показывающая состояние</string>
-    <string name="cardStateChangeDotsContentDescription">Иконка, при нажатии показывающая выпадающее меню</string>
+    <string name="contentDescriptionCardStateImage">Иконка, показывающая состояние</string>
+    <string name="contentDescriptionCardStateChangeDots">Иконка, при нажатии показывающая выпадающее меню</string>
+    <string name="contentDescriptionFragmentStatisticExportDataIcon">Иконка для экспорта статистики в excel</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -85,6 +86,9 @@
     <string name="addStateThirdClarificationEditTextHint">Добавить заметку…</string>
     <string name="addStateSaveButtonText">Сохранить</string>
 
+    <!-- Records -->
+    <string name="emptyRecordsText">Записей нет</string>
+
     <!-- ProfileFragment -->
     <string name="fragmentProfilePremiumButton">Премиум</string>
     <string name="fragmentProfileLoginButton">Войти в аккаунт</string>
@@ -127,39 +131,6 @@
         <item>сб</item>
         <item>вс</item>
     </string-array>
-    <string-array name="days">
-        <item>01</item>
-        <item>02</item>
-        <item>03</item>
-        <item>04</item>
-        <item>05</item>
-        <item>06</item>
-        <item>07</item>
-        <item>08</item>
-        <item>09</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>28</item>
-        <item>29</item>
-        <item>30</item>
-        <item>31</item>
-    </string-array>
     <string name="fragmentStatisticToggleGroupWeek">Неделя</string>
     <string name="fragmentStatisticToggleGroupMonth">Месяц</string>
     <string name="fragmentStatisticToggleGroupYear">Год</string>
@@ -168,5 +139,31 @@
     <string name="fragmentStatisticEmptyChartData">Пока что данных недостаточно</string>
     <string name="fragmentStatisticSecondTagsTitle">Преимущественно, причинами ваших эмоций были:</string>
 
-    <string name="emptyRecordsText">Записей нет</string>
+    <!-- Export Statistic (to excel file and to Intent) -->
+    <string name="exportStatisticErrorMessage">Невозможно экспортировать статистику</string>
+    <string name="exportStatisticForAWeek">Статистика за неделю</string>
+    <string name="exportStatisticForAMonth">Статистика за месяц</string>
+    <string name="exportStatisticForAYear">Статистика за год</string>
+    <string name="exportStatisticLineChartTitle">Статистика</string>
+    <string name="exportStatisticLineChartHeaderData">Дата</string>
+    <string name="exportStatisticLineChartHeadreAverageValue">Среднее значение</string>
+    <string name="exportStatisticPieChartTitle">Частота настроения</string>
+    <string name="exportStatisticPieChartHeaderFreq">Частота</string>
+    <string name="exportStatisticPieChartHeaderMood">Настроение</string>
+    <string name="exportStatisticEmotionalTagTitle">Статистика по эмоциональным тэгам</string>
+    <string name="exportStatisticEmotionalTagHeaderName">Название тэга</string>
+    <string name="exportStatisticEmotionalTagHeaderEmoji">Эмодзи</string>
+    <string name="exportStatisticEmotionalTagHeaderFreq">Частота</string>
+    <string name="exportStatisticTagTitle">Статистика по тэгам</string>
+    <string name="exportStatisticTagHeaderName">Название тэга</string>
+    <string name="exportStatisticTagHeaderEmoji">Эмодзи</string>
+    <string name="exportStatisticTagHeaderFreq">Частота</string>
+    <string name="exportStatisticExportMessageWeek">Моя недельная статистика настроения</string>
+    <string name="exportStatisticExportMessageMonth">Моя месячная статистика настроения</string>
+    <string name="exportStatisticExportMessageYear">Моя годовая статистика настроения</string>
+    <string name="exportStatisticExportSubject">Статистика за период в приложении Reflect</string>
+    <string name="exportStatisticExportIntentTimeWeek">недельной</string>
+    <string name="exportStatisticExportIntentTimeMonth">месячной</string>
+    <string name="exportStatisticExportIntentTimeYear">годовой</string>
+    <string name="exportStatisticExportIntentTitle">Поделиться %1$s статистикой</string>
 </resources>

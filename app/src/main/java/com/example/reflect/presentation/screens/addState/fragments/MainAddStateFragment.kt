@@ -1,6 +1,7 @@
 package com.example.reflect.presentation.screens.addState.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
+import com.example.reflect.presentation.screens.statistics.StatisticIntent
+import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,7 +30,9 @@ import kotlinx.coroutines.launch
 class MainAddStateFragment : Fragment() {
 
     private val vm: ViewModelAddState by activityViewModels()
+    // Говнокод
     private val recordsvm: ViewModelRecords by activityViewModels()
+    private val statisticvm: VIewModelStatistic by activityViewModels()
 
     private var _binding: FragmentMainAddStateBinding? = null
     private val binding get() = _binding!!
@@ -93,6 +98,7 @@ class MainAddStateFragment : Fragment() {
                         vm.userIntent.send(AddStateIntent.EditState)
                     } else {
                         vm.userIntent.send(AddStateIntent.AddState)
+
                     }
                 }
             }
@@ -116,6 +122,9 @@ class MainAddStateFragment : Fragment() {
                     ToastUtils.showAddStateToast(context)
                 }
                 recordsvm.fetchRecords()
+                lifecycleScope.launch {
+                    statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
+                }
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
             }
             is RecordState.Error -> {
