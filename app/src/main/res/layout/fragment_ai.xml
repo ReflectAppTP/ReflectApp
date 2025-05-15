@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/aiBackground"
+    android:transitionName="fab_transition"
+    android:clipToPadding="true"
     tools:context=".presentation.screens.ai.fragment.AiFragment">
 
     <androidx.appcompat.widget.Toolbar
