@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:background="@color/surface"
-            android:contentDescription="@string/contentDescriptionFragmentStatisitcExportDataIcon"
+            android:contentDescription="@string/contentDescriptionFragmentStatisticExportDataIcon"
             android:src="@drawable/ic_file_down" />
 
     </androidx.appcompat.widget.Toolbar>

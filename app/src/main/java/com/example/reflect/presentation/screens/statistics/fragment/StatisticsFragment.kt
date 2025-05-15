@@ -21,6 +21,7 @@ import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
 import com.example.reflect.domain.model.StatisticTagModel
 import com.example.reflect.presentation.adapters.StatisticTagListAdapter
+import com.example.reflect.presentation.common.ExportStatisticUtils
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
@@ -150,13 +151,15 @@ class StatisticsFragment : Fragment() {
 
             fragmentStatisticToolbarExportDataIcon.setOnClickListener {
                 if (isDataExportable()) {
-                    exportToExcel(context,
-                        (vm.lineChartState.value as LineChartState.Success).data,
-                        (vm.pieChartState.value as PieChartState.Success).data,
-                        (vm.firstStatisticTagState.value as StatisticTagState.Success).data,
-                        (vm.secondStatisticTagState.value as StatisticTagState.Success).data,
+                    ExportStatisticUtils.exportToExcel(
+                        context = context,
+                        time = vm.time.value,
+                        lineChartData = (vm.lineChartState.value as LineChartState.Success).data,
+                        pieChartData = (vm.pieChartState.value as PieChartState.Success).data,
+                        emotionalTagData = (vm.firstStatisticTagState.value as StatisticTagState.Success).data,
+                        tagData = (vm.secondStatisticTagState.value as StatisticTagState.Success).data
                     )
-                } else Toast.makeText(context, "Невозможно экспортировать статистику", Toast.LENGTH_SHORT).show()
+                } else ToastUtils.showErrorExportStatisticToast(context)
             }
         }
     }
@@ -254,8 +257,6 @@ class StatisticsFragment : Fragment() {
                     fragmentStatisticLottiePieChart.visibility = View.GONE
                     fragmentStatisticPieChart.visibility = View.VISIBLE
                     fragmentStatisticPieChart.data = null
-
-//                    ToastUtils.showErrorToast(context)
                 }
                 is PieChartState.Idle -> {
                     Unit
@@ -457,157 +458,6 @@ class StatisticsFragment : Fragment() {
         }
     }
 
-    private fun exportToExcel(
-        context: Context,
-        lineChartData: List<Entry>,
-        pieChartData: List<PieEntry>,
-        emotionalTagData: List<StatisticTagModel>,
-        tagData: List<StatisticTagModel>,
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                var i = 0
-                val workbook = HSSFWorkbook()
-                val sheet = when (vm.time.value) {
-                    TimeRange.WEEK -> workbook.createSheet("Статистика за неделю")
-                    TimeRange.MONTH -> workbook.createSheet("Статистика за месяц")
-                    TimeRange.YEAR -> workbook.createSheet("Статистика за год")
-                }
-                sheet.defaultColumnWidth = 15
-
-                val lineChartTitle = sheet.createRow(i++).apply {
-                    createCell(0).apply {
-                        setCellValue("Статистика")
-                    }
-                }
-                val lineChartHeader = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Дата")
-                    createCell(1).setCellValue("Среднее значение")
-                }
-                lineChartData.forEachIndexed { index, entry ->
-                    val row = sheet.createRow(index +  i)
-                    row.createCell(0).setCellValue(entry.data.toString())
-                    row.createCell(1).setCellValue(entry.y.toDouble())
-                }
-                i += lineChartData.size + 1
-
-                val pieChartTitle = sheet.createRow(i++).apply {
-                    createCell(0).apply {
-                        setCellValue("Частота настроения")
-                    }
-                }
-                val pieChartHeader = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Частота")
-                    createCell(1).setCellValue("Настроение")
-                }
-                val sum = pieChartData.map { it.value }.sum()
-                pieChartData.forEachIndexed { index, pieEntry ->
-                    val row = sheet.createRow(index + i)
-                    row.createCell(0).setCellValue((pieEntry.value / sum * 100).toInt().toString() + " %")
-                    row.createCell(1).setCellValue(pieEntry.label)
-                }
-                i += pieChartData.size + 1
-
-                val emotionalTagTitle = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Статистика по эмоциональным тэгам")
-                }
-                val emotionalTagHeader = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Название тэга")
-                    createCell(1).setCellValue("Эмодзи")
-                    createCell(2).setCellValue("Частота")
-                }
-
-                emotionalTagData.forEachIndexed { index, model ->
-                    val row = sheet.createRow(index + i)
-                    row.createCell(0).setCellValue(model.name)
-                    row.createCell(1).setCellValue(model.emoji)
-                    row.createCell(2).setCellValue(model.freq.toDouble())
-                }
-                i += emotionalTagData.size + 1
-
-                val tagTitle = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Статистика по тэгам")
-                }
-                val tagHeader = sheet.createRow(i++).apply {
-                    createCell(0).setCellValue("Название тэга")
-                    createCell(1).setCellValue("Эмодзи")
-                    createCell(2).setCellValue("Частота")
-                }
-                tagData.forEachIndexed { index, model ->
-                    val row = sheet.createRow(index + i)
-                    row.createCell(0).setCellValue(model.name)
-                    row.createCell(1).setCellValue(model.emoji)
-                    row.createCell(2).setCellValue(model.freq.toDouble())
-                }
-                i += tagData.size + 1
-
-                withContext(Dispatchers.Main) {
-                    saveExcelFile(context, workbook)
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun saveExcelFile(context: Context, workbook: HSSFWorkbook) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val filename = when (vm.time.value) {
-                    TimeRange.WEEK -> "week_statistics.xls"
-                    TimeRange.MONTH -> "month_statistics.xls"
-                    TimeRange.YEAR -> "year_statistics.xls"
-                }
-                val filePath = File(context.getExternalFilesDir(null), filename)
-                val fileOutputStream = FileOutputStream(filePath)
-                workbook.write(fileOutputStream)
-                fileOutputStream.close()
-                workbook.close()
-
-                withContext(Dispatchers.Main) {
-                    Log.d("Ok excel", "Excel файл сохранен: ${filePath.absolutePath}")
-
-                    shareExcelFile(context, filePath)
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Ошибка при сохранении файла: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private fun shareExcelFile(context: Context, file: File) {
-        val uri = FileProvider.getUriForFile(
-            context,
-            "${context.packageName}.provider",
-            file
-        )
-
-        val message = when (vm.time.value) {
-            TimeRange.WEEK -> "Моя недельная статистика настроения"
-            TimeRange.MONTH -> "Моя месячная статистика настроения"
-            TimeRange.YEAR -> "Моя годовая статистика настроения"
-        }
-
-        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "application/vnd.ms-excel"
-            putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_TEXT, message)
-            putExtra(Intent.EXTRA_SUBJECT, "Статистика за период в приложении Reflect")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
-
-        val time = when(vm.time.value) {
-            TimeRange.WEEK -> "недельной"
-            TimeRange.MONTH -> "месячной"
-            TimeRange.YEAR -> "годовой"
-        }
-        context.startActivity(Intent.createChooser(shareIntent, "Поделиться $time статистикой"))
-    }
-    
     private fun isDataExportable(): Boolean {
         return vm.lineChartState.value is LineChartState.Success 
                 && vm.pieChartState.value is PieChartState.Success
