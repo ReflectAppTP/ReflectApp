@@ -1,11 +1,8 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -46,8 +44,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.HorizontalAlignment
-import org.apache.poi.ss.usermodel.IndexedColors
 import java.io.File
 import java.io.FileOutputStream
 import kotlin.math.floor
@@ -560,9 +556,9 @@ class StatisticsFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val filename = when (vm.time.value) {
-                    TimeRange.WEEK -> "week_statistics.xlsx"
-                    TimeRange.MONTH -> "month_statistics.xlsx"
-                    TimeRange.YEAR -> "year_statistics.xlsx"
+                    TimeRange.WEEK -> "week_statistics.xls"
+                    TimeRange.MONTH -> "month_statistics.xls"
+                    TimeRange.YEAR -> "year_statistics.xls"
                 }
                 val filePath = File(context.getExternalFilesDir(null), filename)
                 val fileOutputStream = FileOutputStream(filePath)
@@ -571,8 +567,9 @@ class StatisticsFragment : Fragment() {
                 workbook.close()
 
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Excel файл сохранен: ${filePath.absolutePath}", Toast.LENGTH_SHORT).show()
                     Log.d("Ok excel", "Excel файл сохранен: ${filePath.absolutePath}")
+
+                    shareExcelFile(context, filePath)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
@@ -580,6 +577,35 @@ class StatisticsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun shareExcelFile(context: Context, file: File) {
+        val uri = FileProvider.getUriForFile(
+            context,
+            "${context.packageName}.provider",
+            file
+        )
+
+        val message = when (vm.time.value) {
+            TimeRange.WEEK -> "Моя недельная статистика настроения"
+            TimeRange.MONTH -> "Моя месячная статистика настроения"
+            TimeRange.YEAR -> "Моя годовая статистика настроения"
+        }
+
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/vnd.ms-excel"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_TEXT, message)
+            putExtra(Intent.EXTRA_SUBJECT, "Статистика за период в приложении Reflect")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        val time = when(vm.time.value) {
+            TimeRange.WEEK -> "недельной"
+            TimeRange.MONTH -> "месячной"
+            TimeRange.YEAR -> "годовой"
+        }
+        context.startActivity(Intent.createChooser(shareIntent, "Поделиться $time статистикой"))
     }
     
     private fun isDataExportable(): Boolean {
