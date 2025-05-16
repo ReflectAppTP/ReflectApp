@@ -174,5 +174,9 @@
     <dimen name="fragmentStatisticCardRVMarginTop_6dp">6dp</dimen>
     <dimen name="fragmentStatisticTimeRangeMarginBottom_5dp">5dp</dimen>
     <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
+    <dimen name="aiHelperTextCardCornerRadius_45dp">45dp</dimen>
+    <dimen name="aiHelperTextTVMarginHorizontal_24dp">24dp</dimen>
+    <dimen name="aiHelperTextTVMarginVertical">10dp</dimen>
+    <dimen name="aiHelperTextCardMarginHorizontal_5dp">5dp</dimen>
 
 </resources>
