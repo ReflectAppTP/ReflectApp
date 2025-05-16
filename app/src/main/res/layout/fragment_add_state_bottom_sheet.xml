@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_margin="@dimen/addStateBackArrowMargin_16dp"
-        android:background="@color/surface"
+        android:background="@drawable/rounded_surface_ripple"
         android:contentDescription="@string/contentDescriptionAddStateBackArrow"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"

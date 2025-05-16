@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="Иконка возврата на главный экран"
             android:src="@drawable/ic_back_arrow"
-            android:background="@color/aiBackground"
+            android:background="@drawable/rounded_ai_ripple"
             android:layout_gravity="start"
             />
 
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
-        android:background="@color/aiBackground"
+        android:background="@drawable/rounded_ai_ripple"
         android:contentDescription="Кнопка раскрытия и скрытия запросов-помощников"
         android:src="@drawable/ai_expand_button_selector"
         app:layout_constraintEnd_toStartOf="@+id/aiIconButtonSend"
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_ai_send"
-        android:background="@drawable/rounded_ai_send_button"
+        android:background="@drawable/rounded_primary_ripple"
         android:contentDescription="Кнопки отправки запросы к ИИ"
         android:paddingHorizontal="28dp"
         android:paddingVertical="6dp"
@@ -108,8 +108,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/aiHelperTextsRV"
         app:layout_constraintEnd_toEndOf="parent"
-        >
-    </ImageButton>
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/aiHelperTextsRV"

@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/registrationIconBackContentDescription"
             android:src="@drawable/ic_back_arrow"
-            android:background="@color/surface"
+            android:background="@drawable/rounded_surface_ripple"
             android:layout_gravity="start"
             />
 

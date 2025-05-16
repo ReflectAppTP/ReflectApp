@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:contentDescription="@string/contentDescriptionToolbarSearchIcon"
-            android:background="@color/surface"
+            android:background="@drawable/rounded_surface_ripple"
             android:src="@drawable/ic_search_toolbar"
             />
 
