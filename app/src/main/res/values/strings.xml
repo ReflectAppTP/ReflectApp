@@ -26,6 +26,9 @@
     <string name="contentDescriptionCardStateImage">Иконка, показывающая состояние</string>
     <string name="contentDescriptionCardStateChangeDots">Иконка, при нажатии показывающая выпадающее меню</string>
     <string name="contentDescriptionFragmentStatisticExportDataIcon">Иконка для экспорта статистики в excel</string>
+    <string name="contentDescriptionAIFragmentBackArrow">Иконка возврата на главный экран</string>
+    <string name="contentDescriptionAIFragmentExpandMenu">Кнопка раскрытия и скрытия запросов-помощников</string>
+    <string name="contentDescriptionAIFragmentButtonSend">Кнопки отправки запросы к ИИ</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -166,4 +169,9 @@
     <string name="exportStatisticExportIntentTimeMonth">месячной</string>
     <string name="exportStatisticExportIntentTimeYear">годовой</string>
     <string name="exportStatisticExportIntentTitle">Поделиться %1$s статистикой</string>
+
+    <!-- AI Fragment -->
+    <string name="aiFragmentToolbarTitle">Ваш чат с AI</string>
+    <string name="aiFragmentEmptyMessageText">Поделитесь своими чувствами</string>
+    <string name="aiFragmentEditTextHint">Задайте вопрос</string>
 </resources>

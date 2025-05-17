@@ -24,7 +24,7 @@
             android:id="@+id/aiToolbarBackArrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="Иконка возврата на главный экран"
+            android:contentDescription="@string/contentDescriptionAIFragmentBackArrow"
             android:src="@drawable/ic_back_arrow"
             android:background="@drawable/rounded_ai_ripple"
             android:layout_gravity="start"
@@ -34,7 +34,7 @@
             android:id="@+id/aiToolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ваш чат с AI"
+            android:text="@string/aiFragmentToolbarTitle"
             android:textColor="@color/primary"
             android:layout_gravity="center"
             style="@style/TextAppearance.Material3.HeadlineSmall"
@@ -58,7 +58,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="Поделитесь своими чувствами"
+        android:text="@string/aiFragmentEmptyMessageText"
         android:textColor="@color/onSurface" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -66,9 +66,9 @@
         style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="5dp"
-        android:hint="Задайте вопрос"
+        android:layout_marginHorizontal="@dimen/aiFragmentEditTextMarginHorizontal_10dp"
+        android:layout_marginBottom="@dimen/aiFragmentEditTextMarginBottom_5dp"
+        android:hint="@string/aiFragmentEditTextHint"
         app:hintTextColor="@color/onSurfaceVariant"
         app:boxStrokeColor="@color/outline"
         app:errorEnabled="false"
@@ -88,12 +88,12 @@
         android:id="@+id/aiIconButtonExpandMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="5dp"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
+        android:layout_marginEnd="@dimen/aiFragmentExpandMenuMarginEnd_10dp"
+        android:layout_marginTop="@dimen/aiFragmentExpandMenuMarginTop_5dp"
+        android:minWidth="@dimen/aiFragmentExpandMenuMinWidth_0dp"
+        android:minHeight="@dimen/aiFragmentExpandMenuMinHeight_0dp"
         android:button="@drawable/ai_expand_button_selector"
-        android:contentDescription="Кнопка раскрытия и скрытия запросов-помощников"
+        android:contentDescription="@string/contentDescriptionAIFragmentExpandMenu"
         app:layout_constraintEnd_toStartOf="@+id/aiIconButtonSend"
         app:layout_constraintTop_toBottomOf="@+id/aiEditText" />
 
@@ -103,11 +103,11 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_ai_send"
         android:background="@drawable/rounded_primary_ripple"
-        android:contentDescription="Кнопки отправки запросы к ИИ"
-        android:paddingHorizontal="28dp"
-        android:paddingVertical="6dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
+        android:contentDescription="@string/contentDescriptionAIFragmentButtonSend"
+        android:paddingHorizontal="@dimen/aiFragmentButtonSendPaddingHorizontal_28dp"
+        android:paddingVertical="@dimen/aiFragmentButtonSendPaddingVertical"
+        android:layout_marginHorizontal="@dimen/aiFragmentButtonSendMarginHorizontal_10dp"
+        android:layout_marginBottom="@dimen/aiFragmentButtonSendMarginBottom_10dp"
         app:layout_constraintBottom_toTopOf="@id/aiHelperTextsRV"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -116,7 +116,7 @@
         android:id="@+id/aiHelperTextsRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
+        android:layout_marginHorizontal="@dimen/aiFragmentHelperTextRVMarginHorizontal_5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,12 +124,5 @@
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/card_ai_helper_text"
         tools:orientation="horizontal" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/aiAnimationGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="aiHelperTextsRV, aiIconButtonSend, aiIconButtonExpandMenu, aiEditText"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

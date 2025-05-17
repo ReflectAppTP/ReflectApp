@@ -128,6 +128,7 @@
     <dimen name="fragmentRecordsDateTVMarginTop_7dp">7dp</dimen>
     <dimen name="fragmentRecordsRVMarginBottom_80dp">80dp</dimen>
     <dimen name="fragmentRecordsRVMarginTop_12dp">12dp</dimen>
+    <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
 
     <!-- ProfileFragment -->
     <dimen name="fragmentProfileTitleMarginTop_10dp">10dp</dimen>
@@ -173,16 +174,33 @@
     <dimen name="fragmentStatisticCardConstraintLayoutMargin_14dp">14dp</dimen>
     <dimen name="fragmentStatisticCardRVMarginTop_6dp">6dp</dimen>
     <dimen name="fragmentStatisticTimeRangeMarginBottom_5dp">5dp</dimen>
-    <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
+
+
+    <!-- Ai helper text card -->
     <dimen name="aiHelperTextCardCornerRadius_45dp">45dp</dimen>
     <dimen name="aiHelperTextTVMarginHorizontal_24dp">24dp</dimen>
     <dimen name="aiHelperTextTVMarginVertical">10dp</dimen>
     <dimen name="aiHelperTextCardMarginHorizontal_5dp">5dp</dimen>
+
+    <!-- Ai message card -->
     <dimen name="aiCardMessageMaxWidth_250dp">250dp</dimen>
     <dimen name="aiCardMessageMarginHorizontal_10dp">10dp</dimen>
     <dimen name="aiCardMessageMarginVertical_12dp">12dp</dimen>
     <dimen name="aiCardMessageCornerRadius_12dp">12dp</dimen>
     <dimen name="aiCardMessageElevation_4dp">4dp</dimen>
     <dimen name="aiCardMessageTVMargin_16dp">16dp</dimen>
+
+    <!-- AI Fragment -->
+    <dimen name="aiFragmentEditTextMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiFragmentEditTextMarginBottom_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuMarginEnd_10dp">10dp</dimen>
+    <dimen name="aiFragmentExpandMenuMarginTop_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuMinWidth_0dp">0dp</dimen>
+    <dimen name="aiFragmentExpandMenuMinHeight_0dp">0dp</dimen>
+    <dimen name="aiFragmentButtonSendPaddingHorizontal_28dp">28dp</dimen>
+    <dimen name="aiFragmentButtonSendPaddingVertical">6dp</dimen>
+    <dimen name="aiFragmentButtonSendMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiFragmentButtonSendMarginBottom_10dp">10dp</dimen>
+    <dimen name="aiFragmentHelperTextRVMarginHorizontal_5dp">5dp</dimen>
 
 </resources>
