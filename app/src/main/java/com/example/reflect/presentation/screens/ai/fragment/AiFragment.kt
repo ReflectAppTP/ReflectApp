@@ -1,23 +1,22 @@
 package com.example.reflect.presentation.screens.ai.fragment
 
 import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.animation.addListener
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.doOnEnd
-import androidx.core.animation.doOnStart
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentAiBinding
 import com.example.reflect.presentation.screens.ai.adapter.AIHelperTextAdapter
+import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +30,7 @@ class AiFragment : Fragment() {
     private val vm: ViewModelAI by activityViewModels()
 
     private lateinit var helperTextAdapter: AIHelperTextAdapter
+    private lateinit var messageAdapter: AiMessageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,7 @@ class AiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         with (binding) {
 
             aiEditTextField.setText(vm.inputTextValue.value)
@@ -65,6 +66,15 @@ class AiFragment : Fragment() {
 
             aiToolbarBackArrow.setOnClickListener {
                 findNavController().popBackStack()
+            }
+
+            aiHelperTextsRV.post {
+                val height = aiHelperTextsRV.height.toFloat()
+
+                aiHelperTextsRV.translationY = height
+                aiIconButtonSend.translationY = height
+                aiIconButtonExpandMenu.translationY = height
+                aiEditText.translationY = height
             }
 
             aiIconButtonExpandMenu.setOnCheckedChangeListener { _, isChecked ->
@@ -84,6 +94,13 @@ class AiFragment : Fragment() {
             )
             helperTextAdapter.submitList(vm.helperTextList.value)
             aiHelperTextsRV.adapter = helperTextAdapter
+
+            aiMessagesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false).apply {
+                stackFromEnd = true
+            }
+            messageAdapter = AiMessageAdapter()
+            messageAdapter.submitList(vm.messagesList.value)
+            aiMessagesRV.adapter = messageAdapter
         }
     }
 
@@ -94,20 +111,39 @@ class AiFragment : Fragment() {
 
     private fun showRecyclerView() {
         with (binding) {
-            aiHelperTextsRV.visibility = View.VISIBLE
-            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", aiHelperTextsRV.height.toFloat(), 0f).apply {
+            val animators = mutableListOf<Animator>()
+            animators.add(ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonSend, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenu, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", 0f))
+
+            AnimatorSet().apply {
+                playTogether(animators)
                 duration = 300
+                interpolator = AccelerateDecelerateInterpolator()
                 start()
             }
+
+//            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", aiHelperTextsRV.height.toFloat(), 0f).apply {
+//                duration = 300
+//                start()
+//            }
         }
     }
 
     private fun hideRecyclerView() {
         with (binding) {
-            aiHelperTextsRV.visibility = View.VISIBLE
-            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY",0f, aiHelperTextsRV.height.toFloat()).apply {
+            val height = aiHelperTextsRV.height.toFloat()
+            val animators = mutableListOf<Animator>()
+            animators.add(ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonSend, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenu, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", height))
+
+            AnimatorSet().apply {
+                playTogether(animators)
                 duration = 300
-                doOnEnd {  aiHelperTextsRV.visibility = View.GONE}
+                interpolator = AccelerateDecelerateInterpolator()
                 start()
             }
         }

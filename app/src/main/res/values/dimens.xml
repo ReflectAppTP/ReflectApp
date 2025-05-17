@@ -178,5 +178,11 @@
     <dimen name="aiHelperTextTVMarginHorizontal_24dp">24dp</dimen>
     <dimen name="aiHelperTextTVMarginVertical">10dp</dimen>
     <dimen name="aiHelperTextCardMarginHorizontal_5dp">5dp</dimen>
+    <dimen name="aiCardMessageMaxWidth_250dp">250dp</dimen>
+    <dimen name="aiCardMessageMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiCardMessageMarginVertical_12dp">12dp</dimen>
+    <dimen name="aiCardMessageCornerRadius_12dp">12dp</dimen>
+    <dimen name="aiCardMessageElevation_4dp">4dp</dimen>
+    <dimen name="aiCardMessageTVMargin_16dp">16dp</dimen>
 
 </resources>
