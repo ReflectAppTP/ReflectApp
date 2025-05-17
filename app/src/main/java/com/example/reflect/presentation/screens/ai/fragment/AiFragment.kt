@@ -1,10 +1,17 @@
 package com.example.reflect.presentation.screens.ai.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.animation.addListener
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -60,12 +67,20 @@ class AiFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
+            aiIconButtonExpandMenu.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    showRecyclerView()
+                } else {
+                    hideRecyclerView()
+                }
+            }
+
             aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             helperTextAdapter = AIHelperTextAdapter(
-                onClick = { 
+                onClick = {
                     vm.updateTextWithHelper(it)
                     aiEditTextField.append("$it ")
-                } 
+                }
             )
             helperTextAdapter.submitList(vm.helperTextList.value)
             aiHelperTextsRV.adapter = helperTextAdapter
@@ -75,5 +90,26 @@ class AiFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun showRecyclerView() {
+        with (binding) {
+            aiHelperTextsRV.visibility = View.VISIBLE
+            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", aiHelperTextsRV.height.toFloat(), 0f).apply {
+                duration = 300
+                start()
+            }
+        }
+    }
+
+    private fun hideRecyclerView() {
+        with (binding) {
+            aiHelperTextsRV.visibility = View.VISIBLE
+            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY",0f, aiHelperTextsRV.height.toFloat()).apply {
+                duration = 300
+                doOnEnd {  aiHelperTextsRV.visibility = View.GONE}
+                start()
+            }
+        }
     }
 }
