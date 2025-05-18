@@ -202,5 +202,8 @@
     <dimen name="aiFragmentButtonSendMarginHorizontal_10dp">10dp</dimen>
     <dimen name="aiFragmentButtonSendMarginBottom_10dp">10dp</dimen>
     <dimen name="aiFragmentHelperTextRVMarginHorizontal_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuElevation_0dp">0dp</dimen>
+    <dimen name="aiFragmentExpandMenuCornerRadius_45">45dp</dimen>
+    <dimen name="aiFragmentExpandMenuStrokeWidth_1dp">1dp</dimen>
 
 </resources>

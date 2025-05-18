@@ -14,7 +14,7 @@
         android:layout_marginVertical="@dimen/aiCardMessageMarginVertical_12dp"
         android:layout_gravity="start"
         app:strokeColor="@color/onSurface"
-        app:cardBackgroundColor="@color/aiBackground"
+        app:cardBackgroundColor="@color/aiPrimary98"
         app:cardCornerRadius="@dimen/aiCardMessageCornerRadius_12dp"
         app:cardElevation="@dimen/aiCardMessageElevation_4dp"
         >

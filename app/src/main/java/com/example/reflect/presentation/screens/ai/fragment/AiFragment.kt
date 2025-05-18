@@ -3,13 +3,13 @@ package com.example.reflect.presentation.screens.ai.fragment
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.core.animation.doOnEnd
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -58,7 +58,6 @@ class AiFragment : Fragment() {
 
 
         with (binding) {
-
             aiEditTextField.setText(vm.inputTextValue.value)
             aiEditTextField.doAfterTextChanged { value ->
                 vm.updateText(value.toString())
@@ -68,15 +67,34 @@ class AiFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
+            aiIconButtonCleanContext.setOnClickListener {
+                // TODO: request
+                vm.cleanMessages()
+                messageAdapter.submitList(vm.messagesList.value)
+            }
+
             aiHelperTextsRV.post {
                 val height = aiHelperTextsRV.height.toFloat()
 
                 aiHelperTextsRV.translationY = height
                 aiIconButtonSend.translationY = height
-                aiIconButtonExpandMenu.translationY = height
+                aiIconButtonExpandMenuCard.translationY = height
+                aiIconButtonCleanContext.translationY = height
                 aiEditText.translationY = height
+                // TODO: ГОВНОКОД
+                ValueAnimator.ofInt(aiMessagesRV.height, aiMessagesRV.height + aiHelperTextsRV.height).apply {
+                    addUpdateListener {
+                        val params = aiMessagesRV.layoutParams
+                        params.height = it.animatedValue as Int
+                        aiMessagesRV.layoutParams = params
+                    }
+                    duration = 3
+                    interpolator = AccelerateDecelerateInterpolator()
+                    start()
+                }
             }
 
+            aiMessagesRV.layoutParams.height = aiMessagesRV.height + 3 * aiHelperTextsRV.height
             aiIconButtonExpandMenu.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     showRecyclerView()
@@ -112,10 +130,22 @@ class AiFragment : Fragment() {
     private fun showRecyclerView() {
         with (binding) {
             val animators = mutableListOf<Animator>()
+
             animators.add(ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", 0f))
             animators.add(ObjectAnimator.ofFloat(aiIconButtonSend, "translationY", 0f))
-            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenu, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenuCard, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonCleanContext, "translationY", 0f))
             animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", 0f))
+
+            animators.add(ValueAnimator.ofInt(aiMessagesRV.height, aiMessagesRV.height - aiHelperTextsRV.height).apply {
+                addUpdateListener {
+                    val params = aiMessagesRV.layoutParams
+                    params.height = it.animatedValue as Int
+                    aiMessagesRV.layoutParams = params
+                }
+                duration = 300
+                interpolator = AccelerateDecelerateInterpolator()
+            })
 
             AnimatorSet().apply {
                 playTogether(animators)
@@ -123,11 +153,6 @@ class AiFragment : Fragment() {
                 interpolator = AccelerateDecelerateInterpolator()
                 start()
             }
-
-//            ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", aiHelperTextsRV.height.toFloat(), 0f).apply {
-//                duration = 300
-//                start()
-//            }
         }
     }
 
@@ -135,10 +160,22 @@ class AiFragment : Fragment() {
         with (binding) {
             val height = aiHelperTextsRV.height.toFloat()
             val animators = mutableListOf<Animator>()
+
             animators.add(ObjectAnimator.ofFloat(aiHelperTextsRV, "translationY", height))
             animators.add(ObjectAnimator.ofFloat(aiIconButtonSend, "translationY", height))
-            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenu, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenuCard, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiIconButtonCleanContext, "translationY", height))
             animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", height))
+
+            animators.add(ValueAnimator.ofInt(aiMessagesRV.height, aiMessagesRV.height + aiHelperTextsRV.height).apply {
+                addUpdateListener {
+                    val params = aiMessagesRV.layoutParams
+                    params.height = it.animatedValue as Int
+                    aiMessagesRV.layoutParams = params
+                }
+                duration = 300
+                interpolator = AccelerateDecelerateInterpolator()
+            })
 
             AnimatorSet().apply {
                 playTogether(animators)

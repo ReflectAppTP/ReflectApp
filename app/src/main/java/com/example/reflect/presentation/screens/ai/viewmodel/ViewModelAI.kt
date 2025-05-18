@@ -57,4 +57,8 @@ class ViewModelAI @Inject constructor() : ViewModel() {
     fun updateTextWithHelper(helperText: String) {
         _inputTextValue.value += "$helperText "
     }
+
+    fun cleanMessages() {
+        _messagesList.value = emptyList()
+    }
 }

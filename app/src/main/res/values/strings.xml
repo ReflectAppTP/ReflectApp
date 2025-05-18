@@ -174,4 +174,5 @@
     <string name="aiFragmentToolbarTitle">Ваш чат с AI</string>
     <string name="aiFragmentEmptyMessageText">Поделитесь своими чувствами</string>
     <string name="aiFragmentEditTextHint">Задайте вопрос</string>
+    <string name="aiFragmentIconButtonCleanContext">Очистить контекст</string>
 </resources>
