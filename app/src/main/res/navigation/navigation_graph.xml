@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.example.reflect.presentation.screens.friends.fragment.FriendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.MainFriendsFragment"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment

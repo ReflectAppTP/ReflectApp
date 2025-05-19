@@ -214,5 +214,6 @@
     <dimen name="cardFriendIconCornerRadius_45dp">45dp</dimen>
     <dimen name="cardFriendIconTextSize_18sp">18sp</dimen>
     <dimen name="cardFriendLoginMarginStart_16dp">16dp</dimen>
+    <dimen name="emptyFriendsListMarginHorizontal_86dp">86dp</dimen>
 
 </resources>
