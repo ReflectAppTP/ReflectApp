@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.reflect.domain.model.UserModel
 import com.example.reflect.presentation.screens.friends.GetFriendsState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
+@HiltViewModel
 class ViewModelFriends @Inject constructor(): ViewModel() {
 
     private var _friendsListState = MutableStateFlow<GetFriendsState>(GetFriendsState.EmptyContent)
@@ -26,7 +28,6 @@ class ViewModelFriends @Inject constructor(): ViewModel() {
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
         ))
-//        _friendsListState.value = GetFriendsState.EmptyContent
     }
 
     fun getUser(user: UserModel) {
