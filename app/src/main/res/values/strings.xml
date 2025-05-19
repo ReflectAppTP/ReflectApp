@@ -11,7 +11,9 @@
     <!-- Toolbar -->
     <string name="toolbarRecordsTitle">Записи</string>
     <string name="toolbarStatisticTitle">Статистика</string>
-    <string name="toolbarFriendsTitle">Найти друга</string>
+    <string name="toolbarFriendsTitle">Друзья</string>
+    <string name="toolbarSearchFriendsTitle">Найти друга</string>
+    <string name="toolbarNotificationFriendsTitle">Уведомления</string>
 
     <!-- ContentDescriptions -->
     <string name="contentDescriptionToolbarStreakIcon">Иконка стрика</string>
@@ -181,4 +183,8 @@
     <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
     <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
     <string name="emptyFriendsNotificationText">Уведомлений нет</string>
+    <string name="dialogAcceptFriendshipTitle">Этот пользователь хочет добавить вас в друзья</string>
+    <string name="dialogAcceptFriendshipBody">Хотите добавить пользователя в друзья</string>
+    <string name="dialogAcceptFriendshipAcceptButton">Добавить</string>
+    <string name="dialogAcceptFriendshipDeclineButton">Отклонить</string>
 </resources>

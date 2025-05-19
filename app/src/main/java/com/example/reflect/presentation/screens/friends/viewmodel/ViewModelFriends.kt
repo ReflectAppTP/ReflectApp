@@ -57,4 +57,8 @@ class ViewModelFriends @Inject constructor(): ViewModel() {
     fun acceptFriendRequest(id: Int) {
 
     }
+
+    fun declineFriendRequest(id: Int) {
+
+    }
 }

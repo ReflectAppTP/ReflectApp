@@ -36,6 +36,7 @@ class MainFriendsFragment : Fragment() {
             fragmentFriendsToolbarSearchIcon.setOnClickListener {
                 if (fragmentFriendsContainer.findNavController().currentDestination?.label.toString() != resources.getResourceEntryName(R.layout.fragment_search_friends)) {
                     fragmentFriendsContainer.findNavController().navigate(R.id.action_friendsListFragment_to_searchFriendsFragment)
+                    fragmentFriendsToolbarTitle.text = resources.getString(R.string.toolbarSearchFriendsTitle)
                     fragmentFriendsToolbarNotificationIcon.visibility = View.GONE
                     fragmentFriendsToolbarBackIcon.visibility = View.VISIBLE
                 }
@@ -44,6 +45,7 @@ class MainFriendsFragment : Fragment() {
             fragmentFriendsToolbarNotificationIcon.setOnClickListener {
                 if (fragmentFriendsContainer.findNavController().currentDestination?.label.toString() != resources.getResourceEntryName(R.layout.fragment_notification_friends)) {
                     fragmentFriendsContainer.findNavController().navigate(R.id.action_friendsListFragment_to_notificationFriendsFragment)
+                    fragmentFriendsToolbarTitle.text = resources.getString(R.string.toolbarNotificationFriendsTitle)
                     fragmentFriendsToolbarNotificationIcon.visibility = View.GONE
                     fragmentFriendsToolbarSearchIcon.visibility = View.GONE
                     fragmentFriendsToolbarBackIcon.visibility = View.VISIBLE
@@ -52,6 +54,7 @@ class MainFriendsFragment : Fragment() {
 
             fragmentFriendsToolbarBackIcon.setOnClickListener {
                 fragmentFriendsContainer.findNavController().popBackStack()
+                fragmentFriendsToolbarTitle.text = resources.getString(R.string.toolbarFriendsTitle)
                 fragmentFriendsToolbarBackIcon.visibility = View.GONE
                 fragmentFriendsToolbarSearchIcon.visibility = View.VISIBLE
                 fragmentFriendsToolbarNotificationIcon.visibility = View.VISIBLE
