@@ -176,4 +176,7 @@
     <string name="aiFragmentEditTextHint">Задайте вопрос</string>
     <string name="aiFragmentIconButtonCleanContext">Очистить контекст</string>
     <string name="emptyFriendsList">Друзей пока что нет,но вы всегда можете их найти</string>
+    <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
+    <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
+    <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
 </resources>

@@ -1,16 +1,21 @@
 package com.example.reflect.presentation.screens.friends.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentSearchFriendsBinding
+import com.example.reflect.presentation.screens.friends.SearchFriendsState
+import com.example.reflect.presentation.screens.friends.adapter.SearchListAdapter
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelSearchFriends
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +32,8 @@ class SearchFriendsFragment : Fragment() {
 
     private val mainVM: ViewModelFriends by activityViewModels()
     private val searchVM: ViewModelSearchFriends by viewModels()
+
+    private lateinit var searchListAdapter: SearchListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,16 +54,26 @@ class SearchFriendsFragment : Fragment() {
                 if (it?.isNotEmpty() == true) job = CoroutineScope(Dispatchers.Main).launch {
                     delay(2000)
                     searchVM.searchUsers(it.toString())
+                    // TODO: вынести
+                    handleSearchState(searchVM.searchUsersState.value)
                 }
             }
             fragmentSearchFriendsEditTextField.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     job?.cancel()
                     searchVM.searchUsers(fragmentSearchFriendsEditTextField.text.toString())
-                    fragmentSearchFriendsEditText.clearFocus()
+                    hideKeyboard()
+                    // TODO: вынести
+                    handleSearchState(searchVM.searchUsersState.value)
                 }
                 true
             }
+
+            fragmentSearchFriendsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            searchListAdapter = SearchListAdapter {
+                mainVM.getUser(it)
+            }
+            fragmentSearchFriendsRV.adapter = searchListAdapter
         }
     }
 
@@ -65,19 +82,13 @@ class SearchFriendsFragment : Fragment() {
         _binding = null
     }
 
-    private fun onChangeQueryListener() = object: OnQueryTextListener {
-        var job: Job? = null
-        override fun onQueryTextSubmit(query: String?): Boolean {
-            job?.cancel()
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.fragmentSearchFriendsEditTextField.clearFocus()
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
 
-            return false
-        }
-
-        override fun onQueryTextChange(newText: String?): Boolean {
-            job?.cancel()
-
-            return false
-        }
-
+    private fun handleSearchState(state: SearchFriendsState) {
+        searchListAdapter.updateState(state)
     }
 }

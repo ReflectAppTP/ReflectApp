@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_friends_graph"
     app:startDestination="@id/friendsListFragment">
 
     <fragment
         android:id="@+id/friendsListFragment"
         android:name="com.example.reflect.presentation.screens.friends.fragment.FriendsListFragment"
-        android:label="FriendsListFragment" />
+        android:label="FriendsListFragment" >
+        <action
+            android:id="@+id/action_friendsListFragment_to_searchFriendsFragment"
+            app:destination="@id/searchFriendsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/friendsListFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFriendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.SearchFriendsFragment"
+        android:label="fragment_search_friends"
+        tools:layout="@layout/fragment_search_friends" />
 </navigation>

@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentFriendsBinding
-import com.example.reflect.presentation.screens.friends.adapter.FriendsListAdapter
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,21 @@ class MainFriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with (binding) {
+            fragmentFriendsToolbarSearchIcon.setOnClickListener {
+                if (fragmentFriendsContainer.findNavController().currentDestination?.label.toString() != resources.getResourceEntryName(R.layout.fragment_search_friends)) {
+                    fragmentFriendsContainer.findNavController().navigate(R.id.action_friendsListFragment_to_searchFriendsFragment)
+                    fragmentFriendsToolbarNotificationIcon.visibility = View.GONE
+                    fragmentFriendsToolbarBackIcon.visibility = View.VISIBLE
+                }
+            }
+
+            fragmentFriendsToolbarBackIcon.setOnClickListener {
+                fragmentFriendsContainer.findNavController().popBackStack()
+                fragmentFriendsToolbarBackIcon.visibility = View.GONE
+                fragmentFriendsToolbarNotificationIcon.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onDestroyView() {

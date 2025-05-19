@@ -12,10 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:layout_marginHorizontal="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
+        android:layout_marginEnd="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarNotificationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:contentDescription="@string/contentDescriptionFragmentToolbarNotificationIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_friends_notification"
+            />
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarBackIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:visibility="gone"
+            android:contentDescription="@string/contentDescriptionFragmentToolbarBackIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_back_arrow"
+            />
 
         <TextView
             android:id="@+id/fragmentFriendsToolbarTitle"
