@@ -34,6 +34,6 @@
         tools:layout="@layout/fragment_search_friends" />
     <fragment
         android:id="@+id/notificationFriendsFragment"
-        android:name="com.example.reflect.presentation.screens.friends.NotificationFriendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.NotificationFriendsFragment"
         android:label="NotificationFriendsFragment" />
 </navigation>

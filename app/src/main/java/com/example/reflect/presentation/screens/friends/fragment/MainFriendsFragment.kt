@@ -41,9 +41,19 @@ class MainFriendsFragment : Fragment() {
                 }
             }
 
+            fragmentFriendsToolbarNotificationIcon.setOnClickListener {
+                if (fragmentFriendsContainer.findNavController().currentDestination?.label.toString() != resources.getResourceEntryName(R.layout.fragment_notification_friends)) {
+                    fragmentFriendsContainer.findNavController().navigate(R.id.action_friendsListFragment_to_notificationFriendsFragment)
+                    fragmentFriendsToolbarNotificationIcon.visibility = View.GONE
+                    fragmentFriendsToolbarSearchIcon.visibility = View.GONE
+                    fragmentFriendsToolbarBackIcon.visibility = View.VISIBLE
+                }
+            }
+
             fragmentFriendsToolbarBackIcon.setOnClickListener {
                 fragmentFriendsContainer.findNavController().popBackStack()
                 fragmentFriendsToolbarBackIcon.visibility = View.GONE
+                fragmentFriendsToolbarSearchIcon.visibility = View.VISIBLE
                 fragmentFriendsToolbarNotificationIcon.visibility = View.VISIBLE
             }
         }

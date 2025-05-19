@@ -52,6 +52,7 @@ class SearchFriendsFragment : Fragment() {
             fragmentSearchFriendsEditTextField.doAfterTextChanged {
                 job?.cancel()
                 if (it?.isNotEmpty() == true) job = CoroutineScope(Dispatchers.Main).launch {
+                    handleSearchState(SearchFriendsState.Success(mutableListOf()))
                     delay(2000)
                     searchVM.searchUsers(it.toString())
                     // TODO: вынести
