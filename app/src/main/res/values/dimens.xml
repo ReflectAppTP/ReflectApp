@@ -216,5 +216,6 @@
     <dimen name="cardFriendLoginMarginStart_16dp">16dp</dimen>
     <dimen name="emptyFriendsListMarginHorizontal_86dp">86dp</dimen>
     <dimen name="emptySearchFriendsMarginHorizontal_83dp">83dp</dimen>
+    <dimen name="cardFriendNotificationRequestMarginTop_4dp">4dp</dimen>
 
 </resources>

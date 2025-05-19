@@ -179,4 +179,6 @@
     <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
     <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
     <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
+    <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
+    <string name="emptyFriendsNotificationText">Уведомлений нет</string>
 </resources>
