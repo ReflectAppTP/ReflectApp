@@ -25,6 +25,7 @@ import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -92,6 +93,7 @@ class LoginFragment : Fragment() {
                     changeErrorStates(errorMessage = getText(R.string.emptyFieldsErrorMessage).toString())
                 } else {
                     changeErrorStates(emailError = false, passwordError = false)
+                    AppMetrica.reportEvent("Нажатие на кнопку войти")
                     lifecycleScope.launch {
                         vm.userIntent.send(LoginIntent.LoginUser)
                     }
@@ -112,6 +114,8 @@ class LoginFragment : Fragment() {
             }
 
             loginLikeGuestButton.setOnClickListener {
+                // TODO: impl
+                AppMetrica.reportEvent("Нажатие на кнопку Войти как гость")
                 Toast.makeText(requireContext(), "Пока не работает", Toast.LENGTH_SHORT).show()
             }
 

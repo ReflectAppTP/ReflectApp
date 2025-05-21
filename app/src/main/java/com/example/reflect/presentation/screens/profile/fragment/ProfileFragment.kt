@@ -11,6 +11,7 @@ import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -61,6 +62,7 @@ class ProfileFragment : Fragment() {
 
             fragmentProfilePremiumButton.setOnClickListener {
                 // TODO: потом переделать
+                AppMetrica.reportEvent("Нажатие на кнопку Покупка премиума")
                 Toast.makeText(requireContext(), "Тут должен быть фрагмент премиума", Toast.LENGTH_SHORT).show()
             }
 

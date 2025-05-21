@@ -20,6 +20,7 @@ import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 @AndroidEntryPoint
 class AiFragment : Fragment() {
@@ -101,6 +102,11 @@ class AiFragment : Fragment() {
                 } else {
                     hideRecyclerView()
                 }
+            }
+
+            aiIconButtonSend.setOnClickListener {
+                // TODO: Impl
+                AppMetrica.reportEvent("Нажатие на кнопку Отправка запроса к неиросети")
             }
 
             aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

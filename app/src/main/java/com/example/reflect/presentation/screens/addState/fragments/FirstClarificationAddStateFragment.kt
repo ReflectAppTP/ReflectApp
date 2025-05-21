@@ -13,6 +13,7 @@ import com.example.reflect.databinding.FragmentFirstClarificationAddStateBinding
 import com.example.reflect.presentation.adapters.AddStateTagListAdapter
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 
 @AndroidEntryPoint
@@ -54,6 +55,7 @@ class FirstClarificationAddStateFragment : Fragment() {
     private fun addButtonOnClickListeners() {
         with (binding) {
             addStateFirstClarificationNextButton.setOnClickListener {
+                AppMetrica.reportEvent("Нажатие на кнопку Второе уточнение")
                 findNavController().navigate(R.id.action_firstClarificationAddStateFragment_to_secondClarificationAddStateFragment)
             }
         }
