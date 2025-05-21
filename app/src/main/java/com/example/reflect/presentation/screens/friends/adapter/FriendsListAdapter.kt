@@ -1,6 +1,7 @@
 package com.example.reflect.presentation.screens.friends.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -34,6 +35,7 @@ class FriendsListAdapter(
 
                 cardFriendIconMaterialCardText.text = model.username.substring(0,1)
                 cardFriendLogin.text = model.username
+                cardFriendPremiumIcon.visibility = if (model.isPremium) View.VISIBLE else View.GONE
             }
         }
     }

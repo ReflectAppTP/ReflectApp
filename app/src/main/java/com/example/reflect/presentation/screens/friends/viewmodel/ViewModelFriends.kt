@@ -22,14 +22,14 @@ class ViewModelFriends @Inject constructor(): ViewModel() {
     fun fetchFriends() {
         _friendsListState.value = GetFriendsState.Success(mutableListOf(
             UserModel(1,"oleg", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"мяумуяделюксфыва", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"мяумуяделюксфыва", "fasdfsa", "sgsd", false, false),
             UserModel(1,"фываыфваыфваыфваы", "fasdfsa", "sgsd", false, true),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
         ))
     }
@@ -42,14 +42,14 @@ class ViewModelFriends @Inject constructor(): ViewModel() {
     fun fetchNotifications() {
         _friendsNotificationListState.value = GetFriendsNotificationsState.Success(mutableListOf(
             UserModel(1,"oleg", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"мяумуяделюксфыва", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"мяумуяделюксфыва", "fasdfsa", "sgsd", false, false),
             UserModel(1,"фываыфваыфваыфваы", "fasdfsa", "sgsd", false, true),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
+            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
             UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
         ))
     }
