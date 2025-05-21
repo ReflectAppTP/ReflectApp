@@ -31,6 +31,9 @@
     <string name="contentDescriptionAIFragmentBackArrow">Иконка возврата на главный экран</string>
     <string name="contentDescriptionAIFragmentExpandMenu">Кнопка раскрытия и скрытия запросов-помощников</string>
     <string name="contentDescriptionAIFragmentButtonSend">Кнопки отправки запросы к ИИ</string>
+    <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
+    <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
+    <string name="contentDescriptionCardFriendPremiumIcon">Иконка премиума у пользователя</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -177,15 +180,17 @@
     <string name="aiFragmentEmptyMessageText">Поделитесь своими чувствами</string>
     <string name="aiFragmentEditTextHint">Задайте вопрос</string>
     <string name="aiFragmentIconButtonCleanContext">Очистить контекст</string>
+
+    <!-- Friends Fragments -->
     <string name="emptyFriendsList">Друзей пока что нет,но вы всегда можете их найти</string>
     <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
-    <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
-    <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
-    <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
     <string name="emptyFriendsNotificationText">Уведомлений нет</string>
+    <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
+    <string name="fragmentSearchFriendsEditTextHint">Введите логин пользователя</string>
+
+    <!-- Dialog Accept FriendShip -->
     <string name="dialogAcceptFriendshipTitle">Этот пользователь хочет добавить вас в друзья</string>
     <string name="dialogAcceptFriendshipBody">Хотите добавить пользователя в друзья</string>
     <string name="dialogAcceptFriendshipAcceptButton">Добавить</string>
     <string name="dialogAcceptFriendshipDeclineButton">Отклонить</string>
-    <string name="contentDescriptionCardFriendPremiumIcon">Иконка премиума у пользователя</string>
 </resources>

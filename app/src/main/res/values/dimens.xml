@@ -205,6 +205,8 @@
     <dimen name="aiFragmentExpandMenuElevation_0dp">0dp</dimen>
     <dimen name="aiFragmentExpandMenuCornerRadius_45">45dp</dimen>
     <dimen name="aiFragmentExpandMenuStrokeWidth_1dp">1dp</dimen>
+
+    <!-- CardFriend -->
     <dimen name="cardFriendMarginHorizontal_26dp">26dp</dimen>
     <dimen name="cardFriendMarginVertical_7dp">7dp</dimen>
     <dimen name="cardFriendStrokeWidth_1dp">1dp</dimen>
@@ -214,8 +216,15 @@
     <dimen name="cardFriendIconCornerRadius_45dp">45dp</dimen>
     <dimen name="cardFriendIconTextSize_18sp">18sp</dimen>
     <dimen name="cardFriendLoginMarginStart_16dp">16dp</dimen>
+    <dimen name="cardFriendNotificationRequestMarginTop_4dp">4dp</dimen>
+
+    <!-- Empty Friends View -->
     <dimen name="emptyFriendsListMarginHorizontal_86dp">86dp</dimen>
     <dimen name="emptySearchFriendsMarginHorizontal_83dp">83dp</dimen>
-    <dimen name="cardFriendNotificationRequestMarginTop_4dp">4dp</dimen>
+
+    <!-- SearchFriends Fragment -->
+    <dimen name="fragmentSearchFriendsRootMarginTop_3dp">3dp</dimen>
+    <dimen name="fragmentSearchFriendsEditTextMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="fragmentSearchFriendsRVMarginTop_7dp">7dp</dimen>
 
 </resources>
