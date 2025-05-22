@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.reflect.domain.model.UserModel
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.GetFriendsState
+import com.example.reflect.presentation.screens.friends.fragment.FriendsScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelFriends @Inject constructor(): ViewModel() {
+
+    private var _currentScreen = MutableStateFlow(FriendsScreen.FriendsList)
+    val currentScreen: StateFlow<FriendsScreen> = _currentScreen
 
     private var _friendsListState = MutableStateFlow<GetFriendsState>(GetFriendsState.EmptyContent)
     val friendsListState: StateFlow<GetFriendsState> = _friendsListState
@@ -60,5 +64,9 @@ class ViewModelFriends @Inject constructor(): ViewModel() {
 
     fun declineFriendRequest(id: Int) {
 
+    }
+
+    fun moveToScreen(screen: FriendsScreen) {
+        _currentScreen.value = screen
     }
 }
