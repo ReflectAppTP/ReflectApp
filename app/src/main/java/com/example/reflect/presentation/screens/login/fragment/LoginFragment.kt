@@ -152,6 +152,7 @@ class LoginFragment : Fragment() {
         val context = requireContext()
         when (state) {
             is LoginState.Loading -> {
+                binding.loginButton.isEnabled = false
                 ToastUtils.showLoadingToast(context)
             }
             is LoginState.SuccessLogin -> {
@@ -164,6 +165,7 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }
             is LoginState.Error -> {
+                binding.loginButton.isEnabled = true
                 changeErrorStates(errorMessage = state.message)
                 AccountPrefs.clearTokens(context)
             }

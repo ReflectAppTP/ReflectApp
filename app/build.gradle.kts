@@ -87,10 +87,13 @@ dependencies {
     implementation(libs.lottie)
 
     // Export to Excel
-    implementation("org.apache.poi:poi:3.17")
+    implementation(libs.apache.poi)
     
     // Yandex metrica
     implementation(libs.yandex.analytics)
+
+    // Leak Canary
+    debugImplementation(libs.leakcanary)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -27,6 +27,8 @@ loggingInterceptor = "3.8.0"
 lottieVersion="3.4.0"
 analyticsVersion="7.9.0"
 transitionVersion="1.4.1"
+poiVersion="3.17"
+leakCanaryVersion="2.14"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -57,7 +59,8 @@ retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor"}
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion"}
 yandex-analytics = { group = "io.appmetrica.analytics", name = "analytics", version.ref = "analyticsVersion"}
-
+apache-poi = { group = "org.apache.poi", name = "poi", version.ref = "poiVersion"}
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanaryVersion"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

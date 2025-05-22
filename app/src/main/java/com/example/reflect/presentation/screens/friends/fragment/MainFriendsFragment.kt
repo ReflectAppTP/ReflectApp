@@ -81,6 +81,8 @@ class MainFriendsFragment : Fragment() {
                 }
                 FriendsScreen.FriendsList -> {
                     if (fragmentFriendsContainer.findNavController().currentDestination?.id != R.id.friendsListFragment){
+                        fragmentFriendsContainer.findNavController().popBackStack()
+                    } else {
                         fragmentFriendsContainer.findNavController().navigate(
                             R.id.friendsListFragment,
                             null,

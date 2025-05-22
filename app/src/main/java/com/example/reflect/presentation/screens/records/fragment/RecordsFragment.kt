@@ -56,6 +56,7 @@ class RecordsFragment : Fragment() {
 
         // TODO: почему тут надо в разных scope
         lifecycleScope.launch {
+            // TODO: Можно ли как то вынести из repeatOnLifeCycle
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.recordsState.collect { state ->
                     handleRecordsState(state)
