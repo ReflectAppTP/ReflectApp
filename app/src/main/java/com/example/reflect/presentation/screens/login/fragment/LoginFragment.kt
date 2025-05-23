@@ -2,6 +2,7 @@ package com.example.reflect.presentation.screens.login.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +25,17 @@ import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
 import com.google.android.material.textfield.TextInputEditText
+import com.vk.id.AccessToken
+import com.vk.id.VKID
+import com.vk.id.VKIDAuthFail
+import com.vk.id.VKIDUser
+import com.vk.id.auth.VKIDAuthCallback
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.launch
+import com.vk.id.auth.VKIDAuthParams
+import com.vk.id.refreshuser.VKIDGetUserCallback
+import com.vk.id.refreshuser.VKIDGetUserFail
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -86,6 +95,37 @@ class LoginFragment : Fragment() {
     }
 
     private fun setOnClickLogic() {
+        val vkAuthCallback = object : VKIDAuthCallback {
+            override fun onAuth(accessToken: AccessToken) {
+                val token = accessToken.token
+                Log.d("VK", token)
+                Log.d("VK", accessToken.idToken.toString())
+                Log.d("VK", accessToken.userID.toString())
+                Log.d("VK", accessToken.expireTime.toString())
+                binding.loginWithVKButton.isEnabled = true
+                lifecycleScope.launch {
+                    VKID.instance.getUserData(callback = object : VKIDGetUserCallback {
+                        override fun onFail(fail: VKIDGetUserFail) {
+                            Log.d("VK", fail.description)
+                        }
+
+                        override fun onSuccess(user: VKIDUser) {
+                            Log.d("VK", user.email.toString())
+                            Log.d("VK", user.firstName.toString())
+                            Log.d("VK", user.lastName.toString())
+                        }
+
+                    })
+                }
+            }
+
+            override fun onFail(fail: VKIDAuthFail) {
+                binding.loginWithVKButton.isEnabled = true
+                ToastUtils.showErrorToast(requireContext())
+            }
+
+        }
+
         with(binding) {
             loginButton.setOnClickListener {
                 hideKeyboard()
@@ -125,6 +165,13 @@ class LoginFragment : Fragment() {
 
             loginForgotPasswordButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
+            }
+
+            loginWithVKButton.setOnClickListener {
+                loginWithVKButton.isEnabled = false
+                VKID.instance.authorize(this@LoginFragment, vkAuthCallback, params = VKIDAuthParams {
+                    scopes = setOf("phone", "email")
+                })
             }
         }
     }

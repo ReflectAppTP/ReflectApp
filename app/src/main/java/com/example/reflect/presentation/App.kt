@@ -2,9 +2,11 @@ package com.example.reflect.presentation
 
 import android.app.Application
 import android.content.pm.PackageManager
+import com.vk.id.VKID
 import dagger.hilt.android.HiltAndroidApp
 import io.appmetrica.analytics.AppMetrica
 import io.appmetrica.analytics.AppMetricaConfig
+import java.util.Locale
 
 @HiltAndroidApp
 class App: Application() {
@@ -18,5 +20,9 @@ class App: Application() {
             .build()
         AppMetrica.activate(this, config)
         AppMetrica.enableActivityAutoTracking(this)
+
+        VKID.init(this)
+        VKID.instance.setLocale(Locale("ru"))
+        VKID.logsEnabled = true
     }
 }

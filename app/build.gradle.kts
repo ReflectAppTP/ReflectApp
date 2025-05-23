@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp.android)
+    alias(libs.plugins.vkid.manifest.placeholders)
 
     id("kotlin-parcelize")
     kotlin("plugin.serialization").version(libs.versions.kotlin.serialization)
@@ -36,11 +37,12 @@ android {
         viewBinding = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -94,6 +96,13 @@ dependencies {
 
     // Leak Canary
     debugImplementation(libs.leakcanary)
+
+    // VK SDK
+    implementation(libs.vkid.sdk)
+//    implementation(libs.vkid.onetap.xml)
+
+    // Desugaring
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

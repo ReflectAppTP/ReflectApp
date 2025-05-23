@@ -29,6 +29,9 @@ analyticsVersion="7.9.0"
 transitionVersion="1.4.1"
 poiVersion="3.17"
 leakCanaryVersion="2.14"
+vkPlaceholdersVersion="1.1.0"
+vkVersion="2.4.0"
+desugarVersion="2.1.5"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -61,6 +64,10 @@ lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieV
 yandex-analytics = { group = "io.appmetrica.analytics", name = "analytics", version.ref = "analyticsVersion"}
 apache-poi = { group = "org.apache.poi", name = "poi", version.ref = "poiVersion"}
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanaryVersion"}
+vkid-sdk = { group = "com.vk.id", name = "vkid", version.ref = "vkVersion"}
+vkid-onetap-xml = { group = "com.vk.id", name = "onetap-xml", version.ref = "vkVersion"}
+desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarVersion"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -68,3 +75,4 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 ksp-android = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+vkid-manifest-placeholders = { id = "vkid.manifest.placeholders", version.ref = "vkPlaceholdersVersion"}
