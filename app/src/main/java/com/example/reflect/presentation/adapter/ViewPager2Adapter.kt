@@ -1,4 +1,4 @@
-package com.example.reflect.presentation.adapters
+package com.example.reflect.presentation.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

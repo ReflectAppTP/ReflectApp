@@ -95,6 +95,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setOnClickLogic() {
+        // TODO: impl
         val vkAuthCallback = object : VKIDAuthCallback {
             override fun onAuth(accessToken: AccessToken) {
                 val token = accessToken.token

@@ -1,4 +1,4 @@
-package com.example.reflect.presentation.adapters
+package com.example.reflect.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context

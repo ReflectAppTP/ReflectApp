@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
-import com.example.reflect.presentation.adapters.RecordsListAdapter
+import com.example.reflect.presentation.adapter.RecordsListAdapter
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent

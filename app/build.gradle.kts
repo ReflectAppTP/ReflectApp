@@ -104,6 +104,10 @@ dependencies {
     // Desugaring
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
+    // WorkManager
+    implementation(libs.work.runtime)
+    implementation(libs.work.runtime.ktx)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

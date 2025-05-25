@@ -193,4 +193,6 @@
     <string name="dialogAcceptFriendshipBody">Хотите добавить пользователя в друзья?</string>
     <string name="dialogAcceptFriendshipAcceptButton">Добавить</string>
     <string name="dialogAcceptFriendshipDeclineButton">Отклонить</string>
+    <string name="notificationWorkerTitle">Как вы себя чувствуете?</string>
+    <string name="notificationWorkerBody">Отметьте своё эмоциональное состояние</string>
 </resources>
