@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
@@ -13,13 +14,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAiBinding
+import com.example.reflect.presentation.screens.ai.AiIntent
 import com.example.reflect.presentation.screens.ai.adapter.AIHelperTextAdapter
 import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
@@ -28,6 +33,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.NonCancellable.start
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AiFragment : Fragment() {
@@ -103,8 +109,13 @@ class AiFragment : Fragment() {
             }
 
             aiIconButtonSend.setOnClickListener {
-                // TODO: Impl
                 AppMetrica.reportEvent("Нажатие на кнопку Отправка запроса к неиросети")
+                lifecycleScope.launch {
+                    vm.userIntent.send(AiIntent.SendAiMessage)
+                }
+                vm.updateText("")
+                aiEditTextField.setText(vm.inputTextValue.value)
+                hideKeyboard()
             }
 
             aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -190,5 +201,11 @@ class AiFragment : Fragment() {
         transition.duration = 300
         TransitionManager.beginDelayedTransition(binding.root, transition)
         constraintSet.applyTo(binding.root)
+    }
+
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.aiEditTextField.clearFocus()
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 }

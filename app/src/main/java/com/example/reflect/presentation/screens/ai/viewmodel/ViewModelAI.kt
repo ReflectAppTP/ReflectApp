@@ -1,15 +1,28 @@
 package com.example.reflect.presentation.screens.ai.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.AIHelperTextModel
 import com.example.reflect.domain.model.AIMessageModel
+import com.example.reflect.domain.usecase.ai.SendAIMessageUseCase
+import com.example.reflect.presentation.screens.ai.AiIntent
+import com.example.reflect.presentation.screens.ai.SendAIMessageState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelAI @Inject constructor() : ViewModel() {
+class ViewModelAI @Inject constructor(
+    private val sendAIMessageUseCase: SendAIMessageUseCase
+) : ViewModel() {
+
+    val userIntent = Channel<AiIntent>(Channel.UNLIMITED)
+    private val _sendMessageState = MutableStateFlow<SendAIMessageState>(SendAIMessageState.Idle)
 
     private var _inputTextValue = MutableStateFlow("")
     val inputTextValue: StateFlow<String> = _inputTextValue
@@ -21,8 +34,20 @@ class ViewModelAI @Inject constructor() : ViewModel() {
     val helperTextList: StateFlow<List<AIHelperTextModel>> = _helperTextList
 
     init {
+        handleIntent()
+
         fetchHelperTextList()
         fetchMessages()
+    }
+
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect {
+                when (it) {
+                    is AiIntent.SendAiMessage -> postAiMessage()
+                }
+            }
+        }
     }
 
     private fun fetchMessages() {
@@ -48,6 +73,16 @@ class ViewModelAI @Inject constructor() : ViewModel() {
             AIHelperTextModel("Как улучшить мой состояние"),
 
         )
+    }
+
+    private suspend fun postAiMessage() {
+        _sendMessageState.value = SendAIMessageState.Idle
+        sendAIMessageUseCase(_inputTextValue.value).collect { newState ->
+            _sendMessageState.value = newState
+            if (newState is SendAIMessageState.Success) {
+                _inputTextValue.value = "ГОЙДАААА"
+            }
+        }
     }
 
     fun updateText(result: String) {

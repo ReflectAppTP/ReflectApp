@@ -1,6 +1,7 @@
 package com.example.reflect.data.di
 
 import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.data.repository.ai.SendAIMessageRepositoryImpl
 import com.example.reflect.data.repository.state.AddStateRepositoryImpl
 import com.example.reflect.data.repository.state.DeleteStateRepositoryImpl
 import com.example.reflect.data.repository.state.EditStateRepositoryImpl
@@ -17,6 +18,7 @@ import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRe
 import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetWeeklyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetYearlyAverageRepositoryImpl
+import com.example.reflect.domain.repository.ai.SendAIMessageRepository
 import com.example.reflect.domain.repository.state.AddStateRepository
 import com.example.reflect.domain.repository.state.DeleteStateRepository
 import com.example.reflect.domain.repository.state.EditStateRepository
@@ -138,4 +140,10 @@ object RepositoryModule {
     fun provideGetYearlyAverage(
         remoteData: RetrofitRemoteData
     ): GetYearlyAverageRepository = GetYearlyAverageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideAISendMessage(
+        remoteData: RetrofitRemoteData
+    ): SendAIMessageRepository = SendAIMessageRepositoryImpl(remoteData)
 }
