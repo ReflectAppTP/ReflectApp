@@ -1,6 +1,7 @@
 package com.example.reflect.data.di
 
 import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.data.repository.ai.ResetAIContextRepositoryImpl
 import com.example.reflect.data.repository.ai.SendAIMessageRepositoryImpl
 import com.example.reflect.data.repository.state.AddStateRepositoryImpl
 import com.example.reflect.data.repository.state.DeleteStateRepositoryImpl
@@ -18,6 +19,7 @@ import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRe
 import com.example.reflect.data.repository.statistic.GetStatisticTagsRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetWeeklyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetYearlyAverageRepositoryImpl
+import com.example.reflect.domain.repository.ai.ResetAIContextRepository
 import com.example.reflect.domain.repository.ai.SendAIMessageRepository
 import com.example.reflect.domain.repository.state.AddStateRepository
 import com.example.reflect.domain.repository.state.DeleteStateRepository
@@ -146,4 +148,10 @@ object RepositoryModule {
     fun provideAISendMessage(
         remoteData: RetrofitRemoteData
     ): SendAIMessageRepository = SendAIMessageRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideResetContext(
+        remoteData: RetrofitRemoteData
+    ): ResetAIContextRepository = ResetAIContextRepositoryImpl(remoteData)
 }

@@ -29,4 +29,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun getYearlyAverage() = retrofitService.getYearlyAverage()
 
     suspend fun postMessageToAI(aiMessageDTO: AISendMessageRequestDTO) = retrofitService.postMessageToAI(aiMessageDTO)
+    suspend fun resetContext() = retrofitService.resetContext()
 }

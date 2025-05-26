@@ -99,4 +99,14 @@ object ToastUtils {
             show()
         }
     }
+
+    fun showResetContextAI(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_reset_context_ai, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
 }

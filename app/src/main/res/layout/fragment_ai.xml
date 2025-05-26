@@ -62,6 +62,16 @@
         android:text="@string/aiFragmentEmptyMessageText"
         android:textColor="@color/onSurface" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/aiLoadingMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:lottie_rawRes="@raw/loading_animation"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/aiEditText"
         style="@style/EditText"

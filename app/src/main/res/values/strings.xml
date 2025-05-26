@@ -195,4 +195,6 @@
     <string name="dialogAcceptFriendshipDeclineButton">Отклонить</string>
     <string name="notificationWorkerTitle">Как вы себя чувствуете?</string>
     <string name="notificationWorkerBody">Отметьте своё эмоциональное состояние</string>
+    <string name="fragmentAIEmptyMessagesText">Здесь пока пусто</string>
+    <string name="toastMessageResetContextAI">Контекст очищен</string>
 </resources>

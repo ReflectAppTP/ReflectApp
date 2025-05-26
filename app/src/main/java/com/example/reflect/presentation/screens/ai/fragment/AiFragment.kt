@@ -24,7 +24,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAiBinding
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.ai.AiIntent
+import com.example.reflect.presentation.screens.ai.ResetAIContextState
 import com.example.reflect.presentation.screens.ai.adapter.AIHelperTextAdapter
 import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
@@ -33,6 +35,7 @@ import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.NonCancellable.start
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -71,8 +74,19 @@ class AiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        lifecycleScope.launch {
+            vm.resetContextState.collect { state ->
+                handleResetContextState(state)
+            }
+        }
+
 
         with (binding) {
+            if (vm.messagesList.value.isEmpty()) {
+                aiMessagesRV.visibility = View.GONE
+                aiEmptyTitle.visibility = View.VISIBLE
+            }
+
             aiEditTextField.setText(vm.inputTextValue.value)
             aiEditTextField.doAfterTextChanged { value ->
                 vm.updateText(value.toString())
@@ -83,9 +97,9 @@ class AiFragment : Fragment() {
             }
 
             aiIconButtonCleanContext.setOnClickListener {
-                // TODO: request
-                vm.cleanMessages()
-                messageAdapter.submitList(vm.messagesList.value)
+                lifecycleScope.launch {
+                    vm.userIntent.send(AiIntent.ResetAiContext)
+                }
             }
 
             aiHelperTextsRV.post {
@@ -207,5 +221,31 @@ class AiFragment : Fragment() {
         val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         binding.aiEditTextField.clearFocus()
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun handleResetContextState(state: ResetAIContextState) {
+        with (binding) {
+            when (state) {
+                is ResetAIContextState.Loading -> {
+                    aiMessagesRV.visibility = View.GONE
+                    aiEmptyTitle.visibility = View.GONE
+                    aiLoadingMessages.visibility = View.VISIBLE
+                }
+                is ResetAIContextState.Success -> {
+                    aiLoadingMessages.visibility = View.GONE
+                    aiEmptyTitle.visibility = View.VISIBLE
+                    aiMessagesRV.visibility = View.GONE
+                    messageAdapter.submitList(emptyList())
+                    ToastUtils.showResetContextAI(requireContext())
+                }
+                is ResetAIContextState.Error -> {
+                    aiEmptyTitle.visibility = View.GONE
+                    aiLoadingMessages.visibility = View.GONE
+                    aiMessagesRV.visibility = View.VISIBLE
+                    ToastUtils.showErrorToast(requireContext())
+                }
+                is ResetAIContextState.Idle -> Unit
+            }
+        }
     }
 }

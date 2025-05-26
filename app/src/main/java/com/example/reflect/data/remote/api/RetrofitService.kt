@@ -81,4 +81,7 @@ interface RetrofitService {
 
     @POST("$ai/send/")
     suspend fun postMessageToAI(@Body aiMessageDTO: AISendMessageRequestDTO): Response<AISendMessageResponseDTO>
+
+    @POST("$ai/reset/")
+    suspend fun resetContext(): Response<Unit>
 }

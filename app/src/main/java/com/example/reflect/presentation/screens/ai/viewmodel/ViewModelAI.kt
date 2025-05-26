@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.AIHelperTextModel
 import com.example.reflect.domain.model.AIMessageModel
+import com.example.reflect.domain.usecase.ai.ResetAIContextUseCase
 import com.example.reflect.domain.usecase.ai.SendAIMessageUseCase
 import com.example.reflect.presentation.screens.ai.AiIntent
+import com.example.reflect.presentation.screens.ai.ResetAIContextState
 import com.example.reflect.presentation.screens.ai.SendAIMessageState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -18,11 +20,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelAI @Inject constructor(
-    private val sendAIMessageUseCase: SendAIMessageUseCase
+    private val sendAIMessageUseCase: SendAIMessageUseCase,
+    private val resetAIContextUseCase: ResetAIContextUseCase,
 ) : ViewModel() {
 
     val userIntent = Channel<AiIntent>(Channel.UNLIMITED)
     private val _sendMessageState = MutableStateFlow<SendAIMessageState>(SendAIMessageState.Idle)
+    private val _resetContextState = MutableStateFlow<ResetAIContextState>(ResetAIContextState.Idle)
+    val resetContextState: StateFlow<ResetAIContextState> = _resetContextState
 
     private var _inputTextValue = MutableStateFlow("")
     val inputTextValue: StateFlow<String> = _inputTextValue
@@ -45,6 +50,7 @@ class ViewModelAI @Inject constructor(
             userIntent.consumeAsFlow().collect {
                 when (it) {
                     is AiIntent.SendAiMessage -> postAiMessage()
+                    is AiIntent.ResetAiContext -> resetContext()
                 }
             }
         }
@@ -93,7 +99,13 @@ class ViewModelAI @Inject constructor(
         _inputTextValue.value += "$helperText "
     }
 
-    fun cleanMessages() {
-        _messagesList.value = emptyList()
+    private suspend fun resetContext() {
+        _resetContextState.value = ResetAIContextState.Idle
+        resetAIContextUseCase().collect { newState ->
+            if (newState is ResetAIContextState.Success) {
+                _messagesList.value = emptyList()
+            }
+            _resetContextState.value = newState
+        }
     }
 }
