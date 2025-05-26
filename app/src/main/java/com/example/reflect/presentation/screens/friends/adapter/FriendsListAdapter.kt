@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.databinding.CardFriendListBinding
 import com.example.reflect.databinding.EmptyFriendsListBinding
 import com.example.reflect.databinding.LoadingLottieBinding
-import com.example.reflect.domain.model.GetFriendModel
+import com.example.reflect.domain.model.GetShortUserModel
 import com.example.reflect.presentation.screens.friends.GetFriendsState
 
 class FriendsListAdapter(
@@ -27,7 +27,7 @@ class FriendsListAdapter(
     class FriendsListViewHolder(
         private val binding: CardFriendListBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: GetFriendModel, onClick: (Int) -> Unit) {
+        fun bind(model: GetShortUserModel, onClick: (Int) -> Unit) {
             with (binding) {
                 root.setOnClickListener {
                     onClick(model.id)

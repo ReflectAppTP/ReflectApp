@@ -1,6 +1,6 @@
 package com.example.reflect.domain.model
 
-data class GetFriendModel(
+data class GetShortUserModel(
     val id: Int,
     val login: String,
     val email: String,

@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentSearchFriendsBinding
 import com.example.reflect.presentation.screens.friends.SearchFriendsState
@@ -21,7 +20,6 @@ import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelSearc
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -31,7 +29,7 @@ class SearchFriendsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainVM: ViewModelFriends by activityViewModels()
-    private val searchVM: ViewModelSearchFriends by viewModels()
+    private val searchVM: ViewModelSearchFriends by activityViewModels()
 
     private lateinit var searchListAdapter: SearchListAdapter
 
@@ -52,11 +50,8 @@ class SearchFriendsFragment : Fragment() {
             fragmentSearchFriendsEditTextField.doAfterTextChanged {
                 job?.cancel()
                 if (it?.isNotEmpty() == true) job = CoroutineScope(Dispatchers.Main).launch {
-                    handleSearchState(SearchFriendsState.Success(mutableListOf()))
                     delay(2000)
                     searchVM.searchUsers(it.toString())
-                    // TODO: вынести
-                    handleSearchState(searchVM.searchUsersState.value)
                 }
             }
             fragmentSearchFriendsEditTextField.setOnEditorActionListener { _, actionId, _ ->
@@ -64,8 +59,6 @@ class SearchFriendsFragment : Fragment() {
                     job?.cancel()
                     searchVM.searchUsers(fragmentSearchFriendsEditTextField.text.toString())
                     hideKeyboard()
-                    // TODO: вынести
-                    handleSearchState(searchVM.searchUsersState.value)
                 }
                 true
             }
@@ -75,6 +68,12 @@ class SearchFriendsFragment : Fragment() {
                 mainVM.getUser(it)
             }
             fragmentSearchFriendsRV.adapter = searchListAdapter
+        }
+
+        lifecycleScope.launch {
+            searchVM.searchUsersState.collect {
+                handleSearchState(it)
+            }
         }
     }
 

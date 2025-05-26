@@ -93,4 +93,7 @@ interface RetrofitService {
 
     @GET("$friends/friendships/listf/")
     suspend fun getFriendsList(): Response<List<GetFriendsResponseDTO>>
+
+    @GET("$friends/by-username/{username}/")
+    suspend fun searchUsers(@Path("username") username: String): Response<List<GetFriendsResponseDTO>>
 }
