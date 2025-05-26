@@ -52,14 +52,17 @@ class App: Application() {
             targetTime.add(Calendar.DAY_OF_MONTH, 1)
         }
 
+        val initialDelay = targetTime.timeInMillis - System.currentTimeMillis()
 
-        val repeatRequest = PeriodicWorkRequestBuilder<NotificationWorker>(24, TimeUnit.HOURS).build()
+        val repeatRequest = PeriodicWorkRequestBuilder<NotificationWorker>(24, TimeUnit.HOURS)
+            .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
+            .build()
 
         val workManager = WorkManager.getInstance(context)
 
         workManager.enqueueUniquePeriodicWork(
             workName,
-            ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+            ExistingPeriodicWorkPolicy.REPLACE,
             repeatRequest
         )
     }

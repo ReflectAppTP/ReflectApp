@@ -76,25 +76,6 @@ class AiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            vm.resetContextState.collect { state ->
-                handleResetContextState(state)
-            }
-        }
-
-        lifecycleScope.launch {
-            vm.getAIMessageState.collect { state ->
-                handleGetMessageState(state)
-            }
-        }
-
-        lifecycleScope.launch {
-            vm.sendMessageState.collect { state ->
-                handleSendMessageState(state)
-            }
-        }
-
-
         with (binding) {
             if (vm.messagesList.value.isEmpty()) {
                 aiMessagesRV.visibility = View.GONE
@@ -125,7 +106,7 @@ class AiFragment : Fragment() {
                 aiIconButtonCleanContext.translationY = height
                 aiEditText.translationY = height
                 aiLoadingGetAIMessage.translationY = height
-                
+
                 animateMessageRV(true)
             }
 
@@ -168,6 +149,24 @@ class AiFragment : Fragment() {
             messageAdapter = AiMessageAdapter()
             messageAdapter.submitList(vm.messagesList.value)
             aiMessagesRV.adapter = messageAdapter
+        }
+
+        lifecycleScope.launch {
+            vm.resetContextState.collect { state ->
+                handleResetContextState(state)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.getAIMessageState.collect { state ->
+                handleGetMessageState(state)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.sendMessageState.collect { state ->
+                handleSendMessageState(state)
+            }
         }
     }
 
