@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.databinding.CardFriendListBinding
 import com.example.reflect.databinding.EmptyFriendsListBinding
 import com.example.reflect.databinding.LoadingLottieBinding
-import com.example.reflect.domain.model.UserModel
+import com.example.reflect.domain.model.GetFriendModel
 import com.example.reflect.presentation.screens.friends.GetFriendsState
 
 class FriendsListAdapter(
-    private val onClick: (UserModel) -> Unit
+    private val onClick: (Int) -> Unit
 ) : ListAdapter<GetFriendsState, RecyclerView.ViewHolder>(DIFF_CALLBACK){
 
     class EmptyFriendsViewHolder(
@@ -27,14 +27,14 @@ class FriendsListAdapter(
     class FriendsListViewHolder(
         private val binding: CardFriendListBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: UserModel, onClick: (UserModel) -> Unit) {
+        fun bind(model: GetFriendModel, onClick: (Int) -> Unit) {
             with (binding) {
                 root.setOnClickListener {
-                    onClick(model)
+                    onClick(model.id)
                 }
 
-                cardFriendIconMaterialCardText.text = model.username.substring(0,1)
-                cardFriendLogin.text = model.username
+                cardFriendIconMaterialCardText.text = model.login.substring(0,1)
+                cardFriendLogin.text = model.login
                 cardFriendPremiumIcon.visibility = if (model.isPremium) View.VISIBLE else View.GONE
             }
         }

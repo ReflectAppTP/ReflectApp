@@ -13,7 +13,7 @@ import com.example.reflect.domain.model.UserModel
 import com.example.reflect.presentation.screens.friends.SearchFriendsState
 
 class SearchListAdapter(
-    private val onClick: (UserModel) -> Unit
+    private val onClick: (Int) -> Unit
 ) : ListAdapter<SearchFriendsState, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     class EmptySearchFriendsViewHolder(
@@ -27,10 +27,10 @@ class SearchListAdapter(
     class FriendsListViewHolder(
         private val binding: CardFriendListBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: UserModel, onClick: (UserModel) -> Unit) {
+        fun bind(model: UserModel, onClick: (Int) -> Unit) {
             with (binding) {
                 root.setOnClickListener {
-                    onClick(model)
+                    onClick(model.id)
                 }
 
                 cardFriendIconMaterialCardText.text = model.username.substring(0,1)

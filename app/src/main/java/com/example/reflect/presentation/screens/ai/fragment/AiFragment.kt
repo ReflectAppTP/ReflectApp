@@ -173,6 +173,7 @@ class AiFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        vm.cleanStates()
         _binding = null
     }
 

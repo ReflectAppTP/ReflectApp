@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentFriendsListBinding
+import com.example.reflect.presentation.screens.friends.GetFriendsState
 import com.example.reflect.presentation.screens.friends.adapter.FriendsListAdapter
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FriendsListFragment : Fragment() {
@@ -41,10 +44,20 @@ class FriendsListFragment : Fragment() {
             friendsListAdapter.updateState(vm.friendsListState.value)
             fragmentFriendsRV.adapter = friendsListAdapter
         }
+
+        lifecycleScope.launch {
+            vm.friendsListState.collect {
+                handleFriendsState(it)
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleFriendsState(state: GetFriendsState) {
+        friendsListAdapter.updateState(state)
     }
 }

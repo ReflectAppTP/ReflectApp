@@ -11,6 +11,7 @@ import com.example.reflect.data.dto.UserDTO
 import com.example.reflect.data.dto.ai.AIGetMessageResponseDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
+import com.example.reflect.data.dto.friendship.GetFriendsResponseDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
@@ -29,6 +30,7 @@ private const val token = "api/token"
 private const val emotions = "api/emotions"
 private const val statistic = "api/emotions/statistics"
 private const val ai = "api/ai/chat"
+private const val friends = "api/friends"
 
 interface RetrofitService {
 
@@ -88,4 +90,7 @@ interface RetrofitService {
 
     @GET("$ai/messages/{message_id}")
     suspend fun getAIMessage(@Path("message_id") messageId: Int): Response<AIGetMessageResponseDTO>
+
+    @GET("$friends/friendships/listf/")
+    suspend fun getFriendsList(): Response<List<GetFriendsResponseDTO>>
 }

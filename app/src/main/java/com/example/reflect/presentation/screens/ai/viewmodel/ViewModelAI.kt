@@ -123,4 +123,10 @@ class ViewModelAI @Inject constructor(
             _resetContextState.value = newState
         }
     }
+
+    fun cleanStates() {
+        _resetContextState.value = ResetAIContextState.Idle
+//        _sendMessageState.value = SendAIMessageState.Idle
+//        _getMessageState.value = GetAIMessageState.Idle
+    }
 }
