@@ -152,6 +152,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/aiLoadingGetAIMessage"
+        android:layout_width="@dimen/aiLoadingGetAIMessageWidth_75dp"
+        android:layout_height="@dimen/aiLoadingGetAIMessageHeight_30dp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/aiFragmentButtonSendMarginHorizontal_10dp"
+        android:layout_marginBottom="@dimen/aiFragmentButtonSendMarginBottom_10dp"
+        app:lottie_rawRes="@raw/loading_animation"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintBottom_toTopOf="@id/aiHelperTextsRV"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/aiHelperTextsRV"
         android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import com.example.reflect.data.dto.login.LoginResponseDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
+import com.example.reflect.data.dto.ai.AIGetMessageResponseDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
@@ -84,4 +85,7 @@ interface RetrofitService {
 
     @POST("$ai/reset/")
     suspend fun resetContext(): Response<Unit>
+
+    @GET("$ai/messages/{message_id}")
+    suspend fun getAIMessage(@Path("message_id") messageId: Int): Response<AIGetMessageResponseDTO>
 }

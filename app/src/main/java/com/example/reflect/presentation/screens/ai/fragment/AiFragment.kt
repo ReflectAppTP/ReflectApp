@@ -26,7 +26,9 @@ import com.example.reflect.R
 import com.example.reflect.databinding.FragmentAiBinding
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.ai.AiIntent
+import com.example.reflect.presentation.screens.ai.GetAIMessageState
 import com.example.reflect.presentation.screens.ai.ResetAIContextState
+import com.example.reflect.presentation.screens.ai.SendAIMessageState
 import com.example.reflect.presentation.screens.ai.adapter.AIHelperTextAdapter
 import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
@@ -80,6 +82,18 @@ class AiFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            vm.getAIMessageState.collect { state ->
+                handleGetMessageState(state)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.sendMessageState.collect { state ->
+                handleSendMessageState(state)
+            }
+        }
+
 
         with (binding) {
             if (vm.messagesList.value.isEmpty()) {
@@ -110,6 +124,8 @@ class AiFragment : Fragment() {
                 aiIconButtonExpandMenuCard.translationY = height
                 aiIconButtonCleanContext.translationY = height
                 aiEditText.translationY = height
+                aiLoadingGetAIMessage.translationY = height
+                
                 animateMessageRV(true)
             }
 
@@ -124,12 +140,16 @@ class AiFragment : Fragment() {
 
             aiIconButtonSend.setOnClickListener {
                 AppMetrica.reportEvent("Нажатие на кнопку Отправка запроса к неиросети")
-                lifecycleScope.launch {
-                    vm.userIntent.send(AiIntent.SendAiMessage)
+                if (aiEditTextField.text?.isNotEmpty() == true) {
+                    lifecycleScope.launch {
+                        vm.userIntent.send(AiIntent.SendAiMessage)
+                    }
+                    vm.addMessage()
+                    vm.updateText("")
+                    aiEditTextField.setText(vm.inputTextValue.value)
+                    hideKeyboard()
+                    aiIconButtonSend.isEnabled = false
                 }
-                vm.updateText("")
-                aiEditTextField.setText(vm.inputTextValue.value)
-                hideKeyboard()
             }
 
             aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -166,6 +186,7 @@ class AiFragment : Fragment() {
             animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenuCard, "translationY", 0f))
             animators.add(ObjectAnimator.ofFloat(aiIconButtonCleanContext, "translationY", 0f))
             animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", 0f))
+            animators.add(ObjectAnimator.ofFloat(aiLoadingGetAIMessage, "translationY", 0f))
 
             animateMessageRV(false)
 
@@ -188,6 +209,7 @@ class AiFragment : Fragment() {
             animators.add(ObjectAnimator.ofFloat(aiIconButtonExpandMenuCard, "translationY", height))
             animators.add(ObjectAnimator.ofFloat(aiIconButtonCleanContext, "translationY", height))
             animators.add(ObjectAnimator.ofFloat(aiEditText, "translationY", height))
+            animators.add(ObjectAnimator.ofFloat(aiLoadingGetAIMessage, "translationY", height))
 
             animateMessageRV(true)
 
@@ -245,6 +267,63 @@ class AiFragment : Fragment() {
                     ToastUtils.showErrorToast(requireContext())
                 }
                 is ResetAIContextState.Idle -> Unit
+            }
+        }
+    }
+
+    private fun handleGetMessageState(state: GetAIMessageState) {
+        with (binding) {
+            when (state) {
+                is GetAIMessageState.Loading -> {
+                    aiIconButtonSend.isEnabled = false
+                    aiIconButtonSend.visibility = View.INVISIBLE
+                    aiLoadingGetAIMessage.visibility = View.VISIBLE
+                    ToastUtils.showLoadingToast(requireContext())
+                }
+                is GetAIMessageState.Success -> {
+                    aiIconButtonSend.isEnabled = true
+                    aiIconButtonSend.visibility = View.VISIBLE
+                    aiLoadingGetAIMessage.visibility = View.GONE
+                    aiEmptyTitle.visibility = View.GONE
+                    aiMessagesRV.visibility = View.VISIBLE
+                    messageAdapter.submitList(vm.messagesList.value)
+                    messageAdapter.notifyDataSetChanged()
+                    aiMessagesRV.scrollToPosition(vm.messagesList.value.lastIndex)
+                }
+                is GetAIMessageState.Error -> {
+                    aiIconButtonSend.isEnabled = true
+                    aiIconButtonSend.visibility = View.VISIBLE
+                    aiLoadingGetAIMessage.visibility = View.GONE
+                    ToastUtils.showErrorToast(requireContext())
+                }
+                is GetAIMessageState.Idle -> Unit
+            }
+        }
+    }
+
+    private fun handleSendMessageState(state: SendAIMessageState) {
+        with (binding) {
+            when (state) {
+                is SendAIMessageState.Loading -> {
+                    aiMessagesRV.visibility = View.GONE
+                    aiEmptyTitle.visibility = View.GONE
+                    aiLoadingMessages.visibility = View.VISIBLE
+                }
+                is SendAIMessageState.Success -> {
+                    aiMessagesRV.visibility = View.VISIBLE
+                    aiEmptyTitle.visibility = View.GONE
+                    aiLoadingMessages.visibility = View.GONE
+                    messageAdapter.submitList(vm.messagesList.value)
+                    aiMessagesRV.scrollToPosition(vm.messagesList.value.lastIndex)
+                }
+                is SendAIMessageState.Error -> {
+                    aiMessagesRV.visibility = View.VISIBLE
+                    aiEmptyTitle.visibility = View.GONE
+                    aiLoadingMessages.visibility = View.GONE
+                    messageAdapter.submitList(vm.messagesList.value)
+                    ToastUtils.showErrorToast(requireContext())
+                }
+                is SendAIMessageState.Idle -> Unit
             }
         }
     }

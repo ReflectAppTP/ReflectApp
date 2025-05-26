@@ -205,6 +205,8 @@
     <dimen name="aiFragmentExpandMenuElevation_0dp">0dp</dimen>
     <dimen name="aiFragmentExpandMenuCornerRadius_45">45dp</dimen>
     <dimen name="aiFragmentExpandMenuStrokeWidth_1dp">1dp</dimen>
+    <dimen name="aiLoadingGetAIMessageWidth_75dp">75dp</dimen>
+    <dimen name="aiLoadingGetAIMessageHeight_30dp">30dp</dimen>
 
     <!-- CardFriend -->
     <dimen name="cardFriendMarginHorizontal_26dp">26dp</dimen>
