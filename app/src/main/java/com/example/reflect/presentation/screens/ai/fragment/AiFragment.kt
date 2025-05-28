@@ -3,7 +3,6 @@ package com.example.reflect.presentation.screens.ai.fragment
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.transition.ChangeBounds
@@ -15,8 +14,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -32,12 +31,9 @@ import com.example.reflect.presentation.screens.ai.SendAIMessageState
 import com.example.reflect.presentation.screens.ai.adapter.AIHelperTextAdapter
 import com.example.reflect.presentation.screens.ai.adapter.AiMessageAdapter
 import com.example.reflect.presentation.screens.ai.viewmodel.ViewModelAI
-import com.google.android.material.animation.AnimatorSetCompat.playTogether
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
-import kotlinx.coroutines.NonCancellable.start
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -146,7 +142,12 @@ class AiFragment : Fragment() {
             aiMessagesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false).apply {
                 stackFromEnd = true
             }
-            messageAdapter = AiMessageAdapter()
+            messageAdapter = AiMessageAdapter {
+                aiIconButtonSend.isEnabled = true
+                isEnabledResetContext(true)
+                aiIconButtonSend.visibility = View.VISIBLE
+                aiLoadingGetAIMessage.visibility = View.GONE
+            }
             messageAdapter.submitList(vm.messagesList.value)
             aiMessagesRV.adapter = messageAdapter
         }
@@ -254,6 +255,11 @@ class AiFragment : Fragment() {
                     aiLoadingMessages.visibility = View.VISIBLE
                 }
                 is ResetAIContextState.Success -> {
+                    // На всякий случай, если чистим контекст при получении сообщений
+                    aiIconButtonSend.isEnabled = true
+                    aiIconButtonSend.visibility = View.VISIBLE
+                    aiLoadingGetAIMessage.visibility = View.GONE
+
                     aiLoadingMessages.visibility = View.GONE
                     aiEmptyTitle.visibility = View.VISIBLE
                     aiMessagesRV.visibility = View.GONE
@@ -275,15 +281,13 @@ class AiFragment : Fragment() {
         with (binding) {
             when (state) {
                 is GetAIMessageState.Loading -> {
+                    isEnabledResetContext(false)
                     aiIconButtonSend.isEnabled = false
                     aiIconButtonSend.visibility = View.INVISIBLE
                     aiLoadingGetAIMessage.visibility = View.VISIBLE
                     ToastUtils.showLoadingToast(requireContext())
                 }
                 is GetAIMessageState.Success -> {
-                    aiIconButtonSend.isEnabled = true
-                    aiIconButtonSend.visibility = View.VISIBLE
-                    aiLoadingGetAIMessage.visibility = View.GONE
                     aiEmptyTitle.visibility = View.GONE
                     aiMessagesRV.visibility = View.VISIBLE
                     messageAdapter.submitList(vm.messagesList.value)
@@ -324,6 +328,22 @@ class AiFragment : Fragment() {
                     ToastUtils.showErrorToast(requireContext())
                 }
                 is SendAIMessageState.Idle -> Unit
+            }
+        }
+    }
+
+    private fun isEnabledResetContext(enabled: Boolean) {
+        with (binding) {
+            aiIconButtonCleanContext.apply {
+                isEnabled = enabled
+                setTextColor(
+                    if (enabled) ContextCompat.getColor(requireContext(), R.color.aiPrimary98)
+                    else ContextCompat.getColor(requireContext(), R.color.outline)
+                )
+                setBackgroundColor(
+                    if (enabled) ContextCompat.getColor(requireContext(), R.color.primary)
+                    else ContextCompat.getColor(requireContext(), R.color.surface)
+                )
             }
         }
     }

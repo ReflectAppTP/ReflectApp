@@ -8,8 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.databinding.CardAiMessageBinding
 import com.example.reflect.databinding.CardAiMessageResponseBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class AiMessageAdapter: ListAdapter<AIMessageModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class AiMessageAdapter(
+    private val onTypingComplete: (() -> Unit)? = null
+): ListAdapter<AIMessageModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+
+    private var typingJobs = mutableMapOf<Int, Job>()
 
     class MessageViewHolder(
         val binding: CardAiMessageBinding
@@ -22,8 +31,20 @@ class AiMessageAdapter: ListAdapter<AIMessageModel, RecyclerView.ViewHolder>(DIF
     class ResponseViewHolder(
         val binding: CardAiMessageResponseBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: AIMessageModel) {
-            binding.aiCardMessageTV.text = model.message
+        fun bind(model: AIMessageModel, startTypingEffect: Boolean, onTypingComplete: (() -> Unit)? = null) {
+            if (startTypingEffect) {
+                binding.aiCardMessageTV.text = "▌"
+                CoroutineScope(Dispatchers.Main).launch {
+                    for (i in model.message.indices) {
+                        binding.aiCardMessageTV.text = model.message.substring(0, i + 1) + "▌"
+                        delay(TYPING_DELAY)
+                    }
+                    onTypingComplete?.invoke()
+                    binding.aiCardMessageTV.text = model.message
+                }
+            } else {
+                binding.aiCardMessageTV.text = model.message
+            }
         }
     }
 
@@ -48,16 +69,31 @@ class AiMessageAdapter: ListAdapter<AIMessageModel, RecyclerView.ViewHolder>(DIF
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MessageViewHolder -> holder.bind(currentList[position])
-            is ResponseViewHolder -> holder.bind(currentList[position])
+            is ResponseViewHolder -> {
+                typingJobs[position]?.cancel()
+
+                val shouldAnimate = currentList[position].isResponse && position == currentList.size - 1
+                typingJobs[position] = CoroutineScope(Dispatchers.Main).launch {
+                    holder.bind(currentList[position], shouldAnimate, onTypingComplete)
+                }
+            }
         }
     }
 
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+        if (holder is ResponseViewHolder) {
+            typingJobs[holder.adapterPosition]?.cancel()
+            typingJobs.remove(holder.adapterPosition)
+        }
+    }
 
     override fun getItemCount(): Int = currentList.size
 
     companion object {
         private const val VIEW_TYPE_USER = 0
         private const val VIEW_TYPE_AI = 1
+        private const val TYPING_DELAY = 12L
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AIMessageModel>() {
             override fun areItemsTheSame(

@@ -45,6 +45,8 @@ class ViewModelAI @Inject constructor(
     private var _helperTextList = MutableStateFlow<List<AIHelperTextModel>>(mutableListOf())
     val helperTextList: StateFlow<List<AIHelperTextModel>> = _helperTextList
 
+    private var successState = true
+
     init {
         handleIntent()
 
@@ -78,14 +80,14 @@ class ViewModelAI @Inject constructor(
             _sendMessageState.value = newState
             if (newState is SendAIMessageState.Success) {
                 _getMessageState.value = GetAIMessageState.Loading
-                var successState = true
+                // TODO: Говнокод делюкс 
                 while (successState) {
                     getAIMessageUseCase(newState.message.messageId + 1).collect {
                         if (it is GetAIMessageState.Success && it.messageModel.status == "pending") {
                             if (_getMessageState.value !is GetAIMessageState.Loading) {
                                 _getMessageState.value = GetAIMessageState.Loading
                             }
-                            delay(4000)
+                            delay(6000)
                         } else {
                             if (it is GetAIMessageState.Success) {
                                 _messagesList.value.add(
@@ -115,6 +117,7 @@ class ViewModelAI @Inject constructor(
     }
 
     private suspend fun resetContext() {
+        successState = false
         _resetContextState.value = ResetAIContextState.Idle
         resetAIContextUseCase().collect { newState ->
             if (newState is ResetAIContextState.Success) {

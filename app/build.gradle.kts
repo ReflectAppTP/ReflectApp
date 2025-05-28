@@ -95,7 +95,7 @@ dependencies {
     implementation(libs.yandex.analytics)
 
     // Leak Canary
-    debugImplementation(libs.leakcanary)
+//    debugImplementation(libs.leakcanary)
 
     // VK SDK
     implementation(libs.vkid.sdk)
