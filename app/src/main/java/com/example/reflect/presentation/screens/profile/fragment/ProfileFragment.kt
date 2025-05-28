@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
             fragmentProfilePremiumButton.setOnClickListener {
                 // TODO: потом переделать
                 AppMetrica.reportEvent("Нажатие на кнопку Покупка премиума")
-                Toast.makeText(requireContext(), "Тут должен быть фрагмент премиума", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_profileFragment_to_premiumFragment)
             }
 
             fragmentProfileLoginButton.setOnClickListener {

@@ -96,7 +96,7 @@ class ViewModelAI @Inject constructor(
                                 successState = false
                             }
                             _getMessageState.value = it
-                            Log.d("OkHTTP", if (_getMessageState.value is GetAIMessageState.Error) (_getMessageState.value as GetAIMessageState.Error).message else "ecas")
+                            Log.d("OkHTTP", if (_getMessageState.value is GetAIMessageState.Error) (_getMessageState.value as GetAIMessageState.Error).message else "Спасибо, Олег!")
                         }
                     }
                 }

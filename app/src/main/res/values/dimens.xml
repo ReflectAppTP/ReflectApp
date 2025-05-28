@@ -229,4 +229,35 @@
     <dimen name="fragmentSearchFriendsEditTextMarginHorizontal_10dp">10dp</dimen>
     <dimen name="fragmentSearchFriendsRVMarginTop_7dp">7dp</dimen>
 
+    <!-- Premium Fragment -->
+    <dimen name="fragmentPremiumRootMarginHorizontal_21dp">21dp</dimen>
+    <dimen name="fragmentPremiumTariffTitleMarginStart15dp">15dp</dimen>
+    <dimen name="fragmentPremiumTariffTitleMarginTop_22dp">22dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumPriceCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumPriceCardElevation_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumPriceCardHeight_50dp">50dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginHorizontal_15dp">15dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginBottom_23dp">23dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_9dp">9dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_23dp">23dp</dimen>
+    <dimen name="fragmentPremiumPriceCardCornerRadius_8dp">8dp</dimen>
+    <dimen name="fragmentPremiumPriceCardStrokeWidth_1dp">1dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardTitleMargin_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPrice_10sp">10sp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPriceMarginVertical_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPriceMarginStart_4dp">4dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPricePaddingTop_4dp">4dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardMonthPriceMarginVertical_9dp">9dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardMonthPriceMarginEnd_10dp">10dp</dimen>
+    <dimen name="fragmentPremiumBenefitsTitleMarginStart_15dp">15dp</dimen>
+    <dimen name="fragmentPremiumBenefitsTitle_44dp">44dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardMarginTop_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardElevation_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardRootMarginVertical_13dp">13dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardRootMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardDescriptionMarginStart_17dp">17dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardDescriptionMarginTop_20dp">20dp</dimen>
+
 </resources>

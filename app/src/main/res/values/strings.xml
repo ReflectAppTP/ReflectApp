@@ -34,6 +34,8 @@
     <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
     <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
     <string name="contentDescriptionCardFriendPremiumIcon">Иконка премиума у пользователя</string>
+    <string name="contentDescriptionFragmentPremiumToolbarBackArrow">Иконка возврата на экран профиля</string>
+    <string name="contentDescriptionFragmentPremiumCatImage">Картинка котика Купите премиум пж</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -199,4 +201,30 @@
     <!-- WorkManager -->
     <string name="notificationWorkerTitle">Как вы себя чувствуете?</string>
     <string name="notificationWorkerBody">Отметьте своё эмоциональное состояние</string>
+
+
+    <!-- Dialog Buy Premium -->
+    <string name="dialogBuyPremiumTitle">Подтверждение покупки</string>
+    <string name="dialogBuyMonthPremiumBody">Чтобы оформить <b><u>месячную</u></b> подписку на премиум, нажмите кнопку продолжить.</string>
+    <string name="dialogBuyYearPremiumBody">Чтобы оформить <b><u>годовую</u></b> подписку на премиум, нажмите кнопку продолжить.</string>
+    <string name="dialogBuyPremiumNext">Продолжить</string>
+    <string name="dialogBuyPremiumBack">Отмена</string>
+
+
+    <!-- Fragment Premium -->
+    <string name="fragmentPremiumBenefitsCardFirstTitle"><b>1. <u>Безлимитный чат с AI ассистентом</u></b></string>
+    <string name="fragmentPremiumBenefitsCardSecondTitle"><b>2. <u>Расширенный доступ к разделу \"Статистика\"</u></b></string>
+    <string name="fragmentPremiumBenefitsThirdTitle"><b>3. <u>Дополнительный виджет</u></b></string>
+    <string name="fragmentPremiumToolbarTitle">Премиум</string>
+    <string name="fragmentPremiumTariffTitle">Тарифы</string>
+    <string name="fragmentPremiumYearPriceCardTitle">Ежегодная</string>
+    <string name="fragmentPremiumYearPriceCardFullPrice">1428р.</string>
+    <string name="fragmentPremiumYearPriceCardMonthPrice">119р./месяц</string>
+    <string name="fragmentPremiumMonthPriceCardTitle">Ежемесячная</string>
+    <string name="fragmentPremiumMonthPriceCardMonthPrice">149р./месяц</string>
+    <string name="fragmentPremiumBenefitsTitle">Преимущества подписки</string>
+    <string name="fragmentPremiumBenefitsCardFirstDescription">Ещё больше разговоров с виртуальным помощником.</string>
+    <string name="fragmentPremiumBenefitsCardSecondDescription">Три дополнительные диаграммы для отслеживания вашего настроения и вещей, которые чаще всего вызывают у вас чувства.</string>
+    <string name="fragmentPremiumBenefitsCardThirdDescription">Чето там бебебе</string>
+
 </resources>

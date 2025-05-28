@@ -24,8 +24,7 @@
         android:id="@+id/profileFragment"
         android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.reflect.presentation.screens.login.fragment.LoginFragment"
@@ -79,6 +78,13 @@
         <action
             android:id="@+id/action_mainFragment_to_aiFragment"
             app:destination="@id/aiFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -138,4 +144,17 @@
         android:name="com.example.reflect.presentation.screens.ai.fragment.AiFragment"
         android:label="fragment_ai"
         tools:layout="@layout/fragment_ai" />
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.example.reflect.presentation.screens.premium.fragment.PremiumFragment"
+        android:label="fragment_premium"
+        tools:layout="@layout/fragment_premium" />
+    <dialog
+        android:id="@+id/buyMonthPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyMonthPremiumDialog"
+        android:label="BuyMonthPremiumDialog" />
+    <dialog
+        android:id="@+id/buyYearPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyYearPremiumDialog"
+        android:label="BuyYearPremiumDialog" />
 </navigation>
