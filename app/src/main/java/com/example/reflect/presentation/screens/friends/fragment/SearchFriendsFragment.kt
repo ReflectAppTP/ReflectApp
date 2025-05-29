@@ -11,7 +11,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentSearchFriendsBinding
 import com.example.reflect.presentation.screens.friends.SearchFriendsState
 import com.example.reflect.presentation.screens.friends.adapter.SearchListAdapter
@@ -66,6 +68,8 @@ class SearchFriendsFragment : Fragment() {
             fragmentSearchFriendsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             searchListAdapter = SearchListAdapter {
                 mainVM.getUser(it)
+                requireParentFragment().requireParentFragment().findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment)
+//                findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment)
             }
             fragmentSearchFriendsRV.adapter = searchListAdapter
         }

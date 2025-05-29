@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.reflect.R
 import com.example.reflect.databinding.FragmentFriendsListBinding
 import com.example.reflect.presentation.screens.friends.GetFriendsState
 import com.example.reflect.presentation.screens.friends.adapter.FriendsListAdapter
@@ -40,6 +42,7 @@ class FriendsListFragment : Fragment() {
             fragmentFriendsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             friendsListAdapter = FriendsListAdapter {
                 vm.getUser(it)
+                requireParentFragment().requireParentFragment().findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment)
             }
             friendsListAdapter.updateState(vm.friendsListState.value)
             fragmentFriendsRV.adapter = friendsListAdapter
