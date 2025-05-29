@@ -45,6 +45,8 @@ object AccountPrefs {
 
     fun isLoggedIn(context: Context) = isAuthorized(context) || isGuest(context)
 
+    fun isPremium(context: Context) = getUser(context).isPremium
+
     fun getAuthToken(context: Context) = getPrefs(context).getString(ACCESS_TOKEN, null)
 
     fun getRefreshToken(context: Context) = getPrefs(context).getString(REFRESH_TOKEN, null)

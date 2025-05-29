@@ -52,22 +52,22 @@
             android:contentDescription="@string/contentDescriptionFragmentProfileIcon"
             />
 
-        <ImageButton
-            android:id="@+id/fragmentProfileImageViewChangeIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fragmentProfileImageChangeIconMargin_4dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_change_profile_image"
-            android:contentDescription="@string/contentDescriptionFragmentProfileIconChange"
-            />
+<!--        <ImageButton-->
+<!--            android:id="@+id/fragmentProfileImageViewChangeIcon"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:layout_margin="@dimen/fragmentProfileImageChangeIconMargin_4dp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:src="@drawable/ic_change_profile_image"-->
+<!--            android:contentDescription="@string/contentDescriptionFragmentProfileIconChange"-->
+<!--            />-->
 
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/fragmentProfileUserLogin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/fragmentProfileTitleMarginHorizontal_20dp"
         android:layout_marginTop="@dimen/fragmentProfileTitleMarginTop_10dp"
@@ -78,6 +78,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentProfileImageCardView"
         tools:text="Пользователь"/>
+
+    <ImageView
+        android:id="@+id/fragmentProfilePremiumIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_premium_profile"
+        android:layout_marginStart="@dimen/fragmentProfilePremiumIconMarginStart_4dp"
+        android:layout_marginTop="@dimen/fragmentProfilePremiumIconMarginTop"
+        android:visibility="gone"
+        android:contentDescription="@string/contentDescriptionCardFriendPremiumIcon"
+        app:layout_constraintStart_toEndOf="@id/fragmentProfileUserLogin"
+        app:layout_constraintTop_toTopOf="@id/fragmentProfileUserLogin"
+        app:layout_constraintBottom_toBottomOf="@id/fragmentProfileUserLogin"
+        />
 
     <Button
         android:id="@+id/fragmentProfilePremiumButton"

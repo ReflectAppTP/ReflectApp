@@ -8,7 +8,9 @@ import androidx.fragment.app.DialogFragment
 import com.example.reflect.R
 import com.example.reflect.databinding.DialogBuyMonthPremiumBinding
 
-class BuyMonthPremiumDialog : DialogFragment() {
+class BuyMonthPremiumDialog(
+    private val onAcceptClick: () -> Unit
+) : DialogFragment() {
 
     private var _binding: DialogBuyMonthPremiumBinding? = null
     private val binding get() = _binding!!
@@ -27,12 +29,11 @@ class BuyMonthPremiumDialog : DialogFragment() {
 
         with (binding) {
             dialogAgreeButton.setOnClickListener {
-
+                onAcceptClick()
                 dismiss()
             }
 
             dialogDeclineButton.setOnClickListener {
-
                 dismiss()
             }
         }

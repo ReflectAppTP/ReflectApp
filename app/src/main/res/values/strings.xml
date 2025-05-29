@@ -226,5 +226,10 @@
     <string name="fragmentPremiumBenefitsCardFirstDescription">Ещё больше разговоров с виртуальным помощником.</string>
     <string name="fragmentPremiumBenefitsCardSecondDescription">Три дополнительные диаграммы для отслеживания вашего настроения и вещей, которые чаще всего вызывают у вас чувства.</string>
     <string name="fragmentPremiumBenefitsCardThirdDescription">Чето там бебебе</string>
+    <string name="fragmentPremiumStatusTitle">У вас уже оформлена премиум подписка. Следующее списание %1$s</string>
+    <string name="fragmentPremiumCancelSub">Отменить подписку</string>
+    <string name="dialogCancelPremiumAccept">Подтвердить</string>
+    <string name="dialogCancelPremiumAcceptBody">Вы уверены, что хотите отменить подписку на премиум? Все эксклюзивные функции останутся до окончания срока действия.</string>
+    <string name="dialogCancelPremiumAcceptTitle">Подтверждение отмены подписки</string>
 
 </resources>

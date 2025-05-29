@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.reflect.R
-import com.example.reflect.databinding.DialogBuyYearPremiumBinding
+import com.example.reflect.databinding.DialogCancelPremiumBinding
 
-class BuyYearPremiumDialog(
+class CancelPremiumDialog(
     private val onAcceptClick: () -> Unit
 ) : DialogFragment() {
 
-    private var _binding: DialogBuyYearPremiumBinding? = null
+    private var _binding: DialogCancelPremiumBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,7 +20,7 @@ class BuyYearPremiumDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogBuyYearPremiumBinding.inflate(inflater, container, false)
+        _binding = DialogCancelPremiumBinding.inflate(inflater, container, false)
         return binding.root
     }
 

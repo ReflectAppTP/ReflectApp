@@ -259,5 +259,8 @@
     <dimen name="fragmentPremiumBenefitsCardRootMarginHorizontal_10dp">10dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginStart_17dp">17dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfilePremiumIconMarginStart_4dp">4dp</dimen>
+    <dimen name="fragmentProfilePremiumIconMarginTop">2dp</dimen>
+    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
 
 </resources>

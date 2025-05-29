@@ -67,6 +67,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/fragmentPremiumStatusTitle"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/fragmentPremiumStatusTitle"
+                android:textAlignment="center"
+                android:textColor="@color/onSurface"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumCatImage"
+                app:layout_constraintStart_toStartOf="@id/fragmentPremiumCatImage"
+                app:layout_constraintEnd_toEndOf="@id/fragmentPremiumCatImage"
+                />
+
+            <TextView
                 android:id="@+id/fragmentPremiumTariffTitle"
                 style="@style/TextAppearance.Material3.LabelMedium"
                 android:layout_width="wrap_content"
@@ -76,7 +90,7 @@
                 android:text="@string/fragmentPremiumTariffTitle"
                 android:textColor="@color/onSurface"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumCatImage"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumStatusTitle"
                 />
 
             <com.google.android.material.card.MaterialCardView
@@ -335,11 +349,27 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <Button
+                android:id="@+id/fragmentPremiumCancelSub"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragmentPremiumCancelSubMarginTop_32dp"
+                android:text="@string/fragmentPremiumCancelSub"
+                android:textColor="@color/onSurface"
+                android:backgroundTint="@color/secondaryFixedDim"
+                app:icon="@drawable/ic_cancel_premium"
+                app:iconTint="@color/onSurface"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="90dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCard"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumCancelSub"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

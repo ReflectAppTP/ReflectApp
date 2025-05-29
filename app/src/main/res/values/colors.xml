@@ -44,4 +44,6 @@
 
     <color name="aiBackground">#D4FBCE</color>
     <color name="aiPrimary98">#EBFFE5</color>
+
+    <color name="secondaryFixedDim">#FEB59E</color>
 </resources>
