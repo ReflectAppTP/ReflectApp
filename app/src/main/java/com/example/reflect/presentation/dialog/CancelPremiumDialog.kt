@@ -29,8 +29,8 @@ class CancelPremiumDialog(
 
         with (binding) {
             dialogAgreeButton.setOnClickListener {
-                onAcceptClick()
                 dismiss()
+                onAcceptClick()
             }
 
             dialogDeclineButton.setOnClickListener {

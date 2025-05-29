@@ -29,8 +29,8 @@ class BuyMonthPremiumDialog(
 
         with (binding) {
             dialogAgreeButton.setOnClickListener {
-                onAcceptClick()
                 dismiss()
+                onAcceptClick()
             }
 
             dialogDeclineButton.setOnClickListener {
