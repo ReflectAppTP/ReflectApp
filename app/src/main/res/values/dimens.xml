@@ -259,12 +259,18 @@
     <dimen name="fragmentPremiumBenefitsCardRootMarginHorizontal_10dp">10dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginStart_17dp">17dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
     <dimen name="fragmentProfilePremiumIconMarginStart_4dp">4dp</dimen>
     <dimen name="fragmentProfilePremiumIconMarginTop">2dp</dimen>
-    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
 
     <!-- Streak popupWindow -->
     <dimen name="popupStreakCornerRadius_45dp">45dp</dimen>
     <dimen name="popupStreakMarginBottom_8dp">8dp</dimen>
+    <dimen name="widgetStreakProviderMinWidth_80dp">80dp</dimen>
+    <dimen name="widgetStreakProviderMinHeight">80dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeWidth_80dp">80dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeHeight_120dp">120dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeWidth_160dp">160dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeHeight_80dp">80dp</dimen>
 
 </resources>

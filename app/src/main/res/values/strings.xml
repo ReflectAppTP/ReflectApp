@@ -238,4 +238,6 @@
 
     <string name="popupStreakDescription">Ежедневный стрик</string>
 
+    <string name="widgetStreakDescription">Стрик пользователя</string>
+
 </resources>

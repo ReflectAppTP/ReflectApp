@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -21,11 +20,13 @@ import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddS
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.example.reflect.presentation.widget.WidgetStreakProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class ThirdClarificationAddStateFragment : Fragment() {
@@ -126,10 +127,15 @@ class ThirdClarificationAddStateFragment : Fragment() {
                     ToastUtils.showAddStateToast(context)
                 }
                 recordsvm.fetchRecords()
+                // Обновляю статистику на другом фрагменте с помощью говнокоа
                 lifecycleScope.launch {
                     statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
                 }
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+
+                // Обновляю виджет
+                // TODO: fix
+                WidgetStreakProvider.updateWidget(requireContext(), Random.nextInt(0,10))
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)
