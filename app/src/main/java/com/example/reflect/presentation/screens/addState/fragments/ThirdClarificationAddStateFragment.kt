@@ -24,6 +24,7 @@ import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelSt
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -95,8 +96,10 @@ class ThirdClarificationAddStateFragment : Fragment() {
             addStateThirdClarificationNextButton.setOnClickListener {
                 lifecycleScope.launch {
                     if (vm.id.value != null) {
+                        AppMetrica.reportEvent("Редактирование состояния с уточнениями")
                         vm.userIntent.send(AddStateIntent.EditState)
                     } else {
+                        AppMetrica.reportEvent("Добавление состояния с уточнениями")
                         vm.userIntent.send(AddStateIntent.AddState)
                     }
                 }

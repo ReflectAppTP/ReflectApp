@@ -1,11 +1,11 @@
 package com.example.reflect.data.remote.data
 
 import com.example.reflect.data.dto.StateRequestDTO
+import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.remote.api.RetrofitService
-import java.util.Date
 import javax.inject.Inject
 
 class RetrofitRemoteData @Inject constructor(private val retrofitService: RetrofitService){
@@ -28,4 +28,10 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun getMonthlyAverage() = retrofitService.getMonthlyAverage()
     suspend fun getYearlyAverage() = retrofitService.getYearlyAverage()
 
+    suspend fun postMessageToAI(aiMessageDTO: AISendMessageRequestDTO) = retrofitService.postMessageToAI(aiMessageDTO)
+    suspend fun resetContext() = retrofitService.resetContext()
+    suspend fun getAIMessage(messageId: Int) = retrofitService.getAIMessage(messageId)
+
+    suspend fun getFriendsList() = retrofitService.getFriendsList()
+    suspend fun searchUsers(username: String) = retrofitService.searchUsers(username)
 }

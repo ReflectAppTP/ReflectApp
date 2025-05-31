@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
-import com.example.reflect.presentation.adapters.MainFragmentViewPagerAdapter
+import com.example.reflect.presentation.adapter.MainFragmentViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 
@@ -37,15 +38,17 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.statisticsFragment -> {
+                    AppMetrica.reportEvent("Переход на экран статистики")
                     viewPager.currentItem = 1
                     true
                 }
                 R.id.add_record -> {
-                    AppMetrica.reportEvent("Добавление состояния")
+                    AppMetrica.reportEvent("Нажатие на кнопку добавления состояния")
                     findNavController().navigate(R.id.addStateBottomSheetFragment)
                     false
                 }
                 R.id.friendsFragment -> {
+                    AppMetrica.reportEvent("Переход на экран друзей")
                     viewPager.currentItem = 2
                     true
                 }
@@ -71,6 +74,17 @@ class MainFragment : Fragment() {
                 bottomNavBar.selectedItemId = destinationId
             }
         })
+
+        binding.fabAI.setOnClickListener {
+            AppMetrica.reportEvent("Нажатие на кнопку ИИ")
+            val options = FragmentNavigatorExtras(binding.fabAI to "fab_transition")
+            findNavController().navigate(
+                R.id.aiFragment,
+                null,
+                null,
+                options
+            )
+        }
 
         return binding.root
     }

@@ -11,6 +11,7 @@ import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -30,6 +31,12 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
+            if (AccountPrefs.isPremium(requireContext())) {
+                fragmentProfilePremiumIcon.visibility = View.VISIBLE
+            } else {
+                fragmentProfilePremiumIcon.visibility = View.GONE
+            }
+
             fragmentProfileUserLogin.text = AccountPrefs.getUser(requireContext()).username
 
             if (AccountPrefs.isAuthorized(requireContext())) {
@@ -40,7 +47,6 @@ class ProfileFragment : Fragment() {
                 fragmentProfileLogoutButton.visibility = View.GONE
                 fragmentProfileLoginButton.visibility = View.VISIBLE
                 fragmentProfileRegistrationButton.visibility = View.VISIBLE
-                fragmentProfileImageViewChangeIcon.visibility = View.GONE
             }
         }
 
@@ -61,7 +67,8 @@ class ProfileFragment : Fragment() {
 
             fragmentProfilePremiumButton.setOnClickListener {
                 // TODO: потом переделать
-                Toast.makeText(requireContext(), "Тут должен быть фрагмент премиума", Toast.LENGTH_SHORT).show()
+                AppMetrica.reportEvent("Нажатие на кнопку Покупка премиума")
+                findNavController().navigate(R.id.action_profileFragment_to_premiumFragment)
             }
 
             fragmentProfileLoginButton.setOnClickListener {
@@ -76,11 +83,10 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(R.id.logoutDialog)
             }
 
-            fragmentProfileImageViewChangeIcon.setOnClickListener {
-                // TODO: потом переделать
-                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
-            }
-
+//            fragmentProfileImageViewChangeIcon.setOnClickListener {
+//                // TODO: потом переделать
+//                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
+//            }
         }
     }
 }

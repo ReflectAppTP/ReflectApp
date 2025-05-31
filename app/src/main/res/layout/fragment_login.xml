@@ -108,6 +108,7 @@
             android:focusable="true"
             android:padding="@dimen/loginButtonLikeGuestPadding_16dp"
             android:text="@string/loginLikeGuest"
+            android:background="@drawable/rounded_surface_ripple"
             style="@style/Widget.Material3.Button.TextButton"
             android:textColor="@color/onSurfaceVariant"
             android:clickable="true"
@@ -145,6 +146,7 @@
             android:padding="@dimen/loginForgotPasswordPadding_8dp"
             android:paddingHorizontal="@dimen/loginForgotPasswordPaddingHorizontal_20dp"
             android:textColor="@color/onSurface"
+            android:background="@drawable/rounded_surface_ripple"
             style="@style/Widget.Material3.Button.TextButton"
             />
 

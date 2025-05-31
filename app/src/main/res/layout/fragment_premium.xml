@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.premium.fragment.PremiumFragment">
+
+    <Toolbar
+        android:id="@+id/fragmentPremiumToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <ImageButton
+            android:id="@+id/fragmentPremiumToolbarBackArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDescriptionFragmentPremiumToolbarBackArrow"
+            android:src="@drawable/ic_back_arrow"
+            android:background="@drawable/rounded_surface_ripple"
+            android:layout_gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/fragmentPremiumToolbarTitle"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/fragmentPremiumToolbarTitle"
+            android:textColor="@color/onSurface"
+            />
+
+    </Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumToolbar"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/fragmentPremiumRootMarginHorizontal_21dp"
+            >
+
+            <ImageView
+                android:id="@+id/fragmentPremiumCatImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="@string/contentDescriptionFragmentPremiumCatImage"
+                android:focusable="true"
+                android:src="@drawable/image_buy_premium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragmentPremiumStatusTitle"
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/fragmentPremiumStatusTitle"
+                android:textAlignment="center"
+                android:textColor="@color/onSurface"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumCatImage"
+                app:layout_constraintStart_toStartOf="@id/fragmentPremiumCatImage"
+                app:layout_constraintEnd_toEndOf="@id/fragmentPremiumCatImage"
+                />
+
+            <TextView
+                android:id="@+id/fragmentPremiumTariffTitle"
+                style="@style/TextAppearance.Material3.LabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fragmentPremiumTariffTitleMarginStart15dp"
+                android:layout_marginTop="@dimen/fragmentPremiumTariffTitleMarginTop_22dp"
+                android:text="@string/fragmentPremiumTariffTitle"
+                android:textColor="@color/onSurface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumStatusTitle"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentPremiumPriceCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragmentPremiumPriceCardMarginTop_5dp"
+                app:cardCornerRadius="@dimen/fragmentPremiumPriceCardCornerRadius_12dp"
+                app:cardElevation="@dimen/fragmentPremiumPriceCardElevation_5dp"
+                app:cardBackgroundColor="@color/aiPrimary98"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumTariffTitle"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fragmentPremiumYearPriceCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fragmentPremiumPriceCardHeight_50dp"
+                        android:layout_marginHorizontal="@dimen/fragmentPremiumPriceCardMarginHorizontal_15dp"
+                        android:layout_marginTop="@dimen/fragmentPremiumPriceCardMarginTop_23dp"
+                        android:background="@drawable/rounded_premium_ripple"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/fragmentPremiumPriceCardCornerRadius_8dp"
+                        app:cardBackgroundColor="@color/aiPrimary98"
+                        app:strokeColor="@color/outlineVariant"
+                        app:strokeWidth="@dimen/fragmentPremiumPriceCardStrokeWidth_1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/fragmentPremiumYearPriceCardTitle"
+                                style="@style/TextAppearance.Material3.TitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/fragmentPremiumYearPriceCardTitle"
+                                android:textColor="@color/onSurface"
+                                android:gravity="center"
+                                android:layout_margin="@dimen/fragmentPremiumYearPriceCardTitleMargin_12dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                />
+
+                            <TextView
+                                android:id="@+id/fragmentPremiumYearPriceCardFullPrice"
+                                style="@style/TextAppearance.Material3.TitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/fragmentPremiumYearPriceCardFullPrice"
+                                android:textColor="@color/onSurfaceVariant"
+                                android:textSize="@dimen/fragmentPremiumYearPriceCardFullPrice_10sp"
+                                android:gravity="center"
+                                android:layout_marginVertical="@dimen/fragmentPremiumYearPriceCardFullPriceMarginVertical_12dp"
+                                android:layout_marginStart="@dimen/fragmentPremiumYearPriceCardFullPriceMarginStart_4dp"
+                                android:paddingTop="@dimen/fragmentPremiumYearPriceCardFullPricePaddingTop_4dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/fragmentPremiumYearPriceCardTitle"
+                                />
+
+                            <TextView
+                                android:id="@+id/fragmentPremiumYearPriceCardMonthPrice"
+                                style="@style/TextAppearance.Material3.TitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="@dimen/fragmentPremiumYearPriceCardMonthPriceMarginVertical_9dp"
+                                android:layout_marginEnd="@dimen/fragmentPremiumYearPriceCardMonthPriceMarginEnd_10dp"
+                                android:text="@string/fragmentPremiumYearPriceCardMonthPrice"
+                                android:textColor="@color/onSurface"
+                                android:gravity="center"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fragmentPremiumMonthPriceCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/fragmentPremiumPriceCardHeight_50dp"
+                        android:layout_marginHorizontal="@dimen/fragmentPremiumPriceCardMarginHorizontal_15dp"
+                        android:layout_marginBottom="@dimen/fragmentPremiumPriceCardMarginBottom_23dp"
+                        android:layout_marginTop="@dimen/fragmentPremiumPriceCardMarginTop_9dp"
+                        android:background="@drawable/rounded_premium_ripple"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="@dimen/fragmentPremiumPriceCardCornerRadius_8dp"
+                        app:cardBackgroundColor="@color/aiPrimary98"
+                        app:strokeColor="@color/outlineVariant"
+                        app:strokeWidth="@dimen/fragmentPremiumPriceCardStrokeWidth_1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumYearPriceCard"
+                        >
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/fragmentPremiumMonthPriceCardTitle"
+                                style="@style/TextAppearance.Material3.TitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/fragmentPremiumMonthPriceCardTitle"
+                                android:textColor="@color/onSurface"
+                                android:gravity="center"
+                                android:layout_margin="@dimen/fragmentPremiumYearPriceCardTitleMargin_12dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/fragmentPremiumMonthPriceCardMonthPrice"
+                                style="@style/TextAppearance.Material3.TitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="@dimen/fragmentPremiumYearPriceCardMonthPriceMarginVertical_9dp"
+                                android:layout_marginEnd="@dimen/fragmentPremiumYearPriceCardMonthPriceMarginEnd_10dp"
+                                android:text="@string/fragmentPremiumMonthPriceCardMonthPrice"
+                                android:textColor="@color/onSurface"
+                                android:gravity="center"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/fragmentPremiumBenefitsTitle"
+                style="@style/TextAppearance.Material3.LabelMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/fragmentPremiumBenefitsTitleMarginStart_15dp"
+                android:layout_marginTop="@dimen/fragmentPremiumBenefitsTitle_44dp"
+                android:text="@string/fragmentPremiumBenefitsTitle"
+                android:textColor="@color/onSurface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumPriceCard"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/fragmentPremiumBenefitsCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardMarginTop_5dp"
+                app:cardCornerRadius="@dimen/fragmentPremiumBenefitsCardCornerRadius_12dp"
+                app:cardElevation="@dimen/fragmentPremiumBenefitsCardElevation_5dp"
+                app:cardBackgroundColor="@color/aiPrimary98"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsTitle"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/fragmentPremiumBenefitsCardRootMarginVertical_13dp"
+                    android:layout_marginHorizontal="@dimen/fragmentPremiumBenefitsCardRootMarginHorizontal_10dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardFirstTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragmentPremiumBenefitsCardFirstTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardFirstDescription"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/fragmentPremiumBenefitsCardDescriptionMarginStart_17dp"
+                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
+                        android:text="@string/fragmentPremiumBenefitsCardFirstDescription"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardFirstTitle"
+                        />
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardSecondTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
+                        android:text="@string/fragmentPremiumBenefitsCardSecondTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardFirstDescription"
+                        />
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardSecondDescription"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/fragmentPremiumBenefitsCardDescriptionMarginStart_17dp"
+                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
+                        android:text="@string/fragmentPremiumBenefitsCardSecondDescription"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardSecondTitle"
+                        />
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardThirdTitle"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
+                        android:text="@string/fragmentPremiumBenefitsThirdTitle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardSecondDescription"
+                        />
+
+                    <TextView
+                        android:id="@+id/fragmentPremiumBenefitsCardThirdDescription"
+                        style="@style/TextAppearance.Material3.TitleMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/fragmentPremiumBenefitsCardDescriptionMarginStart_17dp"
+                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
+                        android:text="@string/fragmentPremiumBenefitsCardThirdDescription"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardThirdTitle"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/fragmentPremiumCancelSub"
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragmentPremiumCancelSubMarginTop_32dp"
+                android:text="@string/fragmentPremiumCancelSub"
+                android:textColor="@color/onSurface"
+                android:backgroundTint="@color/secondaryFixedDim"
+                app:icon="@drawable/ic_cancel_premium"
+                app:iconTint="@color/onSurface"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragmentPremiumCancelSub"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

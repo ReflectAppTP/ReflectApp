@@ -17,15 +17,14 @@
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/friendsFragment"
-        android:name="com.example.reflect.presentation.screens.friends.fragment.FriendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.MainFriendsFragment"
         android:label="fragment_friends"
         tools:layout="@layout/fragment_friends" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.reflect.presentation.screens.login.fragment.LoginFragment"
@@ -72,6 +71,23 @@
         <action
             android:id="@+id/action_profileFragment_to_registrationFragment"
             app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_aiFragment"
+            app:destination="@id/aiFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileFriendFragment"
+            app:destination="@id/profileFriendFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -130,4 +146,26 @@
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true"/>
     </dialog>
+    <fragment
+        android:id="@+id/aiFragment"
+        android:name="com.example.reflect.presentation.screens.ai.fragment.AiFragment"
+        android:label="fragment_ai"
+        tools:layout="@layout/fragment_ai" />
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.example.reflect.presentation.screens.premium.fragment.PremiumFragment"
+        android:label="fragment_premium"
+        tools:layout="@layout/fragment_premium" />
+    <dialog
+        android:id="@+id/buyMonthPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyMonthPremiumDialog"
+        android:label="BuyMonthPremiumDialog" />
+    <dialog
+        android:id="@+id/buyYearPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyYearPremiumDialog"
+        android:label="BuyYearPremiumDialog" />
+    <fragment
+        android:id="@+id/profileFriendFragment"
+        android:name="com.example.reflect.presentation.screens.profileFriend.fragment.ProfileFriendFragment"
+        android:label="ProfileFriendFragment" />
 </navigation>

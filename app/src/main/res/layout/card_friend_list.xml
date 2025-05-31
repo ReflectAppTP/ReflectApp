@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/cardFriendMarginHorizontal_26dp"
+    android:layout_marginVertical="@dimen/cardFriendMarginVertical_7dp"
+    app:cardBackgroundColor="@color/aiPrimary98"
+    app:strokeWidth="@dimen/cardFriendStrokeWidth_1dp"
+    app:strokeColor="@color/onSurface"
+    >
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cardFriendConstraintLayoutMargin_16dp"
+        >
+
+        <FrameLayout
+            android:id="@+id/cardFriendIconMaterialCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/cardFriendIconSize_40dp"
+                android:layout_height="@dimen/cardFriendIconSize_40dp"
+                app:cardBackgroundColor="@color/primary"
+                app:cardElevation="@dimen/cardFriendIconElevation_0dp"
+                app:cardCornerRadius="@dimen/cardFriendIconCornerRadius_45dp"
+                >
+
+                <TextView
+                    android:id="@+id/cardFriendIconMaterialCardText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/onPrimaryContainer"
+                    android:textSize="@dimen/cardFriendIconTextSize_18sp"
+                    tools:text="A"
+                    />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:id="@+id/cardFriendPremiumIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_premium_profile"
+                android:layout_gravity="bottom|end"
+                android:visibility="gone"
+                android:contentDescription="@string/contentDescriptionCardFriendPremiumIcon"
+                />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/cardFriendLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/cardFriendLoginMarginStart_16dp"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/onSurface"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cardFriendIconMaterialCard"
+            tools:text="Максим качков"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

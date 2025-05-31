@@ -1,17 +1,13 @@
 package com.example.reflect.presentation.screens.statistics.fragment
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentStatisticsBinding
-import com.example.reflect.domain.model.StatisticTagModel
-import com.example.reflect.presentation.adapters.StatisticTagListAdapter
+import com.example.reflect.presentation.adapter.StatisticTagListAdapter
 import com.example.reflect.presentation.common.ExportStatisticUtils
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.ToastUtils
@@ -33,20 +28,12 @@ import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelSt
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import java.io.File
-import java.io.FileOutputStream
 import kotlin.math.floor
 
 @AndroidEntryPoint
@@ -193,8 +180,8 @@ class StatisticsFragment : Fragment() {
                                 axisMaximum = xMax
                                 granularity = when(state.timeRange) {
                                     TimeRange.WEEK -> 1f
-                                    TimeRange.MONTH -> floor(state.data.size / 5f).coerceAtLeast(1f)
-                                    TimeRange.YEAR -> floor(state.data.size / 10f).coerceAtLeast(1f)
+                                    TimeRange.MONTH -> floor(state.data.size / 6f).coerceAtLeast(1f)
+                                    TimeRange.YEAR -> floor(state.data.size / 8f).coerceAtLeast(1f)
                                 }
                                 labelCount = state.data.size
                                 valueFormatter = LineChartXAxisFormatter(state.data.map { it.data.toString() }, state.timeRange)

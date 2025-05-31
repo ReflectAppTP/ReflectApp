@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:background="@color/surface"
+            android:background="@drawable/rounded_surface_ripple"
             android:contentDescription="@string/contentDescriptionToolbarStreakIcon"
-            android:src="@drawable/ic_streak_toolbar" />
+            android:src="@drawable/ic_cat_streak" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -53,8 +53,10 @@
         style="@style/TextAppearance.Material3.TitleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_surface_ripple"
         android:clickable="true"
         android:focusable="true"
+        android:paddingHorizontal="12dp"
         android:layout_marginTop="@dimen/fragmentRecordsDateTVMarginTop_7dp"
         app:layout_constraintEnd_toStartOf="@+id/fragmentRecordsICChevronRight"
         app:layout_constraintStart_toEndOf="@+id/fragmentRecordsICChevronLeft"

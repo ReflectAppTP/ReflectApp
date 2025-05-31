@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    >
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/mainActivityViewPager"
@@ -19,6 +21,7 @@
         android:layout_marginEnd="@dimen/mainFragmentFABMarginEnd_16dp"
         android:layout_marginBottom="@dimen/mainFragmentFABMarginBottom_91dp"
         android:scaleType="center"
+        android:transitionName="fab_transition"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:shapeAppearanceOverlay="@style/CircleFab"
         app:layout_anchor="@id/bottomAppBar"

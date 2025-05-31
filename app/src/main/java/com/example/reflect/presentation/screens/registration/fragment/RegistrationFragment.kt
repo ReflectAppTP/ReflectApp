@@ -137,7 +137,7 @@ class RegistrationFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                if (!Utils.isEmailValid(vm.email.value!!)) {
+                if (!Utils.isEmailValid(vm.email.value)) {
                     changeErrorStates(
                         loginError = false,
                         passwordError = false,
@@ -225,6 +225,7 @@ class RegistrationFragment : Fragment() {
         val context = requireContext()
         when (state) {
             is RegistrationState.Loading -> {
+                binding.registrationButton.isEnabled = false
                 ToastUtils.showLoadingToast(context)
             }
             is RegistrationState.Success -> {
@@ -232,6 +233,7 @@ class RegistrationFragment : Fragment() {
                 findNavController().popBackStack()
             }
             is RegistrationState.Error -> {
+                binding.registrationButton.isEnabled = true
                 changeErrorStates(errorMessage = state.message)
             }
             RegistrationState.Idle -> Unit

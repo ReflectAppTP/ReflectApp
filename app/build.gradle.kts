@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp.android)
+    alias(libs.plugins.vkid.manifest.placeholders)
 
     id("kotlin-parcelize")
     kotlin("plugin.serialization").version(libs.versions.kotlin.serialization)
@@ -36,11 +37,12 @@ android {
         viewBinding = true
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
 
@@ -87,16 +89,31 @@ dependencies {
     implementation(libs.lottie)
 
     // Export to Excel
-    implementation("org.apache.poi:poi:3.17")
+    implementation(libs.apache.poi)
     
     // Yandex metrica
     implementation(libs.yandex.analytics)
+
+    // Leak Canary
+//    debugImplementation(libs.leakcanary)
+
+    // VK SDK
+    implementation(libs.vkid.sdk)
+//    implementation(libs.vkid.onetap.xml)
+
+    // Desugaring
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    // WorkManager
+    implementation(libs.work.runtime)
+    implementation(libs.work.runtime.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.transition)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

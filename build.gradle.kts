@@ -5,4 +5,12 @@ plugins {
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.ksp.android) apply false
+    alias(libs.plugins.vkid.manifest.placeholders) apply true
+}
+
+vkidManifestPlaceholders {
+    init(
+        clientId = "53612946",
+        clientSecret = "YX1fg9sWZPozfag4WuaX",
+    )
 }

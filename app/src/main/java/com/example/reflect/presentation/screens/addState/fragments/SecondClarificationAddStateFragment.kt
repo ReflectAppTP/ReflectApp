@@ -10,9 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentSecondClarificationAddStateBinding
-import com.example.reflect.presentation.adapters.AddStateTagListAdapter
+import com.example.reflect.presentation.adapter.AddStateTagListAdapter
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
 import dagger.hilt.android.AndroidEntryPoint
+import io.appmetrica.analytics.AppMetrica
 
 @AndroidEntryPoint
 class SecondClarificationAddStateFragment : Fragment() {
@@ -53,6 +54,7 @@ class SecondClarificationAddStateFragment : Fragment() {
     private fun addButtonOnClickListeners() {
         with (binding) {
             addStateSecondClarificationNextButton.setOnClickListener {
+                AppMetrica.reportEvent("Нажатие на кнопку Добавление описания состояния")
                 findNavController().navigate(R.id.action_secondClarificationAddStateFragment_to_thirdClarificationAddStateFragment)
             }
         }

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screens.friends.fragment.FriendsFragment">
+    tools:context=".presentation.screens.friends.fragment.MainFriendsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/fragmentFriendsToolbar"
@@ -16,6 +16,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarNotificationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:contentDescription="@string/contentDescriptionFragmentToolbarNotificationIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_friends_notification"
+            />
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarBackIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:visibility="gone"
+            android:contentDescription="@string/contentDescriptionFragmentToolbarBackIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_back_arrow"
+            />
 
         <TextView
             android:id="@+id/fragmentFriendsToolbarTitle"
@@ -33,19 +54,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:contentDescription="@string/contentDescriptionToolbarSearchIcon"
-            android:background="@color/surface"
+            android:background="@drawable/rounded_surface_ripple"
             android:src="@drawable/ic_search_toolbar"
             />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentFriendsRV"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentFriendsContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentFriendsToolbar"
-        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_friends_graph"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

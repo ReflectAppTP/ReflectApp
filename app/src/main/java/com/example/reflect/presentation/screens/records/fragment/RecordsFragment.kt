@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentRecordsBinding
-import com.example.reflect.presentation.adapters.RecordsListAdapter
+import com.example.reflect.presentation.adapter.RecordsListAdapter
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
@@ -29,6 +28,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class RecordsFragment : Fragment() {
@@ -56,6 +56,7 @@ class RecordsFragment : Fragment() {
 
         // TODO: почему тут надо в разных scope
         lifecycleScope.launch {
+            // TODO: Можно ли как то вынести из repeatOnLifeCycle
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.recordsState.collect { state ->
                     handleRecordsState(state)
@@ -81,6 +82,12 @@ class RecordsFragment : Fragment() {
 
             fragmentRecordsDateTV.setOnClickListener {
                 datePicker.show(parentFragmentManager, "datePicker")
+            }
+
+            val streakPopup = StreakPopup(requireContext())
+            fragmentRecordsToolbarStreakIcon.setOnClickListener {
+                streakPopup.updateData(Random.nextInt(0,10))
+                streakPopup.show(fragmentRecordsToolbarStreakIcon)
             }
 
             // Анимация для переключения даты по нажатию стрелочек

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/fragmentSearchFriendsRootMarginTop_3dp"
+    tools:context=".presentation.screens.friends.fragment.SearchFriendsFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentSearchFriendsEditText"
+        style="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fragmentSearchFriendsEditTextMarginHorizontal_10dp"
+        android:hint="@string/fragmentSearchFriendsEditTextHint"
+        app:boxBackgroundColor="@color/onPrimaryContainer"
+        app:hintTextColor="@color/onSurfaceVariant"
+        app:boxStrokeColor="@color/outline"
+        app:errorEnabled="false"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentSearchFriendsEditTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textLongMessage"
+            android:maxLines="1"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentSearchFriendsRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/fragmentSearchFriendsRVMarginTop_7dp"
+        app:layout_constraintTop_toBottomOf="@id/fragmentSearchFriendsEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/card_friend_list"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
