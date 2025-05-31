@@ -28,6 +28,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class RecordsFragment : Fragment() {
@@ -81,6 +82,12 @@ class RecordsFragment : Fragment() {
 
             fragmentRecordsDateTV.setOnClickListener {
                 datePicker.show(parentFragmentManager, "datePicker")
+            }
+
+            val streakPopup = StreakPopup(requireContext())
+            fragmentRecordsToolbarStreakIcon.setOnClickListener {
+                streakPopup.updateData(Random.nextInt(0,10))
+                streakPopup.show(fragmentRecordsToolbarStreakIcon)
             }
 
             // Анимация для переключения даты по нажатию стрелочек

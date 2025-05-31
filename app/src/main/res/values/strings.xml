@@ -36,6 +36,7 @@
     <string name="contentDescriptionCardFriendPremiumIcon">Иконка премиума у пользователя</string>
     <string name="contentDescriptionFragmentPremiumToolbarBackArrow">Иконка возврата на экран профиля</string>
     <string name="contentDescriptionFragmentPremiumCatImage">Картинка котика Купите премиум пж</string>
+    <string name="contentDescriptionPopupStreak">Картинка котика на стрике</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -228,8 +229,13 @@
     <string name="fragmentPremiumBenefitsCardThirdDescription">Чето там бебебе</string>
     <string name="fragmentPremiumStatusTitle">У вас уже оформлена премиум подписка. Следующее списание %1$s</string>
     <string name="fragmentPremiumCancelSub">Отменить подписку</string>
+
+    <!-- Cancel premium dialog -->
     <string name="dialogCancelPremiumAccept">Подтвердить</string>
     <string name="dialogCancelPremiumAcceptBody">Вы уверены, что хотите отменить подписку на премиум? Все эксклюзивные функции останутся до окончания срока действия.</string>
     <string name="dialogCancelPremiumAcceptTitle">Подтверждение отмены подписки</string>
+
+
+    <string name="popupStreakDescription">Ежедневный стрик</string>
 
 </resources>

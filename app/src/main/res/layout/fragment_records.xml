@@ -33,7 +33,7 @@
             android:layout_gravity="end"
             android:background="@drawable/rounded_surface_ripple"
             android:contentDescription="@string/contentDescriptionToolbarStreakIcon"
-            android:src="@drawable/ic_streak_toolbar" />
+            android:src="@drawable/ic_cat_streak" />
 
     </androidx.appcompat.widget.Toolbar>
 

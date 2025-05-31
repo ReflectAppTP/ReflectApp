@@ -180,8 +180,8 @@ class StatisticsFragment : Fragment() {
                                 axisMaximum = xMax
                                 granularity = when(state.timeRange) {
                                     TimeRange.WEEK -> 1f
-                                    TimeRange.MONTH -> floor(state.data.size / 5f).coerceAtLeast(1f)
-                                    TimeRange.YEAR -> floor(state.data.size / 10f).coerceAtLeast(1f)
+                                    TimeRange.MONTH -> floor(state.data.size / 6f).coerceAtLeast(1f)
+                                    TimeRange.YEAR -> floor(state.data.size / 8f).coerceAtLeast(1f)
                                 }
                                 labelCount = state.data.size
                                 valueFormatter = LineChartXAxisFormatter(state.data.map { it.data.toString() }, state.timeRange)

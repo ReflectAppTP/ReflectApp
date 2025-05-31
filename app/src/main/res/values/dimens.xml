@@ -263,4 +263,8 @@
     <dimen name="fragmentProfilePremiumIconMarginTop">2dp</dimen>
     <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
 
+    <!-- Streak popupWindow -->
+    <dimen name="popupStreakCornerRadius_45dp">45dp</dimen>
+    <dimen name="popupStreakMarginBottom_8dp">8dp</dimen>
+
 </resources>
