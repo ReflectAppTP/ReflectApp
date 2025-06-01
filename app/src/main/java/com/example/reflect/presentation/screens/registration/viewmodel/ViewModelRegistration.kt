@@ -97,5 +97,5 @@ class ViewModelRegistration @Inject constructor(
         _passwordConfirmationErrorState.value = passwordConfirmationError
     }
 
-    fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
+    fun isPasswordMoreThanSixSymbols() = _password.value.length >= 6 && _passwordConfirmation.value.length >= 6
 }

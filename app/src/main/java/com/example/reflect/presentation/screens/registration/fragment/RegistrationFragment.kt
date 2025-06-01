@@ -40,7 +40,6 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -117,9 +116,7 @@ class RegistrationFragment : Fragment() {
                 )
                 registrationPasswordConfirmationEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterPasswordLength) - resources.getInteger(R.integer.characterLimit)
-
             }
-
         }
     }
 

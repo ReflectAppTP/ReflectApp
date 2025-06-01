@@ -99,6 +99,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -180,4 +187,9 @@
         android:name="com.example.reflect.presentation.widget.fragment.WidgetFragment"
         android:label="fragment_widget"
         tools:layout="@layout/fragment_widget" />
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" />
 </navigation>

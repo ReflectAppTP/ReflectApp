@@ -284,5 +284,6 @@
     <dimen name="fragmentWidgetScrollableImageFirstMarginTop_20dp">20dp</dimen>
     <dimen name="fragmentWidgetScrollableImageLastMarginBottom_20dp">20dp</dimen>
     <dimen name="fragmentWidgetScrollableImageMarginVertical_10dp">10dp</dimen>
+    <dimen name="fragmentProfileDeleteMarginTop_10dp">10dp</dimen>
 
 </resources>

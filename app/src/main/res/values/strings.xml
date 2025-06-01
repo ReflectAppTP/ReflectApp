@@ -268,5 +268,15 @@
     <!-- Add widget dialog -->
     <string name="dialogAddWidgetTitle">Подтверждение выбора</string>
     <string name="dialogAddWidgetDescription">Добавить этот виджет на экран домой?</string>
+    <string name="fragmentProfileSaveChanges">Сохранить изменения</string>
+    <string name="fragmentProfileDelete">Удалить аккаунт</string>
+    <string name="fragmentProfileVisibilityHint">Видимость профиля</string>
+    <string name="fragmentProfilePasswordConfirmationEditText">Новый пароль</string>
+    <string name="fragmentProfilePasswordEditText">Старый пароль</string>
 
+    <string-array name="fragmentProfileSettingsVisibilityItems">
+        <item>Никому</item>
+        <item>Только друзьям</item>
+        <item>Всем</item>
+    </string-array>
 </resources>

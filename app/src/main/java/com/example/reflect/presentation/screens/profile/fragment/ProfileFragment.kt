@@ -96,6 +96,9 @@ class ProfileFragment : Fragment() {
 //                // TODO: потом переделать
 //                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
 //            }
+            fragmentProfileToolbarSettingsIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_profileSettingsFragment)
+            }
         }
     }
 }
