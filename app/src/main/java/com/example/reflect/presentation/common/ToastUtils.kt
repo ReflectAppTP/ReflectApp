@@ -109,4 +109,14 @@ object ToastUtils {
             show()
         }
     }
+
+    fun showAddWidget(context: Context) {
+        val view = LayoutInflater.from(context).inflate(R.layout.toast_add_widget, null)
+        val toast = Toast(context).apply {
+            setView(view)
+            setGravity(Gravity.BOTTOM, 0,YOFFSET)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+    }
 }

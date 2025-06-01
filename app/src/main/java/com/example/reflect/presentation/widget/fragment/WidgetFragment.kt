@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentWidgetBinding
+import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.dialog.AddWidgetToHomeScreenDialog
+import com.example.reflect.presentation.widget.WidgetStateProvider
+import com.example.reflect.presentation.widget.WidgetStreakProvider
 
 class WidgetFragment : Fragment() {
 
@@ -26,16 +30,26 @@ class WidgetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
+            val dialog = AddWidgetToHomeScreenDialog()
+
             fragmentWidgetToggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
                 if (isChecked) {
                     when (checkedId) {
                         R.id.fragmentWidgetStreakButton -> {
                             fragmentWidgetStreakLayout.visibility = View.VISIBLE
                             fragmentWidgetStateLayout.visibility = View.GONE
+                            dialog.onClick = {
+                                WidgetStreakProvider.pinWidget(requireContext())
+                                ToastUtils.showAddWidget(requireContext())
+                            }
                         }
                         R.id.fragmentWidgetStateButton -> {
                             fragmentWidgetStreakLayout.visibility = View.GONE
                             fragmentWidgetStateLayout.visibility = View.VISIBLE
+                            dialog.onClick = {
+                                WidgetStateProvider.pinWidget(requireContext())
+                                ToastUtils.showAddWidget(requireContext())
+                            }
                         }
                     }
                 } else {
@@ -48,6 +62,14 @@ class WidgetFragment : Fragment() {
 
             fragmentWidgetToolbarBackArrow.setOnClickListener {
                 findNavController().popBackStack()
+            }
+
+            fragmentWidgetStreakLayout.setOnClickListener{
+                dialog.show(parentFragmentManager, "Show add to home dialog")
+            }
+
+            fragmentWidgetStateLayout.setOnClickListener {
+                dialog.show(parentFragmentManager, "Show add to home dialog")
             }
         }
     }

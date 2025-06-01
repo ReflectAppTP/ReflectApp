@@ -247,5 +247,6 @@
     <string name="widgetStateDescription">Настроение за сегодня</string>
     <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
     <string name="widgetStateTitle">Настроение</string>
+    <string name="widgetToastMessage">Виджет успешно добавлен</string>
 
 </resources>
