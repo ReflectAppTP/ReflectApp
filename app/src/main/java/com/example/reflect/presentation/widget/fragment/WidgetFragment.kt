@@ -39,16 +39,16 @@ class WidgetFragment : Fragment() {
                             fragmentWidgetStreakLayout.visibility = View.VISIBLE
                             fragmentWidgetStateLayout.visibility = View.GONE
                             dialog.onClick = {
-                                WidgetStreakProvider.pinWidget(requireContext())
                                 ToastUtils.showAddWidget(requireContext())
+                                WidgetStreakProvider.pinWidget(requireContext())
                             }
                         }
                         R.id.fragmentWidgetStateButton -> {
                             fragmentWidgetStreakLayout.visibility = View.GONE
                             fragmentWidgetStateLayout.visibility = View.VISIBLE
                             dialog.onClick = {
-                                WidgetStateProvider.pinWidget(requireContext())
                                 ToastUtils.showAddWidget(requireContext())
+                                WidgetStateProvider.pinWidget(requireContext())
                             }
                         }
                     }
