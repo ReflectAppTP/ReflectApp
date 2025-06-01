@@ -37,6 +37,17 @@
     <string name="contentDescriptionFragmentPremiumToolbarBackArrow">Иконка возврата на экран профиля</string>
     <string name="contentDescriptionFragmentPremiumCatImage">Картинка котика Купите премиум пж</string>
     <string name="contentDescriptionPopupStreak">Картинка котика на стрике</string>
+    <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
+    <string name="contentDescriptionFragmentWidgetBackArrow">Иконка возврата на экран профиля</string>
+    <string name="contentDescriptionStreakPreview1">Превью стрика, когда записей нет</string>
+    <string name="contentDescriptionStreakPreview2">Превью стрика, когда записей меньше 7</string>
+    <string name="contentDescriptionStreakPreview3">Превью стрика, когда записей больше 7</string>
+    <string name="contentDescriptionStatePreview1">Превью стрика, когда состояние ужасное</string>
+    <string name="contentDescriptionStatePreview2">Превью стрика, когда состояние плохое</string>
+    <string name="contentDescriptionStatePreview3">Превью стрика, когда состояние нормальное</string>
+    <string name="contentDescriptionStatePreview4">Превью стрика, когда состояние хорошее</string>
+    <string name="contentDescriptionStatePreview5">Превью стрика, когда состояние замечательное</string>
+    <string name="contentDescriptionStatePreview6">Превью стрика, когда пользователь не отметил запись состояния</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -240,13 +251,22 @@
     <string name="dialogCancelPremiumAcceptBody">Вы уверены, что хотите отменить подписку на премиум? Все эксклюзивные функции останутся до окончания срока действия.</string>
     <string name="dialogCancelPremiumAcceptTitle">Подтверждение отмены подписки</string>
 
-
+    <!-- Popup window -->
     <string name="popupStreakDescription">Ежедневный стрик</string>
 
+    <!-- Widgets -->
     <string name="widgetStreakDescription">Стрик пользователя</string>
     <string name="widgetStateDescription">Настроение за сегодня</string>
-    <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
     <string name="widgetStateTitle">Настроение</string>
     <string name="widgetToastMessage">Виджет успешно добавлен</string>
+
+    <!-- Widget fragment -->
+    <string name="fragmentWidgetToolbarTitle">Виджеты</string>
+    <string name="fragmentWidgetStreakButton">Стрик пользователя</string>
+    <string name="fragmentWidgetStateButton">Эмоциональное состояние</string>
+
+    <!-- Add widget dialog -->
+    <string name="dialogAddWidgetTitle">Подтверждение выбора</string>
+    <string name="dialogAddWidgetDescription">Добавить этот виджет на экран домой?</string>
 
 </resources>

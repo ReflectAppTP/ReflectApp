@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Подтверждение выбора"
+            android:text="@string/dialogAddWidgetTitle"
             style="@style/TextAppearance.Material3.TitleMedium"
             android:textColor="@color/onSurfaceVariant"
             android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Добавить этот виджет на экран домой?"
+            android:text="@string/dialogAddWidgetDescription"
             style="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="@color/onSurfaceVariant"
             android:layout_marginVertical="@dimen/dialogMarginVertical_4dp"

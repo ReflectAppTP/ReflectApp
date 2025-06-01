@@ -22,7 +22,7 @@
             style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Виджеты"
+            android:text="@string/fragmentWidgetToolbarTitle"
             android:layout_gravity="center"
             android:textColor="@color/onSurface"
             />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:background="@drawable/rounded_surface_ripple"
-            android:contentDescription="Иконка возврата на экран профиля"
+            android:contentDescription="@string/contentDescriptionFragmentWidgetBackArrow"
             android:src="@drawable/ic_back_arrow" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_weight="1"
-            android:text="Стрик пользователя"
+            android:text="@string/fragmentWidgetStreakButton"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_weight="1"
-            android:text="Эмоциональное состояние"
+            android:text="@string/fragmentWidgetStateButton"
             />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -75,8 +75,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/background_scroll_view_widget"
-        android:layout_marginVertical="29dp"
-        android:layout_marginHorizontal="25dp"
+        android:layout_marginVertical="@dimen/fragmentWidgetScrollViewMarginVertical_29dp"
+        android:layout_marginHorizontal="@dimen/fragmentWidgetScrollViewMarginHorizontal_25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragmentWidgetToggleGroup"
@@ -103,26 +103,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_streak_preview_2"
-                    android:contentDescription="Превью стрика, когда записей нет"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/contentDescriptionStreakPreview1"
+                    android:layout_marginTop="@dimen/fragmentWidgetScrollableImageFirstMarginTop_20dp"
+                    android:layout_marginBottom="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_streak_preview_1"
-                    android:contentDescription="Превью стрика, когда записей меньше 7"
-                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/contentDescriptionStreakPreview2"
+                    android:layout_marginVertical="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_streak_preview_3"
-                    android:contentDescription="Превью стрика, когда записей больше 7"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:contentDescription="@string/contentDescriptionStreakPreview3"
+                    android:layout_marginTop="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
+                    android:layout_marginBottom="@dimen/fragmentWidgetScrollableImageLastMarginBottom_20dp"
                     />
             </LinearLayout>
 
@@ -137,50 +137,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_1"
-                    android:contentDescription="Превью стрика, когда состояние ужасное"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview1"
+                    android:layout_marginTop="@dimen/fragmentWidgetScrollableImageFirstMarginTop_20dp"
+                    android:layout_marginBottom="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_2"
-                    android:contentDescription="Превью стрика, когда состояние плохое"
-                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview2"
+                    android:layout_marginVertical="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_3"
-                    android:contentDescription="Превью стрика, когда состояние нормальное"
-                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview3"
+                    android:layout_marginVertical="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_4"
-                    android:contentDescription="Превью стрика, когда состояние хорошее"
-                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview4"
+                    android:layout_marginVertical="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_5"
-                    android:contentDescription="Превью стрика, когда состояние замечательное"
-                    android:layout_marginVertical="10dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview5"
+                    android:layout_marginVertical="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
                     />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/image_widget_state_preview_6"
-                    android:contentDescription="Превью стрика, когда пользователь не отметил запись состояния"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
+                    android:contentDescription="@string/contentDescriptionStatePreview6"
+                    android:layout_marginTop="@dimen/fragmentWidgetScrollableImageMarginVertical_10dp"
+                    android:layout_marginBottom="@dimen/fragmentWidgetScrollableImageLastMarginBottom_20dp"
                     />
             </LinearLayout>
 

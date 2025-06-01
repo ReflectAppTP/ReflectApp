@@ -278,4 +278,11 @@
     <dimen name="widgetImageWidth_100dp">100dp</dimen>
     <dimen name="widgetImageHeight_100dp">100dp</dimen>
 
+    <!-- Widget Fragment -->
+    <dimen name="fragmentWidgetScrollViewMarginVertical_29dp">29dp</dimen>
+    <dimen name="fragmentWidgetScrollViewMarginHorizontal_25dp">25dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageFirstMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageLastMarginBottom_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageMarginVertical_10dp">10dp</dimen>
+
 </resources>
