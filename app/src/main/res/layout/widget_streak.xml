@@ -13,11 +13,10 @@
     >
     <ImageView
         android:id="@+id/popupStreakImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/image_cat_streak_0"
         android:cropToPadding="true"
-        android:scaleType="centerInside"
         android:contentDescription="@string/contentDescriptionPopupStreak"
         />
 
@@ -27,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textSize="@dimen/popupStreakTextSize_16sp"
         android:textColor="@color/onSurface"
         />
 
@@ -36,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/popupStreakDescription"
+        android:textSize="@dimen/popupStreakTextSize_16sp"
         android:textColor="@color/onSurface"
         android:gravity="center"
         android:layout_gravity="center"

@@ -2,7 +2,7 @@
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="@dimen/widgetStreakProviderMinWidth_80dp"
-    android:minHeight="@dimen/widgetStreakProviderMinHeight"
+    android:minHeight="@dimen/widgetStreakProviderMinHeight_80dp"
     android:minResizeWidth="@dimen/widgetStreakProviderMinResizeWidth_80dp"
     android:minResizeHeight="@dimen/widgetStreakProviderMinResizeWidth_80dp"
     android:description="@string/widgetStreakDescription"
