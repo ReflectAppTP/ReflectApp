@@ -175,8 +175,12 @@ class RecordsFragment : Fragment() {
         when (state) {
             is GetRecordsState.Error -> ToastUtils.showErrorConnectionToast(requireContext())
             // Обновляю виджеты
-            is GetRecordsState.EmptyContent -> WidgetStateProvider.updateWidget(requireContext(), null)
-            is GetRecordsState.Success -> WidgetStateProvider.updateWidget(requireContext(), state.records.first().value)
+            is GetRecordsState.EmptyContent -> {
+                if (vm.datesAreEquals()) WidgetStateProvider.updateWidget(requireContext(), null)
+            }
+            is GetRecordsState.Success -> {
+                if (vm.datesAreEquals()) WidgetStateProvider.updateWidget(requireContext(), state.records.first().value)
+            }
             else -> {
                 Unit
             }

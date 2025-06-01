@@ -20,6 +20,7 @@ import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddS
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.example.reflect.presentation.widget.WidgetStateProvider
 import com.example.reflect.presentation.widget.WidgetStreakProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -136,6 +137,8 @@ class ThirdClarificationAddStateFragment : Fragment() {
                 // Обновляю виджет
                 // TODO: fix
                 WidgetStreakProvider.updateWidget(requireContext(), Random.nextInt(0,10))
+                // Обновляю виджет состояния
+                WidgetStateProvider.updateWidget(requireContext(), state.record!!.value)
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)

@@ -98,4 +98,12 @@ class ViewModelRecords @Inject constructor(
             _deleteState.value = newState
         }
     }
+
+    fun datesAreEquals(): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.time = _selectedDate.value
+        return calendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR) &&
+            calendar.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) &&
+            calendar.get(Calendar.DAY_OF_MONTH) == currentCalendar.get(Calendar.DAY_OF_MONTH)
+    }
 }
