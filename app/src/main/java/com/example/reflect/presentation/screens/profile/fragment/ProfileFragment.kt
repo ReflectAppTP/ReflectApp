@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
+import com.example.reflect.presentation.widget.WidgetStateProvider
 import com.example.reflect.presentation.widget.WidgetStreakProvider
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
@@ -71,7 +72,7 @@ class ProfileFragment : Fragment() {
         with(binding) {
             fragmentProfileWidgetButton.setOnClickListener {
                 // TODO: потом переделать
-                WidgetStreakProvider.pinWidget(requireContext())
+                WidgetStateProvider.pinWidget(requireContext())
                 Toast.makeText(requireContext(), "Виджет успешно добавлен", Toast.LENGTH_SHORT).show()
             }
 

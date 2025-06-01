@@ -31,7 +31,7 @@ class WidgetStreakProvider: AppWidgetProvider() {
                 context.packageName,
                 R.layout.widget_streak
             ).apply {
-                setOnClickPendingIntent(R.id.popupStreakImage, pendingIntent)
+                setOnClickPendingIntent(R.id.widgetStreakRoot, pendingIntent)
             }
 
             appWidgetManager.updateAppWidget(it, views)

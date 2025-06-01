@@ -117,6 +117,11 @@
     <string name="cardStateMood">%1$s настроение</string>
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
+    <string name="awfulState">Ужасное</string>
+    <string name="badState">Плохое</string>
+    <string name="normalState">Нормальное</string>
+    <string name="goodState">Хорошее</string>
+    <string name="excellentState">Отличное</string>
 
     <!-- ToastMessages -->
     <string name="addStateToastMessage">Запись успешно создана</string>
@@ -239,5 +244,8 @@
     <string name="popupStreakDescription">Ежедневный стрик</string>
 
     <string name="widgetStreakDescription">Стрик пользователя</string>
+    <string name="widgetStateDescription">Настроение за сегодня</string>
+    <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
+    <string name="widgetStateTitle">Настроение</string>
 
 </resources>

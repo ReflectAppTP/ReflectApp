@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +25,7 @@ import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.example.reflect.presentation.widget.WidgetStateProvider
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,32 +56,10 @@ class RecordsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
-        // TODO: почему тут надо в разных scope
-        lifecycleScope.launch {
-            // TODO: Можно ли как то вынести из repeatOnLifeCycle
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.recordsState.collect { state ->
-                    handleRecordsState(state)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            vm.deleteState.collect { state ->
-                handleDeleteState(state)
-            }
-        }
-
         datePicker = createDatePicker()
         setupDatePickerListeners(datePicker)
 
         with (binding) {
-            lifecycleScope.launch {
-                vm.selectedDateText.collect { date ->
-                    fragmentRecordsDateTV.text = date
-                }
-            }
-
             fragmentRecordsDateTV.setOnClickListener {
                 datePicker.show(parentFragmentManager, "datePicker")
             }
@@ -160,7 +140,28 @@ class RecordsFragment : Fragment() {
                 }
             )
             fragmentRecordsRV.adapter = recordsAdapter
+
+            // TODO: почему тут надо в разных scope
+            lifecycleScope.launch {
+                vm.selectedDateText.collect { date ->
+                    fragmentRecordsDateTV.text = date
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.recordsState.collect { state ->
+                    handleRecordsState(state)
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.deleteState.collect { state ->
+                    handleDeleteState(state)
+                }
+            }
         }
+
+
     }
 
     override fun onDestroyView() {
@@ -169,13 +170,13 @@ class RecordsFragment : Fragment() {
     }
 
     private fun handleRecordsState(state: GetRecordsState) {
-        val context = requireContext()
         recordsAdapter.updateState(state)
 
         when (state) {
-            is GetRecordsState.Error -> {
-                ToastUtils.showErrorConnectionToast(context)
-            }
+            is GetRecordsState.Error -> ToastUtils.showErrorConnectionToast(requireContext())
+            // Обновляю виджеты
+            is GetRecordsState.EmptyContent -> WidgetStateProvider.updateWidget(requireContext(), null)
+            is GetRecordsState.Success -> WidgetStateProvider.updateWidget(requireContext(), state.records.first().value)
             else -> {
                 Unit
             }

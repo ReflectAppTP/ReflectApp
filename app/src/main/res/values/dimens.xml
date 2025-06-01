@@ -268,12 +268,14 @@
     <dimen name="popupStreakMarginBottom_8dp">8dp</dimen>
     <dimen name="popupStreakTextSize_16sp">16sp</dimen>
 
-    <!-- Streak widget -->
-    <dimen name="widgetStreakProviderMinWidth_80dp">80dp</dimen>
+    <!-- Widget -->
+    <dimen name="widgetStreakProviderMinWidth_80dp">200dp</dimen>
     <dimen name="widgetStreakProviderMinHeight_80dp">80dp</dimen>
-    <dimen name="widgetStreakProviderMinResizeWidth_80dp">80dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeWidth_80dp">200dp</dimen>
     <dimen name="widgetStreakProviderMinResizeHeight_50dp">50dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeWidth_160dp">280dp</dimen>
     <dimen name="widgetStreakProviderMaxResizeHeight_120dp">120dp</dimen>
-    <dimen name="widgetStreakProviderMaxResizeWidth_160dp">160dp</dimen>
+    <dimen name="widgetImageWidth_100dp">100dp</dimen>
+    <dimen name="widgetImageHeight_100dp">100dp</dimen>
 
 </resources>

@@ -47,23 +47,23 @@ class RecordsListAdapter(
                 when(model.value) {
                     in 0..1 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_1)
-                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Ужасное")
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, context.resources.getString(R.string.awfulState))
                     }
                     in 2..3 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_2)
-                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Плохое")
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, context.resources.getString(R.string.badState))
                     }
                     in 4..6 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_3)
-                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Нормально")
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, context.resources.getString(R.string.normalState))
                     }
                     in 7..8 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_4)
-                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Хорошее")
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, context.resources.getString(R.string.goodState))
                     }
                     in 9..10 -> {
                         cardStateImageView.setImageResource(R.drawable.ic_state_image_5)
-                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, "Отличное")
+                        cardStateChangeMoodTV.text = context.resources.getString(R.string.cardStateMood, context.resources.getString(R.string.excellentState))
                     }
                     else -> throw IllegalStateException("Как так вообще получилось, что значение от 0 до 10 больше 10?!")
                 }
