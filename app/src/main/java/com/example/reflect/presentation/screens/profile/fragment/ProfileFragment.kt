@@ -71,9 +71,7 @@ class ProfileFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             fragmentProfileWidgetButton.setOnClickListener {
-                // TODO: потом переделать
-                WidgetStateProvider.pinWidget(requireContext())
-                Toast.makeText(requireContext(), "Виджет успешно добавлен", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_mainFragment_to_widgetFragment)
             }
 
             fragmentProfilePremiumButton.setOnClickListener {

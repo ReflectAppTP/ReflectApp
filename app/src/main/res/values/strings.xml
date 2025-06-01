@@ -192,7 +192,7 @@
     <string name="toastMessageResetContextAI">Контекст очищен</string>
 
     <!-- Friends Fragments -->
-    <string name="emptyFriendsList">Друзей пока что нет,но вы всегда можете их найти</string>
+    <string name="emptyFriendsList">Друзей пока что нет, но вы всегда можете их найти</string>
     <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
     <string name="emptyFriendsNotificationText">Уведомлений нет</string>
     <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>

@@ -18,12 +18,12 @@
 
         <TextView
             android:id="@+id/fragmentStatisticToolbarTitle"
+            style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/toolbarStatisticTitle"
             android:layout_gravity="center"
             android:textColor="@color/onSurface"
-            style="@style/TextAppearance.Material3.TitleLarge"
             />
 
         <ImageButton

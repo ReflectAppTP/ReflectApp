@@ -7,7 +7,7 @@
     android:minResizeHeight="@dimen/widgetStreakProviderMinResizeWidth_80dp"
     android:description="@string/widgetStreakDescription"
     android:updatePeriodMillis="900000"
-    android:previewImage="@drawable/image_widget_state_preview"
+    android:previewImage="@drawable/image_widget_state_preview_5"
     android:initialLayout="@layout/widget_state"
     android:widgetCategory="home_screen"
     android:resizeMode="horizontal|vertical"
