@@ -235,6 +235,7 @@ class ProfileFriendFragment : Fragment() {
             when (state) {
                 is SendFriendshipRequestState.Loading -> {
                     fragmentProfileUserAddFriendButtonSendRequest.isEnabled = false
+
                 }
                 is SendFriendshipRequestState.Success -> {
                     fragmentProfileUserAddFriendButtonSendRequest.isEnabled = true
