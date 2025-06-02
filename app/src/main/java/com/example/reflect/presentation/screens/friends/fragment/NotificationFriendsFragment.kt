@@ -13,8 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentNotificationFriendsBinding
 import com.example.reflect.presentation.dialog.AcceptFriendshipDialog
+import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.adapter.NotificationFriendsAdapter
-import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,9 +24,8 @@ class NotificationFriendsFragment : Fragment() {
 
     private var _binding: FragmentNotificationFriendsBinding? = null
     private val binding get() = _binding!!
-    
-    private val vm: ViewModelFriends by activityViewModels()
-    private val notificationVM: ViewModelNotificationFriendship by activityViewModels()
+
+    private val vm: ViewModelNotificationFriendship by activityViewModels()
     private lateinit var notificationFriendsAdapter: NotificationFriendsAdapter
 
     override fun onCreateView(
@@ -43,20 +42,26 @@ class NotificationFriendsFragment : Fragment() {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                notificationVM.notifications.collect {
+                vm.notifications.collect {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
 
-            with (binding) {
-                fragmentNotificationRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                notificationFriendsAdapter = NotificationFriendsAdapter {
-                    val dialog = AcceptFriendshipDialog(it)
-                    dialog.show(parentFragmentManager, "Accept friendship dialog")
-                }
-                notificationFriendsAdapter.updateState(vm.friendsNotificationListState.value)
-                fragmentNotificationRV.adapter = notificationFriendsAdapter
-             }
+        with (binding) {
+            fragmentNotificationRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            notificationFriendsAdapter = NotificationFriendsAdapter {
+                val dialog = AcceptFriendshipDialog(it)
+                dialog.show(parentFragmentManager, "Accept friendship dialog")
+            }
+            notificationFriendsAdapter.updateState(vm.notificationState.value)
+            fragmentNotificationRV.adapter = notificationFriendsAdapter
+        }
+
+        lifecycleScope.launch {
+            vm.notificationState.collect { newState ->
+                handleNotificationsState(newState)
+            }
         }
     }
 
@@ -65,4 +70,7 @@ class NotificationFriendsFragment : Fragment() {
         _binding = null
     }
 
+    private fun handleNotificationsState(state: GetFriendsNotificationsState) {
+        notificationFriendsAdapter.updateState(state)
+    }
 }

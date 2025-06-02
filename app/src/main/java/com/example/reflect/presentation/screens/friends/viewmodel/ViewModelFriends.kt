@@ -27,9 +27,6 @@ class ViewModelFriends @Inject constructor(
     private var _friendsListState = MutableStateFlow<GetFriendsState>(GetFriendsState.EmptyContent)
     val friendsListState: StateFlow<GetFriendsState> = _friendsListState
 
-    private var _friendsNotificationListState = MutableStateFlow<GetFriendsNotificationsState>(GetFriendsNotificationsState.EmptyContent)
-    val friendsNotificationListState: StateFlow<GetFriendsNotificationsState> = _friendsNotificationListState
-
     private var _getUserByIdState = MutableStateFlow<GetUserByIdState>(GetUserByIdState.Idle)
     val getUserByIdState: StateFlow<GetUserByIdState> = _getUserByIdState
 
@@ -56,22 +53,6 @@ class ViewModelFriends @Inject constructor(
                 _getUserByIdState.value = newState
             }
         }
-    }
-
-    // TODO: Переделать на сокетах
-    fun fetchNotifications() {
-        _friendsNotificationListState.value = GetFriendsNotificationsState.Success(mutableListOf(
-            UserModel(1,"oleg", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"мяумуяделюксфыва", "fasdfsa", "sgsd", false, false),
-            UserModel(1,"фываыфваыфваыфваы", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, false),
-            UserModel(1,"роман фисташка", "fasdfsa", "sgsd", false, true),
-        ))
     }
 
     fun acceptFriendRequest(id: Int) {

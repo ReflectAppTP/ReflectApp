@@ -2,6 +2,7 @@ package com.example.reflect.data.repository.friendship
 
 import android.content.Context
 import com.example.reflect.common.prefs.AccountPrefs
+import com.example.reflect.domain.model.NotificationFriendshipModel
 import com.example.reflect.domain.model.NotificationUserModel
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
 import com.google.gson.Gson
@@ -22,11 +23,11 @@ class WebSocketFriendshipRepositoryImpl @Inject constructor(
 ) : WebSocketFriendshipRepository {
     private var webSocket: WebSocket? = null
 
-    override fun notifications(): Flow<NotificationUserModel> = callbackFlow {
+    override fun notifications(): Flow<NotificationFriendshipModel> = callbackFlow {
         val listener = object : WebSocketListener() {
             override fun onMessage(webSocket: WebSocket, text: String) {
                 try {
-                    val notificationModel = Gson().fromJson(text, NotificationUserModel::class.java)
+                    val notificationModel = Gson().fromJson(text, NotificationFriendshipModel::class.java)
                     trySend(notificationModel)
                 } catch (e: Exception) {
                     close(e)

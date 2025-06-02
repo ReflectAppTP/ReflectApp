@@ -15,10 +15,12 @@ import com.example.reflect.data.dto.ai.AIGetMessageResponseDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
 import com.example.reflect.data.dto.friendship.GetFriendsResponseDTO
+import com.example.reflect.data.dto.friendship.NotificationFriendshipDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
+import com.example.reflect.domain.model.NotificationUserModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -103,6 +105,9 @@ interface RetrofitService {
 
     @POST("$friends/friendships/")
     suspend fun sendFriendshipRequest(@Body userIdDTO: UserIdDTO): Response<SendFriendshipRequestDTO>
+
+    @GET("$friends/requests/pending/")
+    suspend fun getFriendshipNotification(): Response<List<NotificationFriendshipDTO>>
 
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
