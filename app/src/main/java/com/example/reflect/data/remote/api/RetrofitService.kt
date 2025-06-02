@@ -1,5 +1,6 @@
 package com.example.reflect.data.remote.api
 
+import com.example.reflect.data.dto.GetUserByIdDTO
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.dto.TagDTO
@@ -31,6 +32,7 @@ private const val emotions = "api/emotions"
 private const val statistic = "api/emotions/statistics"
 private const val ai = "api/ai/chat"
 private const val friends = "api/friends"
+private const val profile = "api/profileReflect"
 
 interface RetrofitService {
 
@@ -96,4 +98,7 @@ interface RetrofitService {
 
     @GET("$friends/by-username/{username}/")
     suspend fun searchUsers(@Path("username") username: String): Response<List<GetFriendsResponseDTO>>
+
+    @GET("$profile/user/{id}/")
+    suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
 }

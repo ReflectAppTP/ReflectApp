@@ -34,4 +34,6 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
 
     suspend fun getFriendsList() = retrofitService.getFriendsList()
     suspend fun searchUsers(username: String) = retrofitService.searchUsers(username)
+
+    suspend fun getUserById(id: Int) = retrofitService.getUserById(id)
 }

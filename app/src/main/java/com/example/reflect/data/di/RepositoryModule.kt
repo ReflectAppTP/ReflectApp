@@ -15,6 +15,7 @@ import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
+import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
 import com.example.reflect.data.repository.friendship.SearchUsersRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetMonthlyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
@@ -36,6 +37,7 @@ import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
+import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
 import com.example.reflect.domain.repository.friendship.SearchUsersRepository
 import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
 import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
@@ -178,4 +180,10 @@ object RepositoryModule {
     fun provideSearchUsers(
         remoteData: RetrofitRemoteData
     ): SearchUsersRepository = SearchUsersRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetUserById(
+        remoteData: RetrofitRemoteData
+    ): GetUserByIdRepository = GetUserByIdRepositoryImpl(remoteData)
 }

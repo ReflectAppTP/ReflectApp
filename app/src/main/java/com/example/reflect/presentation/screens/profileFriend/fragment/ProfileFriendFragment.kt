@@ -12,8 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentProfileFriendBinding
-import com.example.reflect.presentation.common.TimeRange
-import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
+import com.example.reflect.domain.model.GetUserByIdModel
 import com.example.reflect.presentation.screens.profileFriend.viewmodel.ViewModelUserProfile
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.github.mikephil.charting.charts.Chart
@@ -35,6 +34,16 @@ class ProfileFriendFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentProfileFriendBinding.inflate(inflater, container, false)
+
+        val user: GetUserByIdModel = arguments?.getParcelable("userModel") ?: run {
+            throw IllegalArgumentException("RecordModel is null")
+        }
+
+        user.username.let { vm.updateUsername(it) }
+        user.friendshipStatus.let { vm.updateFriendship(it) }
+        user.lastState?.let { vm.updateRecord(it) }
+        user.week?.let { vm.updateLineChart(it) }
+
         return binding.root
     }
 
@@ -44,6 +53,7 @@ class ProfileFriendFragment : Fragment() {
         setLineChartProperties(requireContext())
 
         with (binding) {
+            fragmentProfileUserLogin.text = vm.username.value
             registrationBackArrow.setOnClickListener {
                 findNavController().popBackStack()
             }
