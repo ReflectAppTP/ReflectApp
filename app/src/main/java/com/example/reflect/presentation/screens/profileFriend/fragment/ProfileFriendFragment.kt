@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
+import com.example.reflect.common.FriendshipEnum
+import com.example.reflect.common.UserVisibilityEnum
 import com.example.reflect.databinding.FragmentProfileFriendBinding
 import com.example.reflect.domain.model.GetUserByIdModel
 import com.example.reflect.presentation.adapter.RecordsListAdapter
@@ -52,8 +54,10 @@ class ProfileFriendFragment : Fragment() {
 
         user.username.let { vm.updateUsername(it) }
         user.friendshipStatus.let { vm.updateFriendship(it) }
-        user.lastState?.let { vm.updateRecord(it) }
-        user.week?.let { vm.updateLineChart(it) }
+        user.isPremium.let { vm.updatePremium(it) }
+        user.visibility.let { vm.updateVisibility(it) }
+        vm.updateRecord(user.lastState)
+        vm.updateLineChart(user.week)
 
         return binding.root
     }
@@ -65,15 +69,37 @@ class ProfileFriendFragment : Fragment() {
 
         with (binding) {
             fragmentProfileUserLogin.text = vm.username.value
-            registrationBackArrow.setOnClickListener {
+            fragmentProfileUserPremiumIcon.visibility = if (vm.isPremium.value) View.VISIBLE else View.GONE
+            fragmentProfileUserBackArrow.setOnClickListener {
                 findNavController().popBackStack()
             }
+            
+            when (vm.friendship.value) {
+                FriendshipEnum.User -> {
+                    fragmentProfileUserAddFriendButton.visibility = View.VISIBLE
+                    fragmentProfileUserAddFriendButtonFriend.visibility = View.GONE
+                    fragmentProfileUserAddFriendButtonBanned.visibility = View.GONE
+                }
+                FriendshipEnum.Friend -> {
+                    fragmentProfileUserAddFriendButton.visibility = View.GONE
+                    fragmentProfileUserAddFriendButtonFriend.visibility = View.VISIBLE
+                    fragmentProfileUserAddFriendButtonBanned.visibility = View.GONE
+                }
+                FriendshipEnum.Banned -> {
+                    fragmentProfileUserAddFriendButton.visibility = View.GONE
+                    fragmentProfileUserAddFriendButtonFriend.visibility = View.GONE
+                    fragmentProfileUserAddFriendButtonBanned.visibility = View.VISIBLE
+                }
+            }
             fragmentProfileUserAddFriendButton.setOnClickListener {
+                // TODO: add logic
                 it.visibility = View.GONE
                 fragmentProfileUserAddFriendButtonSendRequest.visibility = View.VISIBLE
             }
 
-            if (vm.recordModel.value == null && (vm.lineChartState.value as LineChartState.Success).data.isEmpty()) {
+            if (vm.visibility.value == UserVisibilityEnum.Self ||
+                (vm.visibility.value == UserVisibilityEnum.Friends && vm.friendship.value != FriendshipEnum.Friend)
+                ) {
                 fragmentProfileUserContentRootScrollView.visibility = View.GONE
                 fragmentProfileUserContentHideTitle.visibility = View.VISIBLE
             }

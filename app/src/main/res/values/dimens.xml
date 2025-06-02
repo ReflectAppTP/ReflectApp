@@ -285,5 +285,10 @@
     <dimen name="fragmentWidgetScrollableImageLastMarginBottom_20dp">20dp</dimen>
     <dimen name="fragmentWidgetScrollableImageMarginVertical_10dp">10dp</dimen>
     <dimen name="fragmentProfileDeleteMarginTop_10dp">10dp</dimen>
+    <dimen name="fragmentProfileUserButtonContainerMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileUserContentRootMarginTop_11dp">11dp</dimen>
+    <dimen name="fragmentProfileUserContentMarginTop_7dp">7dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginHorizontal_23dp">23dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginTop_15dp">15dp</dimen>
 
 </resources>

@@ -273,6 +273,15 @@
     <string name="fragmentProfileVisibilityHint">Видимость профиля</string>
     <string name="fragmentProfilePasswordConfirmationEditText">Новый пароль</string>
     <string name="fragmentProfilePasswordEditText">Старый пароль</string>
+    <string name="contentDescriptionFragmentProfileUserBackArrow">Иконка воврата на экран друзей</string>
+    <string name="contentDescriptionFragmentProfileUserMoreDots">Иконка дополнительного меню во фрагменте профиля пользователя</string>
+    <string name="fragmentProfileUserAddFriendButton">Добавить в друзья</string>
+    <string name="fragmentProfileUserAddFriendButtonSendRequest">Заявка отправлена</string>
+    <string name="fragmentProfileUserAddFriendButtonFriend">У вас в друзьях</string>
+    <string name="fragmentProfileUserAddFriendButtonBanned">Пользователь заблокирован</string>
+    <string name="fragmentProfileUserContentLastRecordTitle">Последняя запись за сегодня</string>
+    <string name="fragmentProfileUserContentStatisticTitle">Статистика за неделю</string>
+    <string name="fragmentProfileUserContentHideTitle">Информация о записях скрыта</string>
 
     <string-array name="fragmentProfileSettingsVisibilityItems">
         <item>Никому</item>

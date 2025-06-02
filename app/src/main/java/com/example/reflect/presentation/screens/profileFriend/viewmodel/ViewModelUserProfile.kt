@@ -2,12 +2,15 @@ package com.example.reflect.presentation.screens.profileFriend.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.reflect.common.FriendshipEnum
+import com.example.reflect.common.UserVisibilityEnum
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.domain.model.StatisticAverageModel
 import com.example.reflect.presentation.common.TimeRange
+import com.example.reflect.presentation.screens.profileFriend.ProfileUserIntent
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.github.mikephil.charting.data.Entry
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -15,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelUserProfile @Inject constructor(): ViewModel() {
 
+    val userIntent = Channel<ProfileUserIntent>(Channel.UNLIMITED)
     private var _username = MutableStateFlow("")
     val username: StateFlow<String> = _username
 
@@ -27,6 +31,12 @@ class ViewModelUserProfile @Inject constructor(): ViewModel() {
     private var _lineChartState = MutableStateFlow<LineChartState>(LineChartState.Idle)
     val lineChartState: StateFlow<LineChartState> = _lineChartState
 
+    private var _isPremium = MutableStateFlow(false)
+    val isPremium: StateFlow<Boolean> = _isPremium
+
+    private var _visibility = MutableStateFlow(UserVisibilityEnum.All)
+    val visibility: StateFlow<UserVisibilityEnum> = _visibility
+
     fun updateUsername(username: String) {
         _username.value = username
     }
@@ -37,6 +47,14 @@ class ViewModelUserProfile @Inject constructor(): ViewModel() {
 
     fun updateRecord(record: RecordModel?) {
         _recordModel.value = record
+    }
+
+    fun updatePremium(isPremium: Boolean) {
+        _isPremium.value = isPremium
+    }
+
+    fun updateVisibility(visibilityEnum: UserVisibilityEnum) {
+        _visibility.value = visibilityEnum
     }
 
     fun updateLineChart(lineChart: List<StatisticAverageModel>?) {

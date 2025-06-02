@@ -2,6 +2,7 @@ package com.example.reflect.data.repository.friendship
 
 import com.example.reflect.common.FriendshipEnum
 import com.example.reflect.common.RetrofitException
+import com.example.reflect.common.UserVisibilityEnum
 import com.example.reflect.data.dto.GetUserByIdDTO
 import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
@@ -30,6 +31,12 @@ class GetUserByIdRepositoryImpl @Inject constructor(
     private fun GetUserByIdDTO.toDomain() = GetUserByIdModel(
         id = this.id,
         username = this.username,
+        isPremium = this.isPremium,
+        visibility = when (this.visibility) {
+            "all" -> UserVisibilityEnum.All
+            "friends" -> UserVisibilityEnum.Friends
+            else -> UserVisibilityEnum.Self
+        },
         friendshipStatus = when (this.friendshipStatus) {
             "not_friend" -> FriendshipEnum.User
             "friend" -> FriendshipEnum.Friend
