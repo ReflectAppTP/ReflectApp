@@ -2,6 +2,7 @@ package com.example.reflect.presentation.screens.profileFriend.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,22 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentProfileFriendBinding
 import com.example.reflect.domain.model.GetUserByIdModel
+import com.example.reflect.presentation.adapter.RecordsListAdapter
+import com.example.reflect.presentation.common.TimeRange
+import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
 import com.example.reflect.presentation.screens.profileFriend.viewmodel.ViewModelUserProfile
+import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
 import com.github.mikephil.charting.charts.Chart
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 @AndroidEntryPoint
 class ProfileFriendFragment : Fragment() {
@@ -28,6 +35,8 @@ class ProfileFriendFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: ViewModelUserProfile by viewModels()
+
+    private lateinit var recordAdapter: RecordsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +47,8 @@ class ProfileFriendFragment : Fragment() {
         val user: GetUserByIdModel = arguments?.getParcelable("userModel") ?: run {
             throw IllegalArgumentException("RecordModel is null")
         }
+
+        Log.d("User", user.toString())
 
         user.username.let { vm.updateUsername(it) }
         user.friendshipStatus.let { vm.updateFriendship(it) }
@@ -61,6 +72,20 @@ class ProfileFriendFragment : Fragment() {
                 it.visibility = View.GONE
                 fragmentProfileUserAddFriendButtonSendRequest.visibility = View.VISIBLE
             }
+
+            if (vm.recordModel.value == null && (vm.lineChartState.value as LineChartState.Success).data.isEmpty()) {
+                fragmentProfileUserContentRootScrollView.visibility = View.GONE
+                fragmentProfileUserContentHideTitle.visibility = View.VISIBLE
+            }
+
+            fragmentProfileUserContentLastRecordRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            recordAdapter = RecordsListAdapter(Calendar.getInstance())
+            if (vm.recordModel.value == null) {
+                recordAdapter.updateState(GetRecordsState.EmptyContent)
+            } else {
+                recordAdapter.updateState(GetRecordsState.Success(listOf(vm.recordModel.value!!)))
+            }
+            fragmentProfileUserContentLastRecordRV.adapter = recordAdapter
         }
 
         lifecycleScope.launch {
@@ -98,7 +123,8 @@ class ProfileFriendFragment : Fragment() {
                             axisMinimum = xMin
                             axisMaximum = xMax
                             labelCount = state.data.size
-//                            valueFormatter = LineChartXAxisFormatter(state.data.map { it.data.toString() }, TimeRange.WEEK)
+                            granularity = 1f
+                            valueFormatter = LineChartXAxisFormatter(state.data.map { it.data.toString() }, TimeRange.WEEK)
                         }
                         setDrawValues(false)
                     }

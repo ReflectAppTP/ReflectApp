@@ -20,7 +20,6 @@ import com.example.reflect.presentation.screens.friends.adapter.SearchListAdapte
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelSearchFriends
 import com.example.reflect.presentation.screens.profile.GetUserByIdState
-import io.appmetrica.analytics.impl.vm
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

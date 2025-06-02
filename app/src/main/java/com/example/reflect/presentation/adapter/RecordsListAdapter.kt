@@ -21,8 +21,8 @@ import java.util.Calendar
 
 class RecordsListAdapter(
     private val calendar: Calendar,
-    private val onEdit: (Int, RecordModel) -> Unit,
-    private val onDelete: (Int) -> Unit
+    private val onEdit: ((Int, RecordModel) -> Unit)? = null,
+    private val onDelete: ((Int) -> Unit)? = null
 ) : ListAdapter<GetRecordsState, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     class EmptyRecordsViewHolder(
@@ -37,7 +37,13 @@ class RecordsListAdapter(
         private val binding: CardStateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(model: RecordModel, today: Calendar, context: Context, onDelete: (Int) -> Unit, onEdit: (Int, RecordModel) -> Unit) {
+        fun bind(
+            model: RecordModel,
+            today: Calendar,
+            context: Context,
+            onDelete: ((Int) -> Unit)?,
+            onEdit: ((Int, RecordModel) -> Unit)?
+        ) {
             with (binding) {
                 val currentDate = Calendar.getInstance()
                 currentDate.time = model.creationDate!!
@@ -91,23 +97,27 @@ class RecordsListAdapter(
                     cardStateSecondRV.adapter = RecordsTagListAdapter(model.secondTagList)
                 }
 
-                cardStateChangeDots.setOnClickListener {
-                    val popupMenu = PopupMenu(context, cardStateChangeDots)
-                    popupMenu.inflate(R.menu.card_state_menu)
-                    popupMenu.setOnMenuItemClickListener {
-                        when(it.itemId) {
-                            R.id.menuEdit -> {
-                                onEdit(model.id, model)
-                                true
+                if (onEdit == null || onDelete == null) {
+                    cardStateChangeDots.visibility = View.GONE
+                } else {
+                    cardStateChangeDots.setOnClickListener {
+                        val popupMenu = PopupMenu(context, cardStateChangeDots)
+                        popupMenu.inflate(R.menu.card_state_menu)
+                        popupMenu.setOnMenuItemClickListener {
+                            when(it.itemId) {
+                                R.id.menuEdit -> {
+                                    onEdit(model.id, model)
+                                    true
+                                }
+                                R.id.menuDelete -> {
+                                    onDelete(model.id)
+                                    true
+                                }
+                                else -> false
                             }
-                            R.id.menuDelete -> {
-                                onDelete(model.id)
-                                true
-                            }
-                            else -> false
                         }
+                        popupMenu.show()
                     }
-                    popupMenu.show()
                 }
             }
         }
