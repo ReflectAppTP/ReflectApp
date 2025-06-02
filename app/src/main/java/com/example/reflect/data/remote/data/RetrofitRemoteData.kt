@@ -1,6 +1,7 @@
 package com.example.reflect.data.remote.data
 
 import com.example.reflect.data.dto.StateRequestDTO
+import com.example.reflect.data.dto.UserIdDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
@@ -34,6 +35,7 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
 
     suspend fun getFriendsList() = retrofitService.getFriendsList()
     suspend fun searchUsers(username: String) = retrofitService.searchUsers(username)
+    suspend fun sendFriendshipRequest(userIdDTO: UserIdDTO) = retrofitService.sendFriendshipRequest(userIdDTO)
 
     suspend fun getUserById(id: Int) = retrofitService.getUserById(id)
 }

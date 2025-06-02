@@ -1,6 +1,7 @@
 package com.example.reflect.data.remote.api
 
 import com.example.reflect.data.dto.GetUserByIdDTO
+import com.example.reflect.data.dto.SendFriendshipRequestDTO
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.StateResponseDTO
 import com.example.reflect.data.dto.TagDTO
@@ -9,6 +10,7 @@ import com.example.reflect.data.dto.login.LoginResponseDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
+import com.example.reflect.data.dto.UserIdDTO
 import com.example.reflect.data.dto.ai.AIGetMessageResponseDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
@@ -98,6 +100,9 @@ interface RetrofitService {
 
     @GET("$friends/by-username/{username}/")
     suspend fun searchUsers(@Path("username") username: String): Response<List<GetFriendsResponseDTO>>
+
+    @POST("$friends/friendships/")
+    suspend fun sendFriendshipRequest(@Body userIdDTO: UserIdDTO): Response<SendFriendshipRequestDTO>
 
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>

@@ -19,7 +19,10 @@ import com.example.reflect.databinding.FragmentProfileFriendBinding
 import com.example.reflect.domain.model.GetUserByIdModel
 import com.example.reflect.presentation.adapter.RecordsListAdapter
 import com.example.reflect.presentation.common.TimeRange
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
+import com.example.reflect.presentation.screens.friends.SendFriendshipRequestState
+import com.example.reflect.presentation.screens.profileFriend.ProfileUserIntent
 import com.example.reflect.presentation.screens.profileFriend.viewmodel.ViewModelUserProfile
 import com.example.reflect.presentation.screens.records.GetRecordsState
 import com.example.reflect.presentation.screens.statistics.states.LineChartState
@@ -52,6 +55,7 @@ class ProfileFriendFragment : Fragment() {
 
         Log.d("User", user.toString())
 
+        user.id.let { vm.updateId(it) }
         user.username.let { vm.updateUsername(it) }
         user.friendshipStatus.let { vm.updateFriendship(it) }
         user.isPremium.let { vm.updatePremium(it) }
@@ -93,8 +97,9 @@ class ProfileFriendFragment : Fragment() {
             }
             fragmentProfileUserAddFriendButton.setOnClickListener {
                 // TODO: add logic
-                it.visibility = View.GONE
-                fragmentProfileUserAddFriendButtonSendRequest.visibility = View.VISIBLE
+                lifecycleScope.launch {
+                    vm.userIntent.send(ProfileUserIntent.FriendRequest)
+                }
             }
 
             if (vm.visibility.value == UserVisibilityEnum.Self ||
@@ -117,6 +122,12 @@ class ProfileFriendFragment : Fragment() {
         lifecycleScope.launch {
             vm.lineChartState.collect {
                 handleLineChartState(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.sendFriendshipRequestState.collect {
+                handleSendFriendshipRequestState(it)
             }
         }
     }
@@ -215,6 +226,28 @@ class ProfileFriendFragment : Fragment() {
                     color = ContextCompat.getColor(context, R.color.onSurface)
                 }
                 invalidate()
+            }
+        }
+    }
+
+    private fun handleSendFriendshipRequestState(state: SendFriendshipRequestState) {
+        with (binding) {
+            when (state) {
+                is SendFriendshipRequestState.Loading -> {
+                    fragmentProfileUserAddFriendButtonSendRequest.isEnabled = false
+                }
+                is SendFriendshipRequestState.Success -> {
+                    fragmentProfileUserAddFriendButtonSendRequest.isEnabled = true
+                    fragmentProfileUserAddFriendButton.visibility = View.GONE
+                    fragmentProfileUserAddFriendButtonSendRequest.visibility = View.VISIBLE
+                }
+                is SendFriendshipRequestState.Error -> {
+                    fragmentProfileUserAddFriendButtonSendRequest.isEnabled = true
+                    fragmentProfileUserAddFriendButton.visibility = View.VISIBLE
+                    fragmentProfileUserAddFriendButtonSendRequest.visibility = View.GONE
+                    ToastUtils.showErrorToast(requireContext())
+                }
+                is SendFriendshipRequestState.Idle -> Unit
             }
         }
     }
