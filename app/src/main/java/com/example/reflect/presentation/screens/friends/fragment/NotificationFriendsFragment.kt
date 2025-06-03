@@ -15,6 +15,7 @@ import com.example.reflect.presentation.dialog.AcceptFriendshipDialog
 import com.example.reflect.presentation.screens.friends.DoWithNotificationState
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.adapter.NotificationFriendsAdapter
+import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -25,7 +26,8 @@ class NotificationFriendsFragment : Fragment() {
     private var _binding: FragmentNotificationFriendsBinding? = null
     private val binding get() = _binding!!
 
-    private val vm: ViewModelNotificationFriendship by activityViewModels()
+    private val friendsVM: ViewModelFriends by activityViewModels()
+    private val notificationVM: ViewModelNotificationFriendship by activityViewModels()
     private lateinit var notificationFriendsAdapter: NotificationFriendsAdapter
 
     override fun onCreateView(
@@ -48,18 +50,18 @@ class NotificationFriendsFragment : Fragment() {
                 val dialog = AcceptFriendshipDialog(it)
                 dialog.show(parentFragmentManager, "Accept friendship dialog")
             }
-            notificationFriendsAdapter.updateState(vm.notificationState.value)
+            notificationFriendsAdapter.updateState(notificationVM.notificationState.value)
             fragmentNotificationRV.adapter = notificationFriendsAdapter
         }
 
         lifecycleScope.launch {
-            vm.notificationState.collect { newState ->
+            notificationVM.notificationState.collect { newState ->
                 handleNotificationsState(newState)
             }
         }
 
         lifecycleScope.launch {
-            vm.doWithNotificationState.collect { newState ->
+            notificationVM.doWithNotificationState.collect { newState ->
                 handleDoWithNotificationState(newState)
             }
         }
@@ -78,11 +80,13 @@ class NotificationFriendsFragment : Fragment() {
         when (state) {
             is DoWithNotificationState.Success -> {
                 Toast.makeText(requireContext(), "Заявка отправлена", Toast.LENGTH_SHORT).show()
-                vm.resetDoWithNotificationState()
+                notificationVM.resetDoWithNotificationState()
+                friendsVM.fetchFriends()
             }
             is DoWithNotificationState.Error -> {
                 ToastUtils.showErrorToast(requireContext())
-                vm.resetDoWithNotificationState()
+                notificationVM.resetDoWithNotificationState()
+                friendsVM.fetchFriends()
             }
             else -> Unit
         }

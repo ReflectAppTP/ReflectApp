@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +22,8 @@ import com.example.reflect.presentation.adapter.RecordsListAdapter
 import com.example.reflect.presentation.common.TimeRange
 import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.common.formatter.LineChartXAxisFormatter
+import com.example.reflect.presentation.dialog.SendReportDialog
+import com.example.reflect.presentation.screens.friends.ReportState
 import com.example.reflect.presentation.screens.friends.SendFriendshipRequestState
 import com.example.reflect.presentation.screens.profileFriend.ProfileUserIntent
 import com.example.reflect.presentation.screens.profileFriend.viewmodel.ViewModelUserProfile
@@ -117,6 +120,26 @@ class ProfileFriendFragment : Fragment() {
                 recordAdapter.updateState(GetRecordsState.Success(listOf(vm.recordModel.value!!)))
             }
             fragmentProfileUserContentLastRecordRV.adapter = recordAdapter
+
+            fragmentProfileUserDots.setOnClickListener { view ->
+                val popupMenu = PopupMenu(requireContext(), view)
+                popupMenu.inflate(R.menu.user_menu)
+                popupMenu.setOnMenuItemClickListener {
+                    when(it.itemId) {
+                        R.id.sendReport -> {
+                            val reportDialog = SendReportDialog(vm.id.value, vm.username.value) { id, report ->
+                                lifecycleScope.launch {
+                                    vm.userIntent.send(ProfileUserIntent.SendReport(id, report))
+                                }
+                            }
+                            reportDialog.show(parentFragmentManager, "Report dialog")
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popupMenu.show()
+            }
         }
 
         lifecycleScope.launch {
@@ -128,6 +151,12 @@ class ProfileFriendFragment : Fragment() {
         lifecycleScope.launch {
             vm.sendFriendshipRequestState.collect {
                 handleSendFriendshipRequestState(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.reportState.collect {
+                handleReportState(it)
             }
         }
     }
@@ -250,6 +279,22 @@ class ProfileFriendFragment : Fragment() {
                 }
                 is SendFriendshipRequestState.Idle -> Unit
             }
+        }
+    }
+
+    private fun handleReportState(state: ReportState) {
+        when (state) {
+            is ReportState.Error -> ToastUtils.showErrorToast(requireContext())
+            is ReportState.SuccessUser -> {
+                ToastUtils.showSendReport(requireContext())
+                vm.resetReportState()
+            }
+            is ReportState.SuccessState -> {
+                ToastUtils.showSendReport(requireContext()) .
+
+                vm.resetReportState()
+            }
+            else -> Unit
         }
     }
 

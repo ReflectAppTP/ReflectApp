@@ -16,11 +16,14 @@ import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
 import com.example.reflect.data.dto.friendship.GetFriendsResponseDTO
 import com.example.reflect.data.dto.friendship.NotificationFriendshipDTO
+import com.example.reflect.data.dto.friendship.ReportUserRequestDTO
+import com.example.reflect.data.dto.friendship.ReportUserResponseDTO
+import com.example.reflect.data.dto.friendship.ReportStateRequestDTO
+import com.example.reflect.data.dto.friendship.ReportStateResponseDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticTagResponseDTO
-import com.example.reflect.domain.model.NotificationUserModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -37,6 +40,7 @@ private const val statistic = "api/emotions/statistics"
 private const val ai = "api/ai/chat"
 private const val friends = "api/friends"
 private const val profile = "api/profileReflect"
+private const val reports = "api/reports"
 
 interface RetrofitService {
 
@@ -109,12 +113,18 @@ interface RetrofitService {
     @GET("$friends/requests/pending/")
     suspend fun getFriendshipNotification(): Response<MutableList<NotificationFriendshipDTO>>
 
-    @POST("$friends/friendships/{id}/accept/")
+    @POST("$friends/friendships/accept/{id}/")
     suspend fun acceptFriendship(@Path("id") id: Int): Response<Unit>
 
-    @POST("$friends/friendships/{id}/reject/")
+    @POST("$friends/friendships/reject/{id}/")
     suspend fun rejectFriendship(@Path("id") id: Int): Response<Unit>
 
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
+
+    @POST("$reports/user/")
+    suspend fun reportUser(@Body reportDTO: ReportUserRequestDTO): Response<ReportUserResponseDTO>
+
+    @POST("$reports/state/")
+    suspend fun reportState(@Body reportDTO: ReportStateRequestDTO): Response<ReportStateResponseDTO>
 }

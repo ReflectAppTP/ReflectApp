@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -111,6 +112,8 @@ class MainFragment : Fragment() {
     private fun handleNotifications(state: GetFriendsNotificationsState) {
         if (state is GetFriendsNotificationsState.Success) {
             binding.bottomNavBar.getOrCreateBadge(R.id.friendsFragment).isVisible = state.users.size != 0
+        } else if (state is GetFriendsNotificationsState.EmptyContent) {
+            binding.bottomNavBar.getOrCreateBadge(R.id.friendsFragment).isVisible = false
         }
     }
 }

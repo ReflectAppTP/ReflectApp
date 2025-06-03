@@ -65,6 +65,9 @@ class ViewModelNotificationFriendship @Inject constructor(
         viewModelScope.launch {
             acceptFriendshipUseCase(id).collect { newState ->
                 _doWithNotificationState.value = newState
+                if (newState is DoWithNotificationState.Success) {
+                    getNotifications()
+                }
             }
         }
     }
@@ -74,6 +77,9 @@ class ViewModelNotificationFriendship @Inject constructor(
         viewModelScope.launch {
             rejectFriendshipUseCase(id).collect { newState ->
                 _doWithNotificationState.value = newState
+                if (newState is DoWithNotificationState.Success) {
+                    getNotifications()
+                }
             }
         }
     }

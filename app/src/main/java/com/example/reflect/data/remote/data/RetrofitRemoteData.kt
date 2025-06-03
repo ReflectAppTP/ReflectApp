@@ -3,6 +3,8 @@ package com.example.reflect.data.remote.data
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.UserIdDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
+import com.example.reflect.data.dto.friendship.ReportStateRequestDTO
+import com.example.reflect.data.dto.friendship.ReportUserRequestDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
@@ -41,4 +43,7 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun rejectFriendship(id: Int) = retrofitService.rejectFriendship(id)
 
     suspend fun getUserById(id: Int) = retrofitService.getUserById(id)
+
+    suspend fun reportUser(reportDTO: ReportUserRequestDTO) = retrofitService.reportUser(reportDTO)
+    suspend fun reportState(reportDTO: ReportStateRequestDTO) = retrofitService.reportState(reportDTO)
 }

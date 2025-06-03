@@ -48,6 +48,9 @@
     <string name="contentDescriptionStatePreview4">Превью стрика, когда состояние хорошее</string>
     <string name="contentDescriptionStatePreview5">Превью стрика, когда состояние замечательное</string>
     <string name="contentDescriptionStatePreview6">Превью стрика, когда пользователь не отметил запись состояния</string>
+    <string name="contentDescriptionFragmentProfileUserBackArrow">Иконка воврата на экран друзей</string>
+    <string name="contentDescriptionFragmentProfileUserMoreDots">Иконка дополнительного меню во фрагменте профиля пользователя</string>
+    <string name="contentDescriptionFragmentFriendsToolbarNotificationIconBadge">Бэйдж уведомлений</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -273,8 +276,6 @@
     <string name="fragmentProfileVisibilityHint">Видимость профиля</string>
     <string name="fragmentProfilePasswordConfirmationEditText">Новый пароль</string>
     <string name="fragmentProfilePasswordEditText">Старый пароль</string>
-    <string name="contentDescriptionFragmentProfileUserBackArrow">Иконка воврата на экран друзей</string>
-    <string name="contentDescriptionFragmentProfileUserMoreDots">Иконка дополнительного меню во фрагменте профиля пользователя</string>
     <string name="fragmentProfileUserAddFriendButton">Добавить в друзья</string>
     <string name="fragmentProfileUserAddFriendButtonSendRequest">Заявка отправлена</string>
     <string name="fragmentProfileUserAddFriendButtonFriend">У вас в друзьях</string>
@@ -282,11 +283,20 @@
     <string name="fragmentProfileUserContentLastRecordTitle">Последняя запись за сегодня</string>
     <string name="fragmentProfileUserContentStatisticTitle">Статистика за неделю</string>
     <string name="fragmentProfileUserContentHideTitle">Информация о записях скрыта</string>
-    <string name="contentDescriptionFragmentFriendsToolbarNotificationIconBadge">Бэйдж уведомлений</string>
 
     <string-array name="fragmentProfileSettingsVisibilityItems">
         <item>Никому</item>
         <item>Только друзьям</item>
         <item>Всем</item>
     </string-array>
+
+    <string name="sendReportMenu">Подать жалобу</string>
+    <string name="dialogSendReportTitle">Подача жалобы</string>
+    <string name="dialogSendReportDescription">Выберите причину подачу жалобы на пользователя <b>%1$s</b></string>
+    <string name="dialogSendReportRadioProfileReport">Неприемлемое имя пользователя</string>
+    <string name="dialogSendReportRadioStateReport">Неприемлимое описаное карточки состояния</string>
+    <string name="dialogSendReportButton">Отправить жалобу</string>
+    <string name="dialogSendReportBack">Назад</string>
+    <string name="toastSendReport">Жалоба отправлена</string>
+
 </resources>

@@ -116,6 +116,8 @@ class MainFriendsFragment : Fragment() {
     private fun handleNotifications(state: GetFriendsNotificationsState) {
         if (state is GetFriendsNotificationsState.Success) {
             binding.fragmentFriendsToolbarNotificationIconBadge.isVisible = state.users.size != 0
+        } else if (state is GetFriendsNotificationsState.EmptyContent) {
+            binding.fragmentFriendsToolbarNotificationIconBadge.isVisible = false
         }
     }
 }

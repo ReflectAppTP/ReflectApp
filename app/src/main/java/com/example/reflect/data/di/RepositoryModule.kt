@@ -19,6 +19,8 @@ import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryIm
 import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
 import com.example.reflect.data.repository.friendship.RejectFriendshipRepositoryImpl
+import com.example.reflect.data.repository.friendship.ReportStateRepositoryImpl
+import com.example.reflect.data.repository.friendship.ReportUserRepositoryImpl
 import com.example.reflect.data.repository.friendship.SearchUsersRepositoryImpl
 import com.example.reflect.data.repository.friendship.SendFriendshipRequestRepositoryImpl
 import com.example.reflect.data.repository.friendship.WebSocketFriendshipRepositoryImpl
@@ -46,6 +48,8 @@ import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
 import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
 import com.example.reflect.domain.repository.friendship.RejectFriendshipRepository
+import com.example.reflect.domain.repository.friendship.ReportStateRepository
+import com.example.reflect.domain.repository.friendship.ReportUserRepository
 import com.example.reflect.domain.repository.friendship.SearchUsersRepository
 import com.example.reflect.domain.repository.friendship.SendFriendshipRequestRepository
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
@@ -220,4 +224,16 @@ object RepositoryModule {
     fun provideGetUserById(
         remoteData: RetrofitRemoteData
     ): GetUserByIdRepository = GetUserByIdRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideReportUser(
+        remoteData: RetrofitRemoteData
+    ): ReportUserRepository = ReportUserRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideReportState(
+        remoteData: RetrofitRemoteData
+    ): ReportStateRepository = ReportStateRepositoryImpl(remoteData)
 }
