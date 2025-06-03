@@ -40,6 +40,8 @@ class NotificationFriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
+
+
         with (binding) {
             fragmentNotificationRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             notificationFriendsAdapter = NotificationFriendsAdapter {

@@ -38,6 +38,7 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun sendFriendshipRequest(userIdDTO: UserIdDTO) = retrofitService.sendFriendshipRequest(userIdDTO)
     suspend fun getFriendshipNotification() = retrofitService.getFriendshipNotification()
     suspend fun acceptFriendship(id: Int) = retrofitService.acceptFriendship(id)
+    suspend fun rejectFriendship(id: Int) = retrofitService.rejectFriendship(id)
 
     suspend fun getUserById(id: Int) = retrofitService.getUserById(id)
 }

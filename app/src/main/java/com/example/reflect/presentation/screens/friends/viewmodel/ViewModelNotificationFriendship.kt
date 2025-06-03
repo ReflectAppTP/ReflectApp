@@ -2,8 +2,10 @@ package com.example.reflect.presentation.screens.friends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.repository.friendship.RejectFriendshipRepository
 import com.example.reflect.domain.usecase.friendship.AcceptFriendshipUseCase
 import com.example.reflect.domain.usecase.friendship.GetFriendsNotificationUseCase
+import com.example.reflect.domain.usecase.friendship.RejectFriendshipUseCase
 import com.example.reflect.domain.usecase.friendship.WebSocketFriendshipUseCase
 import com.example.reflect.presentation.screens.friends.DoWithNotificationState
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
@@ -20,6 +22,7 @@ class ViewModelNotificationFriendship @Inject constructor(
     private val webSocketFriendshipUseCase: WebSocketFriendshipUseCase,
     private val getFriendsNotificationUseCase: GetFriendsNotificationUseCase,
     private val acceptFriendshipUseCase: AcceptFriendshipUseCase,
+    private val rejectFriendshipUseCase: RejectFriendshipUseCase,
 ): ViewModel() {
     val notifications = webSocketFriendshipUseCase().stateIn(
         scope = viewModelScope,
@@ -67,7 +70,12 @@ class ViewModelNotificationFriendship @Inject constructor(
     }
 
     fun rejectFriendship(id: Int) {
-
+        _doWithNotificationState.value = DoWithNotificationState.Idle
+        viewModelScope.launch {
+            rejectFriendshipUseCase(id).collect { newState ->
+                _doWithNotificationState.value = newState
+            }
+        }
     }
 
     fun resetDoWithNotificationState() {

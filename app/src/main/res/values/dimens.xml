@@ -290,5 +290,7 @@
     <dimen name="fragmentProfileUserContentMarginTop_7dp">7dp</dimen>
     <dimen name="fragmentProfileUserContentStatisticLineChartMarginHorizontal_23dp">23dp</dimen>
     <dimen name="fragmentProfileUserContentStatisticLineChartMarginTop_15dp">15dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeMargin_2dp">2dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeSize_4dp">4dp</dimen>
 
 </resources>

@@ -18,6 +18,7 @@ import com.example.reflect.data.repository.friendship.AcceptFriendshipRepository
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
+import com.example.reflect.data.repository.friendship.RejectFriendshipRepositoryImpl
 import com.example.reflect.data.repository.friendship.SearchUsersRepositoryImpl
 import com.example.reflect.data.repository.friendship.SendFriendshipRequestRepositoryImpl
 import com.example.reflect.data.repository.friendship.WebSocketFriendshipRepositoryImpl
@@ -44,6 +45,7 @@ import com.example.reflect.domain.repository.friendship.AcceptFriendshipReposito
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
 import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
+import com.example.reflect.domain.repository.friendship.RejectFriendshipRepository
 import com.example.reflect.domain.repository.friendship.SearchUsersRepository
 import com.example.reflect.domain.repository.friendship.SendFriendshipRequestRepository
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
@@ -206,6 +208,12 @@ object RepositoryModule {
     fun provideAcceptFriendship(
         remoteData: RetrofitRemoteData
     ): AcceptFriendshipRepository = AcceptFriendshipRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideRejectFriendship(
+        remoteData: RetrofitRemoteData
+    ): RejectFriendshipRepository = RejectFriendshipRepositoryImpl(remoteData)
 
     @Provides
     @Singleton

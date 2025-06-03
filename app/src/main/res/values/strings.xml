@@ -282,6 +282,7 @@
     <string name="fragmentProfileUserContentLastRecordTitle">Последняя запись за сегодня</string>
     <string name="fragmentProfileUserContentStatisticTitle">Статистика за неделю</string>
     <string name="fragmentProfileUserContentHideTitle">Информация о записях скрыта</string>
+    <string name="contentDescriptionFragmentFriendsToolbarNotificationIconBadge">Бэйдж уведомлений</string>
 
     <string-array name="fragmentProfileSettingsVisibilityItems">
         <item>Никому</item>

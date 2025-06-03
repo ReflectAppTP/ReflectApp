@@ -112,6 +112,9 @@ interface RetrofitService {
     @POST("$friends/friendships/{id}/accept/")
     suspend fun acceptFriendship(@Path("id") id: Int): Response<Unit>
 
+    @POST("$friends/friendships/{id}/reject/")
+    suspend fun rejectFriendship(@Path("id") id: Int): Response<Unit>
+
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
 }
