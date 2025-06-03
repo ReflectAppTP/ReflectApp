@@ -2,8 +2,10 @@ package com.example.reflect.presentation.screens.friends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.usecase.friendship.AcceptFriendshipUseCase
 import com.example.reflect.domain.usecase.friendship.GetFriendsNotificationUseCase
 import com.example.reflect.domain.usecase.friendship.WebSocketFriendshipUseCase
+import com.example.reflect.presentation.screens.friends.DoWithNotificationState
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +19,7 @@ import javax.inject.Inject
 class ViewModelNotificationFriendship @Inject constructor(
     private val webSocketFriendshipUseCase: WebSocketFriendshipUseCase,
     private val getFriendsNotificationUseCase: GetFriendsNotificationUseCase,
+    private val acceptFriendshipUseCase: AcceptFriendshipUseCase,
 ): ViewModel() {
     val notifications = webSocketFriendshipUseCase().stateIn(
         scope = viewModelScope,
@@ -27,8 +30,12 @@ class ViewModelNotificationFriendship @Inject constructor(
     private var _notificationState = MutableStateFlow<GetFriendsNotificationsState>(GetFriendsNotificationsState.EmptyContent)
     val notificationState: StateFlow<GetFriendsNotificationsState> = _notificationState
 
+    private var _doWithNotificationState = MutableStateFlow<DoWithNotificationState>(DoWithNotificationState.Idle)
+    val doWithNotificationState: StateFlow<DoWithNotificationState> = _doWithNotificationState
+
     init {
         getNotifications()
+        getNotificationsFromWebSocket()
     }
 
     private fun getNotifications() {
@@ -38,13 +45,33 @@ class ViewModelNotificationFriendship @Inject constructor(
                 _notificationState.value = it
             }
         }
-//        viewModelScope.launch {
-//            notifications.collect {
-//                if (it != null) {
-//                    _notificationState.value
-//                }
-//            }
-//        }
+    }
+
+    private fun getNotificationsFromWebSocket() {
+        viewModelScope.launch {
+            notifications.collect {
+                if (it != null) {
+                    getNotifications()
+                }
+            }
+        }
+    }
+
+    fun acceptFriendship(id: Int) {
+        _doWithNotificationState.value = DoWithNotificationState.Idle
+        viewModelScope.launch {
+            acceptFriendshipUseCase(id).collect { newState ->
+                _doWithNotificationState.value = newState
+            }
+        }
+    }
+
+    fun rejectFriendship(id: Int) {
+
+    }
+
+    fun resetDoWithNotificationState() {
+        _doWithNotificationState.value = DoWithNotificationState.Idle
     }
 
     override fun onCleared() {

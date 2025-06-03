@@ -2,10 +2,8 @@ package com.example.reflect.presentation.screens.friends.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.reflect.domain.model.UserModel
 import com.example.reflect.domain.usecase.friendship.GetFriendsListUseCase
 import com.example.reflect.domain.usecase.friendship.GetUserByIdUseCase
-import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.GetFriendsState
 import com.example.reflect.presentation.screens.friends.fragment.FriendsScreen
 import com.example.reflect.presentation.screens.profile.GetUserByIdState
@@ -53,14 +51,6 @@ class ViewModelFriends @Inject constructor(
                 _getUserByIdState.value = newState
             }
         }
-    }
-
-    fun acceptFriendRequest(id: Int) {
-
-    }
-
-    fun declineFriendRequest(id: Int) {
-
     }
 
     fun moveToScreen(screen: FriendsScreen) {

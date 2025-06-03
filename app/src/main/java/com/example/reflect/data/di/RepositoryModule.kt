@@ -14,6 +14,7 @@ import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
+import com.example.reflect.data.repository.friendship.AcceptFriendshipRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
@@ -39,6 +40,7 @@ import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
+import com.example.reflect.domain.repository.friendship.AcceptFriendshipRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
 import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
@@ -198,6 +200,12 @@ object RepositoryModule {
     fun provideGetFriendshipNotification(
         remoteData: RetrofitRemoteData
     ): GetFriendsNotificationRepository = GetFriendsNotificationRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideAcceptFriendship(
+        remoteData: RetrofitRemoteData
+    ): AcceptFriendshipRepository = AcceptFriendshipRepositoryImpl(remoteData)
 
     @Provides
     @Singleton

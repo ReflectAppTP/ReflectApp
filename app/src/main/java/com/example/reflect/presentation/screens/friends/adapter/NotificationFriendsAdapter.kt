@@ -81,7 +81,7 @@ class NotificationFriendsAdapter(
     fun updateState(state: GetFriendsNotificationsState) {
         val states = when (state) {
             is GetFriendsNotificationsState.Success -> state.users.map {
-                GetFriendsNotificationsState.Success(listOf(it))
+                GetFriendsNotificationsState.Success(mutableListOf(it))
             }
             else -> listOf(state)
         }

@@ -107,7 +107,10 @@ interface RetrofitService {
     suspend fun sendFriendshipRequest(@Body userIdDTO: UserIdDTO): Response<SendFriendshipRequestDTO>
 
     @GET("$friends/requests/pending/")
-    suspend fun getFriendshipNotification(): Response<List<NotificationFriendshipDTO>>
+    suspend fun getFriendshipNotification(): Response<MutableList<NotificationFriendshipDTO>>
+
+    @POST("$friends/friendships/{id}/accept/")
+    suspend fun acceptFriendship(@Path("id") id: Int): Response<Unit>
 
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>

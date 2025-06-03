@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.databinding.FragmentNotificationFriendsBinding
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.dialog.AcceptFriendshipDialog
+import com.example.reflect.presentation.screens.friends.DoWithNotificationState
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.adapter.NotificationFriendsAdapter
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
@@ -40,14 +40,6 @@ class NotificationFriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.notifications.collect {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
         with (binding) {
             fragmentNotificationRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             notificationFriendsAdapter = NotificationFriendsAdapter {
@@ -63,6 +55,12 @@ class NotificationFriendsFragment : Fragment() {
                 handleNotificationsState(newState)
             }
         }
+
+        lifecycleScope.launch {
+            vm.doWithNotificationState.collect { newState ->
+                handleDoWithNotificationState(newState)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -72,5 +70,19 @@ class NotificationFriendsFragment : Fragment() {
 
     private fun handleNotificationsState(state: GetFriendsNotificationsState) {
         notificationFriendsAdapter.updateState(state)
+    }
+
+    private fun handleDoWithNotificationState(state: DoWithNotificationState) {
+        when (state) {
+            is DoWithNotificationState.Success -> {
+                Toast.makeText(requireContext(), "Заявка отправлена", Toast.LENGTH_SHORT).show()
+                vm.resetDoWithNotificationState()
+            }
+            is DoWithNotificationState.Error -> {
+                ToastUtils.showErrorToast(requireContext())
+                vm.resetDoWithNotificationState()
+            }
+            else -> Unit
+        }
     }
 }

@@ -13,12 +13,12 @@ import javax.inject.Inject
 class GetFriendsNotificationRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
 ): GetFriendsNotificationRepository {
-    override suspend fun getFriendshipNotification(): List<NotificationFriendshipModel> {
+    override suspend fun getFriendshipNotification(): MutableList<NotificationFriendshipModel> {
         val response = remoteData.getFriendshipNotification()
         if (response.isSuccessful) {
             Log.d("Raw response", " ${response.raw()}")
             Log.d("Response body", " ${response.body()}")
-            return response.body()!!.toDomain()
+            return response.body()!!.toDomain().toMutableList()
         } else {
             throw RetrofitException(response.code(), response.message(), response.errorBody())
         }
