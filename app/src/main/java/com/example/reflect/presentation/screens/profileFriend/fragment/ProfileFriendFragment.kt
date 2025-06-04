@@ -290,8 +290,7 @@ class ProfileFriendFragment : Fragment() {
                 vm.resetReportState()
             }
             is ReportState.SuccessState -> {
-                ToastUtils.showSendReport(requireContext()) .
-
+                ToastUtils.showSendReport(requireContext())
                 vm.resetReportState()
             }
             else -> Unit

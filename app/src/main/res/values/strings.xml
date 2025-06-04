@@ -299,4 +299,13 @@
     <string name="dialogSendReportBack">Назад</string>
     <string name="toastSendReport">Жалоба отправлена</string>
 
+
+    <string name="dialogBewareAITitle"><b>Важная информация</b></string>
+    <string name="dialogBewareAIDescriptionTitle">ИИ - не замена психологу</string>
+    <string name="dialogBewareAIDescriptionDeluxe">Он может давать общие советы, но не обладает профессиональным образованием, опытом и не учитывает вашу уникальную ситуацию. Его ответы — лишь информация, а не диагноз или терапия.</string>
+    <string name="dialogBewareAIDescriptionFirstL">- Всегда консультируйтесь с реальным специалистом перед важными решениями о психическом здоровье.</string>
+    <string name="dialogBewareAIDescriptionSecondL">- Не полагайтесь слепо на ИИ — он не чувствует, не сопереживает и, также как и администрация, не несёт ответственности за последствия.</string>
+    <string name="dialogBewareAIDescriptionFooter"><b>Ваше благополучие важнее всего!</b></string>
+    <string name="dialogBewareAIButton">ОК</string>
+
 </resources>

@@ -11,9 +11,9 @@ import javax.inject.Inject
 class ReportStateRepositoryImpl @Inject constructor(
     private val remoteData: RetrofitRemoteData
 ) : ReportStateRepository {
-    override suspend fun reportState(reportedUser: Int, reason: String): ReportStateModel {
+    override suspend fun reportState(state: Int, reason: String): ReportStateModel {
         val response = remoteData.reportState(
-            ReportStateRequestDTO(reportedUser, reason)
+            ReportStateRequestDTO(state, reason)
         )
         if (response.isSuccessful) {
             return response.body()!!.toDomain()

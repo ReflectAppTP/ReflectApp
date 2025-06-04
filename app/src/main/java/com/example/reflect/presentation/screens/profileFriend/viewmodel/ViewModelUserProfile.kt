@@ -87,7 +87,7 @@ class ViewModelUserProfile @Inject constructor(
         _reportState.value = ReportState.Loading
         viewModelScope.launch {
             when (report) {
-                "Неприемлимое описаное карточки состояния" -> {
+                "Неприемлимое описание карточки состояния" -> {
                     reportStateUseCase(id, report).collect {
                         _reportState.value = it
                     }

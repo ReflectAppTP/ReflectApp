@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
+import com.example.reflect.common.prefs.AiPrefs
 import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
 import com.example.reflect.presentation.common.ToastUtils
@@ -86,4 +87,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        AiPrefs.setAgree(this, false)
+        super.onStop()
+    }
 }

@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -22,8 +23,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
+import com.example.reflect.common.prefs.AiPrefs
 import com.example.reflect.databinding.FragmentAiBinding
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.dialog.BewareAIDialog
 import com.example.reflect.presentation.screens.ai.AiIntent
 import com.example.reflect.presentation.screens.ai.GetAIMessageState
 import com.example.reflect.presentation.screens.ai.ResetAIContextState
@@ -71,6 +74,10 @@ class AiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!AiPrefs.isAgreed(requireContext())) {
+            BewareAIDialog().show(parentFragmentManager, "Beware ai dialog")
+        }
 
         with (binding) {
             if (vm.messagesList.value.isEmpty()) {
