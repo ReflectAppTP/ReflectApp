@@ -14,6 +14,7 @@ import com.example.reflect.data.repository.state.GetSecondTagsRepositoryImpl
 import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
+import com.example.reflect.data.repository.auth.RegistrationFromGuestRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
 import com.example.reflect.data.repository.friendship.AcceptFriendshipRepositoryImpl
 import com.example.reflect.data.repository.friendship.ChangeLoginRepositoryImpl
@@ -49,6 +50,7 @@ import com.example.reflect.domain.repository.state.GetSecondTagsRepository
 import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
+import com.example.reflect.domain.repository.auth.RegistrationFromGuestRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
 import com.example.reflect.domain.repository.friendship.AcceptFriendshipRepository
 import com.example.reflect.domain.repository.friendship.ChangeLoginRepository
@@ -86,6 +88,12 @@ object RepositoryModule {
     fun provideRegistrationRepository(
         remoteData: RetrofitRemoteData
     ): RegistrationRepository = RegistrationRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideRegstrationFromGuest(
+        remoteData: RetrofitRemoteData
+    ): RegistrationFromGuestRepository = RegistrationFromGuestRepositoryImpl(remoteData)
 
     @Provides
     @Singleton

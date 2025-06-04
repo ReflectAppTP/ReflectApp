@@ -319,5 +319,6 @@
     <string name="dialogDeleteUserButton">Удалить</string>
     <string name="toastDeleteUser">Пользователь успешно удалён</string>
     <string name="fragmentFriendsIsGuest">Авторизуйтесь для доступа к функциям социального взаимодействия</string>
+    <string name="fragmentProfileFeedback">Почта для обратной связи\n reflect.app.tp@gmail.com</string>
 
 </resources>

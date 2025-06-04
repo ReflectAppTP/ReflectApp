@@ -16,6 +16,7 @@ import javax.inject.Inject
 
 class RetrofitRemoteData @Inject constructor(private val retrofitService: RetrofitService){
     suspend fun register(registrationRequest: RegistrationRequestDTO) = retrofitService.register(registrationRequest)
+    suspend fun registerFromGuest(registrationRequest: RegistrationRequestDTO) = retrofitService.registerFromGuest(registrationRequest)
     suspend fun login(loginRequest: LoginRequestDTO) = retrofitService.login(loginRequest)
     suspend fun loginLikeGuest() = retrofitService.loginLikeGuest()
     suspend fun getUser() = retrofitService.getProfile()

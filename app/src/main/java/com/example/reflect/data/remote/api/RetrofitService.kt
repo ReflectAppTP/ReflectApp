@@ -61,6 +61,9 @@ interface RetrofitService {
     @POST("$authReflect/guest-login/")
     suspend fun loginLikeGuest(): Response<GuestDTO>
 
+    @POST("$authReflect/register-from-guest/")
+    suspend fun registerFromGuest(@Body registrationRequest: RegistrationRequestDTO): Response<Unit>
+
     @POST("$token/refresh/")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>
 
