@@ -1,3 +1,324 @@
 <resources>
-    <string name="app_name">Reflecet</string>
+    <string name="app_name">Reflect</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="records">Записи</string>
+    <string name="statistic">Статистика</string>
+    <string name="friends">Друзья</string>
+    <string name="profile">Профиль</string>
+
+    <!-- Toolbar -->
+    <string name="toolbarRecordsTitle">Записи</string>
+    <string name="toolbarStatisticTitle">Статистика</string>
+    <string name="toolbarFriendsTitle">Друзья</string>
+    <string name="toolbarSearchFriendsTitle">Найти друга</string>
+    <string name="toolbarNotificationFriendsTitle">Уведомления</string>
+
+    <!-- ContentDescriptions -->
+    <string name="contentDescriptionToolbarStreakIcon">Иконка стрика</string>
+    <string name="contentDescriptionToolbarSearchIcon">Иконка поиска</string>
+    <string name="contentDescriptionToolbarSettingsIcon">Иконка настроек</string>
+    <string name="contentDescriptionAddStateBackArrow">Иконка закрытия окна добавления состояния</string>
+    <string name="contentDescriptionAddStateImage">Картинка с выбранным состоянием</string>
+    <string name="contentDescriptionFragmentProfileIcon">Пустая иконка профиля</string>
+    <string name="contentDescriptionFragmentProfileIconChange">Иконка редактирования иконки профиля</string>
+    <string name="contentDescriptionRecordsFragmentChevronLeft">Кнопка выбора даты на день назад</string>
+    <string name="contentDescriptionRecordsFragmentChevronRight">Кнопка выбора даты на день вперёд</string>
+    <string name="contentDescriptionCardStateImage">Иконка, показывающая состояние</string>
+    <string name="contentDescriptionCardStateChangeDots">Иконка, при нажатии показывающая выпадающее меню</string>
+    <string name="contentDescriptionFragmentStatisticExportDataIcon">Иконка для экспорта статистики в excel</string>
+    <string name="contentDescriptionAIFragmentBackArrow">Иконка возврата на главный экран</string>
+    <string name="contentDescriptionAIFragmentExpandMenu">Кнопка раскрытия и скрытия запросов-помощников</string>
+    <string name="contentDescriptionAIFragmentButtonSend">Кнопки отправки запросы к ИИ</string>
+    <string name="contentDescriptionFragmentToolbarNotificationIcon">Иконка уведомлений</string>
+    <string name="contentDescriptionFragmentToolbarBackIcon">Иконка возврата на предыдущий экран</string>
+    <string name="contentDescriptionCardFriendPremiumIcon">Иконка премиума у пользователя</string>
+    <string name="contentDescriptionFragmentPremiumToolbarBackArrow">Иконка возврата на экран профиля</string>
+    <string name="contentDescriptionFragmentPremiumCatImage">Картинка котика Купите премиум пж</string>
+    <string name="contentDescriptionPopupStreak">Картинка котика на стрике</string>
+    <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
+    <string name="contentDescriptionFragmentWidgetBackArrow">Иконка возврата на экран профиля</string>
+    <string name="contentDescriptionStreakPreview1">Превью стрика, когда записей нет</string>
+    <string name="contentDescriptionStreakPreview2">Превью стрика, когда записей меньше 7</string>
+    <string name="contentDescriptionStreakPreview3">Превью стрика, когда записей больше 7</string>
+    <string name="contentDescriptionStatePreview1">Превью стрика, когда состояние ужасное</string>
+    <string name="contentDescriptionStatePreview2">Превью стрика, когда состояние плохое</string>
+    <string name="contentDescriptionStatePreview3">Превью стрика, когда состояние нормальное</string>
+    <string name="contentDescriptionStatePreview4">Превью стрика, когда состояние хорошее</string>
+    <string name="contentDescriptionStatePreview5">Превью стрика, когда состояние замечательное</string>
+    <string name="contentDescriptionStatePreview6">Превью стрика, когда пользователь не отметил запись состояния</string>
+    <string name="contentDescriptionFragmentProfileUserBackArrow">Иконка воврата на экран друзей</string>
+    <string name="contentDescriptionFragmentProfileUserMoreDots">Иконка дополнительного меню во фрагменте профиля пользователя</string>
+    <string name="contentDescriptionFragmentFriendsToolbarNotificationIconBadge">Бэйдж уведомлений</string>
+
+    <!-- Login Fragment    -->
+    <string name="loginTitle">Вход</string>
+    <string name="loginEmailHint">Почта</string>
+    <string name="loginPasswordHint">Пароль</string>
+    <string name="loginButton">Войти</string>
+    <string name="loginOr">или</string>
+    <string name="loginLikeGuest">Войти как гость</string>
+    <string name="loginRegistration">Регистрация</string>
+    <string name="loginForgotPassword">Забыли пароль?</string>
+
+    <!-- Registration Fragment -->
+    <string name="registrationIconBackContentDescription">Иконка возврата на экран авторизации</string>
+    <string name="registrationIcon">Регистрация</string>
+    <string name="registrationLoginHint">Логин</string>
+    <string name="registrationEmailHint">Почта</string>
+    <string name="registrationPasswordHint">Пароль</string>
+    <string name="registrationPasswordConfirmationHint">Повторите пароль</string>
+    <string name="registrationButton">Зарегистрироваться</string>
+    <string name="registrationOr">или</string>
+
+    <!-- Error messages -->
+    <string name="emptyFieldsErrorMessage">Заполните все поля</string>
+    <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+    <string name="equalityFieldsErrorMessage">Пароли не должны совпадать</string>
+    <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
+    <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
+    <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
+
+    <!-- PasswordChange -->
+    <string name="resetPasswordTitle">Восстановить пароль</string>
+    <string name="resetPasswordEmailTitle">Введите почту, на которую придёт код для восстановления пароля</string>
+    <string name="sendCodeButtonText">Отправить код</string>
+    <string name="resetPasswordCodeTitle">На почту %1$s отправлен код подтверждения</string>
+    <string name="resetPasswordSendCodeAgain">Отправить код через %1$s</string>
+    <string name="resetPasswordSendCodeAgainWithoutTimer">Отправить код повторно</string>
+    <string name="resetPasswordSendCodeButtonText">Подтвердить</string>
+    <string name="resetPasswordNewPasswordConfirmationHint">Подтвердите пароль</string>
+    <string name="newPasswordHint">Новый пароль</string>
+
+    <string name="makeNewPassword">Придумайте новый пароль для входа в аккаунт</string>
+
+    <!-- ConsentDialog -->
+    <string name="agreementDialogTitle">Согласие на обработку персональных данных</string>
+    <string name="agreementDialogDescription">Подтверждая, вы даете согласие на обработку персональных данных</string>
+    <string name="agreementButtonText">Согласен/а</string>
+    <string name="disagreementButtonText">Не согласен/а</string>
+
+    <!-- AddState -->
+    <string name="addStateHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateBadMood">Ужасно</string>
+    <string name="addStateGoodMood">Замечательно</string>
+    <string name="addStateClarifyButtonText">Уточнить</string>
+    <string name="addStateSaveWithoutClarifyButtonText">Сохранить без подробностей</string>
+    <string name="addStateFirstClarificationHowDoYouFeel">Что тебя заставляет так себя чувствовать?</string>
+    <string name="addStateContinueButtonText">Продолжить</string>
+    <string name="addStateSecondClarificationHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateThirdClarificationHowDoYouFeel">Как ты себя чувствуешь?</string>
+    <string name="addStateThirdClarificationEditTextHint">Добавить заметку…</string>
+    <string name="addStateSaveButtonText">Сохранить</string>
+
+    <!-- Records -->
+    <string name="emptyRecordsText">Записей нет</string>
+
+    <!-- ProfileFragment -->
+    <string name="fragmentProfilePremiumButton">Премиум</string>
+    <string name="fragmentProfileLoginButton">Войти в аккаунт</string>
+    <string name="fragmentProfileRegistrationButton">Зарегистрироваться</string>
+    <string name="fragmentProfileLogoutButton">Выйти из аккаунта</string>
+    <string name="fragmentProfileWidgetButton">Виджеты</string>
+
+    <!-- LogoutDialog -->
+    <string name="dialogLogoutTitle">Подтверждение выхода</string>
+    <string name="dialogLogoutMiddleText">Вы действительно хотите выйти? Все несохраненные данные будут потеряны.</string>
+    <string name="dialogLogoutBackButton">Назад</string>
+    <string name="dialogLogoutLogoutButton">Выйти</string>
+
+    <!-- StateCard -->
+    <string name="cardStateMood">%1$s настроение</string>
+    <string name="cardMenuEdit">Редактировать</string>
+    <string name="cardMenuDelete">Удалить</string>
+    <string name="awfulState">Ужасное</string>
+    <string name="badState">Плохое</string>
+    <string name="normalState">Нормальное</string>
+    <string name="goodState">Хорошее</string>
+    <string name="excellentState">Отличное</string>
+
+    <!-- ToastMessages -->
+    <string name="addStateToastMessage">Запись успешно создана</string>
+    <string name="welcomeToastMessage">Добро пожаловать!</string>
+    <string name="successfulRegistrationToastMessage">Регистрация прошла успешно</string>
+    <string name="loadingToastMessage">Пожалуйста, подождите</string>
+    <string name="editStateToastMessage">Запись успешно обновлена</string>
+    <string name="deleteStateToastMessage">Запись успешно удалена</string>
+    <string name="errorToastMessage">Произошла ошибка</string>
+    <string name="toastErrorConnectionMessage">Ошибка подключения к интернету</string>
+
+    <!-- DateUtils -->
+    <string name="selectDate">Выберите дату</string>
+
+    <!-- StatisticFragment -->
+    <string name="cardStatisticTagTV">%1$d раз(а)</string>
+    <string-array name="fragmentStatisticWeekArray">
+        <item>пн</item>
+        <item>вт</item>
+        <item>ср</item>
+        <item>чт</item>
+        <item>пт</item>
+        <item>сб</item>
+        <item>вс</item>
+    </string-array>
+    <string name="fragmentStatisticToggleGroupWeek">Неделя</string>
+    <string name="fragmentStatisticToggleGroupMonth">Месяц</string>
+    <string name="fragmentStatisticToggleGroupYear">Год</string>
+    <string name="fragmentStatisticFirstTagsTitle">Чаще всего вы испытывали эмоции:</string>
+    <string name="fragmentStatisticStateFrequency">Частота настроения</string>
+    <string name="fragmentStatisticEmptyChartData">Пока что данных недостаточно</string>
+    <string name="fragmentStatisticSecondTagsTitle">Преимущественно, причинами ваших эмоций были:</string>
+
+    <!-- Export Statistic (to excel file and to Intent) -->
+    <string name="exportStatisticErrorMessage">Невозможно экспортировать статистику</string>
+    <string name="exportStatisticForAWeek">Статистика за неделю</string>
+    <string name="exportStatisticForAMonth">Статистика за месяц</string>
+    <string name="exportStatisticForAYear">Статистика за год</string>
+    <string name="exportStatisticLineChartTitle">Статистика</string>
+    <string name="exportStatisticLineChartHeaderData">Дата</string>
+    <string name="exportStatisticLineChartHeadreAverageValue">Среднее значение</string>
+    <string name="exportStatisticPieChartTitle">Частота настроения</string>
+    <string name="exportStatisticPieChartHeaderFreq">Частота</string>
+    <string name="exportStatisticPieChartHeaderMood">Настроение</string>
+    <string name="exportStatisticEmotionalTagTitle">Статистика по эмоциональным тэгам</string>
+    <string name="exportStatisticEmotionalTagHeaderName">Название тэга</string>
+    <string name="exportStatisticEmotionalTagHeaderEmoji">Эмодзи</string>
+    <string name="exportStatisticEmotionalTagHeaderFreq">Частота</string>
+    <string name="exportStatisticTagTitle">Статистика по тэгам</string>
+    <string name="exportStatisticTagHeaderName">Название тэга</string>
+    <string name="exportStatisticTagHeaderEmoji">Эмодзи</string>
+    <string name="exportStatisticTagHeaderFreq">Частота</string>
+    <string name="exportStatisticExportMessageWeek">Моя недельная статистика настроения</string>
+    <string name="exportStatisticExportMessageMonth">Моя месячная статистика настроения</string>
+    <string name="exportStatisticExportMessageYear">Моя годовая статистика настроения</string>
+    <string name="exportStatisticExportSubject">Статистика за период в приложении Reflect</string>
+    <string name="exportStatisticExportIntentTimeWeek">недельной</string>
+    <string name="exportStatisticExportIntentTimeMonth">месячной</string>
+    <string name="exportStatisticExportIntentTimeYear">годовой</string>
+    <string name="exportStatisticExportIntentTitle">Поделиться %1$s статистикой</string>
+
+    <!-- AI Fragment -->
+    <string name="aiFragmentToolbarTitle">Ваш чат с AI</string>
+    <string name="aiFragmentEmptyMessageText">Поделитесь своими чувствами</string>
+    <string name="aiFragmentEditTextHint">Задайте вопрос</string>
+    <string name="aiFragmentIconButtonCleanContext">Очистить контекст</string>
+    <string name="aiFragmentEmptyMessagesText">Здесь пока пусто</string>
+    <string name="toastMessageResetContextAI">Контекст очищен</string>
+
+    <!-- Friends Fragments -->
+    <string name="emptyFriendsList">Друзей пока что нет, но вы всегда можете их найти</string>
+    <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
+    <string name="emptyFriendsNotificationText">Уведомлений нет</string>
+    <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
+    <string name="fragmentSearchFriendsEditTextHint">Введите логин пользователя</string>
+
+    <!-- Dialog Accept FriendShip -->
+    <string name="dialogAcceptFriendshipTitle">Этот пользователь хочет добавить вас в друзья</string>
+    <string name="dialogAcceptFriendshipBody">Хотите добавить пользователя в друзья?</string>
+    <string name="dialogAcceptFriendshipAcceptButton">Добавить</string>
+    <string name="dialogAcceptFriendshipDeclineButton">Отклонить</string>
+
+    <!-- WorkManager -->
+    <string name="notificationWorkerTitle">Как вы себя чувствуете?</string>
+    <string name="notificationWorkerBody">Отметьте своё эмоциональное состояние</string>
+
+
+    <!-- Dialog Buy Premium -->
+    <string name="dialogBuyPremiumTitle">Подтверждение покупки</string>
+    <string name="dialogBuyMonthPremiumBody">Чтобы оформить <b><u>месячную</u></b> подписку на премиум, нажмите кнопку продолжить.</string>
+    <string name="dialogBuyYearPremiumBody">Чтобы оформить <b><u>годовую</u></b> подписку на премиум, нажмите кнопку продолжить.</string>
+    <string name="dialogBuyPremiumNext">Продолжить</string>
+    <string name="dialogBuyPremiumBack">Отмена</string>
+
+
+    <!-- Fragment Premium -->
+    <string name="fragmentPremiumBenefitsCardFirstTitle"><b>1. <u>Безлимитный чат с AI ассистентом</u></b></string>
+    <string name="fragmentPremiumBenefitsCardSecondTitle"><b>2. <u>Расширенный доступ к разделу \"Статистика\"</u></b></string>
+    <string name="fragmentPremiumBenefitsThirdTitle"><b>3. <u>Дополнительный виджет</u></b></string>
+    <string name="fragmentPremiumToolbarTitle">Премиум</string>
+    <string name="fragmentPremiumTariffTitle">Тарифы</string>
+    <string name="fragmentPremiumYearPriceCardTitle">Ежегодная</string>
+    <string name="fragmentPremiumYearPriceCardFullPrice">1428р.</string>
+    <string name="fragmentPremiumYearPriceCardMonthPrice">119р./месяц</string>
+    <string name="fragmentPremiumMonthPriceCardTitle">Ежемесячная</string>
+    <string name="fragmentPremiumMonthPriceCardMonthPrice">149р./месяц</string>
+    <string name="fragmentPremiumBenefitsTitle">Преимущества подписки</string>
+    <string name="fragmentPremiumBenefitsCardFirstDescription">Ещё больше разговоров с виртуальным помощником.</string>
+    <string name="fragmentPremiumBenefitsCardSecondDescription">Три дополнительные диаграммы для отслеживания вашего настроения и вещей, которые чаще всего вызывают у вас чувства.</string>
+    <string name="fragmentPremiumBenefitsCardThirdDescription">Чето там бебебе</string>
+    <string name="fragmentPremiumStatusTitle">У вас уже оформлена премиум подписка. Следующее списание %1$s</string>
+    <string name="fragmentPremiumCancelSub">Отменить подписку</string>
+
+    <!-- Cancel premium dialog -->
+    <string name="dialogCancelPremiumAccept">Подтвердить</string>
+    <string name="dialogCancelPremiumAcceptBody">Вы уверены, что хотите отменить подписку на премиум? Все эксклюзивные функции останутся до окончания срока действия.</string>
+    <string name="dialogCancelPremiumAcceptTitle">Подтверждение отмены подписки</string>
+
+    <!-- Popup window -->
+    <string name="popupStreakDescription">Ежедневный стрик</string>
+
+    <!-- Widgets -->
+    <string name="widgetStreakDescription">Стрик пользователя</string>
+    <string name="widgetStateDescription">Настроение за сегодня</string>
+    <string name="widgetStateTitle">Настроение</string>
+    <string name="widgetToastMessage">Виджет успешно добавлен</string>
+
+    <!-- Widget fragment -->
+    <string name="fragmentWidgetToolbarTitle">Виджеты</string>
+    <string name="fragmentWidgetStreakButton">Стрик пользователя</string>
+    <string name="fragmentWidgetStateButton">Эмоциональное состояние</string>
+
+    <!-- Add widget dialog -->
+    <string name="dialogAddWidgetTitle">Подтверждение выбора</string>
+    <string name="dialogAddWidgetDescription">Добавить этот виджет на экран домой?</string>
+    <string name="fragmentProfileSaveChanges">Сохранить изменения</string>
+    <string name="fragmentProfileDelete">Удалить аккаунт</string>
+    <string name="fragmentProfileVisibilityHint">Видимость профиля</string>
+    <string name="fragmentProfilePasswordConfirmationEditText">Новый пароль</string>
+    <string name="fragmentProfilePasswordEditText">Старый пароль</string>
+    <string name="fragmentProfileUserAddFriendButton">Добавить в друзья</string>
+    <string name="fragmentProfileUserAddFriendButtonSendRequest">Заявка отправлена</string>
+    <string name="fragmentProfileUserAddFriendButtonFriend">У вас в друзьях</string>
+    <string name="fragmentProfileUserAddFriendButtonBanned">Пользователь заблокирован</string>
+    <string name="fragmentProfileUserContentLastRecordTitle">Последняя запись за сегодня</string>
+    <string name="fragmentProfileUserContentStatisticTitle">Статистика за неделю</string>
+    <string name="fragmentProfileUserContentHideTitle">Информация о записях скрыта</string>
+
+    <string-array name="fragmentProfileSettingsVisibilityItems">
+        <item>Никому</item>
+        <item>Только друзьям</item>
+        <item>Всем</item>
+    </string-array>
+
+    <string name="sendReportMenu">Подать жалобу</string>
+    <string name="dialogSendReportTitle">Подача жалобы</string>
+    <string name="dialogSendReportDescription">Выберите причину подачу жалобы на пользователя <b>%1$s</b></string>
+    <string name="dialogSendReportRadioProfileReport">Неприемлемое имя пользователя</string>
+    <string name="dialogSendReportRadioStateReport">Неприемлимое описаное карточки состояния</string>
+    <string name="dialogSendReportButton">Отправить жалобу</string>
+    <string name="dialogSendReportBack">Назад</string>
+    <string name="toastSendReport">Жалоба отправлена</string>
+
+
+    <string name="dialogBewareAITitle"><b>Важная информация</b></string>
+    <string name="dialogBewareAIDescriptionTitle">ИИ - не замена психологу</string>
+    <string name="dialogBewareAIDescriptionDeluxe">Он может давать общие советы, но не обладает профессиональным образованием, опытом и не учитывает вашу уникальную ситуацию. Его ответы — лишь информация, а не диагноз или терапия.</string>
+    <string name="dialogBewareAIDescriptionFirstL">- Всегда консультируйтесь с реальным специалистом перед важными решениями о психическом здоровье.</string>
+    <string name="dialogBewareAIDescriptionSecondL">- Не полагайтесь слепо на ИИ — он не чувствует, не сопереживает и, также как и администрация, не несёт ответственности за последствия.</string>
+    <string name="dialogBewareAIDescriptionFooter"><b>Ваше благополучие важнее всего!</b></string>
+    <string name="dialogBewareAIButton">ОК</string>
+    <string name="toastSuccessfulUpdate">Изменения успешно сохранены</string>
+    <string name="fragmentProfileRulesButton">Правила</string>
+    <string name="fragmentRulesTitle">Правила</string>
+    <string name="fragmentRulesDescriptionTitle"><b><u>Правила поведения в приложении:</u></b></string>
+    <string name="fragmentRulesDescriptionFooter"><b>(Правила могут дополняться. Использование приложения означает согласие с ними.)</b></string>
+    <string name="fragmentRulesDescriptionBody">\nЗапрещено:\n - Оскорбления\n - Дискриминация и любые формы ненависти\n - Обсуждение и пропаганда политических взглядов, партий\n - Призывы к агрессии, терроризму, а также любые формы угроз\n - Контент 18+ (включая текст, изображения, видео и намёки)\n - Публикация приватной информации (своей или других пользователей)\n - Спам и реклама – только с разрешения администрации\n - Нарушители блокируются без предупреждения\n</string>
+    <string name="dialogDeleteUserTitle">Подтверждение удаления аккаунта</string>
+    <string name="dialogDeleteUserDescription">Вы действительно хотите удалить аккаунт? После удаления все сохранённые записи буду утеряны</string>
+    <string name="dialogDeleteUserButton">Удалить</string>
+    <string name="toastDeleteUser">Пользователь успешно удалён</string>
+    <string name="fragmentFriendsIsGuest">Авторизуйтесь для доступа к функциям социального взаимодействия</string>
+    <string name="fragmentProfileFeedback">Почта для обратной связи\n reflect.app.tp@gmail.com</string>
+
 </resources>

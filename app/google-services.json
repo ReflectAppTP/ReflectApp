@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "352022296445",
+    "project_id": "reflect-tp",
+    "storage_bucket": "reflect-tp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352022296445:android:17b74c4bd1046f546efe14",
+        "android_client_info": {
+          "package_name": "com.example.reflect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI57xM-Se41eVsVcffGX5BukKVYUS4L1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

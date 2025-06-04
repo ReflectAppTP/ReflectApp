@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mainFragmentViewPagerToolbarMarginHorizontal_16dp">16dp</dimen>
+    <dimen name="mainFragmentViewPagerRecyclerViewMarginBottom_80dp">80dp</dimen>
+    <dimen name="toolbarMarginHorizontal_8dp">8dp</dimen>
+
+    <dimen name="editTextAndButtonWidth_280dp">280dp</dimen>
+
+    <dimen name="errorMessageMarginHorizontal_58dp">58dp</dimen>
+
+    <!-- MainFragment -->
+    <dimen name="mainFragmentBottomAppBarPadding_0dp">0dp</dimen>
+    <dimen name="mainFragmentBottomNavigationViewHeight_75dp">75dp</dimen>
+    <dimen name="mainFragmentBottomNavigationViewMarginEnd_16dp">16dp</dimen>
+    <dimen name="mainFragmentBottomNavigationViewElevation_0dp">0dp</dimen>
+    <dimen name="mainFragmentFABMarginEnd_16dp">16dp</dimen>
+    <dimen name="mainFragmentFABMarginBottom_91dp">91dp</dimen>
+    <dimen name="mainFragmentFABSize_80dp">80dp</dimen>
+
+    <!-- Login -->
+    <dimen name="loginTextInputMarginTop_32dp">32dp</dimen>
+    <dimen name="loginErrorMessageMarginBottom_16dp">16dp</dimen>
+    <dimen name="loginButtonLikeGuestPadding_16dp">16dp</dimen>
+    <dimen name="loginBottomLinearLayoutMarginBottom_35dp">35dp</dimen>
+    <dimen name="loginRegistrationButtonWidth_220dp">220dp</dimen>
+    <dimen name="loginRegistrationButtonPaddingVertical_7dp">7dp</dimen>
+    <dimen name="loginRegistrationButtonCornerRadius_12dp">12dp</dimen>
+    <dimen name="loginForgotPasswordPadding_8dp">8dp</dimen>
+    <dimen name="loginForgotPasswordPaddingHorizontal_20dp">20dp</dimen>
+
+    <!-- RegistrationFragment -->
+    <dimen name="registrationFragmentTextInputLayoutMarginTop_32dp">32dp</dimen>
+    <dimen name="registrationFragmentErrorMessageMarginBottom_16dp">16dp</dimen>
+
+    <!-- PasswordReset -->
+    <dimen name="passwordResetTitleTextSize_45sp">45sp</dimen>
+    <dimen name="passwordResetTitleMarginBottom_40dp">40dp</dimen>
+    <dimen name="passwordResetFragmentContainerMarginTop_40dp">40dp</dimen>
+
+    <!-- PasswordResetEmail -->
+    <dimen name="passwordResetEmailTextInputLayoutMarginTop_40dp">40dp</dimen>
+    <dimen name="passwordResetEmailButtonMarginTop_12dp">12dp</dimen>
+
+    <!-- PasswordResetCode -->
+    <dimen name="passwordResetCodeTitleMarginHorizontal_20dp">20dp</dimen>
+    <dimen name="passwordResetCodePinViewMarginTop_50dp">50dp</dimen>
+    <dimen name="passwordResetCodePinViewItemHeight_70dp">70dp</dimen>
+    <dimen name="passwordResetCodePinViewItemRadius_15dp">15dp</dimen>
+    <dimen name="passwordResetCodePinViewItemSpacing_27dp">27dp</dimen>
+    <dimen name="passwordResetCodePinViewLineWidth_3dp">3dp</dimen>
+    <dimen name="passwordResetCodePinViewTextSize_32sp">32sp</dimen>
+    <dimen name="passwordResetCodeErrorMessageMarginTop_20dp">20dp</dimen>
+    <dimen name="passwordResetCodeSendCodeAgainMarginTop_20dp">20dp</dimen>
+    <dimen name="passwordResetCodeButtonMarginTop_28dp">28dp</dimen>
+
+    <!-- PasswordResetNewPassword -->
+    <dimen name="passwordResetNewPasswordTextInputLayoutMarginTop_40dp">40dp</dimen>
+    <dimen name="passwordResetNewPasswordErrorMessageMarginTop_4dp">4dp</dimen>
+    <dimen name="passwordResetNewPasswordButtonMarginTop_12dp">12dp</dimen>
+
+    <!-- DialogConsent and DialogLogout -->
+    <dimen name="dialogMarginHorizontal_8dp">8dp</dimen>
+    <dimen name="dialogMarginVertical_4dp">4dp</dimen>
+    <dimen name="dialogMarginVertical_8dp">8dp</dimen>
+    <dimen name="dialogButtonMarginStart_8dp">8dp</dimen>
+    <dimen name="dialogButtonElevation_3dp">3dp</dimen>
+    <dimen name="dialogButtonCornerRadius_100dp">100dp</dimen>
+    <dimen name="dialogButtonMarginEnd_8dp">8dp</dimen>
+    <dimen name="dialogCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="dialogLinearLayoutPaddingVertical_12dp">12dp</dimen>
+    <dimen name="dialogLinearLayoutPaddingHorizontal_8dp">8dp</dimen>
+
+    <!-- AddStateMainFragment -->
+    <dimen name="addStateRootPaddingTop_3dp">3dp</dimen>
+    <dimen name="addStateRootPaddingHorizontal_6dp">6dp</dimen>
+    <dimen name="addStateBackArrowMargin_16dp">16dp</dimen>
+    <dimen name="addStateFragmentContainerMarginTop_17dp">17dp</dimen>
+
+    <!-- Tag -->
+    <dimen name="tagMarginVertical_6dp">6dp</dimen>
+    <dimen name="tagMarginHorizontal_12dp">12dp</dimen>
+    <dimen name="tagCardElevation_4dp">4dp</dimen>
+    <dimen name="tagCardRadius_12dp">12dp</dimen>
+    <dimen name="tagHorizontalMargin_8dp">8dp</dimen>
+    <dimen name="tagCardMinWidth_100dp">100dp</dimen>
+    <dimen name="tagCardMaxWidth_150dp">150dp</dimen>
+    <dimen name="tagStateCardMarginVertical_4dp">4dp</dimen>
+    <dimen name="tagStateCardMarginEnd_9dp">9dp</dimen>
+    <dimen name="tagStateCardElevation_0dp">0dp</dimen>
+
+    <!-- MainAddStateFragment -->
+    <dimen name="mainFragmentAddStateCardViewMarginTop_26dp">26dp</dimen>
+    <dimen name="mainFragmentAddStateCardViewCornerRadius_28dp">28dp</dimen>
+    <dimen name="mainFragmentAddStateImageViewMargin_30dp">30dp</dimen>
+    <dimen name="mainFragmentAddStateSliderMarginHorizontal_16dp">16dp</dimen>
+    <dimen name="mainFragmentAddStateSliderMarginTop_32dp">32dp</dimen>
+    <dimen name="mainFragmentAddStateTVSliderMarginTop_10dp">10dp</dimen>
+    <dimen name="mainFragmentAddStateTVSliderMarginStart_8dp">8dp</dimen>
+    <dimen name="mainFragmentAddStateTVSliderPaddingHorizontal_10dp">10dp</dimen>
+    <dimen name="mainFragmentAddStateClarifyButtonMarginHorizontal_34dp">34dp</dimen>
+    <dimen name="mainFragmentAddStateClarifyButtonPaddingVertical_20dp">20dp</dimen>
+    <dimen name="mainFragmentAddStateSaveButtonPaddingVertical_1dp">1dp</dimen>
+    <dimen name="mainFragmentAddStateSaveButtonMarginBottom_36dp">36dp</dimen>
+
+    <!-- ClarificationFragments -->
+    <dimen name="clarificationRecyclerViewMarginTop_24dp">24dp</dimen>
+    <dimen name="clarificationRecyclerViewMarginBottom_12dp">12dp</dimen>
+    <dimen name="clarificationButtonMarginBottom_50dp">50dp</dimen>
+    <dimen name="clarificationButtonMarginHorizontal_34dp">34dp</dimen>
+    <dimen name="clarificationButtonPaddingVertical_20dp">20dp</dimen>
+
+    <!-- ThirdClarificationFragment -->
+    <dimen name="thirdClarificationCardViewMarginHorizontal_22dp">22dp</dimen>
+    <dimen name="thirdClarificationCardViewMarginTop_18dp">18dp</dimen>
+    <dimen name="thirdClarificationCardViewElevation_0dp">0dp</dimen>
+    <dimen name="thirdClarificationCardViewPaddingBottom_4dp">4dp</dimen>
+    <dimen name="thirdClarificationCardViewMarginBottom_40dp">40dp</dimen>
+    <dimen name="thirdClarificationCardViewCornerRadius_3dp">3dp</dimen>
+    <dimen name="thirdClarificationTextInputPaddingTop_6dp">6dp</dimen>
+    <dimen name="thirdClarificationTextInputBoxStrokeWidth_0dp">0dp</dimen>
+
+    <!-- Toast -->
+    <dimen name="toastCardViewCornerRadius_4dp">4dp</dimen>
+    <dimen name="toastMessageMarginVertical_4dp">4dp</dimen>
+    <dimen name="toastMessageMarginHorizontal_8dp">8dp</dimen>
+
+    <!-- RecordsFragment -->
+    <dimen name="fragmentRecordsDateTVMarginTop_7dp">7dp</dimen>
+    <dimen name="fragmentRecordsRVMarginBottom_80dp">80dp</dimen>
+    <dimen name="fragmentRecordsRVMarginTop_12dp">12dp</dimen>
+    <dimen name="emptyRecordsTextSize_22sp">22sp</dimen>
+
+    <!-- ProfileFragment -->
+    <dimen name="fragmentProfileTitleMarginTop_10dp">10dp</dimen>
+    <dimen name="fragmentProfileTitleMarginHorizontal_20dp">20dp</dimen>
+    <dimen name="fragmentProfileCardMarginTop_15dp">15dp</dimen>
+    <dimen name="fragmentProfileCardElevation_0dp">0dp</dimen>
+    <dimen name="fragmentProfileImageSize_100dp">100dp</dimen>
+    <dimen name="fragmentProfileImageChangeIconMargin_4dp">4dp</dimen>
+    <dimen name="fragmentProfileButtonWidth_255dp">255dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileButtonPaddingVertical_12dp">12dp</dimen>
+    <dimen name="fragmentProfileButtonIconPadding_8dp">8dp</dimen>
+    <dimen name="fragmentProfileButtonCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentProfileSmallButtonWidth_180dp">180dp</dimen>
+    <dimen name="fragmentProfileButtonMarginTop_10dp">10dp</dimen>
+
+    <!-- StateCard -->
+    <dimen name="cardStateCardViewMarginVertical_8dp">8dp</dimen>
+    <dimen name="cardStateCardViewMarginHorizontal_23dp">23dp</dimen>
+    <dimen name="cardStateCardViewCornerRadius_12dp">12dp</dimen>
+    <dimen name="cardStateCardViewElevation_4dp">4dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginVertical_12dp">12dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateConstraintLayoutMarginEnd_4dp">4dp</dimen>
+    <dimen name="cardStateImageCardViewCornerRadius_45dp">45dp</dimen>
+    <dimen name="cardStateChangeMoodMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateMoodMarginStart_4dp">4dp</dimen>
+    <dimen name="cardStateCreationDateMarginStart_16dp">16dp</dimen>
+    <dimen name="cardStateCreationDateMarginTop_4dp">4dp</dimen>
+    <dimen name="cardStateChangeDotsPadding_0dp">0dp</dimen>
+    <dimen name="cardStateFirstRVMarginTop_13dp">13dp</dimen>
+    <dimen name="cardStateSecondRVMarginTop_6dp">6dp</dimen>
+    <dimen name="cardStateDescriptionMarginEnd_16dp">16dp</dimen>
+    <dimen name="cardStateDescriptionMarginTop_24dp">24dp</dimen>
+    <dimen name="cardStateIconSize_45dp">45dp</dimen>
+
+    <!-- Statistic Fragment -->
+    <dimen name="fragmentStatisticToggleGroupMarginHorizontal_11dp">11dp</dimen>
+    <dimen name="fragmentStatisticCardElevation_2dp">2dp</dimen>
+    <dimen name="fragmentStatisticCardMarginHorizontal_4dp">4dp</dimen>
+    <dimen name="fragmentStatisticCardHeight_300dp">300dp</dimen>
+    <dimen name="fragmentStatisticCardMarginVertical_12dp">12dp</dimen>
+    <dimen name="fragmentStatisticCardConstraintLayoutMargin_14dp">14dp</dimen>
+    <dimen name="fragmentStatisticCardRVMarginTop_6dp">6dp</dimen>
+    <dimen name="fragmentStatisticTimeRangeMarginBottom_5dp">5dp</dimen>
+
+
+    <!-- Ai helper text card -->
+    <dimen name="aiHelperTextCardCornerRadius_45dp">45dp</dimen>
+    <dimen name="aiHelperTextTVMarginHorizontal_24dp">24dp</dimen>
+    <dimen name="aiHelperTextTVMarginVertical">10dp</dimen>
+    <dimen name="aiHelperTextCardMarginHorizontal_5dp">5dp</dimen>
+
+    <!-- Ai message card -->
+    <dimen name="aiCardMessageMaxWidth_250dp">250dp</dimen>
+    <dimen name="aiCardMessageMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiCardMessageMarginVertical_12dp">12dp</dimen>
+    <dimen name="aiCardMessageCornerRadius_12dp">12dp</dimen>
+    <dimen name="aiCardMessageElevation_4dp">4dp</dimen>
+    <dimen name="aiCardMessageTVMargin_16dp">16dp</dimen>
+
+    <!-- AI Fragment -->
+    <dimen name="aiFragmentEditTextMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiFragmentEditTextMarginBottom_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuMarginEnd_10dp">10dp</dimen>
+    <dimen name="aiFragmentExpandMenuMarginTop_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuMinWidth_0dp">0dp</dimen>
+    <dimen name="aiFragmentExpandMenuMinHeight_0dp">0dp</dimen>
+    <dimen name="aiFragmentButtonSendPaddingHorizontal_28dp">28dp</dimen>
+    <dimen name="aiFragmentButtonSendPaddingVertical">6dp</dimen>
+    <dimen name="aiFragmentButtonSendMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="aiFragmentButtonSendMarginBottom_10dp">10dp</dimen>
+    <dimen name="aiFragmentHelperTextRVMarginHorizontal_5dp">5dp</dimen>
+    <dimen name="aiFragmentExpandMenuElevation_0dp">0dp</dimen>
+    <dimen name="aiFragmentExpandMenuCornerRadius_45">45dp</dimen>
+    <dimen name="aiFragmentExpandMenuStrokeWidth_1dp">1dp</dimen>
+    <dimen name="aiLoadingGetAIMessageWidth_75dp">75dp</dimen>
+    <dimen name="aiLoadingGetAIMessageHeight_30dp">30dp</dimen>
+
+    <!-- CardFriend -->
+    <dimen name="cardFriendMarginHorizontal_26dp">26dp</dimen>
+    <dimen name="cardFriendMarginVertical_7dp">7dp</dimen>
+    <dimen name="cardFriendStrokeWidth_1dp">1dp</dimen>
+    <dimen name="cardFriendConstraintLayoutMargin_16dp">16dp</dimen>
+    <dimen name="cardFriendIconSize_40dp">40dp</dimen>
+    <dimen name="cardFriendIconElevation_0dp">0dp</dimen>
+    <dimen name="cardFriendIconCornerRadius_45dp">45dp</dimen>
+    <dimen name="cardFriendIconTextSize_18sp">18sp</dimen>
+    <dimen name="cardFriendLoginMarginStart_16dp">16dp</dimen>
+    <dimen name="cardFriendNotificationRequestMarginTop_4dp">4dp</dimen>
+
+    <!-- Empty Friends View -->
+    <dimen name="emptyFriendsListMarginHorizontal_86dp">86dp</dimen>
+    <dimen name="emptySearchFriendsMarginHorizontal_83dp">83dp</dimen>
+
+    <!-- SearchFriends Fragment -->
+    <dimen name="fragmentSearchFriendsRootMarginTop_3dp">3dp</dimen>
+    <dimen name="fragmentSearchFriendsEditTextMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="fragmentSearchFriendsRVMarginTop_7dp">7dp</dimen>
+
+    <!-- Premium Fragment -->
+    <dimen name="fragmentPremiumRootMarginHorizontal_21dp">21dp</dimen>
+    <dimen name="fragmentPremiumTariffTitleMarginStart15dp">15dp</dimen>
+    <dimen name="fragmentPremiumTariffTitleMarginTop_22dp">22dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumPriceCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumPriceCardElevation_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumPriceCardHeight_50dp">50dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginHorizontal_15dp">15dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginBottom_23dp">23dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_9dp">9dp</dimen>
+    <dimen name="fragmentPremiumPriceCardMarginTop_23dp">23dp</dimen>
+    <dimen name="fragmentPremiumPriceCardCornerRadius_8dp">8dp</dimen>
+    <dimen name="fragmentPremiumPriceCardStrokeWidth_1dp">1dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardTitleMargin_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPrice_10sp">10sp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPriceMarginVertical_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPriceMarginStart_4dp">4dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardFullPricePaddingTop_4dp">4dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardMonthPriceMarginVertical_9dp">9dp</dimen>
+    <dimen name="fragmentPremiumYearPriceCardMonthPriceMarginEnd_10dp">10dp</dimen>
+    <dimen name="fragmentPremiumBenefitsTitleMarginStart_15dp">15dp</dimen>
+    <dimen name="fragmentPremiumBenefitsTitle_44dp">44dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardMarginTop_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardCornerRadius_12dp">12dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardElevation_5dp">5dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardRootMarginVertical_13dp">13dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardRootMarginHorizontal_10dp">10dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardDescriptionMarginStart_17dp">17dp</dimen>
+    <dimen name="fragmentPremiumBenefitsCardDescriptionMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
+    <dimen name="fragmentProfilePremiumIconMarginStart_4dp">4dp</dimen>
+    <dimen name="fragmentProfilePremiumIconMarginTop">2dp</dimen>
+
+    <!-- Streak popupWindow -->
+    <dimen name="popupStreakCornerRadius_45dp">45dp</dimen>
+    <dimen name="popupStreakMarginBottom_8dp">8dp</dimen>
+    <dimen name="popupStreakTextSize_16sp">16sp</dimen>
+
+    <!-- Widget -->
+    <dimen name="widgetStreakProviderMinWidth_80dp">200dp</dimen>
+    <dimen name="widgetStreakProviderMinHeight_80dp">80dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeWidth_80dp">200dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeHeight_50dp">50dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeWidth_160dp">280dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeHeight_120dp">120dp</dimen>
+    <dimen name="widgetImageWidth_100dp">100dp</dimen>
+    <dimen name="widgetImageHeight_100dp">100dp</dimen>
+
+    <!-- Widget Fragment -->
+    <dimen name="fragmentWidgetScrollViewMarginVertical_29dp">29dp</dimen>
+    <dimen name="fragmentWidgetScrollViewMarginHorizontal_25dp">25dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageFirstMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageLastMarginBottom_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageMarginVertical_10dp">10dp</dimen>
+    <dimen name="fragmentProfileDeleteMarginTop_10dp">10dp</dimen>
+    <dimen name="fragmentProfileUserButtonContainerMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileUserContentRootMarginTop_11dp">11dp</dimen>
+    <dimen name="fragmentProfileUserContentMarginTop_7dp">7dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginHorizontal_23dp">23dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginTop_15dp">15dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeMargin_2dp">2dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeSize_4dp">4dp</dimen>
+    <dimen name="dialogSendReportButtonMarginTop_4dp">4dp</dimen>
+    <dimen name="dialogBewareAIMarginVertical_18dp">18dp</dimen>
+
+</resources>

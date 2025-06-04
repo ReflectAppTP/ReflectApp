@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.profile.fragment.ProfileSettingsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentProfileSettingsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_marginHorizontal="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragmentProfileSettingsBackArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:contentDescription="@string/contentDescriptionToolbarSettingsIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_back_arrow"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragmentProfileSettingsImageCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragmentProfileCardMarginTop_15dp"
+        android:background="@color/background"
+        android:backgroundTint="@color/background"
+        android:elevation="@dimen/fragmentProfileCardElevation_0dp"
+        app:cardElevation="@dimen/fragmentProfileCardElevation_0dp"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfileSettingsToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/fragmentProfileSettingsImageView"
+            android:layout_width="@dimen/fragmentProfileImageSize_100dp"
+            android:layout_height="@dimen/fragmentProfileImageSize_100dp"
+            android:src="@drawable/profile_image"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/contentDescriptionFragmentProfileIcon"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentProfileLoginEditText"
+        android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/registrationFragmentTextInputLayoutMarginTop_32dp"
+        android:hint="@string/registrationLoginHint"
+        android:nextFocusDown="@id/registrationEmailEditText"
+        app:errorEnabled="true"
+        style="@style/EditText"
+        app:counterMaxLength="@integer/counterLoginLength"
+        app:endIconMode="clear_text"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfileSettingsImageCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentProfileLoginEditTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textVisiblePassword"
+            android:maxLength="@integer/counterLoginLength"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentProfilePasswordEditText"
+        android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragmentProfilePasswordEditText"
+        app:errorEnabled="true"
+        style="@style/EditText"
+        app:counterMaxLength="@integer/counterPasswordLength"
+        android:nextFocusDown="@id/registrationPasswordConfirmationEditText"
+        app:endIconMode="password_toggle"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfileLoginEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentProfilePasswordEditTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLength="@integer/counterPasswordLength"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentProfilePasswordConfirmationEditText"
+        android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragmentProfilePasswordConfirmationEditText"
+        app:errorEnabled="true"
+        style="@style/EditText"
+        app:counterMaxLength="@integer/counterPasswordLength"
+        app:endIconMode="password_toggle"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfilePasswordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragmentProfilePasswordConfirmationEditTextField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="@integer/counterPasswordLength"
+            android:maxLines="1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragmentProfileVisibility"
+        style="@style/SettingsEditText"
+        android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragmentProfileVisibilityHint"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfilePasswordConfirmationEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/fragmentProfileVisibilityField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            app:simpleItems="@array/fragmentProfileSettingsVisibilityItems"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/fragmentProfilePasswordErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/error"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/registrationFragmentErrorMessageMarginBottom_16dp"
+        android:layout_marginHorizontal="@dimen/errorMessageMarginHorizontal_58dp"
+        style="@style/TextAppearance.Material3.LabelMedium"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfileVisibility"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <Button
+        android:id="@+id/fragmentProfileSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragmentProfileSaveChanges"
+        android:layout_marginTop="@dimen/registrationFragmentErrorMessageMarginBottom_16dp"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfilePasswordErrorMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/fragmentProfileDelete"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragmentProfileDeleteMarginTop_10dp"
+        android:text="@string/fragmentProfileDelete"
+        android:textColor="@color/error"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProfileSaveChanges"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

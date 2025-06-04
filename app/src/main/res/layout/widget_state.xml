@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetStateRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/primary80"
+    android:orientation="vertical"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="32dp"
+    android:gravity="center"
+    >
+
+    <ImageView
+        android:id="@+id/widgetStateImage"
+        android:layout_width="@dimen/widgetImageWidth_100dp"
+        android:layout_height="@dimen/widgetImageHeight_100dp"
+        android:src="@drawable/ic_empty_widget_state"
+        android:contentDescription="@string/contentDescriptionWidgetStateImage"
+        />
+
+    <TextView
+        android:id="@+id/widgetStateTitle"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сегодня ещё"
+        android:textSize="@dimen/popupStreakTextSize_16sp"
+        />
+
+    <TextView
+        android:id="@+id/widgetStateDescription"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="нет записей"
+        android:textSize="@dimen/popupStreakTextSize_16sp"
+        />
+
+
+</LinearLayout>

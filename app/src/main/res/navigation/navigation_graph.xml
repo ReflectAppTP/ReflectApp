@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/recordsFragment"
+        android:name="com.example.reflect.presentation.screens.records.fragment.RecordsFragment"
+        android:label="fragment_records"
+        tools:layout="@layout/fragment_records" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.reflect.presentation.screens.statistics.fragment.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="com.example.reflect.presentation.screens.friends.fragment.MainFriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.reflect.presentation.screens.login.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
+            app:destination="@id/mainPasswordResetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/loginFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.reflect.presentation.screens.main.fragment.MainFragment"
+        android:label="MainFragment" >
+
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_aiFragment"
+            app:destination="@id/aiFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileFriendFragment"
+            app:destination="@id/profileFriendFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_widgetFragment"
+            app:destination="@id/widgetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.reflect.presentation.screens.registration.fragment.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <include app:graph="@navigation/navigation_reset_password_graph"/>
+    <fragment
+        android:id="@+id/mainPasswordResetFragment"
+        android:name="com.example.reflect.presentation.screens.passwordReset.fragments.MainPasswordResetFragment"
+        android:label="fragment_main_password_reset"
+        tools:layout="@layout/fragment_main_password_reset" >
+        <action
+            android:id="@+id/action_passwordResetNewPasswordFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <dialog
+        android:id="@+id/consentDialog"
+        android:name="com.example.reflect.presentation.dialog.ConsentDialog"
+        android:label="ConsentDialog" />
+    <include app:graph="@navigation/navigation_add_emotional_state" />
+    <dialog
+        android:id="@+id/addStateBottomSheetFragment"
+        android:name="com.example.reflect.presentation.screens.addState.bottomSheet.AddStateBottomSheetFragment"
+        android:label="fragment_add_state_bottom_sheet"
+        tools:layout="@layout/fragment_add_state_bottom_sheet"/>
+    <dialog
+        android:id="@+id/logoutDialog"
+        android:name="com.example.reflect.presentation.dialog.LogoutDialog"
+        android:label="LogoutDialog" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment_with_popUp"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"/>
+    </dialog>
+    <fragment
+        android:id="@+id/aiFragment"
+        android:name="com.example.reflect.presentation.screens.ai.fragment.AiFragment"
+        android:label="fragment_ai"
+        tools:layout="@layout/fragment_ai" />
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.example.reflect.presentation.screens.premium.fragment.PremiumFragment"
+        android:label="fragment_premium"
+        tools:layout="@layout/fragment_premium" />
+    <dialog
+        android:id="@+id/buyMonthPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyMonthPremiumDialog"
+        android:label="BuyMonthPremiumDialog" />
+    <dialog
+        android:id="@+id/buyYearPremiumDialog"
+        android:name="com.example.reflect.presentation.dialog.BuyYearPremiumDialog"
+        android:label="BuyYearPremiumDialog" />
+    <fragment
+        android:id="@+id/profileFriendFragment"
+        android:name="com.example.reflect.presentation.screens.profileFriend.fragment.ProfileFriendFragment"
+        android:label="ProfileFriendFragment" />
+    <fragment
+        android:id="@+id/widgetFragment"
+        android:name="com.example.reflect.presentation.widget.fragment.WidgetFragment"
+        android:label="fragment_widget"
+        tools:layout="@layout/fragment_widget" />
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" />
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" />
+</navigation>

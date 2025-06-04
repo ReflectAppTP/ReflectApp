@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.friends.fragment.MainFriendsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentFriendsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_marginHorizontal="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragmentFriendsToolbarNotificationIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:clickable="true"
+            android:focusable="true"
+            >
+
+            <ImageButton
+                android:id="@+id/fragmentFriendsToolbarNotificationIconDeluxe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/contentDescriptionFragmentToolbarNotificationIcon"
+                android:background="@drawable/rounded_surface_ripple"
+                android:src="@drawable/ic_friends_notification"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/fragmentFriendsToolbarNotificationIconBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fragmentFriendsToolbarNotificationIconBadgeMargin_2dp"
+                android:background="@drawable/badge_circle"
+                android:contentDescription="@string/contentDescriptionFragmentFriendsToolbarNotificationIconBadge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarBackIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:visibility="gone"
+            android:contentDescription="@string/contentDescriptionFragmentToolbarBackIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_back_arrow"
+            />
+
+        <TextView
+            android:id="@+id/fragmentFriendsToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toolbarFriendsTitle"
+            android:layout_gravity="center"
+            android:textColor="@color/onSurface"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            />
+
+        <ImageButton
+            android:id="@+id/fragmentFriendsToolbarSearchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/contentDescriptionToolbarSearchIcon"
+            android:background="@drawable/rounded_surface_ripple"
+            android:src="@drawable/ic_search_toolbar"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentFriendsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/mainFragmentViewPagerRecyclerViewMarginBottom_80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentFriendsToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_friends_graph"
+        />
+
+    <TextView
+        android:id="@+id/fragmentFriendsIsGuest"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/fragmentFriendsIsGuest"
+        android:textColor="@color/onSurface"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

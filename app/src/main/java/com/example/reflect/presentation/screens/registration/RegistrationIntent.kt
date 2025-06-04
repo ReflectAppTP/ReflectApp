@@ -1,0 +1,6 @@
+package com.example.reflect.presentation.screens.registration
+
+sealed class RegistrationIntent {
+    data object RegisterUser: RegistrationIntent()
+    data object RegisterGuest: RegistrationIntent()
+}

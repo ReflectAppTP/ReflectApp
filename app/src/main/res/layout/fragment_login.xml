@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.login.fragment.LoginFragment">
+
+
+    <LinearLayout
+        android:id="@+id/loginTopLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/loginBottomLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/loginTitle"
+            style="@style/TextAppearance.Material3.DisplaySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/onSurface"
+            android:text="@string/loginTitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLoginEditText"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginTextInputMarginTop_32dp"
+            android:hint="@string/loginEmailHint"
+            style="@style/EditText"
+            app:counterMaxLength="@integer/counterEmailLength"
+            app:endIconMode="clear_text"
+            android:nextFocusDown="@id/passwordLoginEditText">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailLoginEditTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLength="@integer/counterEmailLength"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLoginEditText"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/loginPasswordHint"
+            style="@style/EditText"
+            app:counterMaxLength="@integer/counterPasswordLength"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordLoginEditTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLength="@integer/counterPasswordLength"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/loginErrorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/error"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/loginErrorMessageMarginBottom_16dp"
+            android:layout_marginHorizontal="@dimen/errorMessageMarginHorizontal_58dp"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+            android:layout_height="wrap_content"
+            android:text="@string/loginButton"
+            style="@style/MaterialButton" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginOr"
+            android:textColor="@color/onSurface"
+            style="@style/TextAppearance.Material3.LabelLarge"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:id="@+id/loginWithVKButton"
+            android:layout_width="@dimen/editTextAndButtonWidth_280dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#0077FF"
+            android:text="Войти через VK"
+            android:visibility="gone"
+            style="@style/MaterialButton"/>
+
+        <Button
+            android:id="@+id/loginLikeGuestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:padding="@dimen/loginButtonLikeGuestPadding_16dp"
+            android:text="@string/loginLikeGuest"
+            android:background="@drawable/rounded_surface_ripple"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textColor="@color/onSurfaceVariant"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/loginBottomLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/loginBottomLinearLayoutMarginBottom_35dp"
+        >
+
+        <Button
+            android:id="@+id/loginRegistrationButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="@dimen/loginRegistrationButtonWidth_220dp"
+            android:layout_height="wrap_content"
+            android:text="@string/loginRegistration"
+            android:textColor="@color/onSurface"
+            android:paddingVertical="@dimen/loginRegistrationButtonPaddingVertical_7dp"
+            app:cornerRadius="@dimen/loginRegistrationButtonCornerRadius_12dp" />
+
+        <Button
+            android:id="@+id/loginForgotPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginForgotPassword"
+            android:padding="@dimen/loginForgotPasswordPadding_8dp"
+            android:paddingHorizontal="@dimen/loginForgotPasswordPaddingHorizontal_20dp"
+            android:textColor="@color/onSurface"
+            android:background="@drawable/rounded_surface_ripple"
+            android:visibility="gone"
+            style="@style/Widget.Material3.Button.TextButton"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_add_emotional_state"
+    app:startDestination="@id/mainAddStateFragment">
+
+    <fragment
+        android:id="@+id/mainAddStateFragment"
+        android:name="com.example.reflect.presentation.screens.addState.fragments.MainAddStateFragment"
+        android:label="fragment_main_add_state"
+        tools:layout="@layout/fragment_main_add_state" >
+        <action
+            android:id="@+id/action_mainAddStateFragment_to_firstClarificationAddStateFragment"
+            app:destination="@id/firstClarificationAddStateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/firstClarificationAddStateFragment"
+        android:name="com.example.reflect.presentation.screens.addState.fragments.FirstClarificationAddStateFragment"
+        android:label="fragment_first_clarification_add_state"
+        tools:layout="@layout/fragment_first_clarification_add_state" >
+        <action
+            android:id="@+id/action_firstClarificationAddStateFragment_to_secondClarificationAddStateFragment"
+            app:destination="@id/secondClarificationAddStateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/secondClarificationAddStateFragment"
+        android:name="com.example.reflect.presentation.screens.addState.fragments.SecondClarificationAddStateFragment"
+        android:label="fragment_second_clarification_add_state"
+        tools:layout="@layout/fragment_second_clarification_add_state" >
+        <action
+            android:id="@+id/action_secondClarificationAddStateFragment_to_thirdClarificationAddStateFragment"
+            app:destination="@id/thirdClarificationAddStateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/thirdClarificationAddStateFragment"
+        android:name="com.example.reflect.presentation.screens.addState.fragments.ThirdClarificationAddStateFragment"
+        android:label="fragment_third_clarification_add_state"
+        tools:layout="@layout/fragment_third_clarification_add_state" />
+</navigation>

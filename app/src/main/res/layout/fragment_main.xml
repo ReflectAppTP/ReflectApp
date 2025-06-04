@@ -1,0 +1,53 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    >
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mainActivityViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:layout_marginEnd="@dimen/mainFragmentFABMarginEnd_16dp"
+        android:layout_marginBottom="@dimen/mainFragmentFABMarginBottom_91dp"
+        android:scaleType="center"
+        android:transitionName="fab_transition"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:shapeAppearanceOverlay="@style/CircleFab"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="top|end"
+        app:fabCustomSize="@dimen/mainFragmentFABSize_80dp"
+        app:srcCompat="@drawable/ic_fab_ai" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/mainFragmentBottomAppBarPadding_0dp"
+        app:backgroundTint="@color/surfaceContainer">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/mainFragmentBottomNavigationViewHeight_75dp"
+            android:layout_marginEnd="@dimen/mainFragmentBottomNavigationViewMarginEnd_16dp"
+            android:background="@android:color/transparent"
+            app:labelVisibilityMode="labeled"
+            app:elevation="@dimen/mainFragmentBottomNavigationViewElevation_0dp"
+            app:menu="@menu/bottom_nav_menu" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

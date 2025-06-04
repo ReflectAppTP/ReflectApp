@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/cardStateCardViewMarginVertical_8dp"
+    android:layout_marginHorizontal="@dimen/cardStateCardViewMarginHorizontal_23dp"
+    style="@style/Widget.Material3.CardView.Outlined"
+    app:strokeColor="@color/outlineVariant"
+    app:cardCornerRadius="@dimen/cardStateCardViewCornerRadius_12dp"
+    app:cardBackgroundColor="@color/surfaceVariant"
+    app:cardElevation="@dimen/cardStateCardViewElevation_4dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="@dimen/cardStateConstraintLayoutMarginVertical_12dp"
+        android:layout_marginStart="@dimen/cardStateConstraintLayoutMarginStart_16dp"
+        android:layout_marginEnd="@dimen/cardStateConstraintLayoutMarginEnd_4dp"
+        android:layout_gravity="center"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStateImageCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="0dp"
+            app:cardCornerRadius="@dimen/cardStateImageCardViewCornerRadius_45dp"
+            app:cardBackgroundColor="@color/surfaceVariant"
+            >
+
+            <ImageView
+                android:id="@+id/cardStateImageView"
+                android:layout_width="@dimen/cardStateIconSize_45dp"
+                android:layout_height="@dimen/cardStateIconSize_45dp"
+                android:src="@drawable/ic_state_image_1"
+                android:contentDescription="@string/contentDescriptionCardStateImage" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/cardStateChangeMoodTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/onSurface"
+            android:layout_marginStart="@dimen/cardStateChangeMoodMarginStart_16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardStateImageCardView"
+            />
+
+        <TextView
+            android:id="@+id/cardStateMoodTV"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cardStateCreationDateMarginTop_4dp"
+            android:textColor="@color/onSurface"
+            app:layout_constraintEnd_toStartOf="@+id/cardStateChangeDots"
+            app:layout_constraintStart_toEndOf="@+id/cardStateChangeMoodTV"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Хорошее настроение"/>
+
+        <TextView
+            android:id="@+id/cardStateCreationDate"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardStateCreationDateMarginStart_16dp"
+            android:layout_marginTop="@dimen/cardStateCreationDateMarginTop_4dp"
+            android:textColor="@color/onSurface"
+            app:layout_constraintStart_toEndOf="@id/cardStateImageCardView"
+            app:layout_constraintTop_toBottomOf="@id/cardStateMoodTV"
+            tools:text="Сегодня в 12:13" />
+
+        <ImageButton
+            android:id="@+id/cardStateChangeDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/contentDescriptionCardStateChangeDots"
+            android:padding="@dimen/cardStateChangeDotsPadding_0dp"
+            android:src="@drawable/ic_card_state_dots"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cardStateFirstRV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cardStateFirstRVMarginTop_13dp"
+            tools:listitem="@layout/card_state_tag"
+            tools:itemCount="3"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:spanCount="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardStateCreationDate"
+            app:layout_constraintEnd_toStartOf="@id/cardStateChangeDots"/>
+        
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cardStateSecondRV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cardStateSecondRVMarginTop_6dp"
+            tools:listitem="@layout/card_state_tag"
+            tools:itemCount="2"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:spanCount="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStateFirstRV"
+            app:layout_constraintEnd_toStartOf="@id/cardStateChangeDots"/>
+        
+        <TextView
+            android:id="@+id/cardStateDescriptionTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cardStateDescriptionMarginEnd_16dp"
+            android:layout_marginTop="@dimen/cardStateDescriptionMarginTop_24dp"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurface"
+            app:layout_constraintTop_toBottomOf="@id/cardStateSecondRV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="dfgsdgsdgdgsdfgsdfgsdfgsdfgsdgjsdgshdfgjkhsdkghsdfgjksdklgjgdskjlfg"
+            />
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

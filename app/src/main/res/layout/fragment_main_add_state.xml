@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.addState.fragments.MainAddStateFragment">
+
+    <TextView
+        android:id="@+id/addStateTitle"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/addStateHowDoYouFeel"
+        android:textColor="@color/onSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addStateCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mainFragmentAddStateCardViewMarginTop_26dp"
+        android:background="@color/surfaceContainerHigh"
+        android:backgroundTint="@color/surfaceContainerHigh"
+        app:cardCornerRadius="@dimen/mainFragmentAddStateCardViewCornerRadius_28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addStateTitle">
+
+        <ImageView
+            android:id="@+id/addStateImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mainFragmentAddStateImageViewMargin_30dp"
+            android:contentDescription="@string/contentDescriptionAddStateImage"
+            android:src="@drawable/ic_add_state_emotion_3" />
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/addStateSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/mainFragmentAddStateSliderMarginHorizontal_16dp"
+        android:layout_marginTop="@dimen/mainFragmentAddStateSliderMarginTop_32dp"
+        android:stepSize="1"
+        android:valueFrom="0"
+        android:valueTo="10"
+        android:value="5"
+        app:thumbColor="@color/primary80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addStateCardView"
+        app:tickColorInactive="@color/primary"
+        app:tickColorActive="@color/onPrimaryContainer"
+        app:trackColorInactive="@color/primary80" />
+
+    <TextView
+        android:id="@+id/addStateBadStateTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addStateBadMood"
+        android:layout_marginTop="@dimen/mainFragmentAddStateTVSliderMarginTop_10dp"
+        android:layout_marginStart="@dimen/mainFragmentAddStateTVSliderMarginStart_8dp"
+        android:paddingHorizontal="@dimen/mainFragmentAddStateTVSliderPaddingHorizontal_10dp"
+        style="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/onSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addStateSlider" />
+
+    <TextView
+        android:id="@+id/addStateGoodStateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addStateGoodMood"
+        android:layout_marginTop="@dimen/mainFragmentAddStateTVSliderMarginTop_10dp"
+        android:layout_marginStart="@dimen/mainFragmentAddStateTVSliderMarginStart_8dp"
+        android:paddingHorizontal="@dimen/mainFragmentAddStateTVSliderPaddingHorizontal_10dp"
+        style="@style/TextAppearance.Material3.LabelLarge"
+        android:textColor="@color/onSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addStateSlider" />
+
+    <Button
+        android:id="@+id/addStateClarifyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/mainFragmentAddStateClarifyButtonMarginHorizontal_34dp"
+        android:paddingVertical="@dimen/mainFragmentAddStateClarifyButtonPaddingVertical_20dp"
+        android:text="@string/addStateClarifyButtonText"
+        app:layout_constraintBottom_toTopOf="@+id/addStateSaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <Button
+        android:id="@+id/addStateSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:text="@string/addStateSaveWithoutClarifyButtonText"
+        android:textColor="@color/primaryContainer"
+        android:paddingVertical="@dimen/mainFragmentAddStateSaveButtonPaddingVertical_1dp"
+        android:layout_marginBottom="@dimen/mainFragmentAddStateSaveButtonMarginBottom_36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

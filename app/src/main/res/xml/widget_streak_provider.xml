@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="@dimen/widgetStreakProviderMinWidth_80dp"
+    android:minHeight="@dimen/widgetStreakProviderMinHeight_80dp"
+    android:minResizeWidth="@dimen/widgetStreakProviderMinResizeWidth_80dp"
+    android:minResizeHeight="@dimen/widgetStreakProviderMinResizeWidth_80dp"
+    android:description="@string/widgetStreakDescription"
+    android:updatePeriodMillis="900000"
+    android:previewImage="@drawable/image_widget_streak_preview_3"
+    android:initialLayout="@layout/widget_streak"
+    android:widgetCategory="home_screen"
+    android:resizeMode="horizontal|vertical"
+    >
+</appwidget-provider>
