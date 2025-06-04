@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentFriendsBinding
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
@@ -33,7 +34,6 @@ class MainFriendsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFriendsBinding.inflate(inflater, container, false)
-        vm.fetchFriends()
         return binding.root
     }
 
@@ -41,22 +41,33 @@ class MainFriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            fragmentFriendsToolbarSearchIcon.setOnClickListener {
-                moveToScreen(FriendsScreen.Search)
-            }
+            if (AccountPrefs.getUser(requireContext()).isGuest) {
+                fragmentFriendsToolbar.visibility = View.GONE
+                fragmentFriendsContainer.visibility = View.GONE
+                fragmentFriendsIsGuest.visibility = View.VISIBLE
+            } else {
+                fragmentFriendsToolbar.visibility = View.VISIBLE
+                fragmentFriendsContainer.visibility = View.VISIBLE
+                fragmentFriendsIsGuest.visibility = View.GONE
+                vm.fetchFriends()
 
-            fragmentFriendsToolbarNotificationIconDeluxe.setOnClickListener {
-                moveToScreen(FriendsScreen.Notifications)
-            }
+                fragmentFriendsToolbarSearchIcon.setOnClickListener {
+                    moveToScreen(FriendsScreen.Search)
+                }
 
-            fragmentFriendsToolbarBackIcon.setOnClickListener {
-                moveToScreen(FriendsScreen.FriendsList)
-            }
-        }
+                fragmentFriendsToolbarNotificationIconDeluxe.setOnClickListener {
+                    moveToScreen(FriendsScreen.Notifications)
+                }
 
-        lifecycleScope.launch {
-            notificationsVM.notificationState.collect {
-                handleNotifications(it)
+                fragmentFriendsToolbarBackIcon.setOnClickListener {
+                    moveToScreen(FriendsScreen.FriendsList)
+                }
+
+                lifecycleScope.launch {
+                    notificationsVM.notificationState.collect {
+                        handleNotifications(it)
+                    }
+                }
             }
         }
     }

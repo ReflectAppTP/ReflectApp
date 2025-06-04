@@ -24,6 +24,7 @@ import com.example.reflect.data.dto.friendship.ReportUserRequestDTO
 import com.example.reflect.data.dto.friendship.ReportUserResponseDTO
 import com.example.reflect.data.dto.friendship.ReportStateRequestDTO
 import com.example.reflect.data.dto.friendship.ReportStateResponseDTO
+import com.example.reflect.data.dto.login.GuestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
@@ -56,6 +57,9 @@ interface RetrofitService {
 
     @GET("$authReflect/profile/")
     suspend fun getProfile(): Response<UserDTO>
+    
+    @POST("$authReflect/guest-login/")
+    suspend fun loginLikeGuest(): Response<GuestDTO>
 
     @POST("$token/refresh/")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>

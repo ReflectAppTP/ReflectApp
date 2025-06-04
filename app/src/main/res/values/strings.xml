@@ -318,5 +318,6 @@
     <string name="dialogDeleteUserDescription">Вы действительно хотите удалить аккаунт? После удаления все сохранённые записи буду утеряны</string>
     <string name="dialogDeleteUserButton">Удалить</string>
     <string name="toastDeleteUser">Пользователь успешно удалён</string>
+    <string name="fragmentFriendsIsGuest">Авторизуйтесь для доступа к функциям социального взаимодействия</string>
 
 </resources>

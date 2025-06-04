@@ -9,6 +9,7 @@ import com.example.reflect.data.repository.state.DeleteStateRepositoryImpl
 import com.example.reflect.data.repository.state.EditStateRepositoryImpl
 import com.example.reflect.data.repository.state.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.auth.GetProfileRepositoryImpl
+import com.example.reflect.data.repository.auth.LoginLikeGuestRepositoryImpl
 import com.example.reflect.data.repository.state.GetSecondTagsRepositoryImpl
 import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
@@ -43,6 +44,7 @@ import com.example.reflect.domain.repository.state.DeleteStateRepository
 import com.example.reflect.domain.repository.state.EditStateRepository
 import com.example.reflect.domain.repository.state.GetFirstTagsRepository
 import com.example.reflect.domain.repository.auth.GetProfileRepository
+import com.example.reflect.domain.repository.auth.LoginLikeGuestRepository
 import com.example.reflect.domain.repository.state.GetSecondTagsRepository
 import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
@@ -96,6 +98,12 @@ object RepositoryModule {
     fun provideGetProfileRepository(
         remoteData: RetrofitRemoteData
     ): GetProfileRepository = GetProfileRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideLoginLikeGuest(
+        remoteData: RetrofitRemoteData
+    ): LoginLikeGuestRepository = LoginLikeGuestRepositoryImpl(remoteData)
 
     @Provides
     @Singleton

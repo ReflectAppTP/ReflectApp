@@ -126,4 +126,8 @@ class ViewModelRecords @Inject constructor(
             calendar.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) &&
             calendar.get(Calendar.DAY_OF_MONTH) == currentCalendar.get(Calendar.DAY_OF_MONTH)
     }
+
+    fun resetDeleteState(){
+        _deleteState.value = RecordState.Idle
+    }
 }

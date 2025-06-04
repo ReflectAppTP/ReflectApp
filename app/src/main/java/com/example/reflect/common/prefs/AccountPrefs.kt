@@ -41,9 +41,7 @@ object AccountPrefs {
 
     fun isAuthorized(context: Context) = getPrefs(context).getBoolean(LOG_STATE, false)
 
-    fun isGuest(context: Context) = getPrefs(context).getBoolean(GUEST_STATE, false)
-
-    fun isLoggedIn(context: Context) = isAuthorized(context) || isGuest(context)
+    fun isGuest(context: Context) = getUser(context).isGuest
 
     fun isPremium(context: Context) = getUser(context).isPremium
 

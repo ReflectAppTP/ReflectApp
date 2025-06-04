@@ -42,10 +42,16 @@ class ProfileFragment : Fragment() {
                 fragmentProfileLogoutButton.visibility = View.VISIBLE
                 fragmentProfileLoginButton.visibility = View.GONE
                 fragmentProfileRegistrationButton.visibility = View.GONE
+                fragmentProfilePremiumButton.visibility = View.VISIBLE
+                fragmentProfileWidgetButton.visibility = View.VISIBLE
+                fragmentProfileToolbarSettingsIcon.visibility = View.VISIBLE
             } else if (AccountPrefs.isGuest(requireContext())) {
                 fragmentProfileLogoutButton.visibility = View.GONE
                 fragmentProfileLoginButton.visibility = View.VISIBLE
                 fragmentProfileRegistrationButton.visibility = View.VISIBLE
+                fragmentProfilePremiumButton.visibility = View.GONE
+                fragmentProfileWidgetButton.visibility = View.GONE
+                fragmentProfileToolbarSettingsIcon.visibility = View.GONE
             }
         }
 

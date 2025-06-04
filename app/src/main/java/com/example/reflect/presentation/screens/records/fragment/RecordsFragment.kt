@@ -202,6 +202,7 @@ class RecordsFragment : Fragment() {
         when (state) {
             is RecordState.Loading -> {
                 ToastUtils.showLoadingToast(context)
+                vm.resetDeleteState()
             }
             is RecordState.Success -> {
                 vm.fetchRecords()
@@ -209,9 +210,11 @@ class RecordsFragment : Fragment() {
                 lifecycleScope.launch {
                     statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
                 }
+                vm.resetDeleteState()
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)
+                vm.resetDeleteState()
             }
             is RecordState.Idle -> {
                 Unit

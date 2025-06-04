@@ -3,7 +3,6 @@ package com.example.reflect.data.repository.friendship
 import android.content.Context
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.domain.model.NotificationFriendshipModel
-import com.example.reflect.domain.model.NotificationUserModel
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -44,7 +43,7 @@ class WebSocketFriendshipRepositoryImpl @Inject constructor(
         }
 
         val request = Request.Builder()
-            .url("ws://185.185.71.233/ws/notifications/?token=${AccountPrefs.getAuthToken(context)}")
+            .url("wss://reflect-app.ru/ws/notifications/?token=${AccountPrefs.getAuthToken(context)}")
             .build()
 
         webSocket = client.newWebSocket(request, listener)
