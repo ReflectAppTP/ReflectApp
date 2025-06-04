@@ -77,7 +77,6 @@ class NotificationFriendsFragment : Fragment() {
     private fun handleDoWithNotificationState(state: DoWithNotificationState) {
         when (state) {
             is DoWithNotificationState.Success -> {
-                Toast.makeText(requireContext(), "Заявка отправлена", Toast.LENGTH_SHORT).show()
                 notificationVM.resetDoWithNotificationState()
                 friendsVM.fetchFriends()
             }
