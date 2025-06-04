@@ -55,6 +55,7 @@ class ViewModelRecords @Inject constructor(
 
     init {
         fetchRecords()
+        updateStreak()
 
         handleIntent()
     }

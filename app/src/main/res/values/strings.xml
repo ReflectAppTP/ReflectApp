@@ -75,6 +75,7 @@
     <!-- Error messages -->
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+    <string name="equalityFieldsErrorMessage">Пароли не должны совпадать</string>
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
     <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
@@ -307,5 +308,6 @@
     <string name="dialogBewareAIDescriptionSecondL">- Не полагайтесь слепо на ИИ — он не чувствует, не сопереживает и, также как и администрация, не несёт ответственности за последствия.</string>
     <string name="dialogBewareAIDescriptionFooter"><b>Ваше благополучие важнее всего!</b></string>
     <string name="dialogBewareAIButton">ОК</string>
+    <string name="toastSuccessfulUpdate">Профиль успешно изменён</string>
 
 </resources>

@@ -15,6 +15,9 @@ import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
 import com.example.reflect.data.repository.friendship.AcceptFriendshipRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangeLoginRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangePasswordRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangeVisibilityRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
@@ -45,6 +48,9 @@ import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
 import com.example.reflect.domain.repository.friendship.AcceptFriendshipRepository
+import com.example.reflect.domain.repository.friendship.ChangeLoginRepository
+import com.example.reflect.domain.repository.friendship.ChangePasswordRepository
+import com.example.reflect.domain.repository.friendship.ChangeVisibilityRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
 import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
@@ -244,4 +250,22 @@ object RepositoryModule {
     fun provideReportState(
         remoteData: RetrofitRemoteData
     ): ReportStateRepository = ReportStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdatePassword(
+        remoteData: RetrofitRemoteData
+    ): ChangePasswordRepository = ChangePasswordRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdateLogin(
+        remoteData: RetrofitRemoteData
+    ): ChangeLoginRepository = ChangeLoginRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdateVisibility(
+        remoteData: RetrofitRemoteData
+    ): ChangeVisibilityRepository = ChangeVisibilityRepositoryImpl(remoteData)
 }

@@ -9,14 +9,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.Utils
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileSettingsBinding
+import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.profile.SettingsProfileIntent
+import com.example.reflect.presentation.screens.profile.UpdateProfileState
 import com.example.reflect.presentation.screens.profile.viewmodel.ViewModelProfileSettings
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
@@ -26,7 +28,7 @@ class ProfileSettingsFragment : Fragment() {
     private var _binding: FragmentProfileSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private val vm: ViewModelProfileSettings by viewModels()
+    private val vm: ViewModelProfileSettings by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,7 @@ class ProfileSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         with (binding) {
             setValueToFields()
             bindViewModelAndTextFields()
@@ -61,21 +64,33 @@ class ProfileSettingsFragment : Fragment() {
 
                 when {
                     oldPassword == newPassword && isPasswordValid -> {
-                        lifecycleScope.launch {
-                            vm.userIntent.send(SettingsProfileIntent.SaveChanges)
-                        }
+                        changeErrorStates(
+                            loginError = false,
+                            visibility = false,
+                            errorMessage = getText(R.string.equalityFieldsErrorMessage).toString()
+                        )
                     }
                     !isPasswordValid -> {
                         changeErrorStates(
                             loginError = false,
+                            visibility = false,
                             errorMessage = getText(R.string.passwordInSixSymbolsErrorMessage).toString()
                         )
                     }
                     else -> {
-                        changeErrorStates(
-                            loginError = false,
-                            errorMessage = getText(R.string.inequalityFieldsErrorMessage).toString()
-                        )
+                        lifecycleScope.launch {
+                            vm.userIntent.send(SettingsProfileIntent.Update(
+                                if (AccountPrefs.getUser(requireContext()).username == fragmentProfileLoginEditTextField.text.toString()) null
+                                else fragmentProfileLoginEditTextField.text.toString(),
+                                fragmentProfilePasswordEditTextField.text.toString().ifEmpty { null },
+                                fragmentProfilePasswordConfirmationEditTextField.text.toString().ifEmpty { null },
+                                when (fragmentProfileVisibilityField.text.toString()) {
+                                    "Никому" -> "self"
+                                    "Только друзьям" -> "friends"
+                                    else -> "all"
+                                }
+                            ))
+                        }
                     }
                 }
             }
@@ -91,6 +106,12 @@ class ProfileSettingsFragment : Fragment() {
                 true
             }
         }
+
+        lifecycleScope.launch {
+            vm.userState.collect {
+                handleUserState(it)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -100,7 +121,7 @@ class ProfileSettingsFragment : Fragment() {
 
     private fun setValueToFields() {
         val user = AccountPrefs.getUser(requireContext())
-        vm.updateVisibility("Никому")
+        vm.updateVisibility("Всем")
         vm.updateLogin(user.username)
         with (binding) {
             fragmentProfileLoginEditTextField.setText(vm.login.value)
@@ -116,7 +137,8 @@ class ProfileSettingsFragment : Fragment() {
                 changeErrorStates(
                     loginError = false,
                     oldPassword = false,
-                    newPassword = false
+                    newPassword = false,
+                    visibility = false
                 )
                 fragmentProfileLoginEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterLoginLength) - resources.getInteger(R.integer.characterLimit)
@@ -128,7 +150,8 @@ class ProfileSettingsFragment : Fragment() {
                 changeErrorStates(
                     loginError = false,
                     oldPassword = false,
-                    newPassword = false
+                    newPassword = false,
+                    visibility = false
                 )
                 fragmentProfilePasswordEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterLoginLength) - resources.getInteger(R.integer.characterLimit)
@@ -140,7 +163,8 @@ class ProfileSettingsFragment : Fragment() {
                 changeErrorStates(
                     loginError = false,
                     oldPassword = false,
-                    newPassword = false
+                    newPassword = false,
+                    visibility = false
                 )
                 fragmentProfilePasswordConfirmationEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterLoginLength) - resources.getInteger(R.integer.characterLimit)
@@ -158,12 +182,14 @@ class ProfileSettingsFragment : Fragment() {
         loginError: Boolean = true,
         oldPassword: Boolean = true,
         newPassword: Boolean = true,
+        visibility: Boolean = true,
         errorMessage: String = ""
     ) {
         with (binding) {
             fragmentProfileLoginEditText.error = if (loginError) " " else ""
             fragmentProfilePasswordEditText.error = if (oldPassword) " " else ""
             fragmentProfilePasswordConfirmationEditText.error = if (newPassword) " " else ""
+            fragmentProfileVisibility.error = if (visibility) " " else ""
             fragmentProfilePasswordErrorMessage.text = errorMessage
         }
     }
@@ -176,5 +202,25 @@ class ProfileSettingsFragment : Fragment() {
             fragmentProfilePasswordConfirmationEditTextField.clearFocus()
         }
         imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun handleUserState(state: UpdateProfileState) {
+        with (binding) {
+            when (state) {
+                is UpdateProfileState.Loading -> fragmentProfileSaveChanges.isEnabled = false
+                is UpdateProfileState.Success -> {
+                    fragmentProfileSaveChanges.isEnabled = true
+                    AccountPrefs.saveUserModel(requireContext(), AccountPrefs.getUser(requireContext()).copy(username = fragmentProfileLoginEditTextField.text.toString()))
+                    ToastUtils.showSuccessUpdateProfile(requireContext())
+                    vm.updateUserState()
+                }
+                is UpdateProfileState.Error -> {
+                    fragmentProfileSaveChanges.isEnabled = true
+                    changeErrorStates(errorMessage = state.message)
+                    vm.updateUserState()
+                }
+                is UpdateProfileState.Idle -> Unit
+            }
+        }
     }
 }

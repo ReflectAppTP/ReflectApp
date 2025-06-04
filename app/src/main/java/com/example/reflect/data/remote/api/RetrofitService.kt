@@ -1,5 +1,8 @@
 package com.example.reflect.data.remote.api
 
+import com.example.reflect.data.dto.ChangeLoginDTO
+import com.example.reflect.data.dto.ChangePasswordDTO
+import com.example.reflect.data.dto.ChangeVisibilityDTO
 import com.example.reflect.data.dto.GetUserByIdDTO
 import com.example.reflect.data.dto.SendFriendshipRequestDTO
 import com.example.reflect.data.dto.StateRequestDTO
@@ -125,6 +128,15 @@ interface RetrofitService {
 
     @GET("$profile/user/streak/")
     suspend fun getStreak(): Response<StreakResponseDTO>
+
+    @PATCH("$profile/user/update/password/")
+    suspend fun updatePassword(@Body changePasswordDTO: ChangePasswordDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/username/")
+    suspend fun updateUsername(@Body changeLoginDTO: ChangeLoginDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/visibility/")
+    suspend fun updateVisibility(@Body changeVisibilityDTO: ChangeVisibilityDTO): Response<Unit>
 
     @POST("$reports/user/")
     suspend fun reportUser(@Body reportDTO: ReportUserRequestDTO): Response<ReportUserResponseDTO>

@@ -22,9 +22,11 @@ class RegistrationUseCase @Inject constructor(
             val user = registrationRepository.register(username, email, password)
             emit(RegistrationState.Success(user))
         } catch (e: RetrofitException) {
-            emit(RegistrationState.Error(RetrofitExceptionHandler.getErrorMessage(e)))
+            emit(RegistrationState.Error(if (e.code == 400) "Пользователь с таким логином существует" else RetrofitExceptionHandler.getErrorMessage(e)))
         } catch (e: ConnectException) {
             emit(RegistrationState.Error("Ошибка подлючения к интернету"))
+        } catch (e: Exception) {
+            emit(RegistrationState.Error("Какая то ошибка"))
         }
     }
 }
