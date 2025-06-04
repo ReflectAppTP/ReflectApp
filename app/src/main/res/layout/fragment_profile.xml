@@ -52,17 +52,6 @@
             android:contentDescription="@string/contentDescriptionFragmentProfileIcon"
             />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/fragmentProfileImageViewChangeIcon"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="bottom|end"-->
-<!--            android:layout_margin="@dimen/fragmentProfileImageChangeIconMargin_4dp"-->
-<!--            android:background="@android:color/transparent"-->
-<!--            android:src="@drawable/ic_change_profile_image"-->
-<!--            android:contentDescription="@string/contentDescriptionFragmentProfileIconChange"-->
-<!--            />-->
-
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -132,6 +121,25 @@
         app:strokeColor="@color/primary" />
 
     <Button
+        android:id="@+id/fragmentProfileRulesButton"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="@dimen/fragmentProfileButtonWidth_255dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragmentProfileButtonMarginTop_20dp"
+        android:paddingVertical="@dimen/fragmentProfileButtonPaddingVertical_12dp"
+        android:text="@string/fragmentProfileRulesButton"
+        android:textAlignment="textStart"
+        android:textColor="@color/onSurface"
+        app:cornerRadius="@dimen/fragmentProfileButtonCornerRadius_12dp"
+        app:icon="@drawable/ic_rules"
+        app:iconPadding="@dimen/fragmentProfileButtonIconPadding_8dp"
+        app:iconTint="@color/onSurface"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProfileWidgetButton"
+        app:strokeColor="@color/primary" />
+
+    <Button
         android:id="@+id/fragmentProfileLogoutButton"
         android:layout_width="@dimen/fragmentProfileSmallButtonWidth_180dp"
         android:layout_height="wrap_content"
@@ -143,7 +151,7 @@
         app:strokeColor="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentProfileWidgetButton" />
+        app:layout_constraintTop_toBottomOf="@+id/fragmentProfileRulesButton" />
 
     <Button
         android:id="@+id/fragmentProfileLoginButton"

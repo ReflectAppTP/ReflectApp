@@ -64,9 +64,12 @@ class ProfileFragment : Fragment() {
             }
 
             fragmentProfilePremiumButton.setOnClickListener {
-                // TODO: потом переделать
                 AppMetrica.reportEvent("Нажатие на кнопку Покупка премиума")
                 findNavController().navigate(R.id.action_profileFragment_to_premiumFragment)
+            }
+
+            fragmentProfileRulesButton.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_rulesFragment)
             }
 
             fragmentProfileLoginButton.setOnClickListener {
