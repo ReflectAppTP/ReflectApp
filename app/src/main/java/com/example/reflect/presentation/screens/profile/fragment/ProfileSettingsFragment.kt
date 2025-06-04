@@ -247,8 +247,8 @@ class ProfileSettingsFragment : Fragment() {
                 is DeleteUserState.Loading -> fragmentProfileDelete.isEnabled = false
                 is DeleteUserState.Success -> {
                     ToastUtils.showSuccessDeleteUser(requireContext())
-                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment_with_popUp)
                     AccountPrefs.clearAuthState(requireContext())
+                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment_with_popUp)
                 }
                 is DeleteUserState.Error -> {
                     fragmentProfileDelete.isEnabled = true

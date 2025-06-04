@@ -1,6 +1,7 @@
 package com.example.reflect.data.repository.friendship
 
 import android.content.Context
+import android.util.Log
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.domain.model.NotificationFriendshipModel
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
@@ -27,6 +28,7 @@ class WebSocketFriendshipRepositoryImpl @Inject constructor(
             override fun onMessage(webSocket: WebSocket, text: String) {
                 try {
                     val notificationModel = Gson().fromJson(text, NotificationFriendshipModel::class.java)
+                    Log.d("WEBSOCKET", notificationModel.toString())
                     trySend(notificationModel)
                 } catch (e: Exception) {
                     close(e)

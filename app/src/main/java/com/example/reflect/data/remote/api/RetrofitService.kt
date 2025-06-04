@@ -2,6 +2,7 @@ package com.example.reflect.data.remote.api
 
 import com.example.reflect.data.dto.ChangeLoginDTO
 import com.example.reflect.data.dto.ChangePasswordDTO
+import com.example.reflect.data.dto.ChangePremiumDTO
 import com.example.reflect.data.dto.ChangeVisibilityDTO
 import com.example.reflect.data.dto.GetUserByIdDTO
 import com.example.reflect.data.dto.SendFriendshipRequestDTO
@@ -144,6 +145,9 @@ interface RetrofitService {
 
     @PATCH("$profile/user/update/visibility/")
     suspend fun updateVisibility(@Body changeVisibilityDTO: ChangeVisibilityDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/premium/")
+    suspend fun updatePremium(@Body changePremiumDTO: ChangePremiumDTO): Response<Unit>
 
     @DELETE("$profile/user/delete/")
     suspend fun deleteUser(): Response<Unit>

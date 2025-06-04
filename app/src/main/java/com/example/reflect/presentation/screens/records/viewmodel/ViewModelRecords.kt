@@ -76,9 +76,9 @@ class ViewModelRecords @Inject constructor(
             getStatesUseCase(dateFormat.format(_selectedDate.value)).collect { newState ->
                 if (newState is GetRecordsState.Success) {
                     _records.value = newState.records.sortedBy { it.id }
-                    updateStreak()
                 }
                 _recordsState.value = newState
+                updateStreak()
             }
         }
     }

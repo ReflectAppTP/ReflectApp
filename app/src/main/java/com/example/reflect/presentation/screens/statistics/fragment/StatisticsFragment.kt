@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentStatisticsBinding
 import com.example.reflect.presentation.adapter.StatisticTagListAdapter
 import com.example.reflect.presentation.common.ExportStatisticUtils
@@ -64,6 +65,18 @@ class StatisticsFragment : Fragment() {
                 vm.lineChartState.collect { state ->
                     handleLineChartState(state, context)
                 }
+            }
+        }
+
+        with (binding) {
+            if (AccountPrefs.isPremium(requireContext())) {
+                fragmentStatisticCardPieChart.visibility = View.VISIBLE
+                fragmentStatisticCardFirstBarChart.visibility = View.VISIBLE
+                fragmentStatisticCardSecondBarChart.visibility = View.VISIBLE
+            } else {
+                fragmentStatisticCardPieChart.visibility = View.GONE
+                fragmentStatisticCardFirstBarChart.visibility = View.GONE
+                fragmentStatisticCardSecondBarChart.visibility = View.GONE
             }
         }
 

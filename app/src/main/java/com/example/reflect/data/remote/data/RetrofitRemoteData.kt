@@ -2,6 +2,7 @@ package com.example.reflect.data.remote.data
 
 import com.example.reflect.data.dto.ChangeLoginDTO
 import com.example.reflect.data.dto.ChangePasswordDTO
+import com.example.reflect.data.dto.ChangePremiumDTO
 import com.example.reflect.data.dto.ChangeVisibilityDTO
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.UserIdDTO
@@ -57,4 +58,5 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
     suspend fun updatePassword(changePasswordDTO: ChangePasswordDTO) = retrofitService.updatePassword(changePasswordDTO)
     suspend fun updateUsername(changeLoginDTO: ChangeLoginDTO) = retrofitService.updateUsername(changeLoginDTO)
     suspend fun updateVisibility(changeVisibilityDTO: ChangeVisibilityDTO) = retrofitService.updateVisibility(changeVisibilityDTO)
+    suspend fun updatePremium(changePremiumDTO: ChangePremiumDTO) = retrofitService.updatePremium(changePremiumDTO)
 }

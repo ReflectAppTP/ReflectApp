@@ -322,29 +322,6 @@
                         app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardSecondTitle"
                         />
 
-                    <TextView
-                        android:id="@+id/fragmentPremiumBenefitsCardThirdTitle"
-                        style="@style/TextAppearance.Material3.TitleMedium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
-                        android:text="@string/fragmentPremiumBenefitsThirdTitle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardSecondDescription"
-                        />
-
-                    <TextView
-                        android:id="@+id/fragmentPremiumBenefitsCardThirdDescription"
-                        style="@style/TextAppearance.Material3.TitleMedium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/fragmentPremiumBenefitsCardDescriptionMarginStart_17dp"
-                        android:layout_marginTop="@dimen/fragmentPremiumBenefitsCardDescriptionMarginTop_20dp"
-                        android:text="@string/fragmentPremiumBenefitsCardThirdDescription"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/fragmentPremiumBenefitsCardThirdTitle"
-                        />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>

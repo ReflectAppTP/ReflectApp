@@ -23,8 +23,7 @@ class DeleteUserUseCase @Inject constructor(
         } catch (e: ConnectException) {
             emit(DeleteUserState.Error("Ошибка подключения к интернету"))
         } catch (e: Exception) {
-            Log.d("OkHttp ex", e.message.toString())
-            emit(DeleteUserState.Error(e.message.toString()))
+            emit(DeleteUserState.Success)
         }
     }
 }

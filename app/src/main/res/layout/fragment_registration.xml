@@ -152,6 +152,7 @@
             android:text="@string/registrationOr"
             android:textColor="@color/onSurface"
             style="@style/TextAppearance.Material3.LabelLarge"
+            android:visibility="gone"
             />
 
         <Button
@@ -160,6 +161,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#0077FF"
             android:text="Зарегистрироваться через VK"
+            android:visibility="gone"
             style="@style/MaterialButton" />
 
     </LinearLayout>
