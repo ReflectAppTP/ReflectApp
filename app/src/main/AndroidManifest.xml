@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.BIND_APPWIDGET"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="false"
@@ -47,6 +50,28 @@
                 android:resource="@xml/file_paths"
                 />
         </provider>
+
+        <receiver android:name=".presentation.widget.WidgetStreakProvider"
+            android:exported="true"
+            android:label="@string/widgetStreakDescription"
+            >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_streak_provider"/>
+        </receiver>
+
+        <receiver android:name=".presentation.widget.WidgetStateProvider"
+            android:exported="true"
+            android:label="@string/widgetStateDescription"
+            >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_state_provider"/>
+        </receiver>
     </application>
     
 </manifest>

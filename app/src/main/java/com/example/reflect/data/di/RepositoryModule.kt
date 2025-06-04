@@ -9,13 +9,28 @@ import com.example.reflect.data.repository.state.DeleteStateRepositoryImpl
 import com.example.reflect.data.repository.state.EditStateRepositoryImpl
 import com.example.reflect.data.repository.state.GetFirstTagsRepositoryImpl
 import com.example.reflect.data.repository.auth.GetProfileRepositoryImpl
+import com.example.reflect.data.repository.auth.LoginLikeGuestRepositoryImpl
 import com.example.reflect.data.repository.state.GetSecondTagsRepositoryImpl
 import com.example.reflect.data.repository.state.GetStatesRepositoryImpl
 import com.example.reflect.data.repository.auth.LoginRepositoryImpl
 import com.example.reflect.data.repository.auth.RefreshRepositoryImpl
+import com.example.reflect.data.repository.auth.RegistrationFromGuestRepositoryImpl
 import com.example.reflect.data.repository.auth.RegistrationRepositoryImpl
+import com.example.reflect.data.repository.friendship.AcceptFriendshipRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangeLoginRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangePasswordRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangePremiumRepositoryImpl
+import com.example.reflect.data.repository.friendship.ChangeVisibilityRepositoryImpl
+import com.example.reflect.data.repository.friendship.DeleteUserRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
+import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
+import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
+import com.example.reflect.data.repository.friendship.RejectFriendshipRepositoryImpl
+import com.example.reflect.data.repository.friendship.ReportStateRepositoryImpl
+import com.example.reflect.data.repository.friendship.ReportUserRepositoryImpl
 import com.example.reflect.data.repository.friendship.SearchUsersRepositoryImpl
+import com.example.reflect.data.repository.friendship.SendFriendshipRequestRepositoryImpl
+import com.example.reflect.data.repository.state.GetStreakRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetMonthlyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
@@ -30,13 +45,28 @@ import com.example.reflect.domain.repository.state.DeleteStateRepository
 import com.example.reflect.domain.repository.state.EditStateRepository
 import com.example.reflect.domain.repository.state.GetFirstTagsRepository
 import com.example.reflect.domain.repository.auth.GetProfileRepository
+import com.example.reflect.domain.repository.auth.LoginLikeGuestRepository
 import com.example.reflect.domain.repository.state.GetSecondTagsRepository
 import com.example.reflect.domain.repository.state.GetStatesRepository
 import com.example.reflect.domain.repository.auth.LoginRepository
 import com.example.reflect.domain.repository.auth.RefreshRepository
+import com.example.reflect.domain.repository.auth.RegistrationFromGuestRepository
 import com.example.reflect.domain.repository.auth.RegistrationRepository
+import com.example.reflect.domain.repository.friendship.AcceptFriendshipRepository
+import com.example.reflect.domain.repository.friendship.ChangeLoginRepository
+import com.example.reflect.domain.repository.friendship.ChangePasswordRepository
+import com.example.reflect.domain.repository.friendship.ChangePremiumRepository
+import com.example.reflect.domain.repository.friendship.ChangeVisibilityRepository
+import com.example.reflect.domain.repository.friendship.DeleteUserRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
+import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
+import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
+import com.example.reflect.domain.repository.friendship.RejectFriendshipRepository
+import com.example.reflect.domain.repository.friendship.ReportStateRepository
+import com.example.reflect.domain.repository.friendship.ReportUserRepository
 import com.example.reflect.domain.repository.friendship.SearchUsersRepository
+import com.example.reflect.domain.repository.friendship.SendFriendshipRequestRepository
+import com.example.reflect.domain.repository.state.GetStreakRepository
 import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
 import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
@@ -61,6 +91,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
+    fun provideRegistrationFromGuest(
+        remoteData: RetrofitRemoteData
+    ): RegistrationFromGuestRepository = RegistrationFromGuestRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
     fun provideLoginRepository(
         remoteData: RetrofitRemoteData
     ): LoginRepository = LoginRepositoryImpl(remoteData)
@@ -70,6 +106,12 @@ object RepositoryModule {
     fun provideGetProfileRepository(
         remoteData: RetrofitRemoteData
     ): GetProfileRepository = GetProfileRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideLoginLikeGuest(
+        remoteData: RetrofitRemoteData
+    ): LoginLikeGuestRepository = LoginLikeGuestRepositoryImpl(remoteData)
 
     @Provides
     @Singleton
@@ -178,4 +220,82 @@ object RepositoryModule {
     fun provideSearchUsers(
         remoteData: RetrofitRemoteData
     ): SearchUsersRepository = SearchUsersRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideSendFriendshipRequest(
+        remoteData: RetrofitRemoteData
+    ): SendFriendshipRequestRepository = SendFriendshipRequestRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetFriendshipNotification(
+        remoteData: RetrofitRemoteData
+    ): GetFriendsNotificationRepository = GetFriendsNotificationRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideAcceptFriendship(
+        remoteData: RetrofitRemoteData
+    ): AcceptFriendshipRepository = AcceptFriendshipRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideRejectFriendship(
+        remoteData: RetrofitRemoteData
+    ): RejectFriendshipRepository = RejectFriendshipRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStreak(
+        remoteData: RetrofitRemoteData
+    ): GetStreakRepository = GetStreakRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetUserById(
+        remoteData: RetrofitRemoteData
+    ): GetUserByIdRepository = GetUserByIdRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideReportUser(
+        remoteData: RetrofitRemoteData
+    ): ReportUserRepository = ReportUserRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideReportState(
+        remoteData: RetrofitRemoteData
+    ): ReportStateRepository = ReportStateRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdatePassword(
+        remoteData: RetrofitRemoteData
+    ): ChangePasswordRepository = ChangePasswordRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdateLogin(
+        remoteData: RetrofitRemoteData
+    ): ChangeLoginRepository = ChangeLoginRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdateVisibility(
+        remoteData: RetrofitRemoteData
+    ): ChangeVisibilityRepository = ChangeVisibilityRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideDeleteUser(
+        remoteData: RetrofitRemoteData
+    ): DeleteUserRepository = DeleteUserRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideUpdataPremium(
+        remoteData: RetrofitRemoteData
+    ): ChangePremiumRepository = ChangePremiumRepositoryImpl(remoteData)
 }

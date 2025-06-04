@@ -40,7 +40,6 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -117,9 +116,7 @@ class RegistrationFragment : Fragment() {
                 )
                 registrationPasswordConfirmationEditText.isCounterEnabled =
                     value.toString().length >= resources.getInteger(R.integer.counterPasswordLength) - resources.getInteger(R.integer.characterLimit)
-
             }
-
         }
     }
 
@@ -153,8 +150,14 @@ class RegistrationFragment : Fragment() {
 
                 when {
                     password == passwordConfirmation && isPasswordValid -> {
-                        lifecycleScope.launch {
-                            vm.userIntent.send(RegistrationIntent.RegisterUser)
+                        if (AccountPrefs.isGuest(requireContext())) {
+                            lifecycleScope.launch {
+                                vm.userIntent.send(RegistrationIntent.RegisterGuest)
+                            }
+                        } else {
+                            lifecycleScope.launch {
+                                vm.userIntent.send(RegistrationIntent.RegisterUser)
+                            }
                         }
                     }
                     !isPasswordValid -> {
@@ -230,7 +233,7 @@ class RegistrationFragment : Fragment() {
             }
             is RegistrationState.Success -> {
                 ToastUtils.showSuccessfulRegistrationToast(context)
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
             }
             is RegistrationState.Error -> {
                 binding.registrationButton.isEnabled = true

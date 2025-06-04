@@ -7,4 +7,7 @@ data class UserModel(
     val createdAt: String,
     val isAdmin: Boolean,
     val isPremium: Boolean,
+    val isGuest: Boolean = false,
+    val access: String? = null,
+    val refresh: String? = null
     )

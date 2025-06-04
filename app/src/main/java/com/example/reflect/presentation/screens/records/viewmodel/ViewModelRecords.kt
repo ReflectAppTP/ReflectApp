@@ -5,10 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.model.RecordModel
 import com.example.reflect.domain.usecase.state.DeleteStateUseCase
 import com.example.reflect.domain.usecase.state.GetStatesUseCase
+import com.example.reflect.domain.usecase.state.GetStreakUseCase
 import com.example.reflect.presentation.common.DateUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
+import com.example.reflect.presentation.screens.records.GetStreakState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelRecords @Inject constructor(
     private val getStatesUseCase: GetStatesUseCase,
-    private val deleteStateUseCase: DeleteStateUseCase
+    private val deleteStateUseCase: DeleteStateUseCase,
+    private val getStreakUseCase: GetStreakUseCase,
 ) : ViewModel() {
     // Надо это поле делать private или нет?
     val currentCalendar = Calendar.getInstance()
@@ -38,6 +41,9 @@ class ViewModelRecords @Inject constructor(
     private var _deleteState = MutableStateFlow<RecordState>(RecordState.Idle)
     val deleteState: StateFlow<RecordState> = _deleteState
 
+    private var _streakState = MutableStateFlow<GetStreakState>(GetStreakState.Idle)
+    val streakState: StateFlow<GetStreakState> = _streakState
+
     private var _selectedDate = MutableStateFlow(mutableCalendar.time)
     val selectedDate: StateFlow<Date> get() = _selectedDate
 
@@ -49,6 +55,7 @@ class ViewModelRecords @Inject constructor(
 
     init {
         fetchRecords()
+        updateStreak()
 
         handleIntent()
     }
@@ -71,6 +78,16 @@ class ViewModelRecords @Inject constructor(
                     _records.value = newState.records.sortedBy { it.id }
                 }
                 _recordsState.value = newState
+                updateStreak()
+            }
+        }
+    }
+
+    private fun updateStreak() {
+        _streakState.value = GetStreakState.Idle
+        viewModelScope.launch {
+            getStreakUseCase().collect { streakState ->
+                _streakState.value = streakState
             }
         }
     }
@@ -95,7 +112,22 @@ class ViewModelRecords @Inject constructor(
     private suspend fun deleteRecord(id: Int) {
         _deleteState.value = RecordState.Idle
         deleteStateUseCase(id).collect { newState ->
+            if (newState is RecordState.Success) {
+                updateStreak()
+            }
             _deleteState.value = newState
         }
+    }
+
+    fun datesAreEquals(): Boolean {
+        val calendar = Calendar.getInstance()
+        calendar.time = _selectedDate.value
+        return calendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR) &&
+            calendar.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH) &&
+            calendar.get(Calendar.DAY_OF_MONTH) == currentCalendar.get(Calendar.DAY_OF_MONTH)
+    }
+
+    fun resetDeleteState(){
+        _deleteState.value = RecordState.Idle
     }
 }

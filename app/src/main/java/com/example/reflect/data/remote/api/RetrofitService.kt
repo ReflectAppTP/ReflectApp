@@ -1,17 +1,31 @@
 package com.example.reflect.data.remote.api
 
+import com.example.reflect.data.dto.ChangeLoginDTO
+import com.example.reflect.data.dto.ChangePasswordDTO
+import com.example.reflect.data.dto.ChangePremiumDTO
+import com.example.reflect.data.dto.ChangeVisibilityDTO
+import com.example.reflect.data.dto.GetUserByIdDTO
+import com.example.reflect.data.dto.SendFriendshipRequestDTO
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.StateResponseDTO
+import com.example.reflect.data.dto.StreakResponseDTO
 import com.example.reflect.data.dto.TagDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.LoginResponseDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationResponseDTO
 import com.example.reflect.data.dto.UserDTO
+import com.example.reflect.data.dto.UserIdDTO
 import com.example.reflect.data.dto.ai.AIGetMessageResponseDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
 import com.example.reflect.data.dto.ai.AISendMessageResponseDTO
 import com.example.reflect.data.dto.friendship.GetFriendsResponseDTO
+import com.example.reflect.data.dto.friendship.NotificationFriendshipDTO
+import com.example.reflect.data.dto.friendship.ReportUserRequestDTO
+import com.example.reflect.data.dto.friendship.ReportUserResponseDTO
+import com.example.reflect.data.dto.friendship.ReportStateRequestDTO
+import com.example.reflect.data.dto.friendship.ReportStateResponseDTO
+import com.example.reflect.data.dto.login.GuestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.statistic.StatisticAverageResponseDTO
 import com.example.reflect.data.dto.statistic.StatisticMoodResponseDTO
@@ -31,6 +45,8 @@ private const val emotions = "api/emotions"
 private const val statistic = "api/emotions/statistics"
 private const val ai = "api/ai/chat"
 private const val friends = "api/friends"
+private const val profile = "api/profileReflect"
+private const val reports = "api/reports"
 
 interface RetrofitService {
 
@@ -42,6 +58,12 @@ interface RetrofitService {
 
     @GET("$authReflect/profile/")
     suspend fun getProfile(): Response<UserDTO>
+    
+    @POST("$authReflect/guest-login/")
+    suspend fun loginLikeGuest(): Response<GuestDTO>
+
+    @POST("$authReflect/register-from-guest/")
+    suspend fun registerFromGuest(@Body registrationRequest: RegistrationRequestDTO): Response<Unit>
 
     @POST("$token/refresh/")
     suspend fun getAccessToken(@Body refreshRequestDTO: RefreshRequestDTO): Response<LoginResponseDTO>
@@ -96,4 +118,43 @@ interface RetrofitService {
 
     @GET("$friends/by-username/{username}/")
     suspend fun searchUsers(@Path("username") username: String): Response<List<GetFriendsResponseDTO>>
+
+    @POST("$friends/friendships/")
+    suspend fun sendFriendshipRequest(@Body userIdDTO: UserIdDTO): Response<SendFriendshipRequestDTO>
+
+    @GET("$friends/requests/pending/")
+    suspend fun getFriendshipNotification(): Response<MutableList<NotificationFriendshipDTO>>
+
+    @POST("$friends/friendships/accept/{id}/")
+    suspend fun acceptFriendship(@Path("id") id: Int): Response<Unit>
+
+    @POST("$friends/friendships/reject/{id}/")
+    suspend fun rejectFriendship(@Path("id") id: Int): Response<Unit>
+
+    @GET("$profile/user/{id}/")
+    suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
+
+    @GET("$profile/user/streak/")
+    suspend fun getStreak(): Response<StreakResponseDTO>
+
+    @PATCH("$profile/user/update/password/")
+    suspend fun updatePassword(@Body changePasswordDTO: ChangePasswordDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/username/")
+    suspend fun updateUsername(@Body changeLoginDTO: ChangeLoginDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/visibility/")
+    suspend fun updateVisibility(@Body changeVisibilityDTO: ChangeVisibilityDTO): Response<Unit>
+
+    @PATCH("$profile/user/update/premium/")
+    suspend fun updatePremium(@Body changePremiumDTO: ChangePremiumDTO): Response<Unit>
+
+    @DELETE("$profile/user/delete/")
+    suspend fun deleteUser(): Response<Unit>
+
+    @POST("$reports/user/")
+    suspend fun reportUser(@Body reportDTO: ReportUserRequestDTO): Response<ReportUserResponseDTO>
+
+    @POST("$reports/state/")
+    suspend fun reportState(@Body reportDTO: ReportStateRequestDTO): Response<ReportStateResponseDTO>
 }

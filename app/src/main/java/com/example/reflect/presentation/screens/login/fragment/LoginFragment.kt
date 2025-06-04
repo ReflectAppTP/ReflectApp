@@ -2,14 +2,12 @@ package com.example.reflect.presentation.screens.login.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -25,18 +23,9 @@ import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
 import com.example.reflect.presentation.screens.login.viewmodel.ViewModelLogin
 import com.google.android.material.textfield.TextInputEditText
-import com.vk.id.AccessToken
-import com.vk.id.VKID
-import com.vk.id.VKIDAuthFail
-import com.vk.id.VKIDUser
-import com.vk.id.auth.VKIDAuthCallback
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
 import kotlinx.coroutines.launch
-import com.vk.id.auth.VKIDAuthParams
-import com.vk.id.refreshuser.VKIDGetUserCallback
-import com.vk.id.refreshuser.VKIDGetUserFail
-
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
@@ -95,37 +84,37 @@ class LoginFragment : Fragment() {
     }
 
     private fun setOnClickLogic() {
-        // TODO: impl
-        val vkAuthCallback = object : VKIDAuthCallback {
-            override fun onAuth(accessToken: AccessToken) {
-                val token = accessToken.token
-                Log.d("VK", token)
-                Log.d("VK", accessToken.idToken.toString())
-                Log.d("VK", accessToken.userID.toString())
-                Log.d("VK", accessToken.expireTime.toString())
-                binding.loginWithVKButton.isEnabled = true
-                lifecycleScope.launch {
-                    VKID.instance.getUserData(callback = object : VKIDGetUserCallback {
-                        override fun onFail(fail: VKIDGetUserFail) {
-                            Log.d("VK", fail.description)
-                        }
-
-                        override fun onSuccess(user: VKIDUser) {
-                            Log.d("VK", user.email.toString())
-                            Log.d("VK", user.firstName.toString())
-                            Log.d("VK", user.lastName.toString())
-                        }
-
-                    })
-                }
-            }
-
-            override fun onFail(fail: VKIDAuthFail) {
-                binding.loginWithVKButton.isEnabled = true
-                ToastUtils.showErrorToast(requireContext())
-            }
-
-        }
+//        // TODO: impl
+//        val vkAuthCallback = object : VKIDAuthCallback {
+//            override fun onAuth(accessToken: AccessToken) {
+//                val token = accessToken.token
+//                Log.d("VK", token)
+//                Log.d("VK", accessToken.idToken.toString())
+//                Log.d("VK", accessToken.userID.toString())
+//                Log.d("VK", accessToken.expireTime.toString())
+//                binding.loginWithVKButton.isEnabled = true
+//                lifecycleScope.launch {
+//                    VKID.instance.getUserData(callback = object : VKIDGetUserCallback {
+//                        override fun onFail(fail: VKIDGetUserFail) {
+//                            Log.d("VK", fail.description)
+//                        }
+//
+//                        override fun onSuccess(user: VKIDUser) {
+//                            Log.d("VK", user.email.toString())
+//                            Log.d("VK", user.firstName.toString())
+//                            Log.d("VK", user.lastName.toString())
+//                        }
+//
+//                    })
+//                }
+//            }
+//
+//            override fun onFail(fail: VKIDAuthFail) {
+//                binding.loginWithVKButton.isEnabled = true
+//                ToastUtils.showErrorToast(requireContext())
+//            }
+//
+//        }
 
         with(binding) {
             loginButton.setOnClickListener {
@@ -141,6 +130,13 @@ class LoginFragment : Fragment() {
                 }
             }
 
+            loginLikeGuestButton.setOnClickListener {
+                lifecycleScope.launch {
+                    vm.userIntent.send(LoginIntent.LoginLikeGuest)
+                }
+                AppMetrica.reportEvent("Нажатие на кнопку Войти как гость")
+            }
+
             root.setOnClickListener { clickedView ->
                 if (clickedView !is TextInputEditText) {
                     hideKeyboard()
@@ -154,12 +150,6 @@ class LoginFragment : Fragment() {
                 true
             }
 
-            loginLikeGuestButton.setOnClickListener {
-                // TODO: impl
-                AppMetrica.reportEvent("Нажатие на кнопку Войти как гость")
-                Toast.makeText(requireContext(), "Пока не работает", Toast.LENGTH_SHORT).show()
-            }
-
             loginRegistrationButton.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
             }
@@ -168,12 +158,12 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
             }
 
-            loginWithVKButton.setOnClickListener {
-                loginWithVKButton.isEnabled = false
-                VKID.instance.authorize(this@LoginFragment, vkAuthCallback, params = VKIDAuthParams {
-                    scopes = setOf("phone", "email")
-                })
-            }
+//            loginWithVKButton.setOnClickListener {
+//                loginWithVKButton.isEnabled = false
+//                VKID.instance.authorize(this@LoginFragment, vkAuthCallback, params = VKIDAuthParams {
+//                    scopes = setOf("phone", "email")
+//                })
+//            }
         }
     }
 
@@ -209,6 +199,13 @@ class LoginFragment : Fragment() {
             is LoginState.SuccessGetProfile -> {
                 AccountPrefs.saveAuthState(context, true)
                 AccountPrefs.saveUserModel(context, state.userModel)
+                ToastUtils.showWelcomeToast(context)
+                findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+            }
+            is LoginState.SuccessGuestLogin -> {
+                AccountPrefs.saveAuthState(context, false)
+                AccountPrefs.saveUserToken(context, state.guestModel.access!!, state.guestModel.refresh!!)
+                AccountPrefs.saveUserModel(context, state.guestModel)
                 ToastUtils.showWelcomeToast(context)
                 findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
             }

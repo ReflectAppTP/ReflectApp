@@ -73,6 +73,7 @@ class PasswordResetNewPasswordFragment : Fragment() {
             resetPasswordChangePasswordButton.setOnClickListener {
                 val isPasswordMoreThanSixSymbols = vm.isPasswordMoreThanSixSymbols()
                 if (vm.newPassword.value == vm.newPasswordConfirmation.value && isPasswordMoreThanSixSymbols) {
+                    // TODO: asdf
                     navController.navigate(R.id.action_passwordResetNewPasswordFragment_to_mainFragment)
                 } else {
                     val errorMessage = if (!isPasswordMoreThanSixSymbols) {

@@ -5,20 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.reflect.R
 import com.example.reflect.databinding.FragmentMainBinding
 import com.example.reflect.presentation.adapter.MainFragmentViewPagerAdapter
+import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
+import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    // Для того, чтобы подгрузить уведомления при запуске приложения
+    private val notificationsVM: ViewModelNotificationFriendship by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +38,12 @@ class MainFragment : Fragment() {
         val viewPager = binding.mainActivityViewPager
         viewPager.adapter = MainFragmentViewPagerAdapter(this)
         viewPager.isUserInputEnabled = false
+
+        lifecycleScope.launch {
+            notificationsVM.notificationState.collect {
+                handleNotifications(it)
+            }
+        }
 
         val bottomNavBar = binding.bottomNavBar
         bottomNavBar.setOnItemSelectedListener {
@@ -92,5 +107,13 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun handleNotifications(state: GetFriendsNotificationsState) {
+        if (state is GetFriendsNotificationsState.Success) {
+            binding.bottomNavBar.getOrCreateBadge(R.id.friendsFragment).isVisible = state.users.size != 0
+        } else if (state is GetFriendsNotificationsState.EmptyContent) {
+            binding.bottomNavBar.getOrCreateBadge(R.id.friendsFragment).isVisible = false
+        }
     }
 }

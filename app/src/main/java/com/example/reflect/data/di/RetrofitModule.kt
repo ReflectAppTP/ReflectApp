@@ -1,12 +1,16 @@
 package com.example.reflect.data.di
 
+import android.content.Context
 import android.util.Log
 import com.example.reflect.common.interceptor.AccessTokenInterceptor
 import com.example.reflect.data.remote.api.RetrofitService
 import com.example.reflect.data.remote.data.RetrofitRemoteData
+import com.example.reflect.data.repository.friendship.WebSocketFriendshipRepositoryImpl
+import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,7 +23,7 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     @Provides
-    fun provideBaseUrl() : String = "http://185.185.71.233/"
+    fun provideBaseUrl() : String = "https://reflect-app.ru/"
 
     @Provides
     @Singleton
@@ -53,4 +57,11 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideRetrofitRemoteData(retrofitService: RetrofitService) : RetrofitRemoteData = RetrofitRemoteData(retrofitService)
+
+    @Provides
+    @Singleton
+    fun provideWebSocketFriendship(
+        okHttpClient: OkHttpClient,
+        @ApplicationContext context: Context
+    ): WebSocketFriendshipRepository = WebSocketFriendshipRepositoryImpl(okHttpClient, context)
 }

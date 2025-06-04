@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
@@ -43,10 +42,16 @@ class ProfileFragment : Fragment() {
                 fragmentProfileLogoutButton.visibility = View.VISIBLE
                 fragmentProfileLoginButton.visibility = View.GONE
                 fragmentProfileRegistrationButton.visibility = View.GONE
+                fragmentProfilePremiumButton.visibility = View.VISIBLE
+                fragmentProfileWidgetButton.visibility = View.VISIBLE
+                fragmentProfileToolbarSettingsIcon.visibility = View.VISIBLE
             } else if (AccountPrefs.isGuest(requireContext())) {
                 fragmentProfileLogoutButton.visibility = View.GONE
                 fragmentProfileLoginButton.visibility = View.VISIBLE
                 fragmentProfileRegistrationButton.visibility = View.VISIBLE
+                fragmentProfilePremiumButton.visibility = View.GONE
+                fragmentProfileWidgetButton.visibility = View.GONE
+                fragmentProfileToolbarSettingsIcon.visibility = View.GONE
             }
         }
 
@@ -61,14 +66,16 @@ class ProfileFragment : Fragment() {
     private fun setOnClickLogic() {
         with(binding) {
             fragmentProfileWidgetButton.setOnClickListener {
-                // TODO: потом переделать
-                Toast.makeText(requireContext(), "Тут должен быть фрагмент виджетов", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_mainFragment_to_widgetFragment)
             }
 
             fragmentProfilePremiumButton.setOnClickListener {
-                // TODO: потом переделать
                 AppMetrica.reportEvent("Нажатие на кнопку Покупка премиума")
                 findNavController().navigate(R.id.action_profileFragment_to_premiumFragment)
+            }
+
+            fragmentProfileRulesButton.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_rulesFragment)
             }
 
             fragmentProfileLoginButton.setOnClickListener {
@@ -83,10 +90,9 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(R.id.logoutDialog)
             }
 
-//            fragmentProfileImageViewChangeIcon.setOnClickListener {
-//                // TODO: потом переделать
-//                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
-//            }
+            fragmentProfileToolbarSettingsIcon.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_profileSettingsFragment)
+            }
         }
     }
 }

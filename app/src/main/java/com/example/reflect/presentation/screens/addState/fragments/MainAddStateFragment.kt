@@ -16,9 +16,12 @@ import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
+import com.example.reflect.presentation.screens.records.GetStreakState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.example.reflect.presentation.widget.WidgetStateProvider
+import com.example.reflect.presentation.widget.WidgetStreakProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
@@ -52,6 +55,12 @@ class MainAddStateFragment : Fragment() {
                 vm.recordState.collect { state ->
                     handleRecordState(state)
                 }
+            }
+        }
+
+        lifecycleScope.launch {
+            recordsvm.streakState.collect {
+                handleStreakState(it)
             }
         }
 
@@ -124,10 +133,14 @@ class MainAddStateFragment : Fragment() {
                     ToastUtils.showAddStateToast(context)
                 }
                 recordsvm.fetchRecords()
+                // Обновляю статистику на другом фрагменте с помощью говнокоа
                 lifecycleScope.launch {
                     statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
                 }
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
+
+                // Обновляю виджет состояния
+                WidgetStateProvider.updateWidget(requireContext(), state.record!!.value)
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)
@@ -135,6 +148,13 @@ class MainAddStateFragment : Fragment() {
             is RecordState.Idle -> {
                 Unit
             }
+        }
+    }
+
+    private fun handleStreakState(state: GetStreakState) {
+        when (state) {
+            is GetStreakState.Success -> WidgetStreakProvider.updateWidget(requireContext(), state.streak)
+            else -> Unit
         }
     }
 }

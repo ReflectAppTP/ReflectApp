@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.reflect.databinding.CardFriendNotificationBinding
 import com.example.reflect.databinding.EmptyFriendsNotificationsBinding
 import com.example.reflect.databinding.LoadingLottieBinding
-import com.example.reflect.domain.model.UserModel
+import com.example.reflect.domain.model.NotificationFriendshipModel
 import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.GetFriendsState
 
 class NotificationFriendsAdapter(
-    private val onClick: (UserModel) -> Unit
+    private val onClick: (NotificationFriendshipModel) -> Unit
 ) : ListAdapter<GetFriendsNotificationsState, RecyclerView.ViewHolder>(DIFF_CALLBACK){
 
     class EmptyFriendsNotificationsViewHolder(
@@ -27,14 +27,14 @@ class NotificationFriendsAdapter(
     class FriendsNotificationListViewHolder(
         private val binding: CardFriendNotificationBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(model: UserModel, onClick: (UserModel) -> Unit) {
+        fun bind(model: NotificationFriendshipModel, onClick: (NotificationFriendshipModel) -> Unit) {
             with (binding) {
                 root.setOnClickListener {
                     onClick(model)
                 }
 
-                cardFriendIconMaterialCardText.text = model.username.substring(0,1)
-                cardFriendLogin.text = model.username
+                cardFriendIconMaterialCardText.text = model.fromUser.username.substring(0,1)
+                cardFriendLogin.text = model.fromUser.username
             }
         }
     }
@@ -81,7 +81,7 @@ class NotificationFriendsAdapter(
     fun updateState(state: GetFriendsNotificationsState) {
         val states = when (state) {
             is GetFriendsNotificationsState.Success -> state.users.map {
-                GetFriendsNotificationsState.Success(listOf(it))
+                GetFriendsNotificationsState.Success(mutableListOf(it))
             }
             else -> listOf(state)
         }

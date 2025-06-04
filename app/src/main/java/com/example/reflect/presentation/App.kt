@@ -7,12 +7,10 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.reflect.presentation.common.NotificationWorker
-import com.vk.id.VKID
 import dagger.hilt.android.HiltAndroidApp
 import io.appmetrica.analytics.AppMetrica
 import io.appmetrica.analytics.AppMetricaConfig
 import java.util.Calendar
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 @HiltAndroidApp
@@ -30,9 +28,9 @@ class App: Application() {
         AppMetrica.activate(this, config)
         AppMetrica.enableActivityAutoTracking(this)
 
-        VKID.init(this)
-        VKID.instance.setLocale(Locale("ru"))
-        VKID.logsEnabled = true
+//        VKID.init(this)
+//        VKID.instance.setLocale(Locale("ru"))
+//        VKID.logsEnabled = true
     }
 
     private fun scheduleDailyNotification(context: Context, hour: Int, workName: String) {

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/surfaceContainerLow"
+    app:cardCornerRadius="@dimen/dialogCardCornerRadius_12dp"
+    android:background="@color/surfaceContainerLow"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/dialogLinearLayoutPaddingVertical_12dp"
+        android:paddingHorizontal="@dimen/dialogLinearLayoutPaddingHorizontal_8dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAITitle"
+            style="@style/TextAppearance.Material3.TitleSmall"
+            android:gravity="center_horizontal"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAIDescriptionTitle"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginVertical="@dimen/dialogMarginVertical_4dp"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAIDescriptionDeluxe"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginVertical="@dimen/dialogBewareAIMarginVertical_18dp"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAIDescriptionFirstL"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAIDescriptionSecondL"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginVertical="@dimen/dialogMarginVertical_4dp"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialogBewareAIDescriptionFooter"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="@color/onSurfaceVariant"
+            android:layout_marginTop="@dimen/dialogBewareAIMarginVertical_18dp"
+            android:layout_marginHorizontal="@dimen/dialogMarginHorizontal_8dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialogAgreeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dialogButtonMarginStart_8dp"
+                android:layout_marginEnd="@dimen/dialogButtonMarginEnd_8dp"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:text="@string/dialogBewareAIButton"
+                android:elevation="@dimen/dialogButtonElevation_3dp"
+                android:textColor="@color/tertiary"
+                app:backgroundTint="@color/backgroundColorDialogButton"
+                app:cornerRadius="@dimen/dialogButtonCornerRadius_100dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

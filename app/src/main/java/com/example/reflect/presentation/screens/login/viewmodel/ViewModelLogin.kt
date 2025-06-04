@@ -3,6 +3,7 @@ package com.example.reflect.presentation.screens.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.auth.GetProfileUseCase
+import com.example.reflect.domain.usecase.auth.LoginLikeGuestUseCase
 import com.example.reflect.domain.usecase.auth.LoginUseCase
 import com.example.reflect.presentation.screens.login.LoginIntent
 import com.example.reflect.presentation.screens.login.LoginState
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelLogin @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val getProfileUseCase: GetProfileUseCase
+    private val getProfileUseCase: GetProfileUseCase,
+    private val loginLikeGuestUseCase: LoginLikeGuestUseCase,
 ) : ViewModel() {
 
     val userIntent = Channel<LoginIntent>(Channel.UNLIMITED)
@@ -45,6 +47,7 @@ class ViewModelLogin @Inject constructor(
             userIntent.consumeAsFlow().collect {
                 when (it) {
                     is LoginIntent.LoginUser -> login()
+                    is LoginIntent.LoginLikeGuest -> loginLikeGuest()
                 }
             }
         }
@@ -59,6 +62,13 @@ class ViewModelLogin @Inject constructor(
                     _state.value = newGetProfileState
                 }
             }
+        }
+    }
+
+    private suspend fun loginLikeGuest() {
+        _state.value = LoginState.Idle
+        loginLikeGuestUseCase().collect { newState ->
+            _state.value = newState
         }
     }
 

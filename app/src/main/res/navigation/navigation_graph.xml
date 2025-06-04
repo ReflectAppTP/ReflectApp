@@ -92,6 +92,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_widgetFragment"
+            app:destination="@id/widgetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_mainFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -105,6 +126,13 @@
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <include app:graph="@navigation/navigation_reset_password_graph"/>
@@ -168,4 +196,19 @@
         android:id="@+id/profileFriendFragment"
         android:name="com.example.reflect.presentation.screens.profileFriend.fragment.ProfileFriendFragment"
         android:label="ProfileFriendFragment" />
+    <fragment
+        android:id="@+id/widgetFragment"
+        android:name="com.example.reflect.presentation.widget.fragment.WidgetFragment"
+        android:label="fragment_widget"
+        tools:layout="@layout/fragment_widget" />
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" />
+    <fragment
+        android:id="@+id/rulesFragment"
+        android:name="com.example.reflect.presentation.screens.profile.fragment.RulesFragment"
+        android:label="fragment_rules"
+        tools:layout="@layout/fragment_rules" />
 </navigation>

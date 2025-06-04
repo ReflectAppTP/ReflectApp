@@ -8,9 +8,11 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
+import com.example.reflect.common.prefs.AiPrefs
 import com.example.reflect.common.prefs.ConsentPrefs
 import com.example.reflect.databinding.ActivityMainBinding
 import com.example.reflect.presentation.common.ToastUtils
@@ -63,9 +65,11 @@ class MainActivity : AppCompatActivity() {
             }
             is GetProfileState.Success -> {
                 AccountPrefs.saveUserToken(this, state.loginModel.access, state.loginModel.refresh)
-                navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                if (navController.currentDestination?.id == R.id.loginFragment) {
+                    navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                }
                 // TODO: ГОВНОКОД!
-                Timer("SettingUp", false).schedule(1500) {
+                Timer("SettingUp", false).schedule(1200) {
                     splashScreen.setKeepOnScreenCondition { false }
                 }
 
@@ -83,4 +87,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        AiPrefs.setAgree(this, false)
+        super.onStop()
+    }
 }

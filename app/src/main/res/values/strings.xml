@@ -37,6 +37,20 @@
     <string name="contentDescriptionFragmentPremiumToolbarBackArrow">Иконка возврата на экран профиля</string>
     <string name="contentDescriptionFragmentPremiumCatImage">Картинка котика Купите премиум пж</string>
     <string name="contentDescriptionPopupStreak">Картинка котика на стрике</string>
+    <string name="contentDescriptionWidgetStateImage">Иконка состояния на виджете</string>
+    <string name="contentDescriptionFragmentWidgetBackArrow">Иконка возврата на экран профиля</string>
+    <string name="contentDescriptionStreakPreview1">Превью стрика, когда записей нет</string>
+    <string name="contentDescriptionStreakPreview2">Превью стрика, когда записей меньше 7</string>
+    <string name="contentDescriptionStreakPreview3">Превью стрика, когда записей больше 7</string>
+    <string name="contentDescriptionStatePreview1">Превью стрика, когда состояние ужасное</string>
+    <string name="contentDescriptionStatePreview2">Превью стрика, когда состояние плохое</string>
+    <string name="contentDescriptionStatePreview3">Превью стрика, когда состояние нормальное</string>
+    <string name="contentDescriptionStatePreview4">Превью стрика, когда состояние хорошее</string>
+    <string name="contentDescriptionStatePreview5">Превью стрика, когда состояние замечательное</string>
+    <string name="contentDescriptionStatePreview6">Превью стрика, когда пользователь не отметил запись состояния</string>
+    <string name="contentDescriptionFragmentProfileUserBackArrow">Иконка воврата на экран друзей</string>
+    <string name="contentDescriptionFragmentProfileUserMoreDots">Иконка дополнительного меню во фрагменте профиля пользователя</string>
+    <string name="contentDescriptionFragmentFriendsToolbarNotificationIconBadge">Бэйдж уведомлений</string>
 
     <!-- Login Fragment    -->
     <string name="loginTitle">Вход</string>
@@ -61,6 +75,7 @@
     <!-- Error messages -->
     <string name="emptyFieldsErrorMessage">Заполните все поля</string>
     <string name="inequalityFieldsErrorMessage">Пароли не совпадают</string>
+    <string name="equalityFieldsErrorMessage">Пароли не должны совпадать</string>
     <string name="resetPasswordCodePinErrorMessage">Неверный код</string>
     <string name="passwordInSixSymbolsErrorMessage">Пароль должен быть от 6 символов</string>
     <string name="incorrectEmailErrorMessage">Введена неккоректная электронная почта</string>
@@ -117,6 +132,11 @@
     <string name="cardStateMood">%1$s настроение</string>
     <string name="cardMenuEdit">Редактировать</string>
     <string name="cardMenuDelete">Удалить</string>
+    <string name="awfulState">Ужасное</string>
+    <string name="badState">Плохое</string>
+    <string name="normalState">Нормальное</string>
+    <string name="goodState">Хорошее</string>
+    <string name="excellentState">Отличное</string>
 
     <!-- ToastMessages -->
     <string name="addStateToastMessage">Запись успешно создана</string>
@@ -187,7 +207,7 @@
     <string name="toastMessageResetContextAI">Контекст очищен</string>
 
     <!-- Friends Fragments -->
-    <string name="emptyFriendsList">Друзей пока что нет,но вы всегда можете их найти</string>
+    <string name="emptyFriendsList">Друзей пока что нет, но вы всегда можете их найти</string>
     <string name="emptySearchFriendsText">Пользователи с таким именем не найдены</string>
     <string name="emptyFriendsNotificationText">Уведомлений нет</string>
     <string name="cardFriendNotificationRequestText">Хочет добавить вас в друзья</string>
@@ -235,7 +255,70 @@
     <string name="dialogCancelPremiumAcceptBody">Вы уверены, что хотите отменить подписку на премиум? Все эксклюзивные функции останутся до окончания срока действия.</string>
     <string name="dialogCancelPremiumAcceptTitle">Подтверждение отмены подписки</string>
 
-
+    <!-- Popup window -->
     <string name="popupStreakDescription">Ежедневный стрик</string>
+
+    <!-- Widgets -->
+    <string name="widgetStreakDescription">Стрик пользователя</string>
+    <string name="widgetStateDescription">Настроение за сегодня</string>
+    <string name="widgetStateTitle">Настроение</string>
+    <string name="widgetToastMessage">Виджет успешно добавлен</string>
+
+    <!-- Widget fragment -->
+    <string name="fragmentWidgetToolbarTitle">Виджеты</string>
+    <string name="fragmentWidgetStreakButton">Стрик пользователя</string>
+    <string name="fragmentWidgetStateButton">Эмоциональное состояние</string>
+
+    <!-- Add widget dialog -->
+    <string name="dialogAddWidgetTitle">Подтверждение выбора</string>
+    <string name="dialogAddWidgetDescription">Добавить этот виджет на экран домой?</string>
+    <string name="fragmentProfileSaveChanges">Сохранить изменения</string>
+    <string name="fragmentProfileDelete">Удалить аккаунт</string>
+    <string name="fragmentProfileVisibilityHint">Видимость профиля</string>
+    <string name="fragmentProfilePasswordConfirmationEditText">Новый пароль</string>
+    <string name="fragmentProfilePasswordEditText">Старый пароль</string>
+    <string name="fragmentProfileUserAddFriendButton">Добавить в друзья</string>
+    <string name="fragmentProfileUserAddFriendButtonSendRequest">Заявка отправлена</string>
+    <string name="fragmentProfileUserAddFriendButtonFriend">У вас в друзьях</string>
+    <string name="fragmentProfileUserAddFriendButtonBanned">Пользователь заблокирован</string>
+    <string name="fragmentProfileUserContentLastRecordTitle">Последняя запись за сегодня</string>
+    <string name="fragmentProfileUserContentStatisticTitle">Статистика за неделю</string>
+    <string name="fragmentProfileUserContentHideTitle">Информация о записях скрыта</string>
+
+    <string-array name="fragmentProfileSettingsVisibilityItems">
+        <item>Никому</item>
+        <item>Только друзьям</item>
+        <item>Всем</item>
+    </string-array>
+
+    <string name="sendReportMenu">Подать жалобу</string>
+    <string name="dialogSendReportTitle">Подача жалобы</string>
+    <string name="dialogSendReportDescription">Выберите причину подачу жалобы на пользователя <b>%1$s</b></string>
+    <string name="dialogSendReportRadioProfileReport">Неприемлемое имя пользователя</string>
+    <string name="dialogSendReportRadioStateReport">Неприемлимое описаное карточки состояния</string>
+    <string name="dialogSendReportButton">Отправить жалобу</string>
+    <string name="dialogSendReportBack">Назад</string>
+    <string name="toastSendReport">Жалоба отправлена</string>
+
+
+    <string name="dialogBewareAITitle"><b>Важная информация</b></string>
+    <string name="dialogBewareAIDescriptionTitle">ИИ - не замена психологу</string>
+    <string name="dialogBewareAIDescriptionDeluxe">Он может давать общие советы, но не обладает профессиональным образованием, опытом и не учитывает вашу уникальную ситуацию. Его ответы — лишь информация, а не диагноз или терапия.</string>
+    <string name="dialogBewareAIDescriptionFirstL">- Всегда консультируйтесь с реальным специалистом перед важными решениями о психическом здоровье.</string>
+    <string name="dialogBewareAIDescriptionSecondL">- Не полагайтесь слепо на ИИ — он не чувствует, не сопереживает и, также как и администрация, не несёт ответственности за последствия.</string>
+    <string name="dialogBewareAIDescriptionFooter"><b>Ваше благополучие важнее всего!</b></string>
+    <string name="dialogBewareAIButton">ОК</string>
+    <string name="toastSuccessfulUpdate">Изменения успешно сохранены</string>
+    <string name="fragmentProfileRulesButton">Правила</string>
+    <string name="fragmentRulesTitle">Правила</string>
+    <string name="fragmentRulesDescriptionTitle"><b><u>Правила поведения в приложении:</u></b></string>
+    <string name="fragmentRulesDescriptionFooter"><b>(Правила могут дополняться. Использование приложения означает согласие с ними.)</b></string>
+    <string name="fragmentRulesDescriptionBody">\nЗапрещено:\n - Оскорбления\n - Дискриминация и любые формы ненависти\n - Обсуждение и пропаганда политических взглядов, партий\n - Призывы к агрессии, терроризму, а также любые формы угроз\n - Контент 18+ (включая текст, изображения, видео и намёки)\n - Публикация приватной информации (своей или других пользователей)\n - Спам и реклама – только с разрешения администрации\n - Нарушители блокируются без предупреждения\n</string>
+    <string name="dialogDeleteUserTitle">Подтверждение удаления аккаунта</string>
+    <string name="dialogDeleteUserDescription">Вы действительно хотите удалить аккаунт? После удаления все сохранённые записи буду утеряны</string>
+    <string name="dialogDeleteUserButton">Удалить</string>
+    <string name="toastDeleteUser">Пользователь успешно удалён</string>
+    <string name="fragmentFriendsIsGuest">Авторизуйтесь для доступа к функциям социального взаимодействия</string>
+    <string name="fragmentProfileFeedback">Почта для обратной связи\n reflect.app.tp@gmail.com</string>
 
 </resources>

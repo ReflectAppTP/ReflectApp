@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,9 +22,12 @@ import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
+import com.example.reflect.presentation.screens.records.GetStreakState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
+import com.example.reflect.presentation.widget.WidgetStateProvider
+import com.example.reflect.presentation.widget.WidgetStreakProvider
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,40 +58,22 @@ class RecordsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val context = requireContext()
 
-        // TODO: почему тут надо в разных scope
-        lifecycleScope.launch {
-            // TODO: Можно ли как то вынести из repeatOnLifeCycle
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                vm.recordsState.collect { state ->
-                    handleRecordsState(state)
-                }
-            }
-        }
-
-        lifecycleScope.launch {
-            vm.deleteState.collect { state ->
-                handleDeleteState(state)
-            }
-        }
-
         datePicker = createDatePicker()
         setupDatePickerListeners(datePicker)
 
         with (binding) {
-            lifecycleScope.launch {
-                vm.selectedDateText.collect { date ->
-                    fragmentRecordsDateTV.text = date
-                }
-            }
-
             fragmentRecordsDateTV.setOnClickListener {
                 datePicker.show(parentFragmentManager, "datePicker")
             }
 
             val streakPopup = StreakPopup(requireContext())
             fragmentRecordsToolbarStreakIcon.setOnClickListener {
-                streakPopup.updateData(Random.nextInt(0,10))
-                streakPopup.show(fragmentRecordsToolbarStreakIcon)
+                if (vm.streakState.value is GetStreakState.Success) {
+                    streakPopup.updateData((vm.streakState.value as GetStreakState.Success).streak)
+                    streakPopup.show(fragmentRecordsToolbarStreakIcon)
+                } else {
+                    ToastUtils.showErrorToast(requireContext())
+                }
             }
 
             // Анимация для переключения даты по нажатию стрелочек
@@ -160,6 +146,31 @@ class RecordsFragment : Fragment() {
                 }
             )
             fragmentRecordsRV.adapter = recordsAdapter
+
+            // TODO: почему тут надо в разных scope
+            lifecycleScope.launch {
+                vm.selectedDateText.collect { date ->
+                    fragmentRecordsDateTV.text = date
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.recordsState.collect { state ->
+                    handleRecordsState(state)
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.deleteState.collect { state ->
+                    handleDeleteState(state)
+                }
+            }
+
+            lifecycleScope.launch {
+                vm.streakState.collect {
+                    handleStreakState(it)
+                }
+            }
         }
     }
 
@@ -169,12 +180,16 @@ class RecordsFragment : Fragment() {
     }
 
     private fun handleRecordsState(state: GetRecordsState) {
-        val context = requireContext()
         recordsAdapter.updateState(state)
 
         when (state) {
-            is GetRecordsState.Error -> {
-                ToastUtils.showErrorConnectionToast(context)
+            is GetRecordsState.Error -> ToastUtils.showErrorConnectionToast(requireContext())
+            // Обновляю виджеты
+            is GetRecordsState.EmptyContent -> {
+                if (vm.datesAreEquals()) WidgetStateProvider.updateWidget(requireContext(), null)
+            }
+            is GetRecordsState.Success -> {
+                if (vm.datesAreEquals()) WidgetStateProvider.updateWidget(requireContext(), state.records.first().value)
             }
             else -> {
                 Unit
@@ -187,6 +202,7 @@ class RecordsFragment : Fragment() {
         when (state) {
             is RecordState.Loading -> {
                 ToastUtils.showLoadingToast(context)
+                vm.resetDeleteState()
             }
             is RecordState.Success -> {
                 vm.fetchRecords()
@@ -194,9 +210,11 @@ class RecordsFragment : Fragment() {
                 lifecycleScope.launch {
                     statisticvm.userIntent.send(StatisticIntent.UpdateStatistic)
                 }
+                vm.resetDeleteState()
             }
             is RecordState.Error -> {
                 ToastUtils.showErrorToast(context)
+                vm.resetDeleteState()
             }
             is RecordState.Idle -> {
                 Unit
@@ -222,6 +240,13 @@ class RecordsFragment : Fragment() {
                 selectedDate.get(Calendar.MONTH),
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
+        }
+    }
+
+    private fun handleStreakState(state: GetStreakState) {
+        when (state) {
+            is GetStreakState.Success -> WidgetStreakProvider.updateWidget(requireContext(), state.streak)
+            else -> Unit
         }
     }
 }

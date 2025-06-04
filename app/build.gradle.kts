@@ -98,7 +98,7 @@ dependencies {
 //    debugImplementation(libs.leakcanary)
 
     // VK SDK
-    implementation(libs.vkid.sdk)
+//    implementation(libs.vkid.sdk)
 //    implementation(libs.vkid.onetap.xml)
 
     // Desugaring

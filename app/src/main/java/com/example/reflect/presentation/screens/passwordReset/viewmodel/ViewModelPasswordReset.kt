@@ -2,19 +2,32 @@ package com.example.reflect.presentation.screens.passwordReset.viewmodel
 
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.usecase.friendship.ChangePasswordUseCase
+import com.example.reflect.presentation.screens.passwordReset.ResetPasswordIntent
+import com.example.reflect.presentation.screens.profile.UpdateProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelPasswordReset @Inject constructor() : ViewModel() {
+class ViewModelPasswordReset @Inject constructor(
+    private val changePasswordUseCase: ChangePasswordUseCase,
+) : ViewModel() {
     // TODO: remove unused fields
+    val userIntent = Channel<ResetPasswordIntent>(Channel.UNLIMITED)
+
+    private var _resetPasswordState = MutableStateFlow<UpdateProfileState>(UpdateProfileState.Idle)
+    val resetPasswordState: StateFlow<UpdateProfileState> get() = _resetPasswordState
+
     private var _email = MutableStateFlow("")
     val email: StateFlow<String> get() = _email
 
@@ -30,19 +43,28 @@ class ViewModelPasswordReset @Inject constructor() : ViewModel() {
     private var _newPasswordConfirmation = MutableStateFlow("")
     val newPasswordConfirmation: StateFlow<String> get() = _newPasswordConfirmation
 
-    private var _emailErrorState = MutableStateFlow(false)
-    val emailErrorState: StateFlow<Boolean> get() = _emailErrorState
-
-    private var _pinCodeErrorState = MutableStateFlow(false)
-    val pinCodeErrorState: StateFlow<Boolean> get() = _pinCodeErrorState
-
-    private var _newPasswordErrorState = MutableStateFlow(false)
-    val newPasswordErrorState: StateFlow<Boolean> get() = _newPasswordErrorState
-
-    private var _newPasswordConfirmationErrorState = MutableStateFlow(false)
-    val newPasswordConfirmationErrorState: StateFlow<Boolean> get() = _newPasswordConfirmationErrorState
-
     private var timerJob: Job? = null
+
+    init {
+        handleIntent()
+    }
+
+    private fun handleIntent() {
+        viewModelScope.launch {
+            userIntent.consumeAsFlow().collect {
+                when (it) {
+                    is ResetPasswordIntent.ResetPassword -> resetPassword()
+                }
+            }
+        }
+    }
+
+    private fun resetPassword() {
+        _resetPasswordState.value = UpdateProfileState.Idle
+        viewModelScope.launch {
+
+        }
+    }
 
     fun updateEmail(value: String) {
         _email.value = value
@@ -63,18 +85,6 @@ class ViewModelPasswordReset @Inject constructor() : ViewModel() {
     fun generatePinCode() {
         val code = (0..9).shuffled().take(4).joinToString("")
         _sendedPinCode.value = code
-    }
-
-    fun changeErrorStates(
-        emailError: Boolean = true,
-        pinCodeError: Boolean = true,
-        newPasswordError: Boolean = true,
-        newPasswordConfirmationError: Boolean = true
-    ) {
-        _emailErrorState.value = emailError
-        _pinCodeErrorState.value = pinCodeError
-        _newPasswordErrorState.value = newPasswordError
-        _newPasswordConfirmationErrorState.value = newPasswordConfirmationError
     }
 
     fun startTimer(duration: Int, onTick: (Int) -> Unit, onFinish: () -> Unit) {
@@ -106,5 +116,5 @@ class ViewModelPasswordReset @Inject constructor() : ViewModel() {
         if (withEmail) _email.value = ""
     }
 
-    fun isPasswordMoreThanSixSymbols() = _newPassword.value!!.length >= 6 && _newPasswordConfirmation.value!!.length >= 6
+    fun isPasswordMoreThanSixSymbols() = _newPassword.value.length >= 6 && _newPasswordConfirmation.value.length >= 6
 }

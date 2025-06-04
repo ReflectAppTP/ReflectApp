@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -22,8 +23,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reflect.R
+import com.example.reflect.common.prefs.AccountPrefs
+import com.example.reflect.common.prefs.AiPrefs
 import com.example.reflect.databinding.FragmentAiBinding
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.dialog.BewareAIDialog
 import com.example.reflect.presentation.screens.ai.AiIntent
 import com.example.reflect.presentation.screens.ai.GetAIMessageState
 import com.example.reflect.presentation.screens.ai.ResetAIContextState
@@ -73,100 +77,112 @@ class AiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            if (vm.messagesList.value.isEmpty()) {
-                aiMessagesRV.visibility = View.GONE
-                aiEmptyTitle.visibility = View.VISIBLE
-            }
+            if (AccountPrefs.isGuest(requireContext())) {
+                fragmentAIRoot.visibility = View.GONE
+                fragmentAIIsGuest.visibility = View.VISIBLE
+            } else {
+                fragmentAIRoot.visibility = View.VISIBLE
+                fragmentAIIsGuest.visibility = View.GONE
 
-            aiEditTextField.setText(vm.inputTextValue.value)
-            aiEditTextField.doAfterTextChanged { value ->
-                vm.updateText(value.toString())
-            }
-
-            aiToolbarBackArrow.setOnClickListener {
-                findNavController().popBackStack()
-            }
-
-            aiIconButtonCleanContext.setOnClickListener {
-                lifecycleScope.launch {
-                    vm.userIntent.send(AiIntent.ResetAiContext)
+                if (!AiPrefs.isAgreed(requireContext())) {
+                    BewareAIDialog().show(parentFragmentManager, "Beware ai dialog")
                 }
-            }
 
-            aiHelperTextsRV.post {
-                val height = aiHelperTextsRV.height.toFloat()
-
-                aiHelperTextsRV.translationY = height
-                aiIconButtonSend.translationY = height
-                aiIconButtonExpandMenuCard.translationY = height
-                aiIconButtonCleanContext.translationY = height
-                aiEditText.translationY = height
-                aiLoadingGetAIMessage.translationY = height
-
-                animateMessageRV(true)
-            }
-
-            aiMessagesRV.layoutParams.height = aiMessagesRV.height + 3 * aiHelperTextsRV.height
-            aiIconButtonExpandMenu.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    showRecyclerView()
-                } else {
-                    hideRecyclerView()
+                if (vm.messagesList.value.isEmpty()) {
+                    aiMessagesRV.visibility = View.GONE
+                    aiEmptyTitle.visibility = View.VISIBLE
                 }
-            }
 
-            aiIconButtonSend.setOnClickListener {
-                AppMetrica.reportEvent("Нажатие на кнопку Отправка запроса к неиросети")
-                if (aiEditTextField.text?.isNotEmpty() == true) {
+                aiEditTextField.setText(vm.inputTextValue.value)
+                aiEditTextField.doAfterTextChanged { value ->
+                    vm.updateText(value.toString())
+                }
+
+                aiToolbarBackArrow.setOnClickListener {
+                    findNavController().popBackStack()
+                }
+
+                aiIconButtonCleanContext.setOnClickListener {
                     lifecycleScope.launch {
-                        vm.userIntent.send(AiIntent.SendAiMessage)
+                        vm.userIntent.send(AiIntent.ResetAiContext)
                     }
-                    vm.addMessage()
-                    vm.updateText("")
-                    aiEditTextField.setText(vm.inputTextValue.value)
-                    hideKeyboard()
-                    aiIconButtonSend.isEnabled = false
                 }
-            }
 
-            aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            helperTextAdapter = AIHelperTextAdapter(
-                onClick = {
-                    vm.updateTextWithHelper(it)
-                    aiEditTextField.append("$it ")
+                aiHelperTextsRV.post {
+                    val height = aiHelperTextsRV.height.toFloat()
+
+                    aiHelperTextsRV.translationY = height
+                    aiIconButtonSend.translationY = height
+                    aiIconButtonExpandMenuCard.translationY = height
+                    aiIconButtonCleanContext.translationY = height
+                    aiEditText.translationY = height
+                    aiLoadingGetAIMessage.translationY = height
+
+                    animateMessageRV(true)
                 }
-            )
-            helperTextAdapter.submitList(vm.helperTextList.value)
-            aiHelperTextsRV.adapter = helperTextAdapter
 
-            aiMessagesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false).apply {
-                stackFromEnd = true
-            }
-            messageAdapter = AiMessageAdapter {
-                aiIconButtonSend.isEnabled = true
-                isEnabledResetContext(true)
-                aiIconButtonSend.visibility = View.VISIBLE
-                aiLoadingGetAIMessage.visibility = View.GONE
-            }
-            messageAdapter.submitList(vm.messagesList.value)
-            aiMessagesRV.adapter = messageAdapter
-        }
+                aiMessagesRV.layoutParams.height = aiMessagesRV.height + 3 * aiHelperTextsRV.height
+                aiIconButtonExpandMenu.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        showRecyclerView()
+                    } else {
+                        hideRecyclerView()
+                    }
+                }
 
-        lifecycleScope.launch {
-            vm.resetContextState.collect { state ->
-                handleResetContextState(state)
-            }
-        }
+                aiIconButtonSend.setOnClickListener {
+                    AppMetrica.reportEvent("Нажатие на кнопку Отправка запроса к неиросети")
+                    if (aiEditTextField.text?.isNotEmpty() == true) {
+                        lifecycleScope.launch {
+                            vm.userIntent.send(AiIntent.SendAiMessage)
+                        }
+                        vm.addMessage()
+                        vm.updateText("")
+                        aiEditTextField.setText(vm.inputTextValue.value)
+                        hideKeyboard()
+                        aiIconButtonSend.isEnabled = false
+                    }
+                }
 
-        lifecycleScope.launch {
-            vm.getAIMessageState.collect { state ->
-                handleGetMessageState(state)
-            }
-        }
+                aiHelperTextsRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                helperTextAdapter = AIHelperTextAdapter(
+                    onClick = {
+                        vm.updateTextWithHelper(it)
+                        aiEditTextField.append("$it ")
+                    }
+                )
+                helperTextAdapter.submitList(vm.helperTextList.value)
+                aiHelperTextsRV.adapter = helperTextAdapter
 
-        lifecycleScope.launch {
-            vm.sendMessageState.collect { state ->
-                handleSendMessageState(state)
+                aiMessagesRV.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false).apply {
+                    stackFromEnd = true
+                }
+                messageAdapter = AiMessageAdapter {
+                    aiIconButtonSend.isEnabled = true
+                    isEnabledResetContext(true)
+                    aiIconButtonSend.visibility = View.VISIBLE
+                    aiLoadingGetAIMessage.visibility = View.GONE
+                }
+                messageAdapter.submitList(vm.messagesList.value)
+                aiMessagesRV.adapter = messageAdapter
+
+                lifecycleScope.launch {
+                    vm.resetContextState.collect { state ->
+                        handleResetContextState(state)
+                    }
+                }
+
+                lifecycleScope.launch {
+                    vm.getAIMessageState.collect { state ->
+                        handleGetMessageState(state)
+                    }
+                }
+
+                lifecycleScope.launch {
+                    vm.sendMessageState.collect { state ->
+                        handleSendMessageState(state)
+                    }
+                }
             }
         }
     }

@@ -5,13 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.reflect.R
+import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentFriendsBinding
+import com.example.reflect.presentation.screens.friends.GetFriendsNotificationsState
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
+import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFriendsFragment : Fragment() {
@@ -20,13 +27,13 @@ class MainFriendsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: ViewModelFriends by activityViewModels()
+    private val notificationsVM: ViewModelNotificationFriendship by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFriendsBinding.inflate(inflater, container, false)
-        vm.fetchFriends()
         return binding.root
     }
 
@@ -34,16 +41,33 @@ class MainFriendsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with (binding) {
-            fragmentFriendsToolbarSearchIcon.setOnClickListener {
-                moveToScreen(FriendsScreen.Search)
-            }
+            if (AccountPrefs.getUser(requireContext()).isGuest) {
+                fragmentFriendsToolbar.visibility = View.GONE
+                fragmentFriendsContainer.visibility = View.GONE
+                fragmentFriendsIsGuest.visibility = View.VISIBLE
+            } else {
+                fragmentFriendsToolbar.visibility = View.VISIBLE
+                fragmentFriendsContainer.visibility = View.VISIBLE
+                fragmentFriendsIsGuest.visibility = View.GONE
+                vm.fetchFriends()
 
-            fragmentFriendsToolbarNotificationIcon.setOnClickListener {
-                moveToScreen(FriendsScreen.Notifications)
-            }
+                fragmentFriendsToolbarSearchIcon.setOnClickListener {
+                    moveToScreen(FriendsScreen.Search)
+                }
 
-            fragmentFriendsToolbarBackIcon.setOnClickListener {
-                moveToScreen(FriendsScreen.FriendsList)
+                fragmentFriendsToolbarNotificationIconDeluxe.setOnClickListener {
+                    moveToScreen(FriendsScreen.Notifications)
+                }
+
+                fragmentFriendsToolbarBackIcon.setOnClickListener {
+                    moveToScreen(FriendsScreen.FriendsList)
+                }
+
+                lifecycleScope.launch {
+                    notificationsVM.notificationState.collect {
+                        handleNotifications(it)
+                    }
+                }
             }
         }
     }
@@ -97,6 +121,14 @@ class MainFriendsFragment : Fragment() {
                     fragmentFriendsToolbarNotificationIcon.visibility = View.VISIBLE
                 }
             }
+        }
+    }
+
+    private fun handleNotifications(state: GetFriendsNotificationsState) {
+        if (state is GetFriendsNotificationsState.Success) {
+            binding.fragmentFriendsToolbarNotificationIconBadge.isVisible = state.users.size != 0
+        } else if (state is GetFriendsNotificationsState.EmptyContent) {
+            binding.fragmentFriendsToolbarNotificationIconBadge.isVisible = false
         }
     }
 }

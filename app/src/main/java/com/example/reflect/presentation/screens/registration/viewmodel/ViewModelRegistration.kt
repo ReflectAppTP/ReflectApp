@@ -2,6 +2,7 @@ package com.example.reflect.presentation.screens.registration.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.reflect.domain.usecase.auth.RegistrationFromGuestUseCase
 import com.example.reflect.domain.usecase.auth.RegistrationUseCase
 import com.example.reflect.presentation.screens.registration.RegistrationIntent
 import com.example.reflect.presentation.screens.registration.RegistrationState
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelRegistration @Inject constructor(
-    private val registrationUseCase: RegistrationUseCase
+    private val registrationUseCase: RegistrationUseCase,
+    private val registrationFromGuestUseCase: RegistrationFromGuestUseCase,
 ) : ViewModel() {
 
     val userIntent = Channel<RegistrationIntent>(Channel.UNLIMITED)
@@ -35,18 +37,6 @@ class ViewModelRegistration @Inject constructor(
     private val _passwordConfirmation = MutableStateFlow("")
     val passwordConfirmation: StateFlow<String> get() = _passwordConfirmation
 
-    private var _loginErrorState = MutableStateFlow(false)
-    val loginErrorState: StateFlow<Boolean> get() = _loginErrorState
-
-    private var _emailErrorState = MutableStateFlow(false)
-    val emailErrorState: StateFlow<Boolean> get() = _emailErrorState
-
-    private var _passwordErrorState = MutableStateFlow(false)
-    val passwordErrorState: StateFlow<Boolean> get() = _passwordErrorState
-
-    private var _passwordConfirmationErrorState = MutableStateFlow(false)
-    val passwordConfirmationErrorState: StateFlow<Boolean> get() = _passwordConfirmationErrorState
-
     init {
         handleIntent()
     }
@@ -56,6 +46,7 @@ class ViewModelRegistration @Inject constructor(
             userIntent.consumeAsFlow().collect{
                 when (it) {
                     is RegistrationIntent.RegisterUser -> register()
+                    is RegistrationIntent.RegisterGuest -> registerGuest()
                 }
             }
         }
@@ -64,7 +55,16 @@ class ViewModelRegistration @Inject constructor(
     private fun register() {
         _state.value = RegistrationState.Idle
         viewModelScope.launch {
-            registrationUseCase(_login.value, _email.value, password.value).collect { newState ->
+            registrationUseCase(_login.value, _email.value, _password.value).collect { newState ->
+                _state.value = newState
+            }
+        }
+    }
+
+    private fun registerGuest() {
+        _state.value = RegistrationState.Idle
+        viewModelScope.launch {
+            registrationFromGuestUseCase(_login.value, _email.value, _password.value).collect { newState ->
                 _state.value = newState
             }
         }
@@ -86,16 +86,5 @@ class ViewModelRegistration @Inject constructor(
         _passwordConfirmation.value = result
     }
 
-    fun changeErrorStates(
-        loginError: Boolean = true,
-        emailError: Boolean = true,
-        passwordError: Boolean = true,
-        passwordConfirmationError: Boolean = true) {
-        _loginErrorState.value = loginError
-        _emailErrorState.value = emailError
-        _passwordErrorState.value = passwordError
-        _passwordConfirmationErrorState.value = passwordConfirmationError
-    }
-
-    fun isPasswordMoreThanSixSymbols() = _password.value!!.length >= 6 && _passwordConfirmation.value!!.length >= 6
+    fun isPasswordMoreThanSixSymbols() = _password.value.length >= 6 && _passwordConfirmation.value.length >= 6
 }

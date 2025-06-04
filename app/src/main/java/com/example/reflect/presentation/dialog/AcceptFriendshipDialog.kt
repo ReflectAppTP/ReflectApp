@@ -8,17 +8,17 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.reflect.R
 import com.example.reflect.databinding.DialogAcceptFriendshipBinding
-import com.example.reflect.domain.model.UserModel
-import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
+import com.example.reflect.domain.model.NotificationFriendshipModel
+import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelNotificationFriendship
 
 class AcceptFriendshipDialog(
-    private val userModel: UserModel
+    private val userModel: NotificationFriendshipModel
 ): DialogFragment() {
 
     private var _binding: DialogAcceptFriendshipBinding? = null
     private val binding get() = _binding!!
 
-    private val vm: ViewModelFriends by activityViewModels()
+    private val vm: ViewModelNotificationFriendship by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +33,12 @@ class AcceptFriendshipDialog(
         super.onViewCreated(view, savedInstanceState)
         with (binding) {
             dialogAgreeButton.setOnClickListener {
-                vm.acceptFriendRequest(userModel.id)
+                vm.acceptFriendship(userModel.fromUser.id)
                 dismiss()
             }
 
             dialogDeclineButton.setOnClickListener {
-                vm.declineFriendRequest(userModel.id)
+                vm.rejectFriendship(userModel.fromUser.id)
                 dismiss()
             }
         }

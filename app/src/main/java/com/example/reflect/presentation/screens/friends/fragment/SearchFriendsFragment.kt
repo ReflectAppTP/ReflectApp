@@ -19,6 +19,7 @@ import com.example.reflect.presentation.screens.friends.SearchFriendsState
 import com.example.reflect.presentation.screens.friends.adapter.SearchListAdapter
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelFriends
 import com.example.reflect.presentation.screens.friends.viewmodel.ViewModelSearchFriends
+import com.example.reflect.presentation.screens.profile.GetUserByIdState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -67,9 +68,8 @@ class SearchFriendsFragment : Fragment() {
 
             fragmentSearchFriendsRV.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             searchListAdapter = SearchListAdapter {
+                mainVM.updateId(it)
                 mainVM.getUser(it)
-                requireParentFragment().requireParentFragment().findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment)
-//                findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment)
             }
             fragmentSearchFriendsRV.adapter = searchListAdapter
         }
@@ -77,6 +77,12 @@ class SearchFriendsFragment : Fragment() {
         lifecycleScope.launch {
             searchVM.searchUsersState.collect {
                 handleSearchState(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            mainVM.getUserByIdState.collect {
+                handleGetUserState(it)
             }
         }
     }
@@ -94,5 +100,20 @@ class SearchFriendsFragment : Fragment() {
 
     private fun handleSearchState(state: SearchFriendsState) {
         searchListAdapter.updateState(state)
+    }
+
+    private fun handleGetUserState(state: GetUserByIdState) {
+        when (state) {
+            is GetUserByIdState.Success -> {
+                if (requireParentFragment().findNavController().currentDestination?.id == R.id.searchFriendsFragment) {
+                    val args = Bundle().apply {
+                        putParcelable("userModel", state.user)
+                    }
+                    requireParentFragment().requireParentFragment().findNavController().navigate(R.id.action_mainFragment_to_profileFriendFragment, args)
+                    mainVM.updateUserState()
+                }
+            }
+            else -> Unit
+        }
     }
 }

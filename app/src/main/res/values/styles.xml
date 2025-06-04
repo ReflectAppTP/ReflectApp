@@ -14,6 +14,13 @@
         <item name="counterEnabled">false</item>
     </style>
 
+    <style name="SettingsEditText" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+    </style>
+
     <style name="MaterialButton" parent="Widget.Material3.Button.IconButton.Filled">
         <item name="android:paddingTop">13dp</item>
         <item name="android:paddingBottom">13dp</item>

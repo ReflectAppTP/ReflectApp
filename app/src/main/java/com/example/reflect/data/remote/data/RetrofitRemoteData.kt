@@ -1,7 +1,14 @@
 package com.example.reflect.data.remote.data
 
+import com.example.reflect.data.dto.ChangeLoginDTO
+import com.example.reflect.data.dto.ChangePasswordDTO
+import com.example.reflect.data.dto.ChangePremiumDTO
+import com.example.reflect.data.dto.ChangeVisibilityDTO
 import com.example.reflect.data.dto.StateRequestDTO
+import com.example.reflect.data.dto.UserIdDTO
 import com.example.reflect.data.dto.ai.AISendMessageRequestDTO
+import com.example.reflect.data.dto.friendship.ReportStateRequestDTO
+import com.example.reflect.data.dto.friendship.ReportUserRequestDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.RefreshRequestDTO
 import com.example.reflect.data.dto.registration.RegistrationRequestDTO
@@ -10,7 +17,9 @@ import javax.inject.Inject
 
 class RetrofitRemoteData @Inject constructor(private val retrofitService: RetrofitService){
     suspend fun register(registrationRequest: RegistrationRequestDTO) = retrofitService.register(registrationRequest)
+    suspend fun registerFromGuest(registrationRequest: RegistrationRequestDTO) = retrofitService.registerFromGuest(registrationRequest)
     suspend fun login(loginRequest: LoginRequestDTO) = retrofitService.login(loginRequest)
+    suspend fun loginLikeGuest() = retrofitService.loginLikeGuest()
     suspend fun getUser() = retrofitService.getProfile()
     suspend fun getAccessToken(refreshToken: RefreshRequestDTO) = retrofitService.getAccessToken(refreshToken)
 
@@ -34,4 +43,20 @@ class RetrofitRemoteData @Inject constructor(private val retrofitService: Retrof
 
     suspend fun getFriendsList() = retrofitService.getFriendsList()
     suspend fun searchUsers(username: String) = retrofitService.searchUsers(username)
+    suspend fun sendFriendshipRequest(userIdDTO: UserIdDTO) = retrofitService.sendFriendshipRequest(userIdDTO)
+    suspend fun getFriendshipNotification() = retrofitService.getFriendshipNotification()
+    suspend fun acceptFriendship(id: Int) = retrofitService.acceptFriendship(id)
+    suspend fun rejectFriendship(id: Int) = retrofitService.rejectFriendship(id)
+    suspend fun getStreak() = retrofitService.getStreak()
+    suspend fun deleteUser() = retrofitService.deleteUser()
+
+    suspend fun getUserById(id: Int) = retrofitService.getUserById(id)
+
+    suspend fun reportUser(reportDTO: ReportUserRequestDTO) = retrofitService.reportUser(reportDTO)
+    suspend fun reportState(reportDTO: ReportStateRequestDTO) = retrofitService.reportState(reportDTO)
+
+    suspend fun updatePassword(changePasswordDTO: ChangePasswordDTO) = retrofitService.updatePassword(changePasswordDTO)
+    suspend fun updateUsername(changeLoginDTO: ChangeLoginDTO) = retrofitService.updateUsername(changeLoginDTO)
+    suspend fun updateVisibility(changeVisibilityDTO: ChangeVisibilityDTO) = retrofitService.updateVisibility(changeVisibilityDTO)
+    suspend fun updatePremium(changePremiumDTO: ChangePremiumDTO) = retrofitService.updatePremium(changePremiumDTO)
 }

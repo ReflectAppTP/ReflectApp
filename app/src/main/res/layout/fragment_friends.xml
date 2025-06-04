@@ -17,15 +17,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragmentFriendsToolbarNotificationIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:contentDescription="@string/contentDescriptionFragmentToolbarNotificationIcon"
-            android:background="@drawable/rounded_surface_ripple"
-            android:src="@drawable/ic_friends_notification"
-            />
+            android:clickable="true"
+            android:focusable="true"
+            >
+
+            <ImageButton
+                android:id="@+id/fragmentFriendsToolbarNotificationIconDeluxe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/contentDescriptionFragmentToolbarNotificationIcon"
+                android:background="@drawable/rounded_surface_ripple"
+                android:src="@drawable/ic_friends_notification"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/fragmentFriendsToolbarNotificationIconBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fragmentFriendsToolbarNotificationIconBadgeMargin_2dp"
+                android:background="@drawable/badge_circle"
+                android:contentDescription="@string/contentDescriptionFragmentFriendsToolbarNotificationIconBadge"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/fragmentFriendsToolbarBackIcon"
@@ -72,6 +95,18 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_friends_graph"
+        />
+
+    <TextView
+        android:id="@+id/fragmentFriendsIsGuest"
+        style="@style/TextAppearance.Material3.BodyLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/fragmentFriendsIsGuest"
+        android:textColor="@color/onSurface"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:visibility="gone"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

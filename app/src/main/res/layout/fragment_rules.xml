@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.screens.profile.fragment.RulesFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentRulesToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_marginEnd="@dimen/mainFragmentViewPagerToolbarMarginHorizontal_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/fragmentRulesBackArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/contentDescriptionFragmentProfileUserBackArrow"
+            android:src="@drawable/ic_back_arrow"
+            android:background="@drawable/rounded_surface_ripple"
+            android:layout_gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/fragmentRulesTitle"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/fragmentRulesTitle"
+            android:textColor="@color/onSurface" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="21dp"
+        app:contentPadding="10dp"
+        app:contentPaddingTop="15dp"
+        app:cardBackgroundColor="@color/aiPrimary98"
+        app:layout_constraintTop_toBottomOf="@id/fragmentRulesToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/fragmentRulesDescriptionTitle"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragmentRulesDescriptionTitle"
+                />
+
+            <TextView
+                android:id="@+id/fragmentRulesDescriptionBody"
+                style="@style/TextAppearance.Material3.BodyLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragmentRulesDescriptionBody"/>
+
+
+            <TextView
+                android:id="@+id/fragmentRulesDescription"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fragmentRulesDescriptionFooter"
+                />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

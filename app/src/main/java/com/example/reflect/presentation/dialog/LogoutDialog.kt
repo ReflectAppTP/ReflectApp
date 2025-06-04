@@ -44,5 +44,4 @@ class LogoutDialog : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

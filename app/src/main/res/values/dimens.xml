@@ -259,12 +259,40 @@
     <dimen name="fragmentPremiumBenefitsCardRootMarginHorizontal_10dp">10dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginStart_17dp">17dp</dimen>
     <dimen name="fragmentPremiumBenefitsCardDescriptionMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
     <dimen name="fragmentProfilePremiumIconMarginStart_4dp">4dp</dimen>
     <dimen name="fragmentProfilePremiumIconMarginTop">2dp</dimen>
-    <dimen name="fragmentPremiumCancelSubMarginTop_32dp">32dp</dimen>
 
     <!-- Streak popupWindow -->
     <dimen name="popupStreakCornerRadius_45dp">45dp</dimen>
     <dimen name="popupStreakMarginBottom_8dp">8dp</dimen>
+    <dimen name="popupStreakTextSize_16sp">16sp</dimen>
+
+    <!-- Widget -->
+    <dimen name="widgetStreakProviderMinWidth_80dp">200dp</dimen>
+    <dimen name="widgetStreakProviderMinHeight_80dp">80dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeWidth_80dp">200dp</dimen>
+    <dimen name="widgetStreakProviderMinResizeHeight_50dp">50dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeWidth_160dp">280dp</dimen>
+    <dimen name="widgetStreakProviderMaxResizeHeight_120dp">120dp</dimen>
+    <dimen name="widgetImageWidth_100dp">100dp</dimen>
+    <dimen name="widgetImageHeight_100dp">100dp</dimen>
+
+    <!-- Widget Fragment -->
+    <dimen name="fragmentWidgetScrollViewMarginVertical_29dp">29dp</dimen>
+    <dimen name="fragmentWidgetScrollViewMarginHorizontal_25dp">25dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageFirstMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageLastMarginBottom_20dp">20dp</dimen>
+    <dimen name="fragmentWidgetScrollableImageMarginVertical_10dp">10dp</dimen>
+    <dimen name="fragmentProfileDeleteMarginTop_10dp">10dp</dimen>
+    <dimen name="fragmentProfileUserButtonContainerMarginTop_20dp">20dp</dimen>
+    <dimen name="fragmentProfileUserContentRootMarginTop_11dp">11dp</dimen>
+    <dimen name="fragmentProfileUserContentMarginTop_7dp">7dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginHorizontal_23dp">23dp</dimen>
+    <dimen name="fragmentProfileUserContentStatisticLineChartMarginTop_15dp">15dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeMargin_2dp">2dp</dimen>
+    <dimen name="fragmentFriendsToolbarNotificationIconBadgeSize_4dp">4dp</dimen>
+    <dimen name="dialogSendReportButtonMarginTop_4dp">4dp</dimen>
+    <dimen name="dialogBewareAIMarginVertical_18dp">18dp</dimen>
 
 </resources>
