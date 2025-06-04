@@ -22,10 +22,12 @@ import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.records.DeleteStateIntent
 import com.example.reflect.presentation.screens.records.GetRecordsState
+import com.example.reflect.presentation.screens.records.GetStreakState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
 import com.example.reflect.presentation.widget.WidgetStateProvider
+import com.example.reflect.presentation.widget.WidgetStreakProvider
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -66,8 +68,12 @@ class RecordsFragment : Fragment() {
 
             val streakPopup = StreakPopup(requireContext())
             fragmentRecordsToolbarStreakIcon.setOnClickListener {
-                streakPopup.updateData(Random.nextInt(0,10))
-                streakPopup.show(fragmentRecordsToolbarStreakIcon)
+                if (vm.streakState.value is GetStreakState.Success) {
+                    streakPopup.updateData((vm.streakState.value as GetStreakState.Success).streak)
+                    streakPopup.show(fragmentRecordsToolbarStreakIcon)
+                } else {
+                    ToastUtils.showErrorToast(requireContext())
+                }
             }
 
             // Анимация для переключения даты по нажатию стрелочек
@@ -159,9 +165,13 @@ class RecordsFragment : Fragment() {
                     handleDeleteState(state)
                 }
             }
+
+            lifecycleScope.launch {
+                vm.streakState.collect {
+                    handleStreakState(it)
+                }
+            }
         }
-
-
     }
 
     override fun onDestroyView() {
@@ -227,6 +237,13 @@ class RecordsFragment : Fragment() {
                 selectedDate.get(Calendar.MONTH),
                 selectedDate.get(Calendar.DAY_OF_MONTH)
             )
+        }
+    }
+
+    private fun handleStreakState(state: GetStreakState) {
+        when (state) {
+            is GetStreakState.Success -> WidgetStreakProvider.updateWidget(requireContext(), state.streak)
+            else -> Unit
         }
     }
 }

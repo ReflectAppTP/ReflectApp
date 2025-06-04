@@ -24,6 +24,7 @@ import com.example.reflect.data.repository.friendship.ReportUserRepositoryImpl
 import com.example.reflect.data.repository.friendship.SearchUsersRepositoryImpl
 import com.example.reflect.data.repository.friendship.SendFriendshipRequestRepositoryImpl
 import com.example.reflect.data.repository.friendship.WebSocketFriendshipRepositoryImpl
+import com.example.reflect.data.repository.state.GetStreakRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetMonthlyAverageRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStateFrequencyRepositoryImpl
 import com.example.reflect.data.repository.statistic.GetStatisticEmotionalTagsRepositoryImpl
@@ -53,6 +54,7 @@ import com.example.reflect.domain.repository.friendship.ReportUserRepository
 import com.example.reflect.domain.repository.friendship.SearchUsersRepository
 import com.example.reflect.domain.repository.friendship.SendFriendshipRequestRepository
 import com.example.reflect.domain.repository.friendship.WebSocketFriendshipRepository
+import com.example.reflect.domain.repository.state.GetStreakRepository
 import com.example.reflect.domain.repository.statistic.GetMonthlyAverageRepository
 import com.example.reflect.domain.repository.statistic.GetStateFrequencyRepository
 import com.example.reflect.domain.repository.statistic.GetStatisticEmotionalTagsRepository
@@ -218,6 +220,12 @@ object RepositoryModule {
     fun provideRejectFriendship(
         remoteData: RetrofitRemoteData
     ): RejectFriendshipRepository = RejectFriendshipRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideGetStreak(
+        remoteData: RetrofitRemoteData
+    ): GetStreakRepository = GetStreakRepositoryImpl(remoteData)
 
     @Provides
     @Singleton

@@ -4,6 +4,7 @@ import com.example.reflect.data.dto.GetUserByIdDTO
 import com.example.reflect.data.dto.SendFriendshipRequestDTO
 import com.example.reflect.data.dto.StateRequestDTO
 import com.example.reflect.data.dto.StateResponseDTO
+import com.example.reflect.data.dto.StreakResponseDTO
 import com.example.reflect.data.dto.TagDTO
 import com.example.reflect.data.dto.login.LoginRequestDTO
 import com.example.reflect.data.dto.login.LoginResponseDTO
@@ -121,6 +122,9 @@ interface RetrofitService {
 
     @GET("$profile/user/{id}/")
     suspend fun getUserById(@Path("id") id: Int): Response<GetUserByIdDTO>
+
+    @GET("$profile/user/streak/")
+    suspend fun getStreak(): Response<StreakResponseDTO>
 
     @POST("$reports/user/")
     suspend fun reportUser(@Body reportDTO: ReportUserRequestDTO): Response<ReportUserResponseDTO>

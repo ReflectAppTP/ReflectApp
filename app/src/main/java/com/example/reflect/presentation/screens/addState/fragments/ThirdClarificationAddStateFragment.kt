@@ -17,6 +17,7 @@ import com.example.reflect.presentation.common.ToastUtils
 import com.example.reflect.presentation.screens.addState.AddStateIntent
 import com.example.reflect.presentation.screens.addState.RecordState
 import com.example.reflect.presentation.screens.addState.viewmodel.ViewModelAddState
+import com.example.reflect.presentation.screens.records.GetStreakState
 import com.example.reflect.presentation.screens.records.viewmodel.ViewModelRecords
 import com.example.reflect.presentation.screens.statistics.StatisticIntent
 import com.example.reflect.presentation.screens.statistics.viewmodel.VIewModelStatistic
@@ -112,6 +113,12 @@ class ThirdClarificationAddStateFragment : Fragment() {
                     hideKeyboard()
                 }
             }
+
+            lifecycleScope.launch {
+                recordsvm.streakState.collect {
+                    handleStreakState(it)
+                }
+            }
         }
     }
 
@@ -134,9 +141,6 @@ class ThirdClarificationAddStateFragment : Fragment() {
                 }
                 (parentFragment?.parentFragment as BottomSheetDialogFragment).dismiss()
 
-                // Обновляю виджет
-                // TODO: fix
-                WidgetStreakProvider.updateWidget(requireContext(), Random.nextInt(0,10))
                 // Обновляю виджет состояния
                 WidgetStateProvider.updateWidget(requireContext(), state.record!!.value)
             }
@@ -146,6 +150,13 @@ class ThirdClarificationAddStateFragment : Fragment() {
             is RecordState.Idle -> {
                 Unit
             }
+        }
+    }
+
+    private fun handleStreakState(state: GetStreakState) {
+        when (state) {
+            is GetStreakState.Success -> WidgetStreakProvider.updateWidget(requireContext(), state.streak)
+            else -> Unit
         }
     }
 }

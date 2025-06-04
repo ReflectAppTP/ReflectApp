@@ -1,27 +1,16 @@
 package com.example.reflect.presentation.screens.profile.fragment
 
-import android.app.PendingIntent
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.example.reflect.R
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileBinding
-import com.example.reflect.presentation.widget.WidgetStateProvider
-import com.example.reflect.presentation.widget.WidgetStreakProvider
 import dagger.hilt.android.AndroidEntryPoint
 import io.appmetrica.analytics.AppMetrica
-import kotlin.math.PI
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -92,10 +81,6 @@ class ProfileFragment : Fragment() {
                 findNavController().navigate(R.id.logoutDialog)
             }
 
-//            fragmentProfileImageViewChangeIcon.setOnClickListener {
-//                // TODO: потом переделать
-//                Toast.makeText(requireContext(), "Потом доделаю редактирование иконки профиля", Toast.LENGTH_SHORT).show()
-//            }
             fragmentProfileToolbarSettingsIcon.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_profileSettingsFragment)
             }
