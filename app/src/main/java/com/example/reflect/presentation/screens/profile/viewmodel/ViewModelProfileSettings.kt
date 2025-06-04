@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.reflect.domain.usecase.friendship.ChangeLoginUseCase
 import com.example.reflect.domain.usecase.friendship.ChangePasswordUseCase
 import com.example.reflect.domain.usecase.friendship.ChangeVisibilityUseCase
+import com.example.reflect.domain.usecase.friendship.DeleteUserUseCase
+import com.example.reflect.presentation.screens.profile.DeleteUserState
 import com.example.reflect.presentation.screens.profile.SettingsProfileIntent
 import com.example.reflect.presentation.screens.profile.UpdateProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,11 +22,15 @@ class ViewModelProfileSettings @Inject constructor(
     private val changePasswordUseCase: ChangePasswordUseCase,
     private val changeLoginUseCase: ChangeLoginUseCase,
     private val changeVisibilityUseCase: ChangeVisibilityUseCase,
+    private val deleteUserUseCase: DeleteUserUseCase
 ): ViewModel() {
 
     val userIntent = Channel<SettingsProfileIntent>(Channel.UNLIMITED)
     private var _userState = MutableStateFlow<UpdateProfileState>(UpdateProfileState.Idle)
     val userState: StateFlow<UpdateProfileState> = _userState
+
+    private var _deleteState = MutableStateFlow<DeleteUserState>(DeleteUserState.Idle)
+    val deleteState: StateFlow<DeleteUserState> = _deleteState
 
     private var _login = MutableStateFlow("")
     val login: StateFlow<String> = _login
@@ -47,6 +53,7 @@ class ViewModelProfileSettings @Inject constructor(
             userIntent.consumeAsFlow().collect {
                 when (it) {
                     is SettingsProfileIntent.Update -> updateUser(it.username, it.oldPassword, it.newPassword, it.visibility)
+                    is SettingsProfileIntent.Delete -> deleteUser()
                 }
             }
         }
@@ -83,6 +90,15 @@ class ViewModelProfileSettings @Inject constructor(
                         }
                     } else _userState.value = passwordState
                 }
+            }
+        }
+    }
+
+    private fun deleteUser() {
+        _deleteState.value = DeleteUserState.Idle
+        viewModelScope.launch {
+            deleteUserUseCase().collect {
+                _deleteState.value = it
             }
         }
     }

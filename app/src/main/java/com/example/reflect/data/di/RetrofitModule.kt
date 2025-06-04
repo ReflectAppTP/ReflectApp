@@ -23,7 +23,7 @@ import javax.inject.Singleton
 object RetrofitModule {
 
     @Provides
-    fun provideBaseUrl() : String = "http://185.185.71.233/"
+    fun provideBaseUrl() : String = "https://reflect-app.ru/"
 
     @Provides
     @Singleton

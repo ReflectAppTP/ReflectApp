@@ -17,6 +17,8 @@ import com.example.reflect.common.Utils
 import com.example.reflect.common.prefs.AccountPrefs
 import com.example.reflect.databinding.FragmentProfileSettingsBinding
 import com.example.reflect.presentation.common.ToastUtils
+import com.example.reflect.presentation.dialog.DeleteUserDialog
+import com.example.reflect.presentation.screens.profile.DeleteUserState
 import com.example.reflect.presentation.screens.profile.SettingsProfileIntent
 import com.example.reflect.presentation.screens.profile.UpdateProfileState
 import com.example.reflect.presentation.screens.profile.viewmodel.ViewModelProfileSettings
@@ -105,11 +107,26 @@ class ProfileSettingsFragment : Fragment() {
                 }
                 true
             }
+
+            fragmentProfileDelete.setOnClickListener {
+                val dialog = DeleteUserDialog {
+                    lifecycleScope.launch {
+                        vm.userIntent.send(SettingsProfileIntent.Delete)
+                    }
+                }
+                dialog.show(parentFragmentManager, "Delete user dialog")
+            }
         }
 
         lifecycleScope.launch {
             vm.userState.collect {
                 handleUserState(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.deleteState.collect {
+                handleDeleteState(it)
             }
         }
     }
@@ -220,6 +237,24 @@ class ProfileSettingsFragment : Fragment() {
                     vm.updateUserState()
                 }
                 is UpdateProfileState.Idle -> Unit
+            }
+        }
+    }
+
+    private fun handleDeleteState(state: DeleteUserState) {
+        with (binding) {
+            when (state) {
+                is DeleteUserState.Loading -> fragmentProfileDelete.isEnabled = false
+                is DeleteUserState.Success -> {
+                    ToastUtils.showSuccessDeleteUser(requireContext())
+                    findNavController().navigate(R.id.action_profileFragment_to_loginFragment_with_popUp)
+                    AccountPrefs.clearAuthState(requireContext())
+                }
+                is DeleteUserState.Error -> {
+                    fragmentProfileDelete.isEnabled = true
+                    ToastUtils.showErrorToast(requireContext())
+                }
+                is DeleteUserState.Idle -> Unit
             }
         }
     }

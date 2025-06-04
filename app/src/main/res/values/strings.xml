@@ -314,5 +314,9 @@
     <string name="fragmentRulesDescriptionTitle"><b><u>Правила поведения в приложении:</u></b></string>
     <string name="fragmentRulesDescriptionFooter"><b>(Правила могут дополняться. Использование приложения означает согласие с ними.)</b></string>
     <string name="fragmentRulesDescriptionBody">\nЗапрещено:\n - Оскорбления\n - Дискриминация и любые формы ненависти\n - Обсуждение и пропаганда политических взглядов, партий\n - Призывы к агрессии, терроризму, а также любые формы угроз\n - Контент 18+ (включая текст, изображения, видео и намёки)\n - Публикация приватной информации (своей или других пользователей)\n - Спам и реклама – только с разрешения администрации\n - Нарушители блокируются без предупреждения\n</string>
+    <string name="dialogDeleteUserTitle">Подтверждение удаления аккаунта</string>
+    <string name="dialogDeleteUserDescription">Вы действительно хотите удалить аккаунт? После удаления все сохранённые записи буду утеряны</string>
+    <string name="dialogDeleteUserButton">Удалить</string>
+    <string name="toastDeleteUser">Пользователь успешно удалён</string>
 
 </resources>

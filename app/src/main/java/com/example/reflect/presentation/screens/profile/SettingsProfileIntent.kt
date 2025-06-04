@@ -7,4 +7,5 @@ sealed class SettingsProfileIntent {
         val newPassword: String?,
         val visibility: String
     ): SettingsProfileIntent()
+    data object Delete: SettingsProfileIntent()
 }

@@ -138,6 +138,9 @@ interface RetrofitService {
     @PATCH("$profile/user/update/visibility/")
     suspend fun updateVisibility(@Body changeVisibilityDTO: ChangeVisibilityDTO): Response<Unit>
 
+    @DELETE("$profile/user/delete/")
+    suspend fun deleteUser(): Response<Unit>
+
     @POST("$reports/user/")
     suspend fun reportUser(@Body reportDTO: ReportUserRequestDTO): Response<ReportUserResponseDTO>
 

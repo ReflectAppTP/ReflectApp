@@ -18,6 +18,7 @@ import com.example.reflect.data.repository.friendship.AcceptFriendshipRepository
 import com.example.reflect.data.repository.friendship.ChangeLoginRepositoryImpl
 import com.example.reflect.data.repository.friendship.ChangePasswordRepositoryImpl
 import com.example.reflect.data.repository.friendship.ChangeVisibilityRepositoryImpl
+import com.example.reflect.data.repository.friendship.DeleteUserRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsListRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetFriendsNotificationRepositoryImpl
 import com.example.reflect.data.repository.friendship.GetUserByIdRepositoryImpl
@@ -51,6 +52,7 @@ import com.example.reflect.domain.repository.friendship.AcceptFriendshipReposito
 import com.example.reflect.domain.repository.friendship.ChangeLoginRepository
 import com.example.reflect.domain.repository.friendship.ChangePasswordRepository
 import com.example.reflect.domain.repository.friendship.ChangeVisibilityRepository
+import com.example.reflect.domain.repository.friendship.DeleteUserRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsListRepository
 import com.example.reflect.domain.repository.friendship.GetFriendsNotificationRepository
 import com.example.reflect.domain.repository.friendship.GetUserByIdRepository
@@ -268,4 +270,10 @@ object RepositoryModule {
     fun provideUpdateVisibility(
         remoteData: RetrofitRemoteData
     ): ChangeVisibilityRepository = ChangeVisibilityRepositoryImpl(remoteData)
+
+    @Provides
+    @Singleton
+    fun provideDeleteUser(
+        remoteData: RetrofitRemoteData
+    ): DeleteUserRepository = DeleteUserRepositoryImpl(remoteData)
 }
